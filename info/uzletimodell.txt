@@ -1,0 +1,27 @@
+- Elvi technikai felépítés (üzleti modell)
+	- landing page					- tervezgetjük
+	- Érdeklődő e-mail / telefon	- tervezgetjük
+	- 24 órán belül telepítés		- teszteljük
+	- próbaidő megkezdése			- zéró
+	- szerződés kötés havidíjról (havidíjak / csomagok kialakítása) - zéró
+	- próbaidő lejárta után üzembehelyezés							- zéró
+	- nem fizetés / lemondás esetén letiltás						- zéró
+	- lemondás esetén feltöltött adatok rendelkezésre bocsájtása valamilyen zip file-ban
+			zéró
+	
+Kimutatások
+	- Számlák lekérdezése
+		-
+		-
+		-
+		-
+		
+	- Készletek / journal-ok lekérdezése
+		-
+		-
+		-
+		
+Fuvarjaim
+	- lekérdezése
+	- Feltöltés SELEXPED-ből (Addresses form)
+	- Android-os app

@@ -1,0 +1,112 @@
+ID
+TransactID
+SzlaSzam									pipa
+StornoSorszam								pipa
+LongReNr									nem kell (azonos SzlaSzam)
+Iktatosorszam								nem kell (Ügyfélre nem tartozik)
+Period										nem kell
+TipusID										nem kell (szlaszám elég az üdvösséghez)
+Ref_Szamlak_ID								talán
+Parent_INV_ID
+Current_Valid_Correction_Note_ID
+Allapot
+FormatID
+Gedruckt
+StornoGedruckt
+StornoDatum									kell
+Cancellation_ReasonCode
+Cancellation_ReasonText
+AbschlussJN
+Szoveg
+SzallitoKod
+SzallitoNev1								csak Farkas Vivien
+SzallitoNev2
+SzallitoOrszag
+SzallitoState
+SzallitoISZ
+Vendor_Addr_District
+SzallitoVaros
+SzallitoUtca
+Vendor_Addr_ps_type
+Vendor_Addr_housenr
+Vendor_Addr_building
+Vendor_Addr_stairway
+Vendor_Addr_floor
+Vendor_Addr_door
+SzallitoAdoszam
+SzallitoEURAdoszam
+SzallitoPenzforgJelz
+SzallitoSzlaszam
+SzallitoIBANCode
+FIBUKontoKred
+VevoKod
+VevoNev1									csak Farkas Vivien
+VevoNev2
+VevoOrszag
+VevoState
+VevoISZ
+Customer_Addr_District
+VevoVaros
+VevoUtca
+Customer_Addr_ps_type
+Customer_Addr_housenr
+Customer_Addr_building
+Customer_Addr_stairway
+Customer_Addr_floor
+Customer_Addr_door
+VevoAdoszam
+VevoEURAdoszam
+VevoPenzforgJelz
+VevoSzlaszam
+VevoIBANCode
+FIBUKontoDeb
+BankkontoID
+ClassID
+Period_FROM									igen
+Period_TO									igen
+Kelte										igen
+Teljesitve									igen
+Curr_Dates_Method
+ArfDatum
+KonyvelesiDatum
+FizMod
+Lejarat										igen
+BeerkezesDatum
+BejovoSzlaLejarat
+NettoOsszesen								tól-ig igen
+AFAOsszesen									tól-ig igen
+BruttoOsszesen								tól-ig igen
+FizAllapot									fizetve / nem fizetve	(kell)
+Fully_paid_date								kifizetés dátuma (később, hogy számlatörténet majd a CP 2.0)
+EddigKifizetve								igen
+EddigKifizetveEUR							igen
+EddigKifizetveFIBU
+FWGesamtNetto								talán
+FWGesamtMwSt								talán
+FWGesamtBrutto								talán
+SzamlaNyelve
+Wahrung										igen
+EURNetto									igen
+EURMwSt										igen
+EURBrutto									igen
+Bemerkung
+Mellekletek									infoként 2.0-ban
+FelvDatum
+FelvUserID
+SzlaFeladInfo
+SAP_DocEntry
+Subcontracted_Services
+LgrBew_ID
+Prev_Ref_INV_ID
+ZusatzInt01
+ZusatzInt02
+ZusatzInt03
+ZusatzFloat01
+ZusatzFloat02
+ZusatzFloat03
+ZusatzVarchar01
+ZusatzVarchar02
+ZusatzVarchar03
+ZusatzDate01
+ZusatzDate02
+ZusatzDate03

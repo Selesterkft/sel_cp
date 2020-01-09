@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<settings>
+    <general>
+        <favicon>1575827881.avatar.png</favicon>
+        <logo></logo>
+        <profile></profile>
+        <menu_bg_color>#222d32</menu_bg_color>
+        <header_bg_color>#3c8dbc</header_bg_color>
+        <panel_and_tab_line_color>#d2d6de</panel_and_tab_line_color>
+    </general>
+    <loginPage>
+        <wallpaper></wallpaper>
+        <logo></logo>
+        <bg_color></bg_color>
+    </loginPage>
+    <dasboardPage>
+        <menu_bg_color></menu_bg_color>
+        <header_bg_color></header_bg_color>
+        <panel_and_tab_line_color></panel_and_tab_line_color>
+    </dasboardPage>
+    <invoicesPage>
+        <menu_bg_color></menu_bg_color>
+        <header_bg_color></header_bg_color>
+        <panel_and_tab_line_color></panel_and_tab_line_color>
+    </invoicesPage>
+    <usersPage>
+        <menu_bg_color></menu_bg_color>
+        <header_bg_color></header_bg_color>
+        <panel_and_tab_line_color></panel_and_tab_line_color>
+    </usersPage>
+</settings>
