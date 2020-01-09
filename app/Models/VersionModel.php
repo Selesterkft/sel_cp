@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class VersionModel extends Model
@@ -36,7 +38,7 @@ class VersionModel extends Model
     {
         $config = config('appConfig.tables.versions');
 
-        $res = \DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
             ->table($config['read'])
             ->select('ID', 'Version', 'Active')
             ->get();
@@ -44,20 +46,45 @@ class VersionModel extends Model
         return $res;
     }
 
+    public function getByID(int $id) : VersionModel
+    {
+        $config = config('appConfig.tables.versions');
+        $instance = new VersionModel();
+
+        $eloquent_builder = new Builder(
+            DB::connection($config['connection'])
+                ->table($config['read'])
+                ->select(['ID', 'Version', 'Active'])
+                ->find($id)
+        );
+        $eloquent_builder->setModel($instance);
+        $version = $eloquent_builder->get();
+
+        dd('VersionModel.getByID', $version);
+
+        return $version;
+    }
+
     public function save(array $options = [])
     {
         //dd('VersionModel.save', $options);
         $config = config('appConfig.tables.versions');
-        $res = \DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
             ->select(
-                \DB::connection($config['connection'])
-                    ->raw("EXECUTE dbo.{$config['insert']} ?, ?")
+                DB::connection($config['connection'])
+                    ->raw("EXECUTE dbo.{$config['insert']} ?, ?, ?")
             , [
                 $options['Version'],
-                (!empty($options['Active'])) ? $options['Active'] : 0
+                (!empty($options['Active'])) ? $options['Active'] : 0,
+                \App\Classes\Helper::get_timestamp()
             ]);
         //dd('VersionModel.save', $res);
-        $version = $this->find($options['ID']);
+        $version = new VersionModel();
+        foreach($res[0] as $key => $val)
+        {
+            $version->$key = $val;
+        }
+
         return $version;
     }
 
@@ -65,25 +92,33 @@ class VersionModel extends Model
     {
         //dd('VersionModel.update', $attributes);
         $config = config('appConfig.tables.versions');
-        $res = \DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
             ->select(
-                \DB::connection($config['connection'])
+                DB::connection($config['connection'])
                     ->raw('EXECUTE dbo.CP_Versions_Update ?, ?, ?')
             , [
                 $attributes['ID'],
                 $attributes['Version'],
-                (!empty($attributes['Active'])) ? $attributes['Active'] : 0
+                (!empty($attributes['Active'])) ? $attributes['Active'] : 0,
+                ''
             ]);
         //dd('VersionModel.update', $res);
+        $version = new VersionModel();
+        foreach($res[0] as $key => $val)
+        {
+            $version->$key = $val;
+        }
+
+        return $version;
     }
 
     public function delete()
     {
         //dd('VersionModel.delete', $this);
         $config = config('appConfig.tables.versions');
-        $res = \DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
             ->select(
-                \DB::connection($config['connection'])
+                DB::connection($config['connection'])
                     ->raw("EXECUTE dbo.{$config['delete']} ?, ?")
             , [
                 $this->ID,

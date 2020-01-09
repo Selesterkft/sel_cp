@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -37,6 +38,7 @@ class VersionCompanyModel extends Model
     public static function readAll()
     {
         $config = config('appConfig.tables.version_has_company');
+
         $resources = \DB::connection($config['connection'])
             ->table($config['read'])
             ->select(['ID', 'CompanyID', 'VersionID', 'Active'])
@@ -59,34 +61,66 @@ class VersionCompanyModel extends Model
         return $res;
     }
 
-    public function save(array $options = [])
+    public static function getByID(int $id) : VersionCompanyModel
     {
-        //dd('VersionCompanyModel.save', $options);
         $config = config('appConfig.tables.version_has_company');
-        $res = \DB::connection($config['connection'])
-            ->select("EXECUTE dbo.{$config['insert']} ?, ?, ?", [
-                $options['VersionID'],
-                $options['CompanyID'],
-                (!empty($options['Active'])) ? $options['Active'] : 0
-            ]);
-        $VersionComapny = $this->find($res[0]->ID);
-        //dd('VersionCompanyModel.save', $res, $VersionComapny);
-        return $VersionComapny;
+
+        $instance = new VersionCompanyModel();
+        $e_builder = new Builder(
+            \DB::connection($config['connection'])
+                ->table($config['read'])
+                ->find($id)
+        );
+        $e_builder->setModel($instance);
+
+        return $e_builder->get();
     }
 
-    public function update(array $attributes = [], array $options = [])
+    public function save(array $options = []) : VersionCompanyModel
     {
-        //dd('VersionCompanyModel.update', $attributes);
         $config = config('appConfig.tables.version_has_company');
+        $res = \DB::connection($config['connection'])
+            ->select("EXECUTE dbo.{$config['insert']} ?, ?, ?, ?", [
+                $options['VersionID'],
+                $options['CompanyID'],
+                (!empty($options['Active'])) ? $options['Active'] : 0,
+                \App\Classes\Helper::get_timestamp()
+            ]);
+
+        $VersionCompany = new VersionCompanyModel();
+        foreach($res as $key => $val)
+        {
+            $VersionCompany->$key = $val;
+        }
+
+        return $VersionCompany;
+    }
+
+    public function update(array $attributes = [], array $options = []) : VersionCompanyModel
+    {
+        $VersionCompany = new VersionCompanyModel();
+
+        $config = config('appConfig.tables.version_has_company');
+        $instance = new VersionCompanyModel();
+
         $res = \DB::connection($config['connection'])
             ->select(
                 \DB::connection($config['connection'])
-                    ->raw("EXECUTE {$config['update']} ?, ?, ?, ?"), [
+                    ->raw("EXECUTE {$config['update']} ?, ?, ?, ?, ?"), [
                         $attributes['ID'],
                         $attributes['VersionID'],
                         $attributes['CompanyID'],
-                        (!empty($attributes['Active'])) ? $attributes['Active'] : 0
+                        (!empty($attributes['Active'])) ? $attributes['Active'] : 0,
+                        \App\Classes\Helper::get_timestamp()
             ]);
+
+        foreach($res[0] as $key => $val)
+        {
+            $VersionCompany->$key = $val;
+        }
+        //dd('VersionCompany.update', $VersionCompany);
+
+        return $VersionCompany;
     }
 
     public function delete()

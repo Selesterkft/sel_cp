@@ -28,7 +28,7 @@ class VersionCompanyController extends Controller
      */
     public function index()
     {
-        //
+        return null;
     }
 
     /**
@@ -67,12 +67,6 @@ class VersionCompanyController extends Controller
 
         $vc = new VersionCompanyModel();
         $vc->save($request->all());
-        //$vc->CompanyID = $request['CompanyID'];
-        //$vc->VersionID = $request['VersionID'];
-
-        //$vc->Active = ( !empty($request['Active']) ) ? $request['Active'] : 0;
-
-        //$vc->save();
 
         return redirect()
             ->to('versions')
@@ -87,7 +81,7 @@ class VersionCompanyController extends Controller
      */
     public function show($id)
     {
-        $vc = VersionCompanyModel::find($id);
+        $vc = VersionCompanyModel::getByID($id);
 
         $versions = Helper::getVersions();
         $companies = Helper::getCompanies();
@@ -108,7 +102,7 @@ class VersionCompanyController extends Controller
     public function edit($id)
     {
         //dd('VersionCompanyController.edit', session()->all());
-        $vc = VersionCompanyModel::find($id);
+        $vc = VersionCompanyModel::getByID($id);
 
         $versions = Helper::getVersions();
         $companies = Helper::getCompanies();
@@ -140,15 +134,8 @@ class VersionCompanyController extends Controller
         ]);
 
         // Szerkesztendő rekord lekérése az adatbázisból
-        $vc = VersionCompanyModel::find($id);
+        $vc = VersionCompanyModel::getByID($id);
         $vc->update($request->all());
-        // Adatok módosítása
-        //$vc->CompanyID = $request['CompanyID'];
-        //$vc->VersionID = $request['VersionID'];
-        //$vc->Active = ( !empty($request['Active']) ) ? $request['Active'] : 0;
-
-        // Frissítés
-        //$vc->save();
 
         // Ha az aktuális céget szerkesztem, akkor...
         if ($request->get('CompanyID') == session()->get('company_id'))
