@@ -2,10 +2,12 @@
 
 namespace App\Classes;
 
-use App\Models\VersionCompanyModel;
-use App\Models\VersionModel;
-use Spatie\Permission\Models\Role;
+//use App\Models\VersionCompanyModel;
+//use App\Models\VersionModel;
+//use Spatie\Permission\Models\Role;
 use App\Models\SettingModel;
+use App\Models\VersionModel;
+
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Session;
 
@@ -420,37 +422,11 @@ class Helper
                         ->raw("SELECT * FROM {$config['table']} WHERE SubdomainName = :name;"),
                                 ['name' => $companyNickName]
                 );
-        //dd('Helper.getCompanyIDByCompanyNickName', $results);
+
         $companyID = $results[0]->CompanyID;
-        //dd('Helper.getCompanyIDByCompanyNickName', $results[0]->CompanyID);
-        /*
-        foreach( $results as $result )
-        {
-            if( self::getCompanyNickName($result->Nev1) == $companyNickName )
-            {
-                $companyID = (int) $result->ID;
-                break;
-            }
-        }
-        */
+
         return $companyID;
 
-        /*
-        $companies = CompanyModel::all();
-
-        $retValue = '';
-
-        foreach($companies as $company)
-        {
-            if( self::getCompanyNickName($company->Nev1) == $companyNickName )
-            {
-                $retValue = $company->ID;
-                break;
-            }
-        }
-
-        return $retValue;
-        */
     }
 
     public static function getVersionString(int $company_id)
@@ -536,6 +512,7 @@ class Helper
         $versions = ['0' => __('global.app_select_first_element')] + $versions;
 
         return $versions;
+
     }
 
     public static function getBizonylatTipusok()
@@ -548,6 +525,15 @@ class Helper
         ];
         //dd($retVal);
         return $retVal;
+    }
+
+    public static function resToClass($res, &$instance)
+    {
+        foreach($res as $key => $val)
+        {
+            $instance->$key = $val;
+        }
+        return $instance;
     }
 
     /**

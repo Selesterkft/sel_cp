@@ -6,6 +6,7 @@ use App\Classes\Helper;
 use App\Models\VersionCompanyModel;
 use App\Models\VersionModel;
 use Illuminate\Http\Request;
+use Session;
 
 class VersionCompanyController extends Controller
 {
@@ -103,7 +104,6 @@ class VersionCompanyController extends Controller
     {
         //dd('VersionCompanyController.edit', session()->all());
         $vc = VersionCompanyModel::getByID($id);
-
         $versions = Helper::getVersions();
         $companies = Helper::getCompanies();
 
@@ -148,7 +148,7 @@ class VersionCompanyController extends Controller
             {
                 // Új verziószám a SESSION-be
                 //\Session::set('version', $version_name);
-                \Session::put('version', $version_name);
+                Session::put('version', $version_name);
             }
         }
 

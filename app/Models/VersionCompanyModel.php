@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Classes\Helper;
+use DB;
+//use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -39,7 +41,7 @@ class VersionCompanyModel extends Model
     {
         $config = config('appConfig.tables.version_has_company');
 
-        $resources = \DB::connection($config['connection'])
+        $resources = DB::connection($config['connection'])
             ->table($config['read'])
             ->select(['ID', 'CompanyID', 'VersionID', 'Active'])
             ->get();
@@ -65,60 +67,48 @@ class VersionCompanyModel extends Model
     {
         $config = config('appConfig.tables.version_has_company');
 
-        $instance = new VersionCompanyModel();
-        $e_builder = new Builder(
-            \DB::connection($config['connection'])
-                ->table($config['read'])
-                ->find($id)
-        );
-        $e_builder->setModel($instance);
+        $res = DB::connection($config['connection'])
+            ->table($config['read'])->find($id);
 
-        return $e_builder->get();
+        $vc = new VersionCompanyModel();
+        Helper::resToClass($res, $vc);
+
+        return $vc;
     }
 
     public function save(array $options = []) : VersionCompanyModel
     {
         $config = config('appConfig.tables.version_has_company');
-        $res = \DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
             ->select("EXECUTE dbo.{$config['insert']} ?, ?, ?, ?", [
                 $options['VersionID'],
                 $options['CompanyID'],
                 (!empty($options['Active'])) ? $options['Active'] : 0,
-                \App\Classes\Helper::get_timestamp()
+                Helper::get_timestamp()
             ]);
-
         $VersionCompany = new VersionCompanyModel();
-        foreach($res as $key => $val)
-        {
-            $VersionCompany->$key = $val;
-        }
+        Helper::resToClass($res[0], $VersionCompany);
 
         return $VersionCompany;
     }
 
     public function update(array $attributes = [], array $options = []) : VersionCompanyModel
     {
-        $VersionCompany = new VersionCompanyModel();
-
         $config = config('appConfig.tables.version_has_company');
-        $instance = new VersionCompanyModel();
 
-        $res = \DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
             ->select(
-                \DB::connection($config['connection'])
+                DB::connection($config['connection'])
                     ->raw("EXECUTE {$config['update']} ?, ?, ?, ?, ?"), [
                         $attributes['ID'],
                         $attributes['VersionID'],
                         $attributes['CompanyID'],
                         (!empty($attributes['Active'])) ? $attributes['Active'] : 0,
-                        \App\Classes\Helper::get_timestamp()
+                        Helper::get_timestamp()
             ]);
 
-        foreach($res[0] as $key => $val)
-        {
-            $VersionCompany->$key = $val;
-        }
-        //dd('VersionCompany.update', $VersionCompany);
+        $VersionCompany = new VersionCompanyModel();
+        Helper::resToClass($res[0], $VersionCompany);
 
         return $VersionCompany;
     }
@@ -126,9 +116,9 @@ class VersionCompanyModel extends Model
     public function delete()
     {
         $config = config('appConfig.tables.version_has_company');
-        $res = \DB::connection($config['connection'])
+        DB::connection($config['connection'])
             ->select(
-                \DB::connection($config['connection']
+                DB::connection($config['connection']
                     ->raw("EXECUTE {$config['delete']} ?, ?")), [
                         $this->ID,
                         1
@@ -152,6 +142,7 @@ class VersionCompanyModel extends Model
      */
     public function __construct()
     {
+        parent::__construct();
         $config = config('appConfig.tables.version_has_company');
         $this->connection = $config['connection'];
         $this->table = $config['table'];

@@ -10,7 +10,7 @@
                      style="background-color:white;"
                      alt="User Image">
             </div>
-            
+
             <div class="pull-left info" style="top: 20px;">
                 <p>
                     @php
@@ -18,7 +18,7 @@
                     if( $user->Supervisor_ID == 0 )
                     {
                         $companyName = $user->company->Nev1;
-                        
+
                         if( strlen($companyName) < 20 )
                         {
                             echo $companyName;
@@ -27,7 +27,7 @@
                         {
                             echo substr( $companyName, 0, 20) . "...";
                         }
-                        
+
                     }
                     else
                     {
@@ -44,16 +44,16 @@
                     @endphp
                 </p>
             </div>
-            
+
             <!--
             <div class="pull-left info">
-                <p>{{ Auth::user()->Name }}</p>
+                <p>{{-- Auth::user()->Name --}}</p>
                 <a href="#">
                     {{--
                         <i class="fa fa-circle text-success"></i>&nbsp;
                         Auth::user()->company->Nev1
                     --}}
-                    
+
                     @php
                     $user = Auth::user();
                     if( $user->Supervisor_ID == 0 )
@@ -73,7 +73,7 @@
                         }
                     }
                     @endphp
-                    
+
                 </a>
             </div>
             -->
@@ -131,9 +131,9 @@
             </li>-->
             @endcan
             @can('users-menu')
-            <li class="{{ ($request->segment(1) == 'users' || 
-                        $request->segment(1) == 'users.show' || 
-                        $request->segment(1) == 'users.create' || 
+            <li class="{{ ($request->segment(1) == 'users' ||
+                        $request->segment(1) == 'users.show' ||
+                        $request->segment(1) == 'users.create' ||
                         $request->segment(1) == 'users.edit') ? 'active' : '' }}">
                 <a href="{{ url('users') }}">
                     <i class="ion ion-android-contacts"></i>&nbsp;
@@ -184,9 +184,9 @@
             @endcan
 
             @if(Auth::user()->hasRole('Admin') && Auth::user()->CompanyID == 71)
-            <li class="{{ $request->segment(1) == 'companysubdomain' || 
-                        $request->segment(1) == 'companysubdomain.show' || 
-                        $request->segment(1) == 'companysubdomain.create' || 
+            <li class="{{ $request->segment(1) == 'companysubdomain' ||
+                        $request->segment(1) == 'companysubdomain.show' ||
+                        $request->segment(1) == 'companysubdomain.create' ||
                         $request->segment(1) == 'companysubdomain.edit' ? 'active' : '' }}">
                 <a href="{{ url('companysubdomain') }}">
                     <i class="fa fa-paw"></i>&nbsp;
@@ -194,14 +194,14 @@
                 </a>
             </li>
             @endif
-            
+
             @if(Auth::user()->hasRole('Admin') && Auth::user()->CompanyID == 71)
-            <li class="{{ $request->segment(1) == 'versions' || 
-                        $request->segment(1) == 'versions.show' || 
-                        $request->segment(1) == 'versions.create' || 
-                        $request->segment(1) == 'versions.edit' || 
-                        $request->segment(1) == 'version_company.show' || 
-                        $request->segment(1) == 'version_company.create' || 
+            <li class="{{ $request->segment(1) == 'versions' ||
+                        $request->segment(1) == 'versions.show' ||
+                        $request->segment(1) == 'versions.create' ||
+                        $request->segment(1) == 'versions.edit' ||
+                        $request->segment(1) == 'version_company.show' ||
+                        $request->segment(1) == 'version_company.create' ||
                         $request->segment(1) == 'version_company.edit' ? 'active' : '' }}">
                 <a href="{{ url('versions') }}">
                     <i class="fa fa-clone"></i>&nbsp;
@@ -211,7 +211,7 @@
                 </a>
             </li>
             @endif
-            
+
             @if(Auth::user()->hasRole('Admin') && Auth::user()->CompanyID == 71)
             <li class="{{ $request->segment(1) == 'sd_helper' ? 'active' : '' }}">
                 <a href="{{ url('sd_helper') }}">

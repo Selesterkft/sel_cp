@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ver_2019_01\CompanyModel;
+//use App\Models\ver_2019_01\CompanyModel;
 use App\Models\VersionCompanyModel;
 use App\Models\VersionModel;
 use Illuminate\Http\Request;
@@ -46,16 +46,9 @@ class VersionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //dd('VersionController.create');
-        // TODO: Átállítani nézetre
-        $companies = CompanyModel::orderBy('Nev1', 'asc')
-                ->pluck('Nev1', 'ID')
-                ->all();
-
-        return view('versions.create', [
-            'companies' => $companies
-        ]);
+    public function create()
+    {
+        return view('versions.create');
     }
 
     /**

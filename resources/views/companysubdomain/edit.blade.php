@@ -30,10 +30,10 @@
 </section>
 
 <section class="content">
-    
+
     <div class="row">
         <div class="col-md-12">
-            
+
             @if( session()->has('success') )
 
                 @includeIf('layouts.success', ['messages' => session()->get('success') ])
@@ -43,14 +43,14 @@
                 @includeIf('layouts.alert', ['messages' => session()->get('errors')] )
 
             @endif
-            
+
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <form id="frm" name="frm"
-                  action="{{ url('companysubdomain.store') }}" 
+                  action="{{ url('companysubdomain.store') }}"
                   method="POST" class="form-horizontal">
                 @csrf
 
@@ -60,17 +60,19 @@
                         <h3 class="box-title">{{ __('global.company_subdomain.title') }}</h3>
                         <small>{{ __('global.company_subdomain.sub_title') }}</small>
                     </div>
-                    
+
                     <div class="box-body">
-                        
+
                         {{-- COMPANIES --}}
                         <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
                             {{ Form::label('CompanyID',
                                 __('global.company_subdomain.fields.company') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
-                                {!! Form::select('CompanyID', $companies,
-                                    [],
+                                {!! Form::select(
+                                    'CompanyID',
+                                    $companies,
+                                    (old('CompanyID')) ? old('CompanyID') : $cs->CompanyID,
                                     ['class' => 'form-control'])
                                 !!}
                                 <span id="span_company_id" name="span_company_id" class="help-block">
@@ -78,22 +80,22 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         {{-- SUBDOMAIN --}}
                         <div class="form-group {{ ($errors->has('SubdomainName')) ? 'has-error' : '' }}">
                             {{ Form::label('SubdomainName', __('global.company_subdomain.fields.subdomain') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 <input id="SubdomainName" name="SubdomainName" class="form-control" type="text"
-                                       value="{{ old('SubdomainName') }}"/>
+                                       value="{{ (old('SubdomainName')) ? old('SubdomainName') : $cs->SubdomainName }}"/>
                                 <span id="span_email" name="span_email" class="help-block">
                                     {{ ($errors->has('SubdomainName')) ? $errors->first('SubdomainName') : '' }}
                                 </span>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                     <div class="box-footer">
                         <div class="box-footer">
                         <a href="{{ url('companysubdomain') }}"
@@ -105,7 +107,7 @@
                         </button>
                     </div>
                     </div>
-                    
+
                 </div>
 
             </form>

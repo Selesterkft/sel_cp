@@ -409,6 +409,7 @@ return [
     'app_logout' => 'Kijelentkezés',
     'app_add_new' => 'Új hozzáadása',
     'app_date' => 'Dátum',
+    'app_data' => 'adat',
     'app_are_you_sure' => 'Biztos vagy ebben?',
     'app_back_to_list' => 'Vissza a listához',
     'app_dashboard' => 'Irányítópult',

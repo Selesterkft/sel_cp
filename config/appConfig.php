@@ -116,6 +116,11 @@ return array(
         'company_has_subdomain' => [
             'connection'    => 'azure',
             'table'         => 'company_has_subdomain',
+            'read'          => 'CP_Company_Subdomain_Read',
+            'insert'        => 'CP_Company_Subdomain_',
+            'update'        => 'CP_Company_Subdomain_',
+            'delete'        => 'CP_Company_Subdomain_',
+            'restore'       => 'CP_Company_Subdomain_',
         ],
         'versions' => array(
             'connection'    => 'azure',
@@ -143,10 +148,12 @@ return array(
             'ver_2019_01' => [
                 'connection' => 'azure3',
                 'table' => 'Cegek',
+                'read' => 'CP_Cegek_Read',
             ],
             'ver_2019_02' => [
                 'connection' => 'azure3',
                 'table' => 'Cegek',
+                'read' => 'CP_Cegek_Read',
             ],
         ),
         'invoices' => array(
