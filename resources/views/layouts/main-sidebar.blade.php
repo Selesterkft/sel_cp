@@ -14,10 +14,13 @@
             <div class="pull-left info" style="top: 20px;">
                 <p>
                     @php
-                    $user = Auth()->user();
+                    $user = Auth::user();
+
                     if( $user->Supervisor_ID == 0 )
                     {
+                        //dd('as', Auth::user());
                         $companyName = $user->company->Nev1;
+                        //$companyName = Auth::user()->company->Nev1;
 
                         if( strlen($companyName) < 20 )
                         {

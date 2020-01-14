@@ -1,14 +1,15 @@
 @php
 $company_nickname = \App\Classes\Helper::getAppSubdomain();
-//dd('login.blade', $company_nickname);
+//dd('login.blade');
 $company_id = \App\Classes\Helper::getCompanyIDByCompanyNickName($company_nickname);
-//dd('login.blade', $company_id);
+//dd('login.blade', $company_nickname, $company_id);
 //dd('login-blade', \App\Classes\Helper::get_user_tz());
 if($company_id == null)
 {
     @endphp
     <script type="text/javascript">
-        window.location.href = "http://webandtrace.com";
+        //window.location.href = "http://webandtrace.com";
+        window.location.href = "http://google.hu";
     </script>
     @php
 }

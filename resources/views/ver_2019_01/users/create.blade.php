@@ -75,35 +75,32 @@
                                 </span>
                             </div>
                         </div>
-<!--
-                        @if(Auth::user()->hasRole('Admin'))
-                            <div class="form-group {{-- ($errors->has('CompanyID')) ? 'has-error' : '' --}}">
-                                {{-- Form::label('CompanyID',
+
+                        @if(Auth::user()->CompanyID == 71 && Auth::user()->hasRole('Admin'))
+
+                            <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
+                                {{ Form::label('CompanyID',
                                     __('global.user.fields.company') . ':',
-                                    ['class' => 'col-sm-2 control-label']) --}}
+                                    ['class' => 'col-sm-2 control-label']) }}
                                 <div class="col-sm-10">
-                                    {{-- Form::select('CompanyID', $companies,
+                                    {{ Form::select('CompanyID', $companies,
                                         [],
                                         ['class' => 'form-control'])
-                                    --}}
+                                    }}
                                     <span id="span_company_id" name="span_company_id" class="help-block">
-                                    {{-- ($errors->has('CompanyID')) ? $errors->first('CompanyID') : '' --}}
+                                    {{ ($errors->has('CompanyID')) ? $errors->first('CompanyID') : '' }}
                                 </span>
                                 </div>
                             </div>
-                        @elseif( Auth::user()->hasRole('Master') )
-                            <input id="CompanyID" name="CompanyID" type="hidden" 
-                                   value="{{ Auth::user()->CompanyID }}"/>
+
+                        @else
+                            <input id="CompanyID" name="CompanyID" type="hidden" value="{{ Auth::user()->CompanyID }}"/>
                         @endif
--->
+
                         {{-- CSAK CÉGEN BELLÜLI FELHASZNÁLÓNAK HOZHAT LÉTRE HOZZÁFÉRÉST --}}
-                        <input id="CompanyID" name="CompanyID" type="hidden" 
-                                   value="{{ Auth::user()->CompanyID }}"/>
-                        
-                        <input id="Supervisor_ID" name="Supervisor_ID" type="hidden"
-                               value="{{ Auth::user()->Supervisor_ID }}"/>
-                        <input id="Supervisor_Name" name="Supervisor_Name" type="hidden"
-                               value="{{ Auth::user()->Supervisor_Name }}"/>
+                        {{--<input id="CompanyID" name="CompanyID" type="hidden" value="{{ Auth::user()->CompanyID }}"/>--}}
+                        <input id="Supervisor_ID" name="Supervisor_ID" type="hidden" value="{{ Auth::user()->Supervisor_ID }}"/>
+                        <input id="Supervisor_Name" name="Supervisor_Name" type="hidden" value="{{ Auth::user()->Supervisor_Name }}"/>
 
                         @php
                         $languages = config('appConfig.languages');
@@ -152,7 +149,7 @@
                             </span>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">
                                 {{ __('global.user.fields.roles') }}:
@@ -190,7 +187,7 @@
                             {{ __('global.app_save') }}
                         </button>
                         <!--
-                        <button class="btn btn-default pull-right" id="btnSendMail" 
+                        <button class="btn btn-default pull-right" id="btnSendMail"
                                 name="btnSendMail">
                             {{ __('SAVE AND SEND MAIL') }}
                         </button>
@@ -242,7 +239,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                 var optionSelected = $("option:selected", this);
                 var valueSelected = this.value;
                 var textSelected   = optionSelected.text();
-                
+
                 if( valueSelected == 71 )
                 {
                     $('input.role1').prop('checked', false);
@@ -255,13 +252,13 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     //$('input.role1').prop('checked', true);
                     $('.role1').click();
                 }
-                
+
                 //console.log(optionSelected);
                 //console.log(valueSelected);
                 //console.log(textSelected);
             });
 
-            // 
+            //
             // Admin checkboxra kattintás
             $('.role1').on('click', function(event)
             {
@@ -302,3 +299,9 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
     </script>
 
 @endsection
+<script>
+    import Options from "../../../../public/assets/bower_components/bootstrap-colorpicker-3.2.0/src/js/options";
+    export default {
+        components: {Options}
+    }
+</script>

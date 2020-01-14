@@ -117,10 +117,10 @@ return array(
             'connection'    => 'azure',
             'table'         => 'company_has_subdomain',
             'read'          => 'CP_Company_Subdomain_Read',
-            'insert'        => 'CP_Company_Subdomain_',
-            'update'        => 'CP_Company_Subdomain_',
-            'delete'        => 'CP_Company_Subdomain_',
-            'restore'       => 'CP_Company_Subdomain_',
+            'insert'        => 'CP_Company_Subdomain_Insert',
+            'update'        => 'CP_Company_Subdomain_Update',
+            'delete'        => 'CP_Company_Subdomain_Delete',
+            'restore'       => 'CP_Company_Subdomain_RestoreDelete',
         ],
         'versions' => array(
             'connection'    => 'azure',
@@ -160,7 +160,7 @@ return array(
             'ver_2019_01' => [
                 'connection' => 'azure',
                 'table' => 'CP_Inv_Read',
-                //'table' => 'Inv',
+                'widget_read' => 'CP_Invoices_Widget',
             ],
             'ver_2019_02' => [
                 'connection' => 'azure',

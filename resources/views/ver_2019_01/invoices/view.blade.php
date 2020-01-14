@@ -51,6 +51,7 @@
         <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
                 {{ __('global.app_from') }}
+                <!--
                 <address>
                     <strong>{{ config('appConfig.company_name') }}</strong><br>
                     {{ config('appConfig.company_addr_1') }}<br>
@@ -58,16 +59,31 @@
                     @lang('global.app_phone'): {{ config('appConfig.company_phone') }}<br>
                     @lang('global.app_email'): {{ config('appConfig.company_email') }}
                 </address>
+                -->
+                    <address>
+                        <strong>{{ $invoice->Vendor_Name1 }}</strong><br>
+                        @if( !empty($invoice->Vendor_ZIP) && !empty($invoice->Vendor_City) )
+                        {{ $invoice->Vendor_ZIP }}, {{ $invoice->Vendor_City }}
+                        @endif
+                        <br>
+                        {{ (!empty($invoice->Vendor_Addr)) ? $invoice->Vendor_Addr : '' }}&nbsp;
+                            {{ (!empty($invoice->Vendor_Addr_ps_type)) ? $invoice->Vendor_Addr_ps_type : '' }}&nbsp;
+                            {{ (!empty($invoice->Vendor_Addr_housenr)) ? $invoice->Vendor_Addr_housenr : '' }}
+                        <br>
+                        @lang('global.app_phone'): <br>
+                        @lang('global.app_email'):
+                    </address>
+
             </div>
 
             <div class="col-sm-4 invoice-col">
                 @lang('global.app_to')
                 <address>
-                    <strong>{{ $invoice->Vendor_Name1 }}</strong><br>
-                    {{ $invoice->Vendor_ZIP }}, {{ $invoice->Vendor_City }}<br>
-                    {{ $invoice->Vendor_Addr }} {{ $invoice->Vendor_Addr_ps_type }} {{ $invoice->Vendor_Addr_housenr }}<br>
-                    @lang('global.app_phone'): XXX<br>
-                    @lang('global.app_email'): XXX
+                    <strong>{{ $invoice->Cust_Name1 }}</strong><br>
+                    {{ $invoice->Cust_ZIP }}, {{ $invoice->Cust_City }}<br>
+                    {{ $invoice->Cust_Addr }} {{ $invoice->Cust_Addr_ps_type }} {{ $invoice->Cust_Addr_housenr }}<br>
+                    @lang('global.app_phone'): <br>
+                    @lang('global.app_email'):
                 </address>
             </div>
 

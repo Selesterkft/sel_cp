@@ -79,6 +79,7 @@ class VersionCompanyController extends Controller
      *
      * @param $id
      * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function show($id)
     {
@@ -97,8 +98,9 @@ class VersionCompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function edit($id)
     {

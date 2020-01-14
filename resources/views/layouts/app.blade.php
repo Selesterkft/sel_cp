@@ -1,7 +1,7 @@
 @php
 
 $locale = (session()->has('locale')) ? session()->get('locale') : config('app.locale');
-//dd('', session()->get('locale'), config('app.locale'));
+//dd('app.blade', session()->get('locale'), config('app.locale'));
 @endphp
 
 <!DOCTYPE html>

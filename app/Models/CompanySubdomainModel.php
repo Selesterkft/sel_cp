@@ -65,18 +65,33 @@ class CompanySubdomainModel extends Model
     public function save(array $options = []): CompanySubdomainModel
     {
         $config = config('appConfig.tables.company_has_subdomain');
-
+        //dd('CompanySubdomainModel.save', $config, $options);
+        $CompanyID = $options['CompanyID'];
+        $CompanyName = Helper::getCompanyNameByID($CompanyID);
+        $CompanyNickName = Helper::remove_accents($CompanyName);
+        //dd('CompanySubdomainModel.save', $CompanyID, $CompanyName, $CompanyNickName);
+        $SubdomainName = $options['SubdomainName'];
+/*
+        dd('CompanySubdomainModel.save',
+            $options,
+            $config,
+            $CompanyID,
+            $CompanyName,
+            $CompanyNickName,
+            $SubdomainName);
+*/
         $res = DB::connection($config['connection'])
             ->select(
                 DB::connection($config['connection'])
-                    ->raw("EXECUTE {$config['insert']} ?, ?, ?, ?"), [
-                        $options['VersionID'],
-                        $options['CompanyID'],
-                        (!empty($options['Active'])) ? $options['Active'] : 0,
+                    ->raw("EXECUTE {$config['insert']} ?, ?, ?, ?, ?"), [
+                        $CompanyID,
+                        $CompanyName,
+                        $CompanyNickName,
+                        $SubdomainName,
                         Helper::get_timestamp()
                 ]
         );
-
+        //dd('itt5', $res);
         $cs = new CompanySubdomainModel();
         Helper::resToClass($res[0], $cs);
 
@@ -87,19 +102,27 @@ class CompanySubdomainModel extends Model
     {
         $config = config('appConfig.tables.company_has_subdomain');
 
+        //dd('CompanySubdomainModel.save', $config, $options);
+        $CompanyID = $attributes['CompanyID'];
+        $CompanyName = Helper::getCompanyNameByID($CompanyID);
+        $CompanyNickName = Helper::remove_accents($CompanyName);
+        //dd('CompanySubdomainModel.save', $CompanyID, $CompanyName, $CompanyNickName);
+        $SubdomainName = $attributes['SubdomainName'];
+
         $res = DB::connection($config['connection'])
             ->select(DB::connection($config['connection'])
-                ->select("EXECUTE [dbo].{$config['update']} ?, ?, ?, ?, ?"), [
+                ->raw("EXECUTE [dbo].{$config['update']} ?, ?, ?, ?, ?, ?"), [
                 $attributes['ID'],
-                $attributes['VersionID'],
-                $attributes['CompanyID'],
-                (!empty($attributes['Active'])) ? $attributes['Active'] : 0,
+                $CompanyID,
+                $CompanyName,
+                $CompanyNickName,
+                $SubdomainName,
                 Helper::get_timestamp()
             ]);
         $cs = new CompanySubdomainModel();
         Helper::resToClass($res, $cs);
 
-        return true;
+        return $cs;
     }
 
     public function delete()

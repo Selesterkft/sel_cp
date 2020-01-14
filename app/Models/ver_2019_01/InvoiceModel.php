@@ -4,12 +4,14 @@ namespace App\Models\ver_2019_01;
 
 //use EloquentFilter\Filterable;
 
+use DB;
+
 class InvoiceModel extends \Eloquent
 {
     //use Filterable;
 
     protected $connection = 'azure';
-    protected $table = 'Inv';
+    protected $table = 'CP_Inv_Read';
     protected $primaryKey = 'ID';
     protected $fillable = [
         'ID', 'ClientID', 'TransactID', 'Inv_Num', 'CancelInv_Num', 'Inv_Num_int', 'Inv_SeqNum', 'ACCT_Periods_ID',
@@ -86,9 +88,24 @@ class InvoiceModel extends \Eloquent
 
     public function getWidgetData()
     {
+        /*
+        $loggedUser = \Auth::user();
+        $config = config('appConfig.tables.invoices.' . session()->get('version'));
+        $res = DB::connection($config['connection'])
+            ->select(
+                DB::connection($config['connection'])
+                    ->raw("EXECUTE [dbo].[{$config['widget_read']}] ?, ?, ?"),
+                [
+                    $loggedUser[''],
+                    $loggedUser[''],
+                    $loggedUser['']
+                ]
+        );
+        */
         /**
          * https://stackoverflow.com/questions/54815787/how-to-sum-two-columns-in-laravel-5-6/54819566
          */
+
         $model = \DB::connection('azure')->table('Inv')
             ->select([
                 'Curr_ID', 'TypeID',
@@ -101,11 +118,12 @@ class InvoiceModel extends \Eloquent
             ->groupBy('Curr_ID', 'TypeID')
             ->orderBy('Curr_ID', 'asc')
             ->orderBy('TypeID', 'asc');
-        //dd('InvoiceModel.getWidgetData', $model->toSql());
+        //dd('InvoiceModel.getWidgetData', $model->toSql(), session());
         $res = $model->get();
         //dd('InvoiceModel.getWidgetData', $res);
 
         return $res;
+
     }
 
     /**

@@ -27,6 +27,7 @@ class CompanySubdomainController extends Controller
      * Show the form for creating a new resource.
      *
      * @return Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function create()
     {
@@ -48,19 +49,21 @@ class CompanySubdomainController extends Controller
     public function store(Request $request)
     {
         $config = config('appConfig.tables.company_has_subdomain');
+        //dd('CompanySubdomainController.store', $config);
         $this->validate($request, [
             'CompanyID' => 'required|unique:' . $config['connection'] . '.' . $config['table'] . ',CompanyID',
             'SubdomainName' => 'required|min:5|max:255|unique:' . $config['connection'] . '.' . $config['table'] . ',SubdomainName',
         ]);
 
-        $companyModel = app()->make('\App\Models\\' . session()->get('version') . '\CompanyModel');
-        $company = $companyModel->find($request->get('CompanyID'));
+        //$companyModel = app()->make('\App\Models\\' . session()->get('version') . '\CompanyModel');
+        //$company = $companyModel->find($request->get('CompanyID'));
         //dd('CompanySubdomainController', $company, $CompanyName, $CompanyNickName);
 
         $cs = new CompanySubdomainModel();
 
         try
         {
+            //dd('CompanySubdomainController.store', $request);
             $cs->save($request->all());
 
             return redirect()
@@ -92,8 +95,9 @@ class CompanySubdomainController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function edit($id)
     {

@@ -87,7 +87,11 @@ class User extends Authenticatable implements Searchable
 
     public function company()
     {
-        return $this->hasOne('\App\Models\\' . session()->get('version') . '\CompanyModel', 'ID', 'CompanyID');
+        $res = $this->hasOne(
+            '\App\Models\\' . session()->get('version') . '\CompanyModel',
+            'ID',
+            'CompanyID');
+        return $res;
     }
 
     public function CreateUser($request)

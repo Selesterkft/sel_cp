@@ -121,6 +121,7 @@ class InvoicesController extends Controller {
         */
         $invoices = $model->get();
 
+        // A szűrő ablakhoz kellenek az adatok
         $customers = InvoiceModel::where('ClientID', '=', $clientID)
                 ->where('Cust_Name1', '<>', 'Saját cég')
                 ->groupBy('Cust_Name1', 'Cust_ID')
@@ -130,7 +131,7 @@ class InvoicesController extends Controller {
                 ->toArray();
 
         //dd('InvoiceController.index', $customers );
-
+        // A szűrő ablakhoz kellenek az adatok
         $vendors = InvoiceModel::where('ClientID', '=', $clientID)
                 ->where('Vendor_Name1', '<>', 'Saját cég')
                 ->groupBy('Vendor_Name1', 'Vendor_ID')
@@ -312,10 +313,11 @@ class InvoicesController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $invoice = InvoiceModel::find($id);
+    public function show($id)
+    {
+        $invoice = InvoiceModel::find($id, ['*']);
         $details = $invoice->reszletek;
-
+        //dd('InvoicesController.show', $invoice, $details);
         return view(session()->get('version') . "/invoices/view", [
             'invoice' => $invoice,
             'details' => $details,

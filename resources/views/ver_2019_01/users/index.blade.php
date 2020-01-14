@@ -7,7 +7,7 @@
           method="get" class="sidebar-form">
         <div class="input-group">
             <input type="text" name="q" class="form-control"
-                   placeholder="{{ __('global.app_search') }}...">
+                   placeholder="{{-- __('global.app_search') --}}...">
             <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                     <i class="fa fa-search"></i>
@@ -131,9 +131,11 @@
                                     <th data-field="language" data-sortable="true" data-filter-control="select">
                                         {{ __('global.user.fields.language') }}
                                     </th>
+<!--
                                     <th data-field="CompanyName" data-valign="top">
-                                        {{ __('global.user.fields.company') }}
+                                        {{-- __('global.user.fields.company') --}}
                                     </th>
+-->
                                     <th data-field="" data-sortable="true"
                                         data-filter-control="input">
                                         {{ __('global.user.fields.roles') }}
@@ -158,6 +160,7 @@
                                         </td>
 
                                         <td>{{ $user->language }}</td>
+                                        <!--
                                         <td>
                                             @if($user->Supervisor_ID == 0)
                                                 {{ $user->CompanyName }}
@@ -165,6 +168,7 @@
                                                 {{ $user->Supervisor_Name }}
                                             @endif
                                         </td>
+                                        -->
                                         <td>
                                             <?php
                                             if( !empty($user->getRoleNames()) )

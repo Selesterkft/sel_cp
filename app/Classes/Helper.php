@@ -283,7 +283,7 @@ class Helper
             parse_url(\Request::url(), PHP_URL_HOST)
         );
 
-        //dd('Helper.getAppSubdomain', $url_array);
+        //dd('Helper.getAppSubdomain', $url_array, $url_array[0]);
 
         return $url_array[0];
     }
@@ -312,24 +312,21 @@ class Helper
     {
         $companyNickName = null;
         $config = config('appConfig.tables.company_has_subdomain');
+
         $results = \DB::connection($config['connection'])
                 ->select(\DB::raw("SELECT * FROM {$config['table']} WHERE CompanyID = :id;"),
                         ['id' => $company_id]);
+
+        if( $company_id != 71 )
+        {
+            dd('Helper.getCompanyNickNameByID', $company_id, $results);
+        }
          //dd('Helper.getCompanyNickNameByID', $company_id, $results);
          if( !empty($results) )
          {
              $companyNickName = $results[0]->SubdomainName;
          }
-        /*
-        $results = \DB::connection('azure3')
-                ->select(
-                        \DB::connection('azure3')
-                        ->raw('SELECT * FROM Cegek WHERE ID = :id'),
-                        ['id' => $company_id]
-                );
-        $companyNickName = self::getCompanyNickName($results[0]->Nev1);
-        */
-        //dd('Helper.getCompanyNickNameByID', $companyNickName);
+
         return $companyNickName;
     }
 
@@ -337,9 +334,12 @@ class Helper
     {
         //dd('Helper.getCompanyNickName', $company_name);
         $config = config('appConfig.tables.company_has_subdomain');
+        //dd('Helper.getCompanyNickName', $config);
         $results = \DB::connection($config['connection'])
                 ->select(\DB::connection($config['connection'])
-                        ->raw("SELECT * FROM {$config['table']} WHERE SubdomainName = :name"),
+                        ->raw("SELECT * 
+                                        FROM {$config['table']} 
+                                        WHERE SubdomainName = :name"),
                                 ['name' => $company_name]);
         //dd('Helper.getCompanyNickName', $company_name, $results, (empty($results)));
 
@@ -352,6 +352,19 @@ class Helper
         //dd('Helper.getCompanyNickName', $retVal);
         return $retVal;
         //return substr(self::remove_accents($company_name), 0, 20);
+    }
+
+    public static function getCompanyNameByID($id)
+    {
+        $config = config('appConfig.tables.company.' . session()->get('version'));
+        //dd('Helper.getCompanyNameByID', $config, $id);
+        $results = \DB::connection($config['connection'])
+            ->table($config['read'])
+            ->where('ID', '=', $id)
+            ->select(['ID', 'Nev1'])
+            ->get();
+        //dd('Helper.getCompanyNameByID', $results[0]->Nev1);
+        return $results[0]->Nev1;
     }
 
     public static function getWallpaper($company_id)
@@ -415,6 +428,7 @@ class Helper
 
     public static function getCompanyIDByCompanyNickName($companyNickName)
     {
+        //dd('Helper.getCompanyIDByCompanyNickName', $companyNickName);
         $config = config('appConfig.tables.company_has_subdomain');
         $results = \DB::connection($config['connection'])
                 ->select(
@@ -433,16 +447,33 @@ class Helper
     {
         //$valami = VersionCompanyModel::where('CompanyID', '=', $company_id)->where('Active', '=', 1)->first();
 
+        $vcConfig = config('appConfig.tables.version_has_company');
+        $vc = \DB::connection($vcConfig['connection'])
+            ->select(\DB::connection($vcConfig['connection'])
+                ->raw("SELECT VersionID FROM dbo.{$vcConfig['read']} WHERE CompanyID = ?"),
+                [$company_id]
+        );
+
+        $vConfig = config('appConfig.tables.versions');
+        $versionName = \DB::connection($vConfig['connection'])
+            ->select(\DB::connection($vConfig['connection'])
+                ->raw("SELECT Version FROM dbo.{$vConfig['read']} WHERE ID = ?"),
+                [$vc[0]->VersionID]
+        );
+
+        //dd('Helper.getVersionString', $vc, $versionName);
+
+        /*
         $valami = \DB::connection('azure')
                 ->select(\DB::connection('azure')
-                        ->raw('SELECT * FROM version_has_company WHERE CompanyID = :CompanyID'),
+                        ->raw('SELECT VersionID FROM version_has_company WHERE CompanyID = :CompanyID'),
                         ['CompanyID' => $company_id]);
-
-
+        */
+        /*
         $versionName = \DB::connection('azure')
                 ->select(\DB::connection('azure')
-                        ->raw('SELECT * FROM Versions WHERE ID = :ID'), ['ID' => $valami[0]->VersionID]);
-
+                        ->raw('SELECT Version FROM Versions WHERE ID = :ID'), ['ID' => $valami[0]->VersionID]);
+        */
         //dd('Helper.getVersionString', $company_id, $valami[0]->VersionID, $versionName);
 
         return $versionName[0]->Version;
@@ -471,6 +502,7 @@ class Helper
 
     /**
      * @return array|null
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public static function getCompanies()
     {
