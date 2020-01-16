@@ -143,19 +143,6 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
                 </div>
                 <!-- /.col -->
             </div>
-
-            @if( env('APP_DEBUG') == 1 )
-            <div class="row">
-                admin_01@selester.hu; 123456<br/>
-                <br/>
-                zoltan.bodnar@hu.yusen-logistics.com; 123456<br/>
-                admin@alpine.hu; 123456<br/>
-                felhasznalo@alpine.hu; 123456<br/>
-                felhasznalo_01@alpine.hu; 123456<br/>
-                felhasznalo_02@alpine.hu; 123456<br/>
-                felhasznalo_03@alpine.hu; 123456<br/>
-            </div>
-            @endif
         </form>
         <!--
         <a href="{{-- url('password.request') --}}">Elfelejtetted a jelszavad?</a><br>
