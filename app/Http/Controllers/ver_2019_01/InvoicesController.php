@@ -47,8 +47,10 @@ class InvoicesController extends Controller {
         $model = $model->raw(config('appConfig.raw'));
 
         $model = $model->select('ID', 'Inv_Num', 'Vendor_Name1',
-            'Cust_Name1', 'InvDate', 'DeliveryDate', 'DueDate', 'Netto_LC',
-            'Tax_LC', 'Brutto_LC', 'PaidAmount_DC');
+            'Cust_Name1',       'InvDate',          'DeliveryDate',     'DueDate',
+            'Netto_LC',         'Tax_LC',           'Brutto_LC',        'PaidAmount_DC',
+            'Curr_ID',          'Curr_DC',          'Vendor_Phone',     'Vendor_Email',
+            'Customer_Phone',   'Customer_Email');
 
         $model = $model->where('ClientID', '=', $clientID);
 
@@ -105,6 +107,11 @@ class InvoicesController extends Controller {
                     $model = $model->whereBetween('DueDate', [$datum[0], $datum[1]]);
                 }
             }
+
+            if( !empty($request->get('s_type')) )
+            {
+                $model = $model->where('TypeID' , '=', $request->get('s_type'));
+            }
         }
 
         $model = $model->orderBy('Inv_Num', 'asc');
@@ -118,6 +125,7 @@ class InvoicesController extends Controller {
         print_r("delivery:{$datum[0]}, {$datum[1]}\n");
         print_r($model->toSql());
         echo('</pre>');
+        dd('asd');
         */
         $invoices = $model->get();
 

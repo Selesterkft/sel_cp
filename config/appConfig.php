@@ -35,6 +35,16 @@ return array(
     'currencies' => array(
         'en' => '$ %s',
         'hu' => '%s Ft',
+
+        'HUF' => '',
+        'EUR' => '',
+        'USD' => '',
+        'JPY' => '',
+        'THB' => '',
+        'MYR' => '',
+        'CNY' => '',
+        'HKD' => '',
+        'KRW' => '',
     ),
 
     'wallpapers_folder' => 'wallpapers',
@@ -229,6 +239,10 @@ return array(
             'connection' => 'azure',
             'table' => 'stocks',
         ),
+        'currencies' => [
+            'connection' => 'azure',
+            'table' => 'CP_Currs',
+        ],
         /*
         'invoices_old' => array(
             'connection' => 'azure2',

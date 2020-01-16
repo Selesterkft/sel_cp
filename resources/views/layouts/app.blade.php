@@ -2,6 +2,7 @@
 
 $locale = (session()->has('locale')) ? session()->get('locale') : config('app.locale');
 //dd('app.blade', session()->get('locale'), config('app.locale'));
+//dd(Auth::user()->company);
 @endphp
 
 <!DOCTYPE html>

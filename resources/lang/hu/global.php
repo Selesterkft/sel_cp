@@ -90,15 +90,13 @@ return [
                 'incoming' => 'Bejövő bizonylat',
                 'outgoing' => 'Kimenő bizonylat',
             ],
-            '' => '',
-            '' => '',
         ],
         'fields' => [
             'inv_num' => 'Szla szám',
             'cancel_inv_id' => 'Stornó sz.',
             'ref_inv_id' => 'Ref.Inv.ID',
             'cancel_date' => 'Stornó dátum',
-            'vendor_name' => 'Szállító név',
+            'vendor_name' => 'Eladó név',
 
             'cust_name' => 'Vevő név',
             'period_from' => 'TÓL',
@@ -112,8 +110,8 @@ return [
             'brutto_lc' => 'Brutto össz.',
             'pay_status' => 'Fiz.állapot',
 
-            'paid_amount_dc' => 'Tartozás kint',
-            'paid_amount_fc' => 'Tartozás kint EUR',
+            'paid_amount_dc' => 'Kintlevőség',
+            'paid_amount_fc' => 'Kintlevőség EUR',
             'curr_id' => 'Valuta',
             'netto_fc' => 'EUR netto',
             'tax_fc' => 'AFA netto',
@@ -147,6 +145,7 @@ return [
         'debts' => 'Tartozások',
         'overdue_debts' => 'Lejárt tartozások',
         'open_invoices' => 'Nyitott számlák',
+        'paid_so_far' => 'Eddig kifizetve',
     ],
 
     'transports' => [
@@ -430,6 +429,7 @@ return [
     'app_success' => 'Siker!',
     'app_error' => 'Hiba!',
     'app_alert' => 'Figyelmeztetés!',
+    'app_currency' => 'Pénznem',
 
     'app_activity' => [
         'active' => 'Active',

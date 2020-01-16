@@ -7,6 +7,7 @@
 @php
 $dateFormat = (config('appConfig.dateFormats'))[config('app.locale')]['carbon'];
 $priceFormat = config('appConfig.currencies.' . config('app.locale'));
+
 @endphp
 
 <section class='content-header'>
@@ -102,7 +103,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
 
 
 <script>
-    
+
     var $table              = $('#table');
     var $searchModal        = $('#searchRekord');
     var $s_invNum           = $('#s_invNum');
@@ -110,7 +111,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
     var $s_vendor           = $('#s_vendor');
     var $s_delivery_date    = $('#s_delivery_date');
     var $s_due_date         = $('#s_due_date');
-    
+
     /*
      * ================================
      * Search Modal Open
@@ -125,7 +126,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
             $s_due_date.data('daterangepicker').setStartDate($datumok[0]);
             $s_due_date.data('daterangepicker').setEndDate($datumok[1]);
         }
-        
+
         if( getAllUrlParams().s_delivery_date != undefined && getAllUrlParams().s_delivery_date != '' )
         {
             $s_delivery_date.val(getAllUrlParams().s_delivery_date.replace('+-+', ' - '));
@@ -134,7 +135,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
             $s_delivery_date.data('daterangepicker').setEndDate($datumok[1]);
         }
     });
-    
+
     /*
      * ================================
      * Search Modal Close
@@ -144,7 +145,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
     {
         lblSearch;
     });
-    
+
     /*
      * ================================
      * Daterange Pickers Language settings
@@ -163,7 +164,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
         monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
         firstDay: 1
     };
-    
+
     /*
      * ================================
      * Daterange Pickers
@@ -180,21 +181,21 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
         }
         @endphp
     });
-    
-    // 
+
+    //
     $('#s_delivery_date, #s_due_date').on('apply.daterangepicker', function(ev, picker)
     {
-        
-        $(this).val(picker.startDate.format('@php echo config("appConfig.dateFormats." . app()->getLocale() . ".moment") @endphp') + 
-                ' - ' + 
+
+        $(this).val(picker.startDate.format('@php echo config("appConfig.dateFormats." . app()->getLocale() . ".moment") @endphp') +
+                ' - ' +
                 picker.endDate.format('@php echo config("appConfig.dateFormats." . app()->getLocale() . ".moment") @endphp'));
     });
-    
+
     $('#s_delivery_date, #s_due_date').on('cancel.daterangepicker', function(ev, picker)
     {
         $(this).val('');
     });
-    
+
     /*
      * Table beállítás
      */
@@ -206,16 +207,16 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     locale: '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}'
                 });
     }
-    
+
     $(function()
     {
         initTable();
     });
-    
+
     /*
      * https://www.sitepoint.com/get-url-parameters-with-javascript/
      */
-    function getAllUrlParams(url) 
+    function getAllUrlParams(url)
     {
         // get query string from url (optional) or window
         var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
@@ -224,7 +225,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
         var obj = {};
 
         // if query string exists
-        if (queryString) 
+        if (queryString)
         {
             // stuff after # is not part of query string, so get rid of it
             queryString = queryString.split('#')[0];
@@ -232,7 +233,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
             // split our query string into its component parts
             var arr = queryString.split('&');
 
-            for (var i = 0; i < arr.length; i++) 
+            for (var i = 0; i < arr.length; i++)
             {
                 // separate the keys and the values
                 var a = arr[i].split('=');
@@ -246,7 +247,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                 if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
 
                 // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-                if (paramName.match(/\[(\d+)?\]$/)) 
+                if (paramName.match(/\[(\d+)?\]$/))
                 {
 
                     // create key if it doesn't exist
@@ -254,33 +255,33 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     if (!obj[key]) obj[key] = [];
 
                     // if it's an indexed array e.g. colors[2]
-                    if (paramName.match(/\[\d+\]$/)) 
+                    if (paramName.match(/\[\d+\]$/))
                     {
                         // get the index value and add the entry at the appropriate position
                         var index = /\[(\d+)\]/.exec(paramName)[1];
                         obj[key][index] = paramValue;
-                    } 
-                    else 
+                    }
+                    else
                     {
                         // otherwise add the value to the end of the array
                         obj[key].push(paramValue);
                     }
-                } 
-                else 
+                }
+                else
                 {
                     // we're dealing with a string
-                    if (!obj[paramName]) 
+                    if (!obj[paramName])
                     {
                         // if it doesn't exist, create property
                         obj[paramName] = paramValue;
-                    } 
+                    }
                     else if (obj[paramName] && typeof obj[paramName] === 'string')
                     {
                         // if property does exist and it's a string, convert it to an array
                         obj[paramName] = [obj[paramName]];
                         obj[paramName].push(paramValue);
-                    } 
-                    else 
+                    }
+                    else
                     {
                         // otherwise add the property
                         obj[paramName].push(paramValue);
@@ -290,7 +291,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
         }
         return obj;
     }
-    
+
 </script>
 
 @endsection

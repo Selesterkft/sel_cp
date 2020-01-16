@@ -105,7 +105,7 @@ class InvoiceModel extends \Eloquent
         /**
          * https://stackoverflow.com/questions/54815787/how-to-sum-two-columns-in-laravel-5-6/54819566
          */
-
+/*
         $model = \DB::connection('azure')->table('Inv')
             ->select([
                 'Curr_ID', 'TypeID',
@@ -121,7 +121,21 @@ class InvoiceModel extends \Eloquent
         //dd('InvoiceModel.getWidgetData', $model->toSql(), session());
         $res = $model->get();
         //dd('InvoiceModel.getWidgetData', $res);
+*/
+        $loggedUser = \Auth::user();
 
+        $CompanyID = $loggedUser->CompanyID;
+        $Supervisor_ID = ($loggedUser->Supervisor_ID == 0) ? 0 : $loggedUser->Supervisor_ID;
+
+        $config = config('appConfig.tables.invoices.' . session()->get('version'));
+        $res = DB::connection($config['connection'])
+            ->select(DB::connection($config['connection'])
+                ->raw("EXECUTE [dbo].[{$config['widget_read']}] ?, ?"),
+            [
+                $CompanyID,
+                $Supervisor_ID
+            ]);
+        //dd('InvoiceModel.getWidgetData', $loggedUser, $CompanyID, $Supervisor_ID, $config, $res);
         return $res;
 
     }

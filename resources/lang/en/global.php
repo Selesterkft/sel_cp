@@ -126,6 +126,7 @@ return [
         'debts' => 'Debts',
         'overdue_debts' => 'Overdue Debts',
         'open_invoices' => 'Open Invoices',
+        'paid_so_far' => 'Paid so Far',
     ],
 
     'transports' => [
@@ -428,6 +429,7 @@ return [
     'app_success' => 'Success!',
     'app_error' => 'Error!',
     'app_alert' => 'Alert!',
+    'app_currency' => 'Currency',
 
     'app_activity' => [
         'active' => 'Aktive',

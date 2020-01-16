@@ -316,10 +316,10 @@ class Helper
         $results = \DB::connection($config['connection'])
                 ->select(\DB::raw("SELECT * FROM {$config['table']} WHERE CompanyID = :id;"),
                         ['id' => $company_id]);
-
+        //dd('Helper.getCompanyNickNameByID', $results);
         if( $company_id != 71 )
         {
-            dd('Helper.getCompanyNickNameByID', $company_id, $results);
+            //dd('Helper.getCompanyNickNameByID', $company_id, $results);
         }
          //dd('Helper.getCompanyNickNameByID', $company_id, $results);
          if( !empty($results) )

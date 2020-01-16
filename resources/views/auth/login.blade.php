@@ -67,9 +67,9 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
+    {{--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>--}}
     <script src="{{ asset('assets/bower_components/html5shiv/3.7.3/html5shiv.min.js') }}"></script>
-    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+    {{--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--}}
     <script src="{{ asset('assets/bower_components/respond/1.4.2/respond.min.js') }}"></script>
     <![endif]-->
 
@@ -144,6 +144,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
                 <!-- /.col -->
             </div>
 
+            @if( env('APP_DEBUG') == 1 )
             <div class="row">
                 admin_01@selester.hu; 123456<br/>
                 <br/>
@@ -154,7 +155,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
                 felhasznalo_02@alpine.hu; 123456<br/>
                 felhasznalo_03@alpine.hu; 123456<br/>
             </div>
-
+            @endif
         </form>
         <!--
         <a href="{{-- url('password.request') --}}">Elfelejtetted a jelszavad?</a><br>

@@ -25,19 +25,27 @@ $data = $invModel->getWidgetData();
                 <table class="table no-margin">
                     <thead>
                     <tr>
+                        <!--
                         <th>{{ trans('global.invoices_widget.currency') }}</th>
                         <th>{{ trans('global.invoices_widget.type') }}</th>
                         <th>{{ trans('global.invoices_widget.debts') }}</th>
                         <th>{{ trans('global.invoices_widget.overdue_debts') }}</th>
-                        <th>{{ trans('global.invoices_widget.open_invoices') }}</th>
+                        <th>{{ trans('global.invoices_widget.paid_so_far') }}</th>
+                        -->
+                            <th>{{ trans('global.invoices_widget.currency') }}</th>
+                            <th>{{ trans('global.invoices_widget.type') }}</th>
+                            <th>{{ trans('NETTO OSSZESEN') }}</th>
+                            <th>{{ trans('AFA OSSZESEN') }}</th>
+                            <th>{{ trans('BRUTTO OSSZESEN') }}</th>
+                            <th>{{ trans('TARTOZAS') }}</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     @foreach($data as $sum)
                         <tr>
-                            <td>{{ $sum->Curr_ID }}</td>
-                            <td>{{ $sum->TypeID }}</td>
+                            <td>{{ $sum->Penznem }}</td>
+                            <td>{{ $sum->Tipus }}</td>
                             <td>{{ $sum->NettoOsszesen }}</td>
                             <td>{{ $sum->BruttoOsszesen }}</td>
                             <td>{{ $sum->EddigKifizetve }}</td>

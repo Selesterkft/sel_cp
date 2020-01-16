@@ -36,7 +36,7 @@
                        data-show-footer="true">
                 <thead>
                     <tr>
-                        <th>{{ __('global.app_fields.operations') }}</th>
+                        <th data-switchable="false" data-sortable="false" data-searchable="false" data-exportable="false">{{ __('global.app_fields.operations') }}</th>
                         <!--<th data-checkbox="true"></th>-->
                         <!--<th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="false" data-visible="true">{{ __('global.app_id') }}</th>-->
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.inv_num') }}</th>
@@ -60,6 +60,7 @@
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.inv_date') }}</th>
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.delivery_date') }}</th>
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.due_date') }}</th>
+                        <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.app_currency') }}</th>
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.netto_lc') }}</th>
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.tax_lc') }}</th>
                         <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.invoices.fields.brutto_lc') }}</th>
@@ -80,7 +81,7 @@
                                class="btn btn-success btn-sm view">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            <a href="mailto:info@selester.hu?subject=Kérdések a {{ $invoice->Inv_Num }} számlával kapcsolatban&body=Tisztelt {{ $invoice->Cust_Name1 }}!%0D%0AÜdvözlettel: {{ $invoice->Vendor_Name1 }}"
+                            <a href="mailto:?subject=Kérdések a {{ $invoice->Inv_Num }} számlával kapcsolatban&body=Tisztelt {{ $invoice->Cust_Name1 }}!%0D%0AÜdvözlettel: {{ $invoice->Vendor_Name1 }}"
                                class="btn btn-info btn-sm">
                                 <i class="fa fa-envelope"></i>
                             </a>
@@ -102,11 +103,40 @@
                         <td>{{ \Carbon\Carbon::parse($invoice->InvDate)->format($dateFormat) }}</td>
                         <td>{{ \Carbon\Carbon::parse($invoice->DeliveryDate)->format($dateFormat) }}</td>
                         <td>{{ \Carbon\Carbon::parse($invoice->DueDate)->format($dateFormat) }}</td>
-                        <td>{{ str_replace('%s', number_format($invoice->Netto_LC, 2), $priceFormat) }}</td>
-                        <td>{{ str_replace('%s', number_format($invoice->Tax_LC, 2), $priceFormat) }}</td>
-                        <td>{{ str_replace('%s', number_format($invoice->Brutto_LC, 2), $priceFormat) }}</td>
-                        <!--<td>{{ $invoice->PayStatus }}</td>-->
-                        <td>{{ str_replace('%s', number_format($invoice->PaidAmount_DC, 2), $priceFormat) }}</td>
+
+                        <td>
+                            {{ $invoice->Curr_DC }}
+                        </td>
+
+                        <td class="pull-right">
+                            {{ number_format($invoice->Netto_LC, 2) }}
+                            {{-- str_replace('%s', number_format($invoice->Netto_LC, 2), $priceFormat) --}}
+                        </td>
+
+
+                        <td>
+                            <div class="pull-right">
+                                {{ number_format($invoice->Tax_LC, 2) }}
+                            </div>
+                            {{-- str_replace('%s', number_format($invoice->Tax_LC, 2), $priceFormat) --}}
+                        </td>
+
+                        <td>
+                            <div class="pull-right">
+                                {{ number_format($invoice->Brutto_LC, 2) }}
+                            </div>
+                            {{-- str_replace('%s', number_format($invoice->Brutto_LC, 2), $priceFormat) --}}
+                        </td>
+
+                        <!--<td>{{-- $invoice->PayStatus --}}</td>-->
+
+                        <td class="pull-right">
+                            <div class="pull-right">
+                                {{ number_format($invoice->PaidAmount_DC, 2) }}
+                            </div>
+                            {{-- str_replace('%s', number_format($invoice->PaidAmount_DC, 2), $priceFormat) --}}
+                        </td>
+
                         {{--<td>{{ str_replace('%s', number_format($invoice->PaidAmount_FC, 2), $priceFormat) }}</td>--}}
                         {{--<td>{{ $invoice->Curr_ID }}</td>--}}
                         {{--<td>{{ str_replace('%s', number_format($invoice->Netto_FC, 2), $priceFormat) }}</td>--}}

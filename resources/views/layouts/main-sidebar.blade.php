@@ -59,6 +59,7 @@
 
                     @php
                     $user = Auth::user();
+
                     if( $user->Supervisor_ID == 0 )
                     {
                         echo $user->company->Nev1;
@@ -74,7 +75,9 @@
                             echo substr( $user->Supervisor_Name, 0, 20);
                             echo substr($user->Supervisor_Name , 20, strlen($user->Supervisor_Name));
                         }
+
                     }
+
                     @endphp
 
                 </a>
@@ -146,14 +149,14 @@
                 </a>
             </li>
 <!--
-                <li class="{{ ($request->segment(1) == 'users2' ||
+                <li class="{{-- ($request->segment(1) == 'users2' ||
                         $request->segment(1) == 'users.show' ||
                         $request->segment(1) == 'users.create' ||
-                        $request->segment(1) == 'users.edit') ? 'active' : '' }}">
-                    <a href="{{ url('users2') }}">
+                        $request->segment(1) == 'users.edit') ? 'active' : '' --}}">
+                    <a href="{{-- url('users2') --}}">
                         <i class="ion ion-android-contacts"></i>&nbsp;
                         <span>
-                        {{ __('USERS2') }}
+                        {{-- __('USERS2') --}}
                     </span>
                     </a>
                 </li>
@@ -216,14 +219,16 @@
             @endif
 
             @if(Auth::user()->hasRole('Admin') && Auth::user()->CompanyID == 71)
-            <li class="{{ $request->segment(1) == 'sd_helper' ? 'active' : '' }}">
-                <a href="{{ url('sd_helper') }}">
+            <!--
+            <li class="{{-- $request->segment(1) == 'sd_helper' ? 'active' : '' --}}">
+                <a href="{{-- url('sd_helper') --}}">
                     <i class="fa fa-book"></i>&nbsp;
                     <span>
-                        {{ __('global.sd_helper.title') }}
+                        {{-- __('global.sd_helper.title') --}}
                     </span>
                 </a>
             </li>
+                -->
             @endif
 
         </ul>
