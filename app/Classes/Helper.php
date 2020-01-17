@@ -314,13 +314,13 @@ class Helper
         $config = config('appConfig.tables.company_has_subdomain');
 
         $results = \DB::connection($config['connection'])
-                ->select(\DB::raw("SELECT * FROM {$config['table']} WHERE CompanyID = :id;"),
+                ->select(\DB::raw("SELECT SubdomainName FROM {$config['table']} WHERE CompanyID = :id;"),
                         ['id' => $company_id]);
         //dd('Helper.getCompanyNickNameByID', $results);
-        if( $company_id != 71 )
-        {
+        //if( $company_id != 71 )
+        //{
             //dd('Helper.getCompanyNickNameByID', $company_id, $results);
-        }
+        //}
          //dd('Helper.getCompanyNickNameByID', $company_id, $results);
          if( !empty($results) )
          {

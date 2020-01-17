@@ -90,7 +90,7 @@ class User extends Authenticatable implements Searchable
         $res = $this->hasOne(
             '\App\Models\\' . session()->get('version') . '\CompanyModel',
             'ID',
-            'CompanyID');
+            'CompanyID')->select(['Nev1']);
         return $res;
     }
 

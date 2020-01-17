@@ -132,7 +132,7 @@ class InvoiceModel extends \Eloquent
             ->select(DB::connection($config['connection'])
                 ->raw("EXECUTE [dbo].[{$config['widget_read']}] ?, ?"),
             [
-                $CompanyID,
+                (int)$CompanyID,
                 $Supervisor_ID
             ]);
         //dd('InvoiceModel.getWidgetData', $loggedUser, $CompanyID, $Supervisor_ID, $config, $res);

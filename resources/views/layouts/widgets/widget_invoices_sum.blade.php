@@ -22,15 +22,15 @@ $data = $invModel->getWidgetData();
         <!-- /.box-header -->
         <div class="box-body">
             <div class="table-responsive">
-                <table class="table no-margin">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <!--
-                        <th>{{ trans('global.invoices_widget.currency') }}</th>
-                        <th>{{ trans('global.invoices_widget.type') }}</th>
-                        <th>{{ trans('global.invoices_widget.debts') }}</th>
-                        <th>{{ trans('global.invoices_widget.overdue_debts') }}</th>
-                        <th>{{ trans('global.invoices_widget.paid_so_far') }}</th>
+                        <th>{{-- trans('global.invoices_widget.currency') --}}</th>
+                        <th>{{-- trans('global.invoices_widget.type') --}}</th>
+                        <th>{{-- trans('global.invoices_widget.debts') --}}</th>
+                        <th>{{-- trans('global.invoices_widget.overdue_debts') --}}</th>
+                        <th>{{-- trans('global.invoices_widget.paid_so_far') --}}</th>
                         -->
                             <th>{{ trans('global.invoices_widget.currency') }}</th>
                             <th>{{ trans('global.invoices_widget.type') }}</th>
@@ -46,9 +46,26 @@ $data = $invModel->getWidgetData();
                         <tr>
                             <td>{{ $sum->Penznem }}</td>
                             <td>{{ $sum->Tipus }}</td>
-                            <td>{{ $sum->NettoOsszesen }}</td>
-                            <td>{{ $sum->BruttoOsszesen }}</td>
-                            <td>{{ $sum->EddigKifizetve }}</td>
+                            <td>
+                                <div class="pull-right">
+                                    {{ number_format($sum->NettoOsszesen, 2) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    {{ number_format($sum->AFAOsszesen, 2) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    {{ number_format($sum->BruttoOsszesen, 2) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    {{ number_format($sum->EddigKifizetve, 2) }}
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
 
