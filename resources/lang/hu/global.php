@@ -140,12 +140,17 @@ return [
     ],
 
     'invoices_widget' => [
+        'title' => 'Egyenleg',
         'currency' => 'Valuta',
         'type' => 'Típus',
         'debts' => 'Tartozások',
         'overdue_debts' => 'Lejárt tartozások',
         'open_invoices' => 'Nyitott számlák',
         'paid_so_far' => 'Eddig kifizetve',
+        'net_total' => 'Nettó össz.',
+        'brut_total' => 'Bruttó össz.',
+        'vat_total' => 'ÁFA össz.',
+        'debit' => 'Tartozás',
     ],
 
     'transports' => [
@@ -388,6 +393,11 @@ return [
         'nothing_todo' => 'Nincsenek teendők',
     ],
 
+    'account_type' => [
+        201 => 'Kimenő',
+        202 => 'Bejövő',
+    ],
+
     'app_name' => 'Név',
     'app_main_navigation' => 'Fő menü',
     'app_id' => '#',
@@ -430,6 +440,8 @@ return [
     'app_error' => 'Hiba!',
     'app_alert' => 'Figyelmeztetés!',
     'app_currency' => 'Pénznem',
+    'app_quantity' => 'Mennyiség',
+    'app_amount' => 'Darab',
 
     'app_activity' => [
         'active' => 'Active',

@@ -69,8 +69,6 @@ return [
                 'incoming' => 'inbound account',
                 'outgoing' => 'outbound account',
             ],
-            '' => '',
-            '' => '',
         ],
         'fields' => [
             'inv_num' => 'Inv num',
@@ -121,12 +119,17 @@ return [
     ],
 
     'invoices_widget' => [
+        'title' => 'Balance',
         'currency' => 'Currency',
         'type' => 'Type',
         'debts' => 'Debts',
         'overdue_debts' => 'Overdue Debts',
         'open_invoices' => 'Open Invoices',
         'paid_so_far' => 'Paid so Far',
+        'net_total' => 'Net Total',
+        'brut_total' => 'Brut Total',
+        'vat_total' => 'VAT Total',
+        'debit' => 'Debit',
     ],
 
     'transports' => [
@@ -389,6 +392,11 @@ return [
         'nothing_todo' => 'There is nothing to do',
     ],
 
+    'account_type' => [
+        201 => 'Outgoing',
+        202 => 'Incoming',
+    ],
+
     'app_name' => 'Name',
     'app_main_navigation' => 'Main Navigation',
     'app_id' => '#',
@@ -430,6 +438,8 @@ return [
     'app_error' => 'Error!',
     'app_alert' => 'Alert!',
     'app_currency' => 'Currency',
+    'app_quantity' => 'Quantity',
+    'app_amount' => 'Pieces',
 
     'app_activity' => [
         'active' => 'Aktive',

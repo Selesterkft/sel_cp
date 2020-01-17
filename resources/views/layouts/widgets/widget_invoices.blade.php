@@ -1,6 +1,6 @@
 @php
 $model = 'App\Models\\' . session()->get('version') . '\InvoiceModel';
-$countOfInvoices = $model::getCountOfInvoices();
+$countOfInvoices = $model->getCountOfInvoices();
 @endphp
 
 <div class="col-lg-3 col-xs-6">
@@ -9,7 +9,9 @@ $countOfInvoices = $model::getCountOfInvoices();
         <div class="inner invoicesBox">
             <h3 class="invoicesBox">{{ __('global.invoices.title') }}</h3>
 
-            <p class="invoicesBox">{{ $countOfInvoices }}</p>
+            <p class="invoicesBox">
+                {{ $countOfInvoices }}&nbsp;{{ __('global.app_amount') }}
+            </p>
         </div>
         <div class="icon invoicesBox">
             <i class="ion ion-ios-list-outline invoicesBox"></i>
@@ -27,13 +29,11 @@ $countOfInvoices = $model::getCountOfInvoices();
 
     $invBox.on('mouseleave', function()
     {
-        //console.log('lelépett');
         $invBox.find('*').css('cursor', 'pointer');
     });
 
     $invBox.mouseover(function()
     {
-        //console.log('felette');
         $invBox.find('*').css('cursor', 'hand');
     });
 

@@ -7,9 +7,13 @@ $data = $invModel->getWidgetData();
     <div class="box box-info">
 
         <div class="box-header with-border">
-            <h3 class="box-title">Latest Orders</h3>
-
+            <h3 class="box-title">
+                <i class="fa fa-money"></i>&nbsp;
+                {{ __('global.invoices_widget.title') }}
+            </h3>
+            <!--
             <div class="box-tools pull-right">
+
                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-minus"></i>
                 </button>
@@ -17,6 +21,7 @@ $data = $invModel->getWidgetData();
                     <i class="fa fa-times"></i>
                 </button>
             </div>
+            -->
         </div>
 
         <!-- /.box-header -->
@@ -32,20 +37,22 @@ $data = $invModel->getWidgetData();
                         <th>{{-- trans('global.invoices_widget.overdue_debts') --}}</th>
                         <th>{{-- trans('global.invoices_widget.paid_so_far') --}}</th>
                         -->
-                            <th>{{ trans('global.invoices_widget.currency') }}</th>
-                            <th>{{ trans('global.invoices_widget.type') }}</th>
-                            <th>{{ trans('NETTO OSSZESEN') }}</th>
-                            <th>{{ trans('AFA OSSZESEN') }}</th>
-                            <th>{{ trans('BRUTTO OSSZESEN') }}</th>
-                            <th>{{ trans('TARTOZAS') }}</th>
+                            <th class="text-center">{{ trans('global.invoices_widget.type') }}</th>
+                            <th class="text-center">{{ trans('global.invoices_widget.currency') }}</th>
+                            <th class="text-center">{{ trans('global.invoices_widget.net_total') }}</th>
+                            <th class="text-center">{{ trans('global.invoices_widget.vat_total') }}</th>
+                            <th class="text-center">{{ trans('global.invoices_widget.brut_total') }}</th>
+                            <th class="text-center">{{ trans('global.invoices_widget.debit') }}</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     @foreach($data as $sum)
                         <tr>
+                            <td>
+                                {{ __('global.account_type.' . $sum->TypeID) }}
+                            </td>
                             <td>{{ $sum->Penznem }}</td>
-                            <td>{{ $sum->Tipus }}</td>
                             <td>
                                 <div class="pull-right">
                                     {{ number_format($sum->NettoOsszesen, 2) }}
