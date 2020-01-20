@@ -35,16 +35,6 @@ return array(
     'currencies' => array(
         'en' => '$ %s',
         'hu' => '%s Ft',
-
-        'HUF' => '',
-        'EUR' => '',
-        'USD' => '',
-        'JPY' => '',
-        'THB' => '',
-        'MYR' => '',
-        'CNY' => '',
-        'HKD' => '',
-        'KRW' => '',
     ),
 
     'wallpapers_folder' => 'wallpapers',
@@ -169,7 +159,8 @@ return array(
         'invoices' => array(
             'ver_2019_01' => [
                 'connection' => 'azure',
-                'table' => 'CP_Inv_Read',
+                'table' => 'CP_Inv',
+                'read' => 'CP_Inv_Read',
                 'widget_read' => 'CP_Invoices_Widget',
             ],
             'ver_2019_02' => [
@@ -207,6 +198,7 @@ return array(
             'read' => 'CP_Users_Read',
             'insert' => 'CP_Users_Insert',
             'update' => 'CP_Users_Update',
+            'register' => 'CP_User_Register_Login',
             'delete' => 'CP_Users_Delete',
             'restore' => 'CP_Users_RestoreDeleted',
         ),
@@ -242,6 +234,10 @@ return array(
         'currencies' => [
             'connection' => 'azure',
             'table' => 'CP_Currs',
+        ],
+        'audit_logs' => [
+            'connection' => 'azure',
+            'table' => 'audit_logs',
         ],
         /*
         'invoices_old' => array(

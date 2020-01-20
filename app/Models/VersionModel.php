@@ -2,37 +2,35 @@
 
 namespace App\Models;
 
+use App\Classes\Helper;
+use App\Traits\Auditable;
+use App\User;
 use DB;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class VersionModel extends Model
 {
+    use HasEvents;
     use SoftDeletes;
     use LogsActivity;
+    //use Auditable;
 
     protected $connection = 'azure';
-    protected $table = 'version';
+    protected $table = 'Versions';
 
     protected $primaryKey = 'ID';
     protected $fillable = ['Version', 'Active'];
-    protected $dates = ['deleted_at'];
-
-    // ================================================
-    // Naplózás
-    // ================================================
-    protected static $logFillable = true;
-    // Naplózandó mezők
-    //protected static $logAtributes = ['Version', 'Active'];
-    // Naplózandó események
-    //protected static $recordEvents = ['created', 'updated', 'deleted'];
-    // Naplózásból kihagyandó mezők
-    //protected static $ignoreChangedAttributes = [];
-
-    // Csak a ténylegesen megváltozott mezőket naplózza
-    //protected static $logOnlyDirty = true;
+    //protected $dates = ['deleted_at'];
+    /*
+    protected static $logOnlyDirty = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logAttributes = ['Version', 'Active'];
+    */
 
     public static function readAll()
     {
@@ -68,6 +66,9 @@ class VersionModel extends Model
     public function save(array $options = [])
     {
         //dd('VersionModel.save', $options);
+
+        //if ($this->fireModelEvent('saving') === false) { return false; }
+
         $config = config('appConfig.tables.versions');
         $res = DB::connection($config['connection'])
             ->select(
@@ -80,36 +81,34 @@ class VersionModel extends Model
             ]);
         //dd('VersionModel.save', $res);
         $version = new VersionModel();
-        foreach($res[0] as $key => $val)
-        {
-            $version->$key = $val;
-        }
+        Helper::resToClass($res, $version);
 
         return $version;
     }
 
     public function update(array $attributes = [], array $options = [])
     {
-        //dd('VersionModel.update', $attributes);
+        // Az "Active" érték nem jön át, ha 0 értékű
+        if( empty($attributes['Active']) )
+        {
+            $attributes['Active'] = 0;
+        }
+
+        $this->fill($attributes);
+
         $config = config('appConfig.tables.versions');
         $res = DB::connection($config['connection'])
             ->select(
                 DB::connection($config['connection'])
-                    ->raw('EXECUTE dbo.CP_Versions_Update ?, ?, ?')
+                    ->raw('EXECUTE dbo.CP_Versions_Update ?, ?, ?, ?')
             , [
                 $attributes['ID'],
                 $attributes['Version'],
                 (!empty($attributes['Active'])) ? $attributes['Active'] : 0,
-                ''
+                \App\Classes\Helper::get_timestamp()
             ]);
-        //dd('VersionModel.update', $res);
-        $version = new VersionModel();
-        foreach($res[0] as $key => $val)
-        {
-            $version->$key = $val;
-        }
 
-        return $version;
+        return $this;
     }
 
     public function delete()

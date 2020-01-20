@@ -53,7 +53,7 @@ $priceFormat = config('appConfig.currencies.' . config('app.locale'));
 @endsection
 
 @section('css')
-<link href="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/bootstrap-table.css') }}" rel="stylesheet"/>
+<link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
 {{--<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">--}}
 
 {{--<link href="{{ asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">--}}
@@ -81,14 +81,21 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
 @section('js')
 
 {{-- Bootstrap Table --}}
-<script src="{{ asset('assets/bower_components/bootstrap-table/tableExport.min.js') }}" type="text/javascript"></script>
-{{-- <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/bootstrap-table.js') }}" type="text/javascript"></script>--}}
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-{{--<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>--}}
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-hu-HU.js"></script>
-{{--<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/extensions/export/bootstrap-table-export.js') }}" type="text/javascript"></script>--}}
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>
+<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') }}" type="text/javascript"></script>
 
+<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.plugin.autotable.js') }}" type="text/javascript"></script>
+
+<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.js') }}" type="text/javascript"></script>--}}
+<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>--}}
+
+<script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}" type="text/javascript"></script>
+
+{{--
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-hu-HU.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>
+--}}
 {{-- Date Picker --}}
 {{--<script src="{{ asset('assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>--}}
 {{--<script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>--}}

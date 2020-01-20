@@ -7,35 +7,15 @@ use DB;
 //use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class VersionCompanyModel extends Model
 {
-    use LogsActivity;
     use SoftDeletes;
 
     protected $connection = 'azure',
         $table = 'version_has_company',
         $primaryKey = 'ID',
         $fillable = ['CompanyID', 'VersionID', 'Active'];
-
-    // ================================================
-    // Naplózás
-    // ================================================
-    protected static $logFillable = true;
-    // Naplózandó mezők
-    protected static $logAtributes = [
-        'CompanyID', 'PropertyName', 'PropertyValue'
-    ];
-    // Naplózandó események
-    protected static $recordEvents = [
-        'created', 'updated', 'deleted'
-    ];
-    // Naplózásból kihagyandó mezők
-    protected static $ignoreChangedAttributes = [];
-
-    // Csak a ténylegesen megváltozott mezőket naplózza
-    protected static $logOnlyDirty = true;
 
     public static function readAll()
     {
@@ -45,21 +25,24 @@ class VersionCompanyModel extends Model
             ->table($config['read'])
             ->select(['ID', 'CompanyID', 'VersionID', 'Active'])
             ->get();
-        //dd('VersionCompanyModel.readAll', $res);
+        //dd('VersionCompanyModel.readAll', $resources);
 
         $res = [];
 
         foreach( $resources as $resource )
         {
             $vc = new VersionCompanyModel();
+            Helper::resToClass($resource, $vc);
+            /*
             foreach( $resource as $key => $val )
             {
                 $vc->$key = $val;
             }
+            */
             //dd('VersionCompanyModel.readAll', $vc);
             $res[] = $vc;
         }
-
+        //dd('VersionCompanyModel.readAll', $res);
         return $res;
     }
 
@@ -67,11 +50,11 @@ class VersionCompanyModel extends Model
     {
         $config = config('appConfig.tables.version_has_company');
 
-        $res = DB::connection($config['connection'])
-            ->table($config['read'])->find($id);
-
-        $vc = new VersionCompanyModel();
-        Helper::resToClass($res, $vc);
+        //$res = DB::connection($config['connection'])->table($config['read'])->find($id);
+        $vc = VersionCompanyModel::find($id);
+        //dd('VersionCompanyModel.getByID', $res);
+        //$vc = new VersionCompanyModel();
+        //Helper::resToClass($res, $vc);
 
         return $vc;
     }
@@ -145,6 +128,6 @@ class VersionCompanyModel extends Model
         parent::__construct();
         $config = config('appConfig.tables.version_has_company');
         $this->connection = $config['connection'];
-        $this->table = $config['table'];
+        $this->table = $config['read'];
     }
 }

@@ -2,23 +2,28 @@
 
 namespace App;
 
+use App\Traits\Auditable;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 //use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
-use Spatie\Activitylog\Traits\LogsActivity;
+//use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable implements Searchable
 {
     use Notifiable;
     use HasRoles;
+    use HasEvents;
     use SoftDeletes;
+    use Auditable;
     use LogsActivity;
 
     protected $connection = 'azure';
@@ -41,35 +46,18 @@ class User extends Authenticatable implements Searchable
      */
     protected $hidden = [];
 
-    /* =========================================================
-     * Activity Log
-     * =========================================================
-     */
-    //
-    protected static $logFillable = true;
-    // Naplózandó mezők
-    //protected static $logAttributes = [
-    //    'CompanyID', 'Supervisor_ID', 'Supervisor_Name', 'Name', 'Email', 'password', 'language'
-    //];
-
-    // Naplózandó események
-    //protected static $recordEvents = [
-    //    'created', 'updated', 'deleted'
-    //];
-
-    // Naplózásból kihagyandó mezők
-    //protected static $ignoreChangedAttributes = ['created_at', 'updated_at'];
-
-    // Csak a ténylegesen megváltozott mezőket naplózza
-    //protected static $logOnlyDirty = true;
-    // =========================================================
-
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [];
+
+    protected static $logOnlyDirty = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logAttributes = [
+        'TransactID', 'CompanyID', 'Supervisor_ID', 'Supervisor_Name',
+        'Name', 'Email', 'password', 'language', 'last_login_at', 'last_login_ip'];
 
     /**
      * User constructor.
@@ -122,10 +110,13 @@ class User extends Authenticatable implements Searchable
 
     public function update(array $attributes = [], array $options = [])
     {
+        //if (! $this->exists) { return false; }
+
+        $this->fill($attributes);
+
         //dd('User.update', $attributes, $this);
-        if (! $this->exists) {
-            return false;
-        }
+
+        //if( $this->fireModelEvent('saving') === false ){ return false; }
 
         $config = config('appConfig.tables.users');
 
@@ -133,7 +124,7 @@ class User extends Authenticatable implements Searchable
         {
             $res = \DB::connection($config['connection'])
                 ->select(
-                    \DB::connection()->raw('EXECUTE CP_User_Register_Login ?, ?, ?, ?'),
+                    \DB::connection()->raw('EXECUTE [dbo].[' . $config['register'] . '] ?, ?, ?, ?'),
                 [
                     $this->ID,
                     $attributes['last_login_ip'],
@@ -154,6 +145,9 @@ class User extends Authenticatable implements Searchable
                         \App\Classes\Helper::get_timestamp()
                     ]);
         }
+
+        //$this->fireModelEvent('saved', false);
+
         return $res;
     }
 

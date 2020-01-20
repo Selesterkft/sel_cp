@@ -88,40 +88,6 @@ class InvoiceModel extends \Eloquent
 
     public function getWidgetData()
     {
-        /*
-        $loggedUser = \Auth::user();
-        $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        $res = DB::connection($config['connection'])
-            ->select(
-                DB::connection($config['connection'])
-                    ->raw("EXECUTE [dbo].[{$config['widget_read']}] ?, ?, ?"),
-                [
-                    $loggedUser[''],
-                    $loggedUser[''],
-                    $loggedUser['']
-                ]
-        );
-        */
-        /**
-         * https://stackoverflow.com/questions/54815787/how-to-sum-two-columns-in-laravel-5-6/54819566
-         */
-/*
-        $model = \DB::connection('azure')->table('Inv')
-            ->select([
-                'Curr_ID', 'TypeID',
-                \DB::raw('SUM(Netto_LC) AS NettoOsszesen'),
-                \DB::raw('SUM(Tax_LC) AS AFAOsszesen'),
-                \DB::raw('SUM(Brutto_LC) AS BruttoOsszesen'),
-                \DB::raw('SUM(PaidAmount_DC) AS EddigKifizetve'),
-            ])
-            ->where('ClientID', '=', 71)
-            ->groupBy('Curr_ID', 'TypeID')
-            ->orderBy('Curr_ID', 'asc')
-            ->orderBy('TypeID', 'asc');
-        //dd('InvoiceModel.getWidgetData', $model->toSql(), session());
-        $res = $model->get();
-        //dd('InvoiceModel.getWidgetData', $res);
-*/
         $loggedUser = \Auth::user();
 
         $CompanyID = $loggedUser->CompanyID;
@@ -149,6 +115,6 @@ class InvoiceModel extends \Eloquent
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
         //dd('InvoiceModel.construct', $config);
         $this->connection = $config['connection'];
-        $this->table = $config['table'];
+        $this->table = $config['read'];
     }
 }

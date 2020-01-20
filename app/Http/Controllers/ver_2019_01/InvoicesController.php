@@ -46,7 +46,8 @@ class InvoicesController extends Controller {
         $model = new InvoiceModel();
         $model = $model->raw(config('appConfig.raw'));
 
-        $model = $model->select('ID', 'Inv_Num', 'Vendor_Name1',
+        $model = $model->select(
+            'ID',               'Inv_Num',          'Vendor_Name1',
             'Cust_Name1',       'InvDate',          'DeliveryDate',     'DueDate',
             'Netto_LC',         'Tax_LC',           'Brutto_LC',        'PaidAmount_DC',
             'Curr_ID',          'Curr_DC',          'Vendor_Phone',     'Vendor_Email',
@@ -58,9 +59,6 @@ class InvoicesController extends Controller {
         {
             $model = $model
                     ->where('Inv_Num', 'like', '%' . $request->get('s_invNum') . '%');
-            //echo('<pre>');
-            //print_r("Inv_Num: %{$request->get('s_invNum')}%\n");
-            //echo('</pre>');
         }
         else
         {

@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//use Spatie\Activitylog\Traits\LogsActivity;
 
 class CurrModel extends Model
 {
     use SoftDeletes;
-    //use LogsActivity;
 
     protected $connection = 'azure';
     protected $table = 'CP_Currs';
