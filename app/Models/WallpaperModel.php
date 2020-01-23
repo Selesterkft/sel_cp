@@ -10,29 +10,30 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class WallpaperModel extends Model
 {
-    use SoftDeletes, HasMediaTrait;
-    
+    use SoftDeletes,
+        HasMediaTrait;
+
     protected $connection = 'azure', $table = 'wallpapers', $primaryKey = 'ID';
-    
+
 
 
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at'
     ];
-    
+
     protected $fillable = [];
-    
-    public function getCoverAttribute() 
+
+    public function getCoverAttribute()
     {
         return $this->getMedia('cover')->last();
     }
-    
-    public function registerMediaConversions(Media $media = null) 
+
+    public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
                 ->width(150)
                 ->height(100);
         //parent::registerMediaConversions($media);
     }
-    
+
 }

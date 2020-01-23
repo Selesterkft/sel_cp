@@ -72,6 +72,7 @@ return [
         ],
         'fields' => [
             'inv_num' => 'Inv num',
+            'inv_seq_num' => 'Registry Number',
             'cancel_inv_id' => 'Cancel Inv.ID',
             'ref_inv_id' => 'Ref.Inv.ID',
             'cancel_date' => 'Cancel Date',

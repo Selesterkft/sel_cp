@@ -14,7 +14,7 @@ class InvoiceModel extends \Eloquent
     protected $table = 'CP_Inv_Read';
     protected $primaryKey = 'ID';
     protected $fillable = [
-        'ID', 'ClientID', 'TransactID', 'Inv_Num', 'CancelInv_Num', 'Inv_Num_int', 'Inv_SeqNum', 'ACCT_Periods_ID',
+        'ID', 'SELEXPED_INV_ID', 'ClientID', 'TransactID', 'Inv_Num', 'CancelInv_Num', 'Inv_Num_int', 'Inv_SeqNum', 'ACCT_Periods_ID',
         'TypeID', 'Ref_Inv_ID', 'Parent_INV_ID', 'Current_Valid_Correction_Note_ID', 'Inv_Status', 'FormatID',
         'Printed', 'CancelPrinted', 'CancelDate', 'Cancellation_ReasonCode', 'Cancellation_ReasonText', 'ClosedYN',
         'Note2', 'Vendor_ID', 'Vendor_Name1', 'Vendor_Name2', 'Vendor_Country', 'Vendor_State', 'Vendor_ZIP',
@@ -40,7 +40,10 @@ class InvoiceModel extends \Eloquent
 
     public function reszletek()
     {
-        return $this->hasMany('App\Models\\' . session()->get('version') . '\InvoiceDetailModel', 'Inv_ID', 'ID');
+        $res = $this->hasMany('App\Models\\' . session()->get('version') . '\InvoiceDetailModel', 'SELEXPED_INV_ID', 'Inv_ID');
+        //dd('InvoiceModel.reszletek', $res);
+        return $res;
+        //return $this->hasMany('App\Models\\' . session()->get('version') . '\InvoiceDetailModel', 'Inv_ID', 'SELEXPED_INV_ID');
     }
 
     public function client()

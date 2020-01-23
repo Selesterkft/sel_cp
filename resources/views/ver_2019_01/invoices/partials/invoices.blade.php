@@ -9,7 +9,7 @@
     <div class="box box-body">
 
         <!--<div class="table-responsive mailbox-messages">-->
-        <table id="table" name="table" class="table table-striped"
+        <table id="table" name="table" class="table table-striped table-bordered"
                data-buttons-class="primary"
                data-toggle="table"
                data-search="false"
@@ -68,7 +68,8 @@
                 <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true"
                     data-switchable="true" data-width=100">{{ __('global.invoices.fields.due_date') }}</th>
 
-                <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">{{ __('global.app_currency') }}</th>
+                <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true"
+                    data-switchable="true">{{ __('global.app_currency') }}</th>
 
                 <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true"
                     data-switchable="true">{{ __('global.invoices.fields.netto_lc') }}</th>
@@ -95,17 +96,19 @@
             </tr>
             </thead>
             <tbody>
+            @php
+            $f = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+            $f->setAttribute($f::FRACTION_DIGITS, 2);
+            @endphp
             @foreach ($invoices as $invoice)
-                @php
-                    $f = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-                    $f->setAttribute($f::FRACTION_DIGITS, 2);
-                @endphp
                 <tr>
                     <td>
-                        <a href="{{ url('invoices.show', $invoice) }}"
-                           class="btn btn-success btn-sm view">
+
+                        <a href="{{ url('invoices.show', $invoice->SELEXPED_INV_ID) }}"
+                           class="btn btn-success btn-sm view" {{ ($invoice->Inv_L_Num != 0) ? '' : 'disabled' }}>
                             <i class="fa fa-eye"></i>
                         </a>
+
                         <a href="mailto:?subject=Kérdések a {{ $invoice->Inv_Num }} számlával kapcsolatban&body=Tisztelt {{ $invoice->Cust_Name1 }}!%0D%0AÜdvözlettel: {{ $invoice->Vendor_Name1 }}"
                            class="btn btn-info btn-sm">
                             <i class="fa fa-envelope"></i>
@@ -128,7 +131,6 @@
                     <td>{{ \Carbon\Carbon::parse($invoice->InvDate)->format($dateFormat) }}</td>
                     <td>{{ \Carbon\Carbon::parse($invoice->DeliveryDate)->format($dateFormat) }}</td>
                     <td>{{ \Carbon\Carbon::parse($invoice->DueDate)->format($dateFormat) }}</td>
-
 
                         <td>
                             {{ $invoice->Curr_DC }}

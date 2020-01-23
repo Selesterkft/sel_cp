@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ver_2019_01;
 
+use App\Models\ver_2019_01\InvoiceDetailModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ver_2019_01\InvoiceModel;
@@ -47,18 +48,17 @@ class InvoicesController extends Controller {
         $model = $model->raw(config('appConfig.raw'));
 
         $model = $model->select(
-            'ID',               'Inv_Num',          'Vendor_Name1',
-            'Cust_Name1',       'InvDate',          'DeliveryDate',     'DueDate',
-            'Netto_LC',         'Tax_LC',           'Brutto_LC',        'PaidAmount_DC',
-            'Curr_ID',          'Curr_DC',          'Vendor_Phone',     'Vendor_Email',
-            'Customer_Phone',   'Customer_Email');
+            'ID',             'SELEXPED_INV_ID', 'Inv_Num',      'Vendor_Name1', 'Inv_SeqNum',
+            'Cust_Name1',     'InvDate',         'DeliveryDate', 'DueDate',
+            'Netto_LC',       'Tax_LC',          'Brutto_LC',    'PaidAmount_DC',
+            'Curr_ID',        'Curr_DC',         'Vendor_Phone', 'Vendor_Email',
+            'Customer_Phone', 'Customer_Email',  'Inv_L_Num');
 
         $model = $model->where('ClientID', '=', $clientID);
 
         if( !empty($request->get('s_invNum')) )
         {
-            $model = $model
-                    ->where('Inv_Num', 'like', '%' . $request->get('s_invNum') . '%');
+            $model = $model->where('Inv_Num', 'like', '%' . $request->get('s_invNum') . '%');
         }
         else
         {
@@ -113,7 +113,7 @@ class InvoicesController extends Controller {
         }
 
         $model = $model->orderBy('Inv_Num', 'asc');
-        /*
+/*
         echo('<pre>');
         print_r("user companyID: {$loggedUser->CompanyID}\n");
         print_r("user supervisorID:{$loggedUser->Supervisor_ID}\n");
@@ -124,7 +124,7 @@ class InvoicesController extends Controller {
         print_r($model->toSql());
         echo('</pre>');
         dd('asd');
-        */
+*/
         $invoices = $model->get();
 
         // A szűrő ablakhoz kellenek az adatok
@@ -321,9 +321,9 @@ class InvoicesController extends Controller {
      */
     public function show($id)
     {
-        $invoice = InvoiceModel::find($id, ['*']);
-        $details = $invoice->reszletek;
-        //dd('InvoicesController.show', $invoice, $details);
+        $invoice = InvoiceModel::where('SELEXPED_INV_ID', '=', $id)->first();
+        $details = InvoiceDetailModel::where('Inv_ID', '=', $id)->get();
+
         return view(session()->get('version') . "/invoices/view", [
             'invoice' => $invoice,
             'details' => $details,

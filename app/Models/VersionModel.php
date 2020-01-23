@@ -10,15 +10,11 @@ use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
-use Spatie\Activitylog\Models\Activity;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class VersionModel extends Model
 {
     use HasEvents;
     use SoftDeletes;
-    use LogsActivity;
-    //use Auditable;
 
     protected $connection = 'azure';
     protected $table = 'Versions';

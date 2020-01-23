@@ -2,20 +2,13 @@
 
 namespace App;
 
-use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
-
-//use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable implements Searchable
 {
@@ -23,8 +16,6 @@ class User extends Authenticatable implements Searchable
     use HasRoles;
     use HasEvents;
     use SoftDeletes;
-    use Auditable;
-    use LogsActivity;
 
     protected $connection = 'azure';
     protected $table = 'CP_Users';

@@ -27,7 +27,7 @@ $data = $invModel->getWidgetData();
         <!-- /.box-header -->
         <div class="box-body">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <!--
@@ -38,7 +38,7 @@ $data = $invModel->getWidgetData();
                         <th>{{-- trans('global.invoices_widget.paid_so_far') --}}</th>
                         -->
                             <th class="text-center">{{ trans('global.invoices_widget.type') }}</th>
-                            <th class="text-center">{{ trans('global.invoices_widget.currency') }}</th>
+                            <th class="text-center">{{ trans('global.app_currency') }}</th>
                             <th class="text-center">{{ trans('global.invoices_widget.net_total') }}</th>
                             <th class="text-center">{{ trans('global.invoices_widget.vat_total') }}</th>
                             <th class="text-center">{{ trans('global.invoices_widget.brut_total') }}</th>
@@ -46,7 +46,10 @@ $data = $invModel->getWidgetData();
                     </tr>
                     </thead>
                     <tbody>
-
+                    @php
+                    $f = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+                    $f->setAttribute($f::FRACTION_DIGITS, 2);
+                    @endphp
                     @foreach($data as $sum)
                         <tr>
                             <td>
@@ -55,22 +58,22 @@ $data = $invModel->getWidgetData();
                             <td>{{ $sum->Penznem }}</td>
                             <td>
                                 <div class="pull-right">
-                                    {{ number_format($sum->NettoOsszesen, 2) }}
+                                    {{ $f->formatCurrency($sum->NettoOsszesen, $sum->Penznem) }}
                                 </div>
                             </td>
                             <td>
                                 <div class="pull-right">
-                                    {{ number_format($sum->AFAOsszesen, 2) }}
+                                    {{ $f->formatCurrency($sum->AFAOsszesen, $sum->Penznem) }}
                                 </div>
                             </td>
                             <td>
                                 <div class="pull-right">
-                                    {{ number_format($sum->BruttoOsszesen, 2) }}
+                                    {{ $f->formatCurrency($sum->BruttoOsszesen, $sum->Penznem) }}
                                 </div>
                             </td>
                             <td>
                                 <div class="pull-right">
-                                    {{ number_format($sum->EddigKifizetve, 2) }}
+                                    {{ $f->formatCurrency($sum->EddigKifizetve, $sum->Penznem) }}
                                 </div>
                             </td>
                         </tr>

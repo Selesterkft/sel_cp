@@ -124,9 +124,10 @@ return [
         'title' => 'Számla',
         'sub_title' => 'Megtekintés',
         'inv_id' => 'Számla sorszám',
+        'inv_seq_num' => 'Iktatószám',
         'order_id' => 'Megrendelésszám',
         'payment_due' => 'Fizetési határidő',
-        'account_number' => 'Számlaszám',
+        'account_number' => 'Számla szám',
         'fields' => [
             'product' => 'Termék',
             'qty' => 'Mennyiség',
@@ -135,13 +136,13 @@ return [
             'vat' => 'ÁFA',
             'vat_value' => 'ÁFA érték',
             'net' => 'Nettó',
-            'gross' => 'Gross',
+            'gross' => 'Bruttó',
         ],
     ],
 
     'invoices_widget' => [
         'title' => 'Egyenleg',
-        'currency' => 'Valuta',
+        'currency' => 'Deviza',
         'type' => 'Típus',
         'debts' => 'Tartozások',
         'overdue_debts' => 'Lejárt tartozások',
@@ -439,7 +440,7 @@ return [
     'app_success' => 'Siker!',
     'app_error' => 'Hiba!',
     'app_alert' => 'Figyelmeztetés!',
-    'app_currency' => 'Pénznem',
+    'app_currency' => 'Deviza',
     'app_quantity' => 'Mennyiség',
     'app_amount' => 'Darab',
 
