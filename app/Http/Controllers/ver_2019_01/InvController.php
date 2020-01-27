@@ -65,6 +65,9 @@ class InvController extends Controller
                 }
             }
 
+            $delivery_date = [];
+            $due_date = [];
+
             if( !empty($request->get('s_delivery_date')) )
             {
                 $delivery_date = explode(' - ', $request->get('s_delivery_date'));
@@ -81,6 +84,16 @@ class InvController extends Controller
             {
                 $model = $model->where('TypeID' , '=', $request->get('s_type'));
             }
+
+            if( count($delivery_date) > 0 )
+            {
+                print_r("delivery:{$delivery_date[0]} - {$delivery_date[1]}\n");
+            }
+            if( count($due_date) > 0 ){
+                print_r("due:{$due_date[0]} - {$due_date[1]}\n");
+            }
+
+            $modelCount = $model->count();
 
             // Sorok száma
             $limit = null;
@@ -130,9 +143,8 @@ class InvController extends Controller
             print_r("Inv_Num: {$request->get('s_invNum')}\n");
             print_r("custID: {$request->get('s_customer')}\n");
             print_r("vendorID: {$request->get('s_vendor')}\n");
-            print_r("delivery:{$delivery_date[0]} - {$delivery_date[1]}\n");
-            print_r("due:{$due_date[0]} - {$due_date[1]}\n");
             print_r("type: {$request->get('s_type')}");
+            print_r("count: {$modelCount}");
             print_r($model->toSql());
             echo('</pre>');
 */
@@ -148,7 +160,7 @@ class InvController extends Controller
             //dd('InvController.index', $result);
 
             $invoices = [
-                'total' => $model->count(),
+                'total' => $modelCount,
                 'totalNotFiltered' => InvoiceModel::count(),
                 'rows' => $result
             ];

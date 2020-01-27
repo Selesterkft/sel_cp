@@ -150,9 +150,6 @@
             {
                 params.s_delivery_date = urlParams.s_delivery_date.replace('+-+', ' - ');
             }
-
-            console.log(urlParams);
-            console.log(params);
             return params;
         }
 
@@ -241,6 +238,42 @@
             $(this).val('');
         });
 
+        function operateFormatter(value, row, index)
+        {
+            $url = '{{ url('inv_new.show', 'xx') }}'.replace('xx', row.SELEXPED_INV_ID);
+
+            $disabled = '';
+            if( row.Inv_L_Num == '0' )
+            {
+                $disabled = 'disabled';
+            }
+
+            $b1 = '<a href="' + $url + '" class="btn btn-success btn-sm view" ' + $disabled + '>'+
+                '<i class="fa fa-eye"></i>'+
+                '</a>';
+            $b2 = '<a href="mailto:?subject=Kérdések a ' + row.Inv_Num + ' számlával kapcsolatban&body=Tisztelt ' + row.Cust_Name1 + ' !%0D%0AÜdvözlettel: ' + row.Vendor_Name1 + '" '+
+                'class="btn btn-info btn-sm" style="margin-left: 10px;">'+
+                '<i class="fa fa-envelope"></i>'+
+                '</a>';
+
+            return [$b1, $b2].join('');
+
+        }
+
+        window.operateEvents = {
+            /*
+            'click .like': function (e, value, row, index) {
+                alert('You click like action, row: ' + JSON.stringify(row))
+            },
+            'click .remove': function (e, value, row, index) {
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: [row.id]
+                })
+            }
+            */
+        };
+
         /*
          * Table beállítás
          */
@@ -249,7 +282,17 @@
             $table.bootstrapTable('destroy')
                 .bootstrapTable({
                     exportTypes: ['csv', 'txt', 'excel', 'pdf'],
-                    locale: '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}'
+                    locale: '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}',
+                    columns: [
+                    {
+                        field: 'operate',
+                        title: '{{ __('global.app_fields.operations') }}',
+                        align: 'center',
+                        clickToSelect: false,
+                        events: window.operateEvents,
+                        switchable: false,
+                        formatter: operateFormatter
+                    }]
                 });
         }
 
@@ -337,28 +380,31 @@
             return obj;
         }
 
-
-
-        function priceFormatter(data) {
-            return formatMoney(data);
+        /*
+        * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
+        */
+        function priceFormatter(data, row)
+        {
+            $aa = new Intl.NumberFormat(
+                '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}',
+                {
+                    style: 'currency',
+                    currency: row.Curr_DC
+                }).format(data);
+            return $aa;
         }
 
         function dateFormatter(data) {
             return moment(data).format(dateFormat);
         }
 
-        function formatMoney(number, decPlaces, decSep, thouSep) {
-            decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
-                decSep = typeof decSep === "undefined" ? "." : decSep;
-            thouSep = typeof thouSep === "undefined" ? "," : thouSep;
-            var sign = number < 0 ? "-" : "";
-            var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(decPlaces)));
-            var j = (j = i.length) > 3 ? j % 3 : 0;
-
-            return sign +
-                (j ? i.substr(0, j) + thouSep : "") +
-                i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
-                (decPlaces ? decSep + Math.abs(number - i).toFixed(decPlaces).slice(2) : "");
+        function cellStyle(value, row, index)
+        {
+            return {
+                css: {
+                    'white-space': 'nowrap'
+                }
+            }
         }
     </script>
 

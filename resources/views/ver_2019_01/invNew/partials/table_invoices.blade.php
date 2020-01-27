@@ -34,6 +34,7 @@
                    data-show-toggle="false"
                    data-show-fullscreen="false"
                    data-show-columns="true"
+                   data-show-columns-toggle-all="false"
                    data-show-export="true"
                    data-show-pagination-switch="false"
                    data-show-columns-toggle-all="true"
@@ -62,7 +63,8 @@
                     @endif
                     <th data-field="InvDate"
                         data-formatter="dateFormatter"
-                        data-sortable="true">{{ __('global.invoices.fields.inv_date') }}</th>
+                        data-sortable="true"
+                        data-cell-style="cellStyle">{{ __('global.invoices.fields.inv_date') }}</th>
                     <th data-field="DeliveryDate"
                         data-formatter="dateFormatter"
                         data-sortable="true">{{ __('global.invoices.fields.delivery_date') }}</th>
@@ -71,17 +73,33 @@
                         data-sortable="true">{{ __('global.invoices.fields.due_date') }}</th>
 
                     <th data-field="Curr_DC"
-                        data-sortable="true">{{ __('global.app_currency') }}</th>
+                        data-sortable="true">
+                        {{ __('global.app_currency') }}
+                    </th>
                     <th data-field="Netto_LC"
-                        data-sortable="true">{{ __('global.invoices.fields.netto_lc') }}</th>
+                        data-sortable="true"
+                        data-formatter="priceFormatter"
+                        data-halign="left" data-align="right">
+                        {{ __('global.invoices.fields.netto_lc') }}
+                    </th>
                     <th data-field="Tax_LC"
                         data-formatter="priceFormatter"
-                        data-sortable="true">{{ __('global.invoices.fields.tax_lc') }}</th>
+                        data-sortable="true"
+                        data-halign="left" data-align="right">
+                        {{ __('global.invoices.fields.tax_lc') }}
+                    </th>
                     <th data-field="Brutto_LC"
-                        data-sortable="true">{{ __('global.invoices.fields.brutto_lc') }}</th>
+                        data-formatter="priceFormatter"
+                        data-sortable="true"
+                        data-halign="left" data-align="right">
+                        {{ __('global.invoices.fields.brutto_lc') }}
+                    </th>
                     <th data-field="PaidAmount_DC"
                         data-formatter="priceFormatter"
-                        data-sortable="true">{{ __('global.invoices.fields.paid_amount_dc') }}</th>
+                        data-sortable="true"
+                        data-halign="left" data-align="right">
+                        {{ __('global.invoices.fields.paid_amount_dc') }}
+                    </th>
                 </tr>
                 </thead>
             </table>
