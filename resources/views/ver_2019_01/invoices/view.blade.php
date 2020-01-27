@@ -5,7 +5,7 @@
 
     @php
     $format = (config('appConfig.dateFormats'))[config('app.locale')]['carbon'];
-    $currency_template = config('appConfig.currencies.' . config('app.locale'));
+    //$currency_template = config('appConfig.currencies.' . config('app.locale'));
     @endphp
 
     <section class="content-header">
@@ -219,13 +219,14 @@
         </div>
 
         <div class="row">
-            <a href="{{ url('invoices') }}"
+            <a href="{{ url('inv_new') }}"
                class="btn btn-default">
                 {{ __('global.app_back_to_list') }}
             </a>
         </div>
 
     </section>
+
 
 @endsection
 

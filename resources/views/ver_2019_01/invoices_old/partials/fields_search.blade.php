@@ -1,147 +1,117 @@
-<?php
-//$model = app()->make('\App\Classes\ver_2019_01\Helper');
-//$bizonylatTipusok = $model->callAction('getBizonylatTipusok', $parameters = []);
-$bizonylatTipusok = \App\Classes\Helper::getBizonylatTipusok();
-?>
-<div class="form-group">
-    <label for="s_type_id" class="col-sm-3 control-label">
+{{-- Számla típusok --}}
+<div class="form-group col-sm-12">
+    <label for="s_customer" class="control-label">
         {{ __('global.invoices.search.type') }}:
     </label>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-7">
-        {{ Form::select(
-            's_type_id',
-            $bizonylatTipusok,
-            (request()->has('s_type_id')) ? request()->get('s_type_id') : null,
-            [
-                'id' => 's_type_id',
-                'class' => 'form-control tooltip-enabled',
-                'data-toggle' => '',
-                'title' => 'TÍPUS'
-            ]) }}
+    <div class="">
+        <select id="s_type" name="s_type"
+                class="form-control tooltip-enabled"
+                data-toggle="tooltip"
+                title="{{ __('SZÁMLATÍPUS') }}">
+            <option value="">{{ __('Összes') }}</option>
+            <option value="201" @if(request()->get('s_type') == '201') selected @endif >{{ __('Kimenő') }}</option>
+            <option value="202" @if(request()->get('s_type') == '202') selected @endif >{{ __('Bejövő') }}</option>
+        </select>
+    </div>
+</div>
+{{-- /.Számla típusok --}}
+
+{{-- Számlaszám --}}
+<div class="form-group col-sm-12">
+    <label for="s_invNum" class="control-label">
+        {{ __('global.invoice.account_number') }}:
+    </label>
+
+    <div class="">
+        <input id="s_invNum" name="s_invNum" class="form-control"
+               value="{{ request()->get('s_invNum') }}">
+    </div>
+
+</div>
+{{-- /.Számlaszám --}}
+
+@if( \Auth::user()->Supervisor_ID == 0 )
+<div class="form-group col-sm-12">
+    <label for="s_customer" class="control-label">
+        {{ __('global.invoices.search.customer') }}:
+    </label>
+    <div class="">
+        <select id="s_customer" name="s_customer" class="form-control tooltip-enabled"
+                data-toggle="tooltip"
+                title="{{ __('global.invoices.search.customer') }}">
+            <option value="0">{{ __('global.app_select_first_element') }}</option>
+            <?php
+            /** @var TYPE_NAME $customers */
+            foreach($customers as $customer)
+            {
+                $selected = '';
+                if( $customer['Cust_ID'] == request()->get('s_customer') )
+                {
+                    $selected = 'selected';
+                }
+            ?>
+            <option value="{{ $customer['Cust_ID'] }}" {{ $selected }}>{{ $customer['Cust_Name1'] }}</option>
+            <?php
+            }
+            ?>
+        </select>
     </div>
 </div>
 
-<div class="form-group">
-    <label for="s_vendor" class="col-sm-3 control-label">
+<div class="form-group col-sm-12">
+    <label for="s_vendor" class="control-label">
         {{ __('global.invoices.search.vendor') }}:
     </label>
-    <div class="col-sm-2">
-        {{--
-        @include('layouts.rel_select', [
-            'id' => 's_vendor_rel',
-            'title' => 'reláció',
-            'like' => true,
-            'selected' => (Request::get('s_vendor_rel') ? Request::get('s_vendor_rel') : '')
-        ])
-        --}}
-    </div>
-    <div class="col-sm-7">
-        {{ Form::select(
-            's_vendor',
-            $vendors,
-            null, [
-                'id' => 's_vendor',
-                'class' => 'form-control tooltip-enabled',
-                'data-toggle' => 'tooltip',
-                'title' => __('global.invoices.search.vendor')
-            ]) }}
+    <div class="">
+        <select id="s_vendor" name="s_vendor" class="form-control tooltip-enabled"
+                data-toggle="tooltip"
+                title="__('global.invoices.search.vendor')">
+            <option value="0">{{ __('global.app_select_first_element') }}</option>
+
+            <?php
+                /** @var TYPE_NAME $vendors */
+            foreach($vendors as $vendor)
+            {
+                $selected = '';
+                if( $vendor['Vendor_ID'] == request()->get('s_vendor') )
+                {
+                    $selected = 'selected';
+                }
+            ?>
+            <option value="{{ $vendor['Vendor_ID'] }}" {{ $selected }}>{{ $vendor['Vendor_Name1'] }}</option>
+            <?php
+            }
+            ?>
+
+        </select>
     </div>
 </div>
+@endif
 
-<div class="form-group">
-    <label for="s_customer" class="col-sm-3 control-label">{{ __('global.invoices.search.customer') }}:</label>
-    <div class="col-sm-2">
-        {{--
-        @include('layouts.rel_select', [
-            'id' => 's_customer_rel',
-            'title' => 'reláció',
-            'like' => true,
-            'selected' => (Request::get('s_customer_rel') ? Request::get('s_customer_rel') : '')
-        ])
-        --}}
-    </div>
-    <div class="col-sm-7">
-        {{ Form::select(
-            's_customer',
-            $customers,
-            null,
-            [
-                'id' => 's_customer',
-                'class' => 'form-control tooltip-enabled',
-                'data-toggle' => 'tooltip',
-                'title' => __('global.invoices.search.customer')
-            ]) }}
-    </div>
-</div>
+<div class="form-group col-sm-12">
+    <label for="s_delivery_date" class="control-label">
+        {{ __('global.invoices.fields.delivery_date') }}:
+    </label>
 
-<div class="form-group">
-    <label for="s_inv_date" class="col-sm-3 control-label">{{ __('global.invoices.fields.inv_date') }}:</label>
-    <div class="col-sm-2">
-        @includeIf('layouts.rel_select', [
-            'id' => 's_inv_date_rel',
-            'title' => __('global.app_relation'),
-            'like' => false,
-            'selected' => (Request::has('s_inv_date_rel')) ? Request::get('s_inv_date_rel') : '',
-        ])
-    </div>
-    <div class="col-sm-7">
-        <div class="input-group date">
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-            <input type="text" class="form-control tooltip-enabled"
-                id="s_inv_date" name="s_inv_date"
-                data-toggle="tooltip" title="{{ __('global.inv_date') }}"
-                value="{{ (Request::has('s_inv_date')) ? Request::get('s_inv_date') : '' }}">
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
         </div>
+        <input id="s_delivery_date" name="s_delivery_date"
+               class="form-control pull-right" value="" autocomplete="off">
     </div>
 </div>
 
-<div class="form-group">
-    <label for="s_delivery_date" class="col-sm-3 control-label">{{ __('global.invoices.fields.delivery_date') }}:</label>
-    <div class="col-sm-2">
-        @includeIf('layouts.rel_select', [
-            'id' => 's_delivery_date_rel',
-            'title' => __('global.app_relation'),
-            'like' => false,
-            'selected' => (Request::has('s_delivery_date_rel')) ? Request::get('s_delivery_date_rel') : '',
-        ])
-    </div>
-    <div class="col-sm-7">
-        <div class="input-group date">
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-            <input type="text" class="form-control tooltip-enabled"
-                id="s_delivery_date" name="s_delivery_date"
-                data-toggle="tooltip" 
-                title="{{ __('global.delivery_date') }}"
-                value="{{ (Request::has('s_delivery_date')) ? Request::get('s_delivery_date') : '' }}">
-        </div>
-    </div>
-</div>
+<div class="form-group col-sm-12">
+    <label for="s_due_date" class="control-label">
+        {{ __('global.invoices.fields.due_date') }}:
+    </label>
 
-<div class="form-group">
-    <label for="s_due_date" class="col-sm-3 control-label">{{ __('global.invoices.fields.due_date') }}:</label>
-    <div class="col-sm-2">
-        @includeIf('layouts.rel_select', [
-            'id' => 's_due_date_rel',
-            'title' => __('global.app_relation'),
-            'like' => false,
-            'selected' => (Request::has('s_due_date_rel')) ? Request::get('s_due_date_rel') : '',
-        ])
-    </div>
-    <div class="col-sm-7">
-        <div class="input-group date">
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-            <input type="text" class="form-control tooltip-enabled"
-                id="s_due_date" name="s_due_date"
-                data-toggle="tooltip" 
-                title="{{ __('global.due_date') }}"
-                value="{{ (Request::has('s_due_date')) ? Request::get('s_due_date') : '' }}">
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
         </div>
+        <input id="s_due_date" name="s_due_date"
+               class="form-control pull-right" value="" autocomplete="off">
     </div>
 </div>

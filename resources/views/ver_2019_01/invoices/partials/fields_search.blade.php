@@ -31,61 +31,61 @@
 {{-- /.Számlaszám --}}
 
 @if( \Auth::user()->Supervisor_ID == 0 )
-<div class="form-group col-sm-12">
-    <label for="s_customer" class="control-label">
-        {{ __('global.invoices.search.customer') }}:
-    </label>
-    <div class="">
-        <select id="s_customer" name="s_customer" class="form-control tooltip-enabled"
-                data-toggle="tooltip"
-                title="{{ __('global.invoices.search.customer') }}">
-            <option value="0">{{ __('global.app_select_first_element') }}</option>
-            <?php
-            /** @var TYPE_NAME $customers */
-            foreach($customers as $customer)
-            {
+    <div class="form-group col-sm-12">
+        <label for="s_customer" class="control-label">
+            {{ __('global.invoices.search.customer') }}:
+        </label>
+        <div class="">
+            <select id="s_customer" name="s_customer" class="form-control tooltip-enabled"
+                    data-toggle="tooltip"
+                    title="{{ __('global.invoices.search.customer') }}">
+                <option value="0">{{ __('global.app_select_first_element') }}</option>
+                <?php
+                /** @var TYPE_NAME $customers */
+                foreach($customers as $customer)
+                {
                 $selected = '';
                 if( $customer['Cust_ID'] == request()->get('s_customer') )
                 {
                     $selected = 'selected';
                 }
-            ?>
-            <option value="{{ $customer['Cust_ID'] }}" {{ $selected }}>{{ $customer['Cust_Name1'] }}</option>
-            <?php
-            }
-            ?>
-        </select>
+                ?>
+                <option value="{{ $customer['Cust_ID'] }}" {{ $selected }}>{{ $customer['Cust_Name1'] }}</option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
     </div>
-</div>
 
-<div class="form-group col-sm-12">
-    <label for="s_vendor" class="control-label">
-        {{ __('global.invoices.search.vendor') }}:
-    </label>
-    <div class="">
-        <select id="s_vendor" name="s_vendor" class="form-control tooltip-enabled"
-                data-toggle="tooltip"
-                title="__('global.invoices.search.vendor')">
-            <option value="0">{{ __('global.app_select_first_element') }}</option>
+    <div class="form-group col-sm-12">
+        <label for="s_vendor" class="control-label">
+            {{ __('global.invoices.search.vendor') }}:
+        </label>
+        <div class="">
+            <select id="s_vendor" name="s_vendor" class="form-control tooltip-enabled"
+                    data-toggle="tooltip"
+                    title="__('global.invoices.search.vendor')">
+                <option value="0">{{ __('global.app_select_first_element') }}</option>
 
-            <?php
+                <?php
                 /** @var TYPE_NAME $vendors */
-            foreach($vendors as $vendor)
-            {
+                foreach($vendors as $vendor)
+                {
                 $selected = '';
                 if( $vendor['Vendor_ID'] == request()->get('s_vendor') )
                 {
                     $selected = 'selected';
                 }
-            ?>
-            <option value="{{ $vendor['Vendor_ID'] }}" {{ $selected }}>{{ $vendor['Vendor_Name1'] }}</option>
-            <?php
-            }
-            ?>
+                ?>
+                <option value="{{ $vendor['Vendor_ID'] }}" {{ $selected }}>{{ $vendor['Vendor_Name1'] }}</option>
+                <?php
+                }
+                ?>
 
-        </select>
+            </select>
+        </div>
     </div>
-</div>
 @endif
 
 <div class="form-group col-sm-12">

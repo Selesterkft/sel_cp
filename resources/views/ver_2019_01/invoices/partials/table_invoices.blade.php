@@ -20,7 +20,7 @@
                    data-toolbar="#toolbar"
 
                    data-query-params="queryParams"
-                   data-url="{{ url('inv_new') }}"
+                   data-url="{{ url('invoices') }}"
 
                    data-buttons-class="primary"
                    data-toggle="table"
