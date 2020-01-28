@@ -128,11 +128,13 @@
                     <thead>
                     <tr>
                         <th data-field="Descr"
+                            data-footer-formatter="totalTextFormatter"
                             data-halign="center" data-align="left"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.product') }}
                         </th>
                         <th data-field="Pcs" data-formatter="pcs_formatter"
+                            data-footer-formatter="totalNameFormatter"
                             data-halign="center" data-align="right"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.qty') }}
@@ -142,27 +144,35 @@
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.qty_unit') }}
                         </th>
-                        <th data-field="UnitPrice_DC" data-formatter="priceFormatter"
+                        <th data-field="UnitPrice_DC"
+                            data-formatter="priceFormatter"
                             data-halign="center" data-align="right"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.unit_price') }}
                         </th>
-                        <th data-field="Netto_DC" data-formatter="priceFormatter"
+                        <th data-field="Netto_DC"
+                            data-formatter="priceFormatter"
+                            data-footer-formatter="totalPriceFormatter"
                             data-halign="center" data-align="right"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.net') }}
                         </th>
-                        <th data-field="TaxRate" data-formatter="percentFormatter"
+                        <th data-field="TaxRate"
+                            data-formatter="percentFormatter"
                             data-halign="center" data-align="right"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.vat') }}
                         </th>
-                        <th data-field="Tax_LC" data-formatter="priceFormatter"
+                        <th data-field="Tax_DC"
+                            data-footer-formatter="totalPriceFormatter"
+                            data-formatter="priceFormatter"
                             data-halign="center" data-align="right"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.vat_value') }}
                         </th>
-                        <th data-field="Brutto_DC" data-formatter="priceFormatter"
+                        <th data-field="Brutto_DC"
+                            data-formatter="priceFormatter"
+                            data-footer-formatter="totalPriceFormatter"
                             data-halign="center" data-align="right"
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.gross') }}
@@ -244,6 +254,48 @@
                     currency: row.Curr_DC
                 }).format(data);
             return $aa;
+        }
+
+        function totalPriceFormatter(data)
+        {
+            retVal = '0';
+
+            if( data.length != 0 )
+            {
+                var field = this.field;
+
+                switch (field) {
+                    case 'Netto_DC':
+                        retVal = '{{ $invoice->Netto_DC }}';
+                        break;
+                    case 'Tax_DC':
+                        retVal = '{{ $invoice->Tax_DC }}';
+                        break;
+                    case 'Brutto_DC':
+                        retVal = '{{ $invoice->Brutto_DC }}';
+                        break;
+                    default:
+                        break;
+                }
+
+                retVal = new Intl.NumberFormat(
+                    '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}',
+                    {
+                        style: 'currency',
+                        currency: '{{ $invoice->Curr_DC }}'
+                    }).format(retVal);
+            }
+            return retVal;
+        }
+
+        function totalTextFormatter(data)
+        {
+            return 'Total';
+        }
+
+        function totalNameFormatter(data)
+        {
+            return data.length;
         }
 
         function initTable()

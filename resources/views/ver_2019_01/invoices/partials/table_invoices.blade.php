@@ -52,6 +52,7 @@
                     <!--
                     <th data-field="state" data-checkbox="true"></th>
                     -->
+                    <th data-cell-style="cellStyle"></th>
                     <th data-field="Inv_Num"
                         data-sortable="true">{{ __('global.invoices.fields.inv_num') }}</th>
                     @if( Auth::user()->Supervisor_ID == 0 )
@@ -75,19 +76,19 @@
                         data-sortable="true">
                         {{ __('global.app_currency') }}
                     </th>
-                    <th data-field="Netto_LC"
+                    <th data-field="Netto_DC"
                         data-sortable="true"
                         data-formatter="priceFormatter"
                         data-halign="left" data-align="right">
                         {{ __('global.invoices.fields.netto_lc') }}
                     </th>
-                    <th data-field="Tax_LC"
+                    <th data-field="Tax_DC"
                         data-formatter="priceFormatter"
                         data-sortable="true"
                         data-halign="left" data-align="right">
                         {{ __('global.invoices.fields.tax_lc') }}
                     </th>
-                    <th data-field="Brutto_LC"
+                    <th data-field="Brutto_DC"
                         data-formatter="priceFormatter"
                         data-sortable="true"
                         data-halign="left" data-align="right">

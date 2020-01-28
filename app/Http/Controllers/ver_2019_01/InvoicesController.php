@@ -152,7 +152,8 @@ class InvoicesController extends Controller
             $result = $model->select(
                 'ID',             'SELEXPED_INV_ID', 'Inv_Num',      'Vendor_Name1', 'Inv_SeqNum',
                 'Cust_Name1',     'InvDate',         'DeliveryDate', 'DueDate',
-                'Netto_LC',       'Tax_LC',          'Brutto_LC',    'PaidAmount_DC',
+                'Netto_LC',       'Netto_DC',        'Tax_LC',       'Tax_DC',          'Brutto_LC', 'Brutto_DC',
+                'PaidAmount_LC',  'PaidAmount_DC',
                 'Curr_ID',        'Curr_DC',         'Vendor_Phone', 'Vendor_Email',
                 'Customer_Phone', 'Customer_Email',  'Inv_L_Num')
                     ->get()
@@ -200,6 +201,8 @@ class InvoicesController extends Controller
         {
             $model = InvoiceDetailModel::where('Inv_ID', '=', $id);
 
+            $modelCount = $model->count();
+
             //$limit = null;
             if( $request->has('limit') )
             {
@@ -224,7 +227,7 @@ class InvoicesController extends Controller
             $result = $model->get();
 
             $details = [
-                'total' => $result->count(),
+                'total' => $modelCount,
                 'totalNotFiltered' => InvoiceDetailModel::count(),
                 'rows' => $result,
             ];

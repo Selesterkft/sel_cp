@@ -255,7 +255,7 @@
                 'class="btn btn-info btn-sm" style="margin-left: 10px;">'+
                 '<i class="fa fa-envelope"></i>'+
                 '</a>';
-
+//console.log($b1);
             return [$b1, $b2].join('');
 
         }
