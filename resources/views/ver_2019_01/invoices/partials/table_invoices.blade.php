@@ -14,7 +14,7 @@
     <div class="box box-body">
         <div class="table-responsive mailbox-messages">
 
-            <table id="table" name="table" class="table table-striped"
+            <table id="table" name="table" class="table table-striped table-bordered"
                    data-id-field="ID"
 
                    data-toolbar="#toolbar"
@@ -37,7 +37,6 @@
                    data-show-columns-toggle-all="false"
                    data-show-export="true"
                    data-show-pagination-switch="false"
-                   data-show-columns-toggle-all="true"
 
                    data-detail-formatter="detailFormatter"
                    data-minimum-count-columns="2"

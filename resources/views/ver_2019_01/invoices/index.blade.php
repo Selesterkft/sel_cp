@@ -68,7 +68,7 @@
         @includeIf('modals.modal_search2', [
             'fields' => session()->get('version') . '.invoices.partials.fields_search',
             'title' => __('global.app_search_title'),
-            'url' => 'inv_new',
+            'url' => 'invoices',
         ])
         <!-- /.SEARCH MODAL -->
 

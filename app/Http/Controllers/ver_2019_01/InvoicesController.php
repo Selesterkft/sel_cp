@@ -194,6 +194,52 @@ class InvoicesController extends Controller
         ]);
     }
 
+    public function show(Request $request,int $id)
+    {
+        if( $request->ajax() )
+        {
+            $model = InvoiceDetailModel::where('Inv_ID', '=', $id);
+
+            //$limit = null;
+            if( $request->has('limit') )
+            {
+                //$limit = $request->get('limit');
+                $model = $model->take($request->get('limit'));
+            }
+
+            //$offset = null;
+            if( $request->has('offset') )
+            {
+                //$offset = $request->get('offset');
+                $model = $model->skip($request->get('offset'));
+            }
+
+            //$order = 'asc';
+            if( $request->has('sort') && $request->has('order') )
+            {
+                //$asc = $request->get('order');
+                $model = $model->orderBy($request->get('sort'), $request->get('order'));
+            }
+
+            $result = $model->get();
+
+            $details = [
+                'total' => $result->count(),
+                'totalNotFiltered' => InvoiceDetailModel::count(),
+                'rows' => $result,
+            ];
+
+            return json_encode($details);
+        }
+
+        $invoice = InvoiceModel::where('SELEXPED_INV_ID', '=', $id)->first();
+
+        return view(session()->get('version').'.invoices.view', [
+            'invoice' => $invoice
+        ]);
+    }
+
+    /*
     public function show($id)
     {
         $invoice = InvoiceModel::where('SELEXPED_INV_ID', '=', $id)->first();
@@ -204,4 +250,5 @@ class InvoicesController extends Controller
             'details' => $details,
         ]);
     }
+    */
 }
