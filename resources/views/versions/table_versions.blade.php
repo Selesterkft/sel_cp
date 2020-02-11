@@ -19,24 +19,23 @@
                     @php
                         $label = 'label-primary';
                         $active = 'inactive';
-                        if($version->Active == 1)
-                        {
+                    @endphp
+                    @if( $version->Active == 1 )
                         $label = 'label-success';
                         $active = 'active';
-                        }
-                    @endphp
+                    @endif
                     <div class="label {{ $label }}">{{ $active }}</div>
                 </td>
 
                 <td class="text-center">
                     <a href="{{ url('versions.show', $version->ID) }}"
-                       class="btn btn-info">
+                       class="btn btn-xs btn-info">
                         <i class="fa fa-eye"></i>
                     </a>
 
                     <a href="{{ url('versions.edit', $version->ID) }}"
-                       class="btn btn-success"
-                       style="margin-left: 10px;">
+                       class="btn btn-xs btn-success"
+                       style="margin-left: 5px;">
                         <i class="fa fa-pencil"></i>
                     </a>
 
@@ -44,8 +43,8 @@
                         <form action="{{ url('versions.restore', $version->ID) }}"
                               method="POST" style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-info"
-                                    style="margin-left: 10px;">
+                            <button type="submit" class="btn btn-xs btn-info"
+                                    style="margin-left: 5px;">
                                 <i class="fa fa-recycle"></i>
                             </button>
                         </form>
@@ -55,8 +54,8 @@
                               style="display:inline;">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger"
-                                    style="margin-left: 10px;">
+                            <button type="submit" class="btn btn-xs btn-danger"
+                                    style="margin-left: 5px;">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </form>

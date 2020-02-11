@@ -20,22 +20,21 @@
                 @php
                 $label = 'label-primary';
                 $active = 'inactive';
-                if($vc->Active == 1)
-                {
-                $label = 'label-success';
-                $active = 'active';
-                }
                 @endphp
+                @if( $vc->Avtive == 1 )
+                    $label = 'label-success';
+                    $active = 'active';
+                @endif
                 <div class="label {{ $label }}">{{ $active }}</div>
             </td>
             <td class="text-center">
                 <a href="{{ url('version_company.show', $vc) }}"
-                   class="btn btn-info">
+                   class="btn btn-xs btn-info">
                     <i class="fa fa-eye"></i>
                 </a>
                 <a href="{{ url('version_company.edit', $vc) }}"
-                   class="btn btn-success"
-                   style="margin-left: 10px;">
+                   class="btn btn-xs btn-success"
+                   style="margin-left: 5px;">
                     <i class="fa fa-pencil"></i>
                 </a>
                 {{--

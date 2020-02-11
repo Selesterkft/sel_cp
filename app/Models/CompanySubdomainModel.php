@@ -27,14 +27,15 @@ class CompanySubdomainModel extends Model
     public static function readAll()
     {
         $config = config('appConfig.tables.company_has_subdomain');
-        $resources = DB::connection()
+        $resources = DB::connection($config['connection'])
             ->table($config['read'])
             ->select([
                 'id',                   'CompanyID',        'CompanyName'
                 , 'CompanyNickName',    'SubdomainName',    'created_at'
                 , 'updated_at',         'deleted_at'])
             ->get();
-
+//dd('', $resources);
+/*
         $res = [];
 
         foreach( $resources as $resource )
@@ -46,8 +47,8 @@ class CompanySubdomainModel extends Model
             }
             $res[] = $cs;
         }
-
-        return $res;
+*/
+        return $resources;
     }
 
     public static function getByID(int $id) : CompanySubdomainModel

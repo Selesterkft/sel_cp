@@ -36,11 +36,11 @@
             @endif
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="box box-default">
-                
+
                 <div class="box-header with-border">
                         <h3 class="box-title">
                             {{ __('global.company_subdomain.menu_title') }}
@@ -55,10 +55,10 @@
                         </div>
 
                     </div>
-                
+
                 <div class="box-body">
                     <div class="table-responsive mailbox-messages">
-                        
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -79,13 +79,13 @@
                                     <td>{{ $cs->CompanyNickName }}</td>
                                     <td>{{ $cs->SubdomainName }}</td>
                                     <td>
-                                        <a href="{{ url('companysubdomain.show', ['id' => $cs->id]) }}" 
+                                        <a href="{{ url('companysubdomain.show', ['id' => $cs->id]) }}"
                                            class="btn btn-info btn-xs">
                                             <i class="fa fa-eye"></i>
                                         </a>
 
                                         <a href="{{ url('companysubdomain.edit', ['id' => $cs->id]) }}"
-                                           class="btn btn-success btn-xs" 
+                                           class="btn btn-success btn-xs"
                                            style="margin-left: 10px;">
                                             <i class="fa fa-pencil"></i>
                                         </a>
@@ -95,9 +95,9 @@
                                               method="POST"
                                               style="display:inline;">
                                             @csrf
-                                            <button type="submit" 
-                                                    class="btn btn-info btn-xs" 
-                                                    style="margin-left: 10px;">
+                                            <button type="submit"
+                                                    class="btn btn-info btn-xs"
+                                                    style="margin-left: 5px;">
                                                 <i class="fa fa-recycle"></i>
                                             </button>
                                         </form>
@@ -107,14 +107,14 @@
                                                       'id' => $cs->id
                                                   ]) }}"
                                                 style="display:inline;">
-                                              <input type="hidden" name="_method" value="DELETE"/>
-                                              @csrf
-                                              <button type="submit" 
-                                                      class="btn btn-danger btn-xs" 
-                                                      style="margin-left: 10px;">
-                                                  <i class="fa fa-trash"></i>
-                                              </button>
-                                          </form>
+                                            <input type="hidden" name="_method" value="DELETE"/>
+                                            @csrf
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-xs"
+                                                    style="margin-left: 10px;">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
                                     @endif
 
                                     </td>
@@ -122,15 +122,15 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
-                
+
                 <div class="box-footer"></div>
-                
+
             </div>
         </div>
     </div>
-    
+
 </section>
 @endsection

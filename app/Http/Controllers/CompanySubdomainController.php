@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\CompanySubdomainModel;
 use App\Classes\Helper;
@@ -16,7 +17,7 @@ class CompanySubdomainController extends Controller
      */
     public function index()
     {
-        $company_subdomain = CompanySubdomainModel::all();
+        $company_subdomain = CompanySubdomainModel::readAll();
 
         return view('companysubdomain.index', [
             'company_subdomain' => $company_subdomain
@@ -67,10 +68,10 @@ class CompanySubdomainController extends Controller
             $cs->save($request->all());
 
             return redirect()
-                ->to( url('companysubdomain') )
+                ->to( url('versions') )
                 ->with('success', 'A kapcsolat létrejött');
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             //dd('CompanySubdomainController.store', $e->getMessage());
             return redirect()
@@ -89,7 +90,7 @@ class CompanySubdomainController extends Controller
      */
     public function show($id)
     {
-        //
+        return $id;
     }
 
     /**
@@ -134,7 +135,7 @@ class CompanySubdomainController extends Controller
         $cs->update($request->all());
 
         return redirect()
-            ->to('companysubdomain')
+            ->to('versions')
             ->with('success', __('global.app_messages.update_successfully', ['name' => __('global.app_data')]));
     }
 
@@ -143,7 +144,7 @@ class CompanySubdomainController extends Controller
      *
      * @param int $id
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id)
     {

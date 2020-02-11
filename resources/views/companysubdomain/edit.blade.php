@@ -83,8 +83,7 @@
 
                         {{-- SUBDOMAIN --}}
                         <div class="form-group {{ ($errors->has('SubdomainName')) ? 'has-error' : '' }}">
-                            {{ Form::label('SubdomainName', __('global.company_subdomain.fields.subdomain') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
+                            <label class="col-sm-2 control-label" for="SubdomainName">{{ __('global.company_subdomain.fields.subdomain') }}:</label>
                             <div class="col-sm-10">
                                 <input id="SubdomainName" name="SubdomainName" class="form-control" type="text"
                                        value="{{ (old('SubdomainName')) ? old('SubdomainName') : $cs->SubdomainName }}"/>
@@ -98,7 +97,7 @@
 
                     <div class="box-footer">
                         <div class="box-footer">
-                        <a href="{{ url('companysubdomain') }}"
+                        <a href="{{ url('versions') }}"
                            class="btn btn-default">
                             {{ __('global.app_cancel') }}
                         </a>

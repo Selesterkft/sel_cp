@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use App\Models\ver_2019_01\CompanyModel;
+use App\Models\CompanySubdomainModel;
 use App\Models\VersionCompanyModel;
 use App\Models\VersionModel;
 use Illuminate\Http\Request;
@@ -32,12 +33,14 @@ class VersionController extends Controller {
         //$versions = VersionModel::all();
         $versions = VersionModel::readAll();
 
-        //$version_companies = VersionCompanyModel::all();
         $version_companies = VersionCompanyModel::readAll();
+
+        $company_subdomain = CompanySubdomainModel::readAll();
 
         return view('versions.index', [
             'versions' => $versions,
             'version_companies' => $version_companies,
+            'company_subdomains' => $company_subdomain,
         ]);
     }
 
@@ -179,7 +182,7 @@ class VersionController extends Controller {
 
         if(empty($version))
         {
-            return restore()
+            return redirect()
                     ->to('versions')
                     ->with('error', __('global.app_messages.restore_error', ['name' => __('global.version.title')]));
         }
