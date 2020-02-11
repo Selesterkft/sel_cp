@@ -35,9 +35,7 @@ class Invoices2Controller extends Controller
 
         if( $request->ajax() )
         {
-            //$config = config('appConfig.tables.invoices2.ver_2019_01');
-            //$invModel = new Invoice2Model();
-            //$invModel->setTable($config['read']);
+            //dd('Invoices2Controller.show', $request->all());
             return Invoice2Model::all();
         }
 

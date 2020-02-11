@@ -55,7 +55,7 @@ class Invoice2Model extends Model
 
         $totalNotFiltered = $model->count();
 
-        if( !empty(request()->has('s_invNum')) )
+        if( !empty(request()->get('s_invNum')) )
         {
             $model = $model->where('Inv_Num', '=', request()->get('s_invNum'));
         }
@@ -99,7 +99,7 @@ class Invoice2Model extends Model
 
         $total = $model->count();
 
-        //dd('Invoice2Model.all', request()->all());
+        //dd('Invoice2Model::all', request()->all(), $model->toSql());
 
         // Oldaltörés
         if( request()->has('limit') )
