@@ -36,7 +36,7 @@
                 <button id="clear_search" name="clear_search"
                         type="button" title="{{ __('global.app_delete_search') }}"
                         class="btn btn-bitbucket"
-                        onclick="window.location.href='{{ url('inv_new') }}'">
+                        onclick="window.location.href='{{ url('invoices') }}'">
                     <i class="fa fa-search-minus"></i>&nbsp;
                     {{ __('global.app_delete_search') }}
                 </button>

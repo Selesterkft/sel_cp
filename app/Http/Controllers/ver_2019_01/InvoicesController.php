@@ -32,7 +32,8 @@ class InvoicesController extends Controller
             $model = $model->select(
                 'ID',             'SELEXPED_INV_ID', 'Inv_Num',      'Vendor_Name1', 'Inv_SeqNum',
                 'Cust_Name1',     'InvDate',         'DeliveryDate', 'DueDate',
-                'Netto_LC',       'Tax_LC',          'Brutto_LC',    'PaidAmount_DC',
+                'Net_LC',       'Tax_LC',          '
+            gross_LC',    'PaidAmount_DC',
                 'Curr_ID',        'Curr_DC',         'Vendor_Phone', 'Vendor_Email',
                 'Customer_Phone', 'Customer_Email',  'Inv_L_Num');
             */
@@ -85,7 +86,7 @@ class InvoicesController extends Controller
             {
                 $model = $model->where('TypeID' , '=', $request->get('s_type'));
             }
-
+/*
             if( count($delivery_date) > 0 )
             {
                 print_r("delivery:{$delivery_date[0]} - {$delivery_date[1]}\n");
@@ -93,7 +94,7 @@ class InvoicesController extends Controller
             if( count($due_date) > 0 ){
                 print_r("due:{$due_date[0]} - {$due_date[1]}\n");
             }
-
+*/
             $modelCount = $model->count();
 
             // Sorok száma
@@ -152,7 +153,7 @@ class InvoicesController extends Controller
             $result = $model->select(
                 'ID',             'SELEXPED_INV_ID', 'Inv_Num',      'Vendor_Name1', 'Inv_SeqNum',
                 'Cust_Name1',     'InvDate',         'DeliveryDate', 'DueDate',
-                'Netto_LC',       'Netto_DC',        'Tax_LC',       'Tax_DC',          'Brutto_LC', 'Brutto_DC',
+                'Net_LC',       'Net_DC',        'Tax_LC',       'Tax_DC',          'Gross_LC', 'Gross_DC',
                 'PaidAmount_LC',  'PaidAmount_DC',
                 'Curr_ID',        'Curr_DC',         'Vendor_Phone', 'Vendor_Email',
                 'Customer_Phone', 'Customer_Email',  'Inv_L_Num')

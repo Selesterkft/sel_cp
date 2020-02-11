@@ -26,9 +26,9 @@ class InvoiceModel extends \Eloquent
         'Customer_Addr_stairway', 'Customer_Addr_floor', 'Customer_Addr_door', 'Cust_TaxNum', 'Cust_TaxNum2',
         'Cust_BankCode', 'Cust_BankAcc', 'Cust_IBAN', 'Cust_AccNum_ID', 'Bank_AC_ID', 'ClassID', 'Period_FROM',
         'Period_TO', 'InvDate', 'DeliveryDate', 'Curr_Dates_Method', 'CurrDate', 'AccDate', 'PaymentMethod',
-        'DueDate', 'PostInDate', 'InvInDueDate', 'Netto_LC', 'Tax_LC', 'Brutto_LC', 'PayStatus', 'Fully_paid_date',
-        'PaidAmount_DC', 'PaidAmount_FC', 'PaidAmount_LC', 'Netto_DC', 'Tax_DC', 'Brutto_DC', 'Lang', 'Curr_ID',
-        'Netto_FC', 'Tax_FC', 'Brutto_FC', 'Remarks', 'Attachments', 'Added_Date', 'Added_Users_ID', 'ACC_Info',
+        'DueDate', 'PostInDate', 'InvInDueDate', 'Net_LC', 'Tax_LC', 'Gross_LC', 'PayStatus', 'Fully_paid_date',
+        'PaidAmount_DC', 'PaidAmount_FC', 'PaidAmount_LC', 'Net_DC', 'Tax_DC', 'Gross_DC', 'Lang', 'Curr_ID',
+        'Net_FC', 'Tax_FC', 'Gross_FC', 'Remarks', 'Attachments', 'Added_Date', 'Added_Users_ID', 'ACC_Info',
         'SAP_DocEntry', 'Subcontracted_Services', 'Wrhs_Tran_ID', 'Prev_Ref_INV_ID', 'UserFld_int01', 'UserFld_int02',
         'UserFld_int03', 'UserFld_float01', 'UserFld_float02', 'UserFld_float03', 'UserFld_nvarchar01',
         'UserFld_nvarchar02', 'UserFld_nvarchar03', 'UserFld_date01', 'UserFld_date02', 'UserFld_date03'];

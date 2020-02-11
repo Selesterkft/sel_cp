@@ -67,6 +67,6 @@
 </div>
 
 <form id="search-clear" name="search-clear"
-      action="{{ url('inv_new') }}"
+      action="{{ url('invoices') }}"
       method="get">
 </form>

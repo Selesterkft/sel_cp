@@ -6,6 +6,7 @@
     @php
         $format = (config('appConfig.dateFormats'))[config('app.locale')]['carbon'];
         //$currency_template = config('appConfig.currencies.' . config('app.locale'));
+        //dd('view.blade', $invoice->Inv_ID, $invoice);
     @endphp
 
     <section class="content-header">
@@ -52,17 +53,14 @@
             <div class="col-sm-4 invoice-col">
                 {{ __('global.app_from') }}
                 <address>
-                    <strong>{{ $invoice->Vendor_Name1 }}</strong><br>
-                    @if( !empty($invoice->Vendor_ZIP) && !empty($invoice->Vendor_City) )
-                        {{ $invoice->Vendor_ZIP }}, {{ $invoice->Vendor_City }}
-                    @endif
+                    <strong>{{ $invoice->Partner_Name }}</strong><br>
                     <br>
-                    {{ (!empty($invoice->Vendor_Addr)) ? $invoice->Vendor_Addr : '' }}&nbsp;
-                    {{ (!empty($invoice->Vendor_Addr_ps_type)) ? $invoice->Vendor_Addr_ps_type : '' }}&nbsp;
-                    {{ (!empty($invoice->Vendor_Addr_housenr)) ? $invoice->Vendor_Addr_housenr : '' }}
+                    {{ $invoice->Partner_Country_ZIP_City }}
+                    {{--
                     <br>
                     <b>@lang('global.app_phone'):</b>&nbsp;{{ $invoice->Vendor_Phone }}<br>
                     <b>@lang('global.app_email'):</b>&nbsp;{{ $invoice->Vendor_Email }}
+                    --}}
                 </address>
 
             </div>
@@ -99,7 +97,7 @@
 
                        data-toolbar="#toolbar"
 
-                       data-url="{{ url('invoices.show', $invoice->SELEXPED_INV_ID) }}"
+                       data-url="{{ url('szamlak.show', $invoice->SELEXPED_INV_ID) }}"
 
                        data-buttons-class="primary"
                        data-toggle="table"
@@ -127,6 +125,36 @@
                        data-show-footer="true">
                     <thead>
                     <tr>
+                        <th data-field="SeqNum" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('SeqNum') }}</th>
+                        <th data-field="Inv_L_ID" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Inv_L_ID') }}</th>
+                        <th data-field="SELEXPED_INV_L_ID" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('SELEXPED_INV_L_ID') }}</th>
+                        <th data-field="Inv_ID" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Inv_ID') }}</th>
+                        <th data-field="SELEXPED_INV_ID" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('SELEXPED_INV_ID') }}</th>
+                        <th data-field="Descr" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Descr') }}</th>
+                        <th data-field="Pcs" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Pcs') }}</th>
+                        <th data-field="Unit" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Unit') }}</th>
+                        <th data-field="UnitPrice_LC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('UnitPrice_LC') }}</th>
+                        <th data-field="UnitPrice_DC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('UnitPrice_DC') }}</th>
+                        <th data-field="UnitPrice_FC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('UnitPrice_FC') }}</th>
+                        <th data-field="UnitPrice_FC2" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('UnitPrice_FC2') }}</th>
+                        <th data-field="Netto_LC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Netto_LC') }}</th>
+                        <th data-field="Netto_DC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Netto_DC') }}</th>
+                        <th data-field="Netto_FC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Netto_FC') }}</th>
+                        <th data-field="Netto_FC2" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Netto_FC2') }}</th>
+                        <th data-field="TaxRate" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('TaxRate') }}</th>
+                        <th data-field="Tax_LC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Tax_LC') }}</th>
+                        <th data-field="Tax_DC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Tax_DC') }}</th>
+                        <th data-field="Tax_FC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Tax_FC') }}</th>
+                        <th data-field="Tax_FC2" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Tax_FC2') }}</th>
+                        <th data-field="GROSS_LC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_LC') }}</th>
+                        <th data-field="GROSS_DC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_DC') }}</th>
+                        <th data-field="GROSS_FC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_FC') }}</th>
+                        <th data-field="GROSS_FC2" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_FC2') }}</th>
+                        <th data-field="Curr_LC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_LC') }}</th>
+                        <th data-field="Curr_DC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_DC') }}</th>
+                        <th data-field="Curr_FC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_FC') }}</th>
+                        <th data-field="Curr_FC2" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_FC2') }}</th>
+                        <!--
                         <th data-field="Descr"
                             data-footer-formatter="totalTextFormatter"
                             data-halign="center" data-align="left"
@@ -182,6 +210,7 @@
                             data-sortable="true" data-searchable="true" data-switchable="true">
                             {{ trans('global.invoice.fields.gross') }}
                         </th>
+                        -->
                     </tr>
                     </thead>
 

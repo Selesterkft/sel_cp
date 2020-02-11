@@ -96,7 +96,7 @@ class CreateSzamlakTable extends Migration
 			$table->dateTime('Lejarat')->index('IX_Szamlak_Lejarat');
 			$table->dateTime('BeerkezesDatum')->index('IX_Szamlak_BeerkezesDatum');
 			$table->dateTime('BejovoSzlaLejarat')->index('IX_Szamlak_BejovoSzlaLejarat');
-			$table->float('NettoOsszesen', 53, 0);
+			$table->float('NetOsszesen', 53, 0);
 			$table->float('AFAOsszesen', 53, 0);
 			$table->float('BruttoOsszesen', 53, 0);
 			$table->integer('FizAllapot')->default(0)->index('IX_Szamlak_FizAllapot');
@@ -104,12 +104,12 @@ class CreateSzamlakTable extends Migration
 			$table->float('EddigKifizetve', 53, 0)->default(0);
 			$table->float('EddigKifizetveEUR', 53, 0)->default(0);
 			$table->float('EddigKifizetveFIBU', 53, 0)->default(0);
-			$table->float('FWGesamtNetto', 53, 0)->default(0);
+			$table->float('FWGesamtNet', 53, 0)->default(0);
 			$table->float('FWGesamtMwSt', 53, 0)->default(0);
 			$table->float('FWGesamtBrutto', 53, 0)->default(0);
 			$table->string('SzamlaNyelve', 3);
 			$table->integer('Wahrung')->index('IX_Szamlak_Wahrung');
-			$table->float('EURNetto', 53, 0)->default(0);
+			$table->float('EURNet', 53, 0)->default(0);
 			$table->float('EURMwSt', 53, 0)->default(0);
 			$table->float('EURBrutto', 53, 0)->default(0);
 			$table->string('Bemerkung')->nullable();

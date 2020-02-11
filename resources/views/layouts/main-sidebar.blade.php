@@ -113,16 +113,25 @@
                     </span>
                 </a>
             </li>
-            <!--
-            <li class="{{-- $request->segment(1) == 'inv_new' || $request->segment(1) == 'inv_new.show' ? 'active' : '' --}}">
-                <a href="{{-- url('inv_new') --}}">
+
+            <li class="{{ $request->segment(1) == 'inv_new*' ? 'active' : '' }}">
+                <a href="{{ url('inv_new') }}">
                     <i class="ion ion-ios-list-outline"></i>&nbsp;
                     <span>
-                    {{-- __('global.invoices.title') . '2' --}}
+                    {{ 'inv_new' }}
                 </span>
                 </a>
             </li>
-                -->
+
+                <li class="{{ $request->segment(1) == 'szamlak*' ? 'active' : '' }}">
+                    <a href="{{ url('szamlak') }}">
+                        <i class="ion ion-ios-list-outline"></i>&nbsp;
+                        <span>
+                    {{ 'Számlák' }}
+                </span>
+                    </a>
+                </li>
+
             @endcan
 
             @can('stocks-menu')

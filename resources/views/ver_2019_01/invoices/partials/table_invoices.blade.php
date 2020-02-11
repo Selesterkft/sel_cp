@@ -42,6 +42,9 @@
                    data-minimum-count-columns="2"
                    data-striped="true"
 
+                   data-cookie="true"
+                   data-cookie-id-table="saveId"
+
                    data-pagination="true"
                    data-page-size="10"
                    data-page-list="[10, 25, 50, 100]"
@@ -76,26 +79,26 @@
                         data-sortable="true">
                         {{ __('global.app_currency') }}
                     </th>
-                    <th data-field="Netto_DC"
+                    <th data-field="Net_DC"
                         data-sortable="true"
-                        data-formatter="priceFormatter"
+                        data-formatter="decimalFormatter"
                         data-halign="left" data-align="right">
-                        {{ __('global.invoices.fields.netto_lc') }}
+                        {{ __('global.invoices.fields.net_lc') }}
                     </th>
                     <th data-field="Tax_DC"
-                        data-formatter="priceFormatter"
+                        data-formatter="decimalFormatter"
                         data-sortable="true"
                         data-halign="left" data-align="right">
                         {{ __('global.invoices.fields.tax_lc') }}
                     </th>
-                    <th data-field="Brutto_DC"
-                        data-formatter="priceFormatter"
+                    <th data-field="Gross_DC"
+                        data-formatter="decimalFormatter"
                         data-sortable="true"
                         data-halign="left" data-align="right">
-                        {{ __('global.invoices.fields.brutto_lc') }}
+                        {{ __('global.invoices.fields.gross_lc') }}
                     </th>
                     <th data-field="PaidAmount_DC"
-                        data-formatter="priceFormatter"
+                        data-formatter="decimalFormatter"
                         data-sortable="true"
                         data-halign="left" data-align="right">
                         {{ __('global.invoices.fields.paid_amount_dc') }}

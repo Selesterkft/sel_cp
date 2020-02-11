@@ -50,7 +50,7 @@ class CreateAlkalmazottakTable extends Migration
 			$table->string('LeanykoriNeve', 50)->nullable();
 			$table->dateTime('SzulDatum')->nullable();
 			$table->string('SzulHely', 30)->nullable();
-			$table->float('NettoFiz', 53, 0)->nullable()->default(0);
+			$table->float('NetFiz', 53, 0)->nullable()->default(0);
 			$table->float('BruttoFiz', 53, 0)->nullable()->default(0);
 			$table->float('TBjarulek', 53, 0)->nullable()->default(0);
 			$table->float('Potlek01', 53, 0)->nullable();

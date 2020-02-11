@@ -49,7 +49,7 @@
                 <button id="clear_search" name="clear_search"
                         type="button" title="{{ __('global.app_delete_search') }}"
                         class="btn btn-bitbucket"
-                        onclick="window.location.href='{{ url('inv_new') }}'">
+                        onclick="window.location.href='{{ url('invoices') }}'">
                     <i class="fa fa-search-minus"></i>&nbsp;
                     {{ __('global.app_delete_search') }}
                 </button>
@@ -112,6 +112,7 @@
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-hu-HU.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
     <!--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
     -->
@@ -281,7 +282,7 @@
         {
             $table.bootstrapTable('destroy')
                 .bootstrapTable({
-                    exportTypes: ['csv', 'txt', 'excel', 'pdf'],
+                    exportTypes: ['excel'],
                     locale: '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}',
                     columns: [
                     {
@@ -299,6 +300,8 @@
         $(function()
         {
             initTable();
+
+            console.log($table.bootstrapTable('getOptions').pageNumber);
         });
 
         /*
@@ -394,6 +397,11 @@
             return $aa;
         }
 
+        function decimalFormatter(data)
+        {
+            return FormatNumber(data);
+        }
+
         function dateFormatter(data) {
             return moment(data).format(dateFormat);
         }
@@ -404,6 +412,14 @@
                 css: {
                     'white-space': 'nowrap'
                 }
+            }
+        }
+
+        function FormatNumber(number, numberOfDigits = 2) {
+            try {
+                return new Intl.NumberFormat('en-US').format(parseFloat(number).toFixed(2));
+            } catch (error) {
+                return 0;
             }
         }
     </script>

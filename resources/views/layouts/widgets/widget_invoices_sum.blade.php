@@ -47,7 +47,7 @@ $data = $invModel->getWidgetData();
                     </thead>
                     <tbody>
                     @php
-                    $f = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+                    $f = new \NumberFormatter(app()->getLocale(), \NumberFormatter::DECIMAL);
                     $f->setAttribute($f::FRACTION_DIGITS, 2);
                     @endphp
                     @foreach($data as $sum)
@@ -58,22 +58,22 @@ $data = $invModel->getWidgetData();
                             <td>{{ $sum->Penznem }}</td>
                             <td>
                                 <div class="pull-right">
-                                    {{ $f->formatCurrency($sum->NettoOsszesen, $sum->Penznem) }}
+                                    {{ $f->format($sum->NettoOsszesen) }}
                                 </div>
                             </td>
                             <td>
                                 <div class="pull-right">
-                                    {{ $f->formatCurrency($sum->AFAOsszesen, $sum->Penznem) }}
+                                    {{ $f->format($sum->AFAOsszesen) }}
                                 </div>
                             </td>
                             <td>
                                 <div class="pull-right">
-                                    {{ $f->formatCurrency($sum->BruttoOsszesen, $sum->Penznem) }}
+                                    {{ $f->format($sum->BruttoOsszesen) }}
                                 </div>
                             </td>
                             <td>
                                 <div class="pull-right">
-                                    {{ $f->formatCurrency($sum->EddigKifizetve, $sum->Penznem) }}
+                                    {{ $f->format($sum->EddigKifizetve) }}
                                 </div>
                             </td>
                         </tr>

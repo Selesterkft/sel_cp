@@ -29,7 +29,7 @@ return array(
         ),
         'hu' => array(
             'carbon' => 'Y-m-d',        // PHP date format
-            'moment' => 'YYYY-MM-DD'    // Javascript date format
+            'moment' => 'YYYY.MM.DD'    // Javascript date format
         ),
     ),
     'currencies' => array(
@@ -168,6 +168,22 @@ return array(
                 'table' => 'Inv',
             ],
         ),
+        'invoices2' => [
+            'ver_2019_01' => [
+                'connection' => 'azure',
+                'table' => 'Inv',
+                'read' => 'CP_PAGE_INV_INDEX_INV_LIST',
+                'getCustomers' => 'CP_getCustomers',
+                'getVendors' => 'CP_getVendors',
+            ]
+        ],
+        'invoice_details2' => [
+            'ver_2019_01' => [
+                'connection' => 'azure',
+                'table' => 'Inv_L',
+                'read' => 'CP_PAGE_INV_DETAIL_LIST',
+            ]
+        ],
         'invoice_details' => array(
             'ver_2019_01' => [
                 'connection' => 'azure',

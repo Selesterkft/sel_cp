@@ -21,15 +21,15 @@ namespace App\Models\ver_2019_01;
  * @property float $Pcs
  * @property string $Unit
  * @property float $UnitPrice_DC
- * @property float $Netto_DC
+ * @property float $Net_DC
  * @property int $ACCT_TaxCodes_ID
  * @property float $TaxRate
  * @property float $Tax_DC
- * @property float $Brutto_DC
+ * @property float $Gross_DC
  * @property float $UnitPrice_FC2
- * @property float $Netto_FC2
+ * @property float $Net_FC2
  * @property float $Tax_FC2
- * @property float $Brutto_FC2
+ * @property float $Gross_FC2
  * @property int $Curr_ID
  * @property float $Rate_DC
  * @property int $Rate_Unit_DC
@@ -37,7 +37,7 @@ namespace App\Models\ver_2019_01;
  * @property float $Rate_FC
  * @property int $Rate_Unit_FC
  * @property float $UnitPrice_FC
- * @property float $Netto_FC
+ * @property float $Net_FC
  * @property float $Tax_FC
  * @property float $EURBrutto
  * @property string $Rate_Date_FC
@@ -46,9 +46,9 @@ namespace App\Models\ver_2019_01;
  * @property int $Rate_Unit_LC
  * @property string $Rate_Date_LC
  * @property float $UnitPrice_LC
- * @property float $Netto_LC
+ * @property float $Net_LC
  * @property float $Tax_LC
- * @property float $Brutto_LC
+ * @property float $Gross_LC
  * @property string $Period_FROM
  * @property string $Period_TO
  * @property boolean $Subcontracted_Services
@@ -71,13 +71,13 @@ class InvoiceDetailModel extends \Eloquent
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'Inv_L';
     /**
      * The connection name for the model.
-     * 
+     *
      * @var string
      */
     protected $connection = 'azure';
@@ -89,12 +89,12 @@ class InvoiceDetailModel extends \Eloquent
         'ID', 'ClientID', 'TransactID', 'Inv_ID', 'SeqNum',
         'Comp_Inv_ID', 'Pos_ID', 'Ord_Num', 'PosInfo', 'Part_ID',
         'Rates_ID', 'Descr', 'Note', 'Pcs', 'Unit',
-        'UnitPrice_DC', 'Netto_DC', 'ACCT_TaxCodes_ID', 'TaxRate', 'Tax_DC',
-        'Brutto_DC', 'UnitPrice_FC2', 'Netto_FC2', 'Tax_FC2', 'Brutto_FC2',
+        'UnitPrice_DC', 'Net_DC', 'ACCT_TaxCodes_ID', 'TaxRate', 'Tax_DC',
+        'Gross_DC', 'UnitPrice_FC2', 'Net_FC2', 'Tax_FC2', 'Gross_FC2',
         'Curr_ID', 'Rate_DC', 'Rate_Unit_DC', 'Rate_Date_DC', 'Rate_FC',
-        'Rate_Unit_FC', 'UnitPrice_FC', 'Netto_FC', 'Tax_FC', 'EURBrutto',
+        'Rate_Unit_FC', 'UnitPrice_FC', 'Net_FC', 'Tax_FC', 'EURGros',
         'Rate_Date_FC', 'Ord_Calc_ID', 'Rate_LC', 'Rate_Unit_LC', 'Rate_Date_LC',
-        'UnitPrice_LC', 'Netto_LC', 'Tax_LC', 'Brutto_LC', 'Period_FROM',
+        'UnitPrice_LC', 'Net_LC', 'Tax_LC', 'Gross_LC', 'Period_FROM',
         'Period_TO', 'Subcontracted_Services', 'ConseqNum', 'INV_Group_ConseqNum',
         'UserFld_int01', 'UserFld_int02', 'UserFld_int03', 'UserFld_float01',
         'UserFld_float02', 'UserFld_float03', 'UserFld_nvarchar01', 'UserFld_nvarchar02',
