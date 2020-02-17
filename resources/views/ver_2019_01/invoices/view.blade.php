@@ -6,6 +6,9 @@
     @php
         $format = (config('appConfig.dateFormats'))[config('app.locale')]['carbon'];
         //$currency_template = config('appConfig.currencies.' . config('app.locale'));
+        echo '<pre>';
+        print_r($invoice->getAttributes());
+        echo '</pre>';
     @endphp
 
     <section class="content-header">
@@ -52,17 +55,14 @@
             <div class="col-sm-4 invoice-col">
                 {{ __('global.app_from') }}
                 <address>
-                    <strong>{{ $invoice->Vendor_Name1 }}</strong><br>
-                    @if( !empty($invoice->Vendor_ZIP) && !empty($invoice->Vendor_City) )
-                        {{ $invoice->Vendor_ZIP }}, {{ $invoice->Vendor_City }}
-                    @endif
+                    <strong>{{ $invoice->Partner_Name }}</strong><br>
                     <br>
-                    {{ (!empty($invoice->Vendor_Addr)) ? $invoice->Vendor_Addr : '' }}&nbsp;
-                    {{ (!empty($invoice->Vendor_Addr_ps_type)) ? $invoice->Vendor_Addr_ps_type : '' }}&nbsp;
-                    {{ (!empty($invoice->Vendor_Addr_housenr)) ? $invoice->Vendor_Addr_housenr : '' }}
+                    {{ $invoice->Partner_Country_ZIP_City }}
+                    {{--
                     <br>
                     <b>@lang('global.app_phone'):</b>&nbsp;{{ $invoice->Vendor_Phone }}<br>
                     <b>@lang('global.app_email'):</b>&nbsp;{{ $invoice->Vendor_Email }}
+                    --}}
                 </address>
 
             </div>
@@ -127,61 +127,98 @@
                        data-show-footer="true">
                     <thead>
                     <tr>
-                        <th data-field="Descr"
-                            data-footer-formatter="totalTextFormatter"
-                            data-halign="center" data-align="left"
-                            data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.product') }}
+                        <th data-field="SeqNum" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('SeqNum') }}</th>
+                        <th data-field="Inv_L_ID" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Inv_L_ID') }}</th>
+                        <th data-field="SELEXPED_INV_L_ID" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('SELEXPED_INV_L_ID') }}</th>
+                        <th data-field="Inv_ID" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Inv_ID') }}</th>
+                        <th data-field="SELEXPED_INV_ID" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('SELEXPED_INV_ID') }}</th>
+
+                        <th data-field="Descr" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Descr') }}</th>
+
+                        <th data-field="Pcs"
+                            data-align="right" data-halign="center"
+                            data-sortable="true" data-searchable="true" data-switchable="true"
+                            data-formatter="pcs_formatter">
+                            {{ trans('Pcs') }}
                         </th>
-                        <th data-field="Pcs" data-formatter="pcs_formatter"
-                            data-footer-formatter="totalNameFormatter"
-                            data-halign="center" data-align="right"
+
+                        <th data-field="Unit" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Unit') }}</th>
+
+                        <th data-field="UnitPrice_LC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.qty') }}
+                            {{ trans('UnitPrice_LC') }}
                         </th>
-                        <th data-field="Unit"
-                            data-halign="center" data-align="left"
+                        <th data-field="UnitPrice_DC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.qty_unit') }}
+                            {{ trans('UnitPrice_DC') }}
                         </th>
-                        <th data-field="Curr_DC"
-                            data-halign="center" data-align="left"
+                        <th data-field="UnitPrice_FC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.app_currency') }}
+                            {{ trans('UnitPrice_FC') }}
                         </th>
-                        <th data-field="UnitPrice_DC"
-                            data-formatter="decimalFormatter"
-                            data-halign="center" data-align="right"
+                        <th data-field="UnitPrice_FC2" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.unit_price') }}
+                            {{ trans('UnitPrice_FC2') }}
                         </th>
-                        <th data-field="Netto_DC"
-                            data-formatter="decimalFormatter"
-                            data-footer-formatter="totalPriceFormatter"
-                            data-halign="center" data-align="right"
+                        <th data-field="Netto_LC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.net') }}
+                            {{ trans('Netto_LC') }}
                         </th>
-                        <th data-field="TaxRate"
-                            data-formatter="percentFormatter"
-                            data-halign="center" data-align="right"
+                        <th data-field="Netto_DC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.vat') }}
+                            {{ trans('Netto_DC') }}
                         </th>
-                        <th data-field="Tax_DC"
-                            data-footer-formatter="totalPriceFormatter"
-                            data-formatter="decimalFormatter"
-                            data-halign="center" data-align="right"
+                        <th data-field="Netto_FC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.vat_value') }}
+                            {{ trans('Netto_FC') }}
                         </th>
-                        <th data-field="Brutto_DC"
-                            data-formatter="decimalFormatter"
-                            data-footer-formatter="totalPriceFormatter"
-                            data-halign="center" data-align="right"
+                        <th data-field="Netto_FC2" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
                             data-sortable="true" data-searchable="true" data-switchable="true">
-                            {{ trans('global.invoice.fields.gross') }}
+                            {{ trans('Netto_FC2') }}
                         </th>
+                        <th data-field="TaxRate" data-formatter="percentFormatter"
+                            data-align="right" data-halign="center"
+                            data-sortable="true" data-searchable="true" data-switchable="true">
+                            {{ trans('TaxRate') }}
+                        </th>
+                        <th data-field="Tax_LC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
+                            data-sortable="true" data-searchable="true" data-switchable="true">
+                            {{ trans('Tax_LC') }}
+                        </th>
+                        <th data-field="Tax_DC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
+                            data-sortable="true" data-searchable="true" data-switchable="true">
+                            {{ trans('Tax_DC') }}
+                        </th>
+                        <th data-field="Tax_FC" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
+                            data-sortable="true" data-searchable="true" data-switchable="true">
+                            {{ trans('Tax_FC') }}
+                        </th>
+                        <th data-field="Tax_FC2" data-formatter="decimalFormatter"
+                            data-align="right" data-halign="center"
+                            data-sortable="true" data-searchable="true" data-switchable="true">
+                            {{ trans('Tax_FC2') }}
+                        </th>
+
+                        <th data-field="GROSS_LC" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_LC') }}</th>
+                        <th data-field="GROSS_DC" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_DC') }}</th>
+                        <th data-field="GROSS_FC" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_FC') }}</th>
+                        <th data-field="GROSS_FC2" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('GROSS_FC2') }}</th>
+
+                        <th data-field="Curr_LC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_LC') }}</th>
+                        <th data-field="Curr_DC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_DC') }}</th>
+                        <th data-field="Curr_FC" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_FC') }}</th>
+                        <th data-field="Curr_FC2" data-align="left" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">{{ trans('Curr_FC2') }}</th>
                     </tr>
                     </thead>
 
@@ -239,6 +276,8 @@
 
     <script>
         var $table = $('#table');
+        var $local = '{{ app() ->getLocale() }}' + '-' + '{{ strtoupper(app()->getLocale()) }}';
+        var $local_short = '{{ app() ->getLocale() }}';
 
         function pcs_formatter(value, row, index)
         {
@@ -266,10 +305,13 @@
             return FormatNumber(data);
         }
 
-        function FormatNumber(number, numberOfDigits = 2) {
+        function FormatNumber(number, numberOfDigits = 2)
+        {
             try {
-                return new Intl.NumberFormat('en-US').format(parseFloat(number).toFixed(2));
+                //retVal = new Intl.NumberFormat('hu-HU').format(parseFloat(number).toFixed(2));
+                return parseFloat(number).toFixed(2);
             } catch (error) {
+                console.log(error);
                 return 0;
             }
         }
@@ -315,7 +357,7 @@
             $table
                 .bootstrapTable('destroy')
                 .bootstrapTable({
-                    locale: '{{ app()->getLocale() . '-' . strtoupper(app()->getLocale()) }}'
+                    locale: $local
                 });
         }
 

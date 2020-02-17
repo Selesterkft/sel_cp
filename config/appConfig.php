@@ -156,25 +156,29 @@ return array(
                 'read' => 'CP_Cegek_Read',
             ],
         ),
+        /*
         'invoices' => array(
             'ver_2019_01' => [
-                'connection' => 'azure',
-                'table' => 'CP_Inv',
-                'read' => 'CP_Inv_Read',
-                'widget_read' => 'CP_Invoices_Widget',
+                'connection'    => 'azure',
+                'table'         => 'CP_Inv',
+                'read'          => 'CP_Inv_Read',
+                'widget_read'   => 'CP_Invoices_Widget',
             ],
             'ver_2019_02' => [
                 'connection' => 'azure',
                 'table' => 'Inv',
             ],
         ),
-        'invoices2' => [
+        */
+        'invoices' => [
             'ver_2019_01' => [
-                'connection' => 'azure',
-                'table' => 'Inv',
-                'read' => 'CP_PAGE_INV_INDEX_INV_LIST',
-                'getCustomers' => 'CP_getCustomers',
-                'getVendors' => 'CP_getVendors',
+                'connection'    => 'azure',
+                'table'         => 'Inv',
+                'read'          => 'CP_PAGE_INV_INDEX_INV_LIST',
+                'read2'         => 'CP_Inv_Read_Data',
+                'getCustomers'  => 'CP_getCustomers',
+                'getVendors'    => 'CP_getVendors',
+                'widget_read'   => 'CP_Invoices_Widget',
             ]
         ],
         'invoice_details2' => [

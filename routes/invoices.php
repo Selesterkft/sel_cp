@@ -10,27 +10,6 @@ $domain = \App\Classes\Helper::getAppDomain();
 // ============================================
 Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function()
 {
-    Route::get('szamlak', function()
-    {
-        $controller = app()->make(App\Http\Controllers\ver_2019_01\Invoices2Controller::class);
-        return $controller->callAction('index', $parameters = ['request' => request()]);
-    });
-
-    Route::get('szamlak.show/{id}', function($company, $id)
-    {
-        $controller = app()->make(App\Http\Controllers\ver_2019_01\Invoices2Controller::class);
-        return $controller->callAction('show', $parameters = [
-            'request' => request(),
-            'id' => $id
-        ]);
-    });
-
-    Route::get('inv_new', function()
-    {
-        $controller = app()->make('\App\Http\Controllers\\' . session()->get('version') . '\InvController');
-        return $controller->callAction('index', $parameters = ['request' => request()]);
-    });
-
     Route::get('invoices', function()
     {
         //dd('routes.invoices');

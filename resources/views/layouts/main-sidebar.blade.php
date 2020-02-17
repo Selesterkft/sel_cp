@@ -113,7 +113,7 @@
                     </span>
                 </a>
             </li>
-
+{{--
             <li class="{{ $request->segment(1) == 'inv_new*' ? 'active' : '' }}">
                 <a href="{{ url('inv_new') }}">
                     <i class="ion ion-ios-list-outline"></i>&nbsp;
@@ -122,16 +122,17 @@
                 </span>
                 </a>
             </li>
-
-                <li class="{{ $request->segment(1) == 'szamlak*' ? 'active' : '' }}">
-                    <a href="{{ url('szamlak') }}">
-                        <i class="ion ion-ios-list-outline"></i>&nbsp;
-                        <span>
-                    {{ 'Számlák' }}
-                </span>
-                    </a>
-                </li>
-
+--}}
+{{--
+            <li class="{{ $request->segment(1) == 'szamlak*' ? 'active' : '' }}">
+                <a href="{{ url('szamlak') }}">
+                    <i class="ion ion-ios-list-outline"></i>&nbsp;
+                    <span>
+                        {{ 'Számlák' }}
+                    </span>
+                </a>
+            </li>
+--}}
             @endcan
 
             @can('stocks-menu')

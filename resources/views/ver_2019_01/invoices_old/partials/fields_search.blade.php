@@ -29,6 +29,7 @@
 
 </div>
 {{-- /.Számlaszám --}}
+
 @if( \Auth::user()->Supervisor_ID == 0 )
     <div class="form-group col-sm-12">
         <label for="s_customer" class="control-label">
@@ -44,12 +45,12 @@
                 foreach($customers as $customer)
                 {
                 $selected = '';
-                if( $customer->Cust_ID == request()->get('s_customer') )
+                if( $customer['Cust_ID'] == request()->get('s_customer') )
                 {
                     $selected = 'selected';
                 }
                 ?>
-                <option value="{{ $customer->Cust_ID }}" {{ $selected }}>{{ $customer->Cust_Name1 }}</option>
+                <option value="{{ $customer['Cust_ID'] }}" {{ $selected }}>{{ $customer['Cust_Name1'] }}</option>
                 <?php
                 }
                 ?>
@@ -72,12 +73,12 @@
                 foreach($vendors as $vendor)
                 {
                 $selected = '';
-                if( $vendor->Vendor_ID == request()->get('s_vendor') )
+                if( $vendor['Vendor_ID'] == request()->get('s_vendor') )
                 {
                     $selected = 'selected';
                 }
                 ?>
-                <option value="{{ $vendor->Vendor_ID }}" {{ $selected }}>{{ $vendor->Vendor_Name1 }}</option>
+                <option value="{{ $vendor['Vendor_ID'] }}" {{ $selected }}>{{ $vendor['Vendor_Name1'] }}</option>
                 <?php
                 }
                 ?>

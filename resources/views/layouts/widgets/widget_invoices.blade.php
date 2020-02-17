@@ -1,6 +1,8 @@
 @php
-$model = 'App\Models\\' . session()->get('version') . '\InvoiceModel';
-$countOfInvoices = $model::getCountOfInvoices();
+//$model = 'App\Models\\' . session()->get('version') . '\InvoiceModel';
+//$countOfInvoices = $model::getCountOfInvoices();
+use App\Models\ver_2019_01\InvoiceModel;
+$countOfInvoices = InvoiceModel::getCountOfInvoices();
 @endphp
 
 <div class="col-lg-3 col-xs-6">

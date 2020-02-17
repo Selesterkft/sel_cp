@@ -21,7 +21,7 @@ class InvoiceDetail2Model extends Model
         $cp_users_id = $loggedUser->ID;
         $lang = app()->getLocale();
 
-        $model = new Invoice2Model();
+        $model = new InvoiceModel();
         $columns = implode(',', $model->getFillable());
         $model->setConnection($config['connection']);
         $model->setTable("{$config['read']}({$session_id}, {$client_id}, {$cp_users_id}, {$lang}, {$selexped_inv_id}");
