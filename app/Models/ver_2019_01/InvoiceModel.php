@@ -120,7 +120,7 @@ class InvoiceModel extends Model
             $offset = request()->get('offset');
         }
 
-        $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}'";
+        $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}',''";
 
         $res = \DB::connection($config['connection'])
             ->select(\DB::raw($query));
