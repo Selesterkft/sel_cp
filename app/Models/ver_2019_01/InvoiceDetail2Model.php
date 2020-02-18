@@ -74,6 +74,50 @@ class InvoiceDetail2Model extends Model
     public function getDetails(int $id)
     {
         $config = config('appConfig.tables.invoice_details2.' . session()->get('version'));
+
+        $model = new InvoiceDetail2Model();
+        $model->setConnection($config['connection']);
+        $model->setTable($config['read']);
+
+        // Feltételek
+        $model = $model->where('Inv_ID', '=', $id);
+
+        // Rendezés
+        $sort = (request()->has('sort')) ? request()->get('sort') : null;
+        $order = (request()->has('order')) ? request()->get('order') : 'asc';
+        if( $sort && $order )
+        {
+            $model = $model->orderBy($sort, $order);
+        }
+
+        // Oldaltörés
+        if(request()->has('limit'))
+        {
+            $model = $model->take(request()->get('limit'));
+        }
+        if(request()->has('offset'))
+        {
+            $model = $model->skip(request()->get('offset'));
+        }
+
+        $total = $totalNotFiltered = $model->count();
+
+        $result = $model->get()->toArray();
+
+        $details = [
+            'total' => $total,
+            'totalNotFiltered' => $totalNotFiltered,
+            'rows' => $result,
+        ];
+
+        //dd('InvoiceModel::getDetails', $details);
+
+        return json_encode($details);
+    }
+
+    public function getDetails_old(int $id)
+    {
+        $config = config('appConfig.tables.invoice_details2.' . session()->get('version'));
         $loggedUser = \Auth::user();
         $session_id = session()->getId();
         $client_id = (int)$loggedUser->CompanyID;

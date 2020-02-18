@@ -2,6 +2,8 @@
 
 namespace App\Models\ver_2019_01;
 
+use Auth;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class InvoiceModel extends Model
@@ -39,13 +41,11 @@ class InvoiceModel extends Model
 
     public static function all($columns = ['*'])
     {
-        //dd('Invoice2Model::all', request()->all());
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        //dd('Invoice2Model::all', $config);
-        $loggedUser = \Auth::user();
+        $loggedUser = Auth::user();
         $supervisor_id = $loggedUser->Supervisor_ID;
 
-        $columns = implode(',', $columns);
+        //$columns = implode(',', $columns);
         $session_id = session()->getId();
         $client_id = (int)$loggedUser->CompanyID;
         $cp_users_id = $loggedUser->ID;
@@ -53,14 +53,6 @@ class InvoiceModel extends Model
         $limit = 0;
         $offset = 0;
         $where = '';
-
-        //$model = new Invoice2Model();
-        //$model->setConnection($config['connection']);
-        //$model->setTable("EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',{$limit},{$offset},'{$where}''");
-
-        //dd('Invoice2Model.all', $model->toSql());
-
-        //$totalNotFiltered = $model->count();
 
         if( !empty(request()->get('s_invNum')) )
         {
@@ -122,15 +114,15 @@ class InvoiceModel extends Model
 
         $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}',''";
 
-        $res = \DB::connection($config['connection'])
-            ->select(\DB::raw($query));
+        $res = DB::connection($config['connection'])
+            ->select(DB::raw($query));
 
         $total = count($res);
 
         $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',{$offset},{$limit},'{$where}', '{$sort}'";
         //dd('Invoice2Model::all', $query);
-        $res = \DB::connection($config['connection'])
-            ->select(\DB::raw($query));
+        $res = DB::connection($config['connection'])
+            ->select(DB::raw($query));
         //dd('Invoice2Model::all', $res);
         $invoices = [
             'query' => $query,
@@ -143,114 +135,14 @@ class InvoiceModel extends Model
         //dd('Invoice2Model::all', "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',{$offset},{$limit},'{$where}'", $res);
     }
 
-    public static function all2($columns = ['*'])
-    {
-        $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        $loggedUser = \Auth::user();
-        $supervisor_id = $loggedUser->Supervisor_ID;
-
-        $columns = implode(',', $columns);
-        $session_id = session()->getId();
-        $client_id = (int)$loggedUser->CompanyID;
-        $cp_users_id = $loggedUser->ID;
-        $lang = app()->getLocale();
-        $limit = 0;
-        $offset = 0;
-
-        $model = new InvoiceModel();
-        $model->setConnection($config['connection']);
-
-        //$model->setTable("EXECUTE [dbo].[{$config['read2']}] '{$session_id}', {$client_id}, {$cp_users_id}, '{$lang}', {$limit}, {$offset}, @where");
-        $model->setTable("{$config['read']}('{$session_id}',{$client_id},{$cp_users_id},'{$lang}')");
-
-        $totalNotFiltered = $model->count();
-
-        if( !empty(request()->get('s_invNum')) )
-        {
-            $model = $model->where('Inv_Num', '=', request()->get('s_invNum'));
-        }
-        else
-        {
-            if( $supervisor_id == 0 )
-            {
-                if( request()->get('s_vendor') != 0 )
-                {
-                    $model = $model->where('Vendor_ID', '=', request()->get('s_vendor'));
-                }
-                if( request()->get('s_customer') != 0 )
-                {
-                    $model = $model->where('Cust_ID', '=', request()->get('s_customer'));
-                }
-            }
-            else
-            {
-                $model = $model->where(function($q)use($supervisor_id)
-                {
-                    $q->where('Vendor_ID', '=', $supervisor_id)
-                        ->orWhere('Cust_ID', '=', $supervisor_id);
-                });
-            }
-        }
-
-        if( !empty(request()->get('s_delivery_date')) )
-        {
-            $delivery_date = explode(' - ', request()->get('s_delivery_date'));
-            $model = $model->whereBetween('DeliveryDate', $delivery_date[0], $delivery_date[1]);
-        }
-        if( !empty(request()->get('s_due_date')) )
-        {
-            $due_date = explode('', request()->get('s_due_date'));
-            $model = $model->whereBetween('DueDate', $due_date[0], $due_date[1]);
-        }
-        if( !empty(request()->get('s_type')) )
-        {
-            $model = $model->where('TypeID', '=', request()->get('s_type'));
-        }
-
-        $total = $model->count();
-
-        //dd('Invoice2Model::all', request()->all(), $model->toSql());
-
-        // Oldaltörés
-        if( request()->has('limit') )
-        {
-            $model = $model->take(request()->get('limit'));
-        }
-
-        if( request()->has('offset') )
-        {
-            $model = $model->skip(request()->get('offset'));
-        }
-
-        // Rendezés
-        $sort = (request()->has('sort')) ? request()->get('sort') : null;
-        $order = (request()->has('order')) ? request()->get('order') : 'asc';
-        if( $sort && $order )
-        {
-            $model = $model->orderBy($sort, $order);
-        }
-
-        $model = $model->select($columns);
-        dd('Invoice2Model', request()->all(), $model->toSql());
-        $result = $model->get()->toArray();
-
-        $invoices = [
-            'total' => $total,
-            'totalNotFiltered' => $totalNotFiltered,
-            'rows' => $result,
-        ];
-        //dd('Invoice2Model', $invoices);
-        return json_encode($invoices);
-    }
-
     /*
      *  Visszaadja a számlákon szereplő vevőket
      */
     public static function getCustomers(int $clientID) : array
     {
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        $res = \DB::connection($config['connection'])
-            ->select(\DB::raw("SELECT Cust_ID,Cust_Name1 
+        $res = DB::connection($config['connection'])
+            ->select(DB::raw("SELECT Cust_ID,Cust_Name1 
                                     FROM {$config['getCustomers']} 
                                     WHERE ClientID = :client_id 
                                     ORDER BY Cust_Name1"), ['client_id' => $clientID]);
@@ -263,8 +155,8 @@ class InvoiceModel extends Model
     public static function getVendors(int $clientID) : array
     {
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        $res = \DB::connection($config['connection'])
-            ->select(\DB::raw("SELECT Vendor_ID,Vendor_Name1 
+        $res = DB::connection($config['connection'])
+            ->select(DB::raw("SELECT Vendor_ID,Vendor_Name1 
                                     FROM {$config['getVendors']} 
                                     WHERE ClientID = :client_id 
                                     ORDER BY Vendor_Name1"), ['client_id' => $clientID]);
@@ -274,8 +166,32 @@ class InvoiceModel extends Model
     public static function getInvoice(int $id)
     {
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        $loggedUser = \Auth::user();
-        $supervisor_id = $loggedUser->Supervisor_ID;
+        $loggedUser = Auth::user();
+        //$supervisor_id = $loggedUser->Supervisor_ID;
+
+        $session_id = session()->getId();
+        $client_id = (int)$loggedUser->CompanyID;
+        $cp_users_id = $loggedUser->ID;
+        $lang = app()->getLocale();
+        //$limit = 0;
+        //$offset = 0;
+
+        $where = "WHERE SELEXPED_INV_ID = {$id}";
+        $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}',''";
+        //dd('InvoiceModel::getInvoice', $query);
+        $invoice = DB::connection()
+            ->select(DB::raw($query));
+
+        //dd('Invoice2Model', $invoice);
+
+        return $invoice[0];
+    }
+
+    public static function getInvoice_old(int $id)
+    {
+        $config = config('appConfig.tables.invoices.' . session()->get('version'));
+        $loggedUser = Auth::user();
+        //$supervisor_id = $loggedUser->Supervisor_ID;
 
         $session_id = session()->getId();
         $client_id = (int)$loggedUser->CompanyID;
@@ -321,7 +237,7 @@ class InvoiceModel extends Model
     {
         $count = 0;
 
-        $loggedUser = \Auth::user();
+        $loggedUser = Auth::user();
 
         $model = app()->make('\App\Models\\' . session()->get('version') . '\InvoiceModel');
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
@@ -348,14 +264,14 @@ class InvoiceModel extends Model
 
     public function getWidgetData()
     {
-        $loggedUser = \Auth::user();
+        $loggedUser = Auth::user();
 
         $CompanyID = $loggedUser->CompanyID;
         $Supervisor_ID = ($loggedUser->Supervisor_ID == 0) ? 0 : $loggedUser->Supervisor_ID;
 
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
-        $res = \DB::connection($config['connection'])
-            ->select(\DB::connection($config['connection'])
+        $res = DB::connection($config['connection'])
+            ->select(DB::connection($config['connection'])
                 ->raw("EXECUTE [dbo].[{$config['widget_read']}] ?, ?"),
                 [
                     (int)$CompanyID,

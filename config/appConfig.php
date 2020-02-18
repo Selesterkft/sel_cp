@@ -185,7 +185,8 @@ return array(
             'ver_2019_01' => [
                 'connection' => 'azure',
                 'table' => 'Inv_L',
-                'read' => 'CP_PAGE_INV_DETAIL_LIST',
+                'read' => 'CP_Inv_L_Read',
+                'read2' => 'CP_PAGE_INV_DETAIL_LIST',
             ]
         ],
         'invoice_details' => array(
