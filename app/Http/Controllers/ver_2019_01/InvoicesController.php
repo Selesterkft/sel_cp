@@ -39,8 +39,10 @@ class InvoicesController extends Controller
             return InvoiceModel::all();
         }
 
-        $customers = InvoiceModel::getCustomers($clientID);
-        $vendors = InvoiceModel::getVendors($clientID);
+        //$customers = InvoiceModel::getCustomers($clientID);
+        //$vendors = InvoiceModel::getVendors($clientID);
+        $customers = [];
+        $vendors = [];
 
         return view(session()->get('version') . '.invoices.index', [
             'customers' => $customers,

@@ -59,209 +59,216 @@
         <div class="box box-default">
             <div class="box-body">
                 <div class="table-responsive">
-
                     <table id="table" name="table"
                            class="table table-striped table-bordered"
+                           data-id-field="ID"
                            data-toolbar="#toolbar"
-                           data-buttons-class="primary"
+
+                           data-query-params="queryParams"
                            data-url="{{ url('invoices') }}"
+                           data-buttons-class="primary"
                            data-toggle="table"
+                           data-search="false"
+                           data-show-search-button="false"
+                           data-search-on-enter-key="false"
+                           data-side-pagination="server"
+                           data-virtual-scroll="true"
 
                            data-show-refresh="true"
+                           data-show-toggle="false"
+                           data-show-fullscreen="false"
                            data-show-columns="true"
+                           data-show-columns-toggle-all="false"
                            data-show-export="true"
+                           data-show-pagination-switch="false"
+
+                           data-detail-formatter="detailFormatter"
+                           data-minimum-count-columns="2"
                            data-striped="true"
 
-                           data-minimum-count-columns="2"
-                           data-side-pagination="server"
+                           data-cookie="true"
+                           data-cookie-id-table="saveId"
+
                            data-pagination="true"
+                           data-pagination-v-align="both"
                            data-page-size="10"
-                           data-page-list="[10, 25, 50, 100]">
+                           data-page-list="[10, 25, 50, 100]"
+
+                           data-show-footer="true">
                         <thead>
                         <tr>
-                            <th  data-switchable="false"></th>
-                            <th data-field="ID"
-                                data-switchable="false"
-                                data-visible="false">
-                                ID
+                            <th></th>
+                            {{--
+                            <th data-field="Inv_ID" data-visible="false" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="false">
+                                {{ trans('global.invoices2.fields.Inv_ID') }}
+                            </th>
+                            --}}
+                            <th data-field="SELEXPED_INV_ID" data-visible="false" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="false">
+                                {{ trans('global.invoices2.fields.SELEXPED_INV_ID') }}
                             </th>
 
-                            <th data-field="SELEXPED_INV_ID"
-                                data-switchable="false" data-visible="false">
-                                SELEXPED_INV_ID
+                            <th data-field="Inv_Num" data-visible="true" data-halign="left" data-align="left"
+                                data-sortable="true" data-switchable="true">
+                                {{ trans('global.invoices2.fields.Inv_Num') }}
+                            </th>
+                            <th data-field="Inv_SeqNum" data-visible="true" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="true">
+                                {{ trans('global.invoices2.fields.Inv_SeqNum') }}
+                            </th>
+                            <th data-field="ACCT_Period" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.ACCT_Period') }}
+                            </th>
+                            {{--
+                            <th data-field="INV_Type_ID" data-visible="false" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="false">
+                                {{ trans('global.invoices2.fields.INV_Type_ID') }}
+                            </th>
+                            --}}
+                            {{--
+                            <th data-field="INV_Type" data-visible="true" data-halign="left" data-align="left"
+                                data-sortable="true" data-switchable="true">
+                                {{ trans('global.invoices2.fields.INV_Type') }}
+                            </th>
+                            <th data-field="Ref_Inv" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Ref_Inv') }}
+                            </th>
+                            <th data-field="Cancellation_ReasonCode" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="true">
+                                {{ trans('global.invoices2.fields.Cancellation_ReasonCode') }}
+                            </th>
+                            <th data-field="Partner_Name" data-halign="left" data-align="left" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Partner_Name') }}
+                            </th>
+                            <th data-field="Partner_Address" data-halign="left" data-align="left" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Partner_Address') }}
+                            </th>
+                            <th data-field="Partner_Country_ZIP_City" data-halign="left" data-align="left"
+                                data-sortable="true" data-switchable="true">
+                                {{ trans('global.invoices2.fields.Partner_Country_ZIP_City') }}
+                            </th>
+                            <th data-field="Partner_Bank_Account" data-halign="left" data-align="left"
+                                data-sortable="true" data-switchable="true">
+                                {{ trans('global.invoices2.fields.Partner_Bank_Account') }}
+                            </th>
+                            <th data-field="Type_of_Invoice" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Type_of_Invoice') }}
+                            </th>
+                            <th data-field="Period_From_To" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Period_From_To') }}
+                            </th>
+                            <th data-field="InvDate" data-halign="left" data-align="left" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.InvDate') }}
+                            </th>
+                            <th data-field="DeliveryDate" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.DeliveryDate') }}
                             </th>
 
-                            <th data-field="Inv_Num" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.inv_num') }}
+                            <th data-field="PaymentMethod_ID" data-visible="false" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="false">
+                                {{ trans('global.invoices2.fields.PaymentMethod_ID') }}
                             </th>
-                            <th data-field="Inv_SeqNum" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.seq_num') }}
+                            <th data-field="PaymentMethod" data-halign="left" data-align="left" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.PaymentMethod') }}
                             </th>
-                            <th data-field="ACCT_Period" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.period') }}
+                            <th data-field="DueDate" data-halign="left" data-align="left" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.DueDate') }}
                             </th>
-
-                            {{--<th data-field="INV_Type_ID" data-sortable="true">
-                                INV_Type_ID
-                            </th>--}}
-
-                            <th data-field="InvType" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.type_of_document') }}
+                            <th data-field="PostInDate" data-halign="left" data-align="left" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.PostInDate') }}
                             </th>
-
-                            <th data-field="Ref_Inv" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.num_ref_doc') }}
-                            </th>
-                            <th data-field="Cancellation_ReasonCode" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.cancellation_reason_code') }}
-                            </th>
-                            {{--<th data-field="Partner_ID" data-sortable="true">Partner_ID</th>--}}
-
-                            <th data-field="Partner_Name" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.account_partner_name') }}
+                            <th data-field="Net_LC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Net_LC') }}
                             </th>
 
-                            <th data-field="Partner_Address" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.partner_address') }}
+                            <th data-field="Tax_LC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true" data-formatter="decimalFormatter">
+                                {{ trans('global.invoices2.fields.Tax_LC') }}
                             </th>
-                            {{--<th data-field="Partner_Country_ZIP_City" data-sortable="true">
-                                Partner_Country_ZIP_City
-                            </th>--}}
-                            <th data-field="Partner_Bank_Account" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.bank_code') }}
-                            </th>
-                            <th data-field="Period_From_To" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.period_to_from') }}
-                            </th>
-                            <th data-field="PayStatus" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.pay_status') }}
+                            <th data-field="Gross_LC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Gross_LC') }}
                             </th>
 
-                            <th data-field="Subcontracted_Services" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.subcontracted_services') }}
+                            <th data-field="PayStatus_ID" data-visible="false" data-halign="left" data-align="right"
+                                data-sortable="true" data-switchable="false">
+                                {{ trans('global.invoices2.fields.PayStatus_ID') }}
                             </th>
-                            <th data-field="InvDate" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.inv_date') }}
+                            <th data-field="PayStatus" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.PayStatus') }}
                             </th>
-                            <th data-field="DeliveryDate" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.delivery_date') }}
+                            <th data-field="PaidAmount_DC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.PaidAmount_DC') }}
                             </th>
-                            {{--<th data-field="PaymentMethod_ID" data-sortable="true">
-                                PaymentMethod_ID
-                            </th>--}}
-                            <th data-field="PaymentMethod" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.payment_method') }}
+                            <th data-field="PaidAmount_FC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.PaidAmount_FC') }}
                             </th>
-
-                            <th data-field="DueDate" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.due_date') }}
+                            <th data-field="PaidAmount_LC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.PaidAmount_LC') }}
                             </th>
-                            <th data-field="DeliveryDate" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.delivery_date') }}
+                            <th data-field="Net_DC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Net_DC') }}
                             </th>
-                            {{--<th data-field="PaymentMethod_ID" data-sortable="true">
-                                PaymentMethod_ID
-                            </th>--}}
-                            {{--<th data-field="PaymentMethod" data-sortable="true">
-                                {{ trans('global.invoices.fields.payment_method') }}
-                            </th>--}}
-
-                            <th data-field="PostInDate" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.postin_date') }}
+                            <th data-field="Tax_DC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Tax_DC') }}
                             </th>
-                            <th data-field="Fully_paid_date" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.fully_paid_date') }}
+                            <th data-field="Gross_DC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Gross_DC') }}
                             </th>
 
-                            <th data-field="Net_LC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.net_lc') }}
+                            <th data-field="Curr_DC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Curr_DC') }}
                             </th>
-                            <th data-field="Tax_LC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.tax_lc') }}
+                            <th data-field="Net_FC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Net_FC') }}
                             </th>
-                            <th data-field="Gross_LC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.gross_lc') }}
+                            <th data-field="Tax_FC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Tax_FC') }}
                             </th>
-
-
-                            <th data-field="PaidAmount_LC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.paid_amount_lc') }}
+                            <th data-field="Gross_FC" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Gross_FC') }}
                             </th>
-                            <th data-field="PaidAmount_DC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.paid_amount_dc') }}
+                            <th data-field="Remarks" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Remarks') }}
                             </th>
-                            <th data-field="PaidAmount_FC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.paid_amount_fc') }}
+                            <th data-field="Attachments" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Attachments') }}
                             </th>
-
-                            <th data-field="Net_DC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.net_dc') }}
+                            <th data-field="Added_User" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Added_User') }}
                             </th>
-                            <th data-field="Tax_DC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.tax_dc') }}
+                            <th data-field="Added_User_Name" data-halign="left" data-align="right" data-sortable="true"
+                                data-switchable="true">
+                                {{ trans('global.invoices2.fields.Added_User') }}
                             </th>
-                            <th data-field="Gross_DC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.gross_dc') }}
-                            </th>
-                            <th data-field="Curr_DC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.curr_dc') }}
-                            </th>
-
-                            <th data-field="Net_FC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.curr_fc') }}
-                            </th>
-                            <th data-field="Tax_FC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.tax_fc') }}
-                            </th>
-                            <th data-field="Gross_FC" data-sortable="true"
-                                data-align="right" data-halign="center">
-                                {{ trans('global.invoices.fields.gross_fc') }}
-                            </th>
-
-                            <th data-field="Remarks" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.remarks') }}
-                            </th>
-                            <th data-field="Attachments" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.attachments') }}
-                            </th>
-                            {{--<th data-field="Added_User" data-sortable="true">Added_User</th>--}}
-                            <th data-field="Added_User_Name" data-sortable="true"
-                                data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.added_user_name') }}
-                            </th>
+                            --}}
                         </tr>
                         </thead>
                     </table>
@@ -276,10 +283,9 @@
                 </div>
             </div>
         </div>
-
     </section>
-
 @endsection
+
 @section('css')
     <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
     {{--<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">--}}
@@ -305,7 +311,8 @@
     @endphp
 
     <style>
-        table.table.table-striped.table-bordered td{
+        table.table.table-striped.table-bordered td,
+        table.table.table-striped.table-bordered td.text {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -313,23 +320,21 @@
     </style>
 
 @endsection
+
 @section('js')
     {{-- Bootstrap Table --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') }}"
-            type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/tableExport.min.js') }}" type="text/javascript"></script>
     {{--
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.min.js') }}"
             type="text/javascript"></script>
+    --}}
+    {{--
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.plugin.autotable.js') }}"
             type="text/javascript"></script>
     --}}
-
-    {{--<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-hu-HU.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>--}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>
     {{--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
     --}}
@@ -341,8 +346,7 @@
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     {{-- Daterange Picker --}}
-{{--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>--}}
-    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
         var $table = $('#table');
@@ -482,6 +486,7 @@
                         align: 'center',
                         clickToSelect: false,
                         sortable: false,
+                        events: window.operateEvents,
                         formatter: operateFormatter
                     }]
                 });
@@ -494,7 +499,6 @@
 
         function operateFormatter(value, row, index) {
 
-            //console.log(row);
             $url = '{{ url('invoices.show') }}' + '/' + row.SELEXPED_INV_ID;
 
             return [
@@ -519,4 +523,5 @@
         }
 
     </script>
+
 @endsection

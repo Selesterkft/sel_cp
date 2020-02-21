@@ -51,9 +51,9 @@
                     @php
                         /** @var stdClass $invoice */
                         /** @var string $format */
-                        $datum = Carbon\Carbon::parse($invoice->InvDate)->format($format);
+                        //$datum = Carbon\Carbon::parse($invoice->InvDate)->format($format);
                     @endphp
-                    <small class="pull-right"><b>{{ __('global.app_date') }}:</b> {{ $datum }}</small>
+                    <small class="pull-right"><b>{{ __('global.app_date') }}:</b> {{ $invoice->InvDate }}</small>
                 </h2>
             </div>
         </div>
@@ -72,9 +72,9 @@
                 <b>@lang('global.invoice.account_number'):</b>&nbsp;{{ $invoice->Inv_Num }}<br/>
                 <b>@lang('global.invoice.inv_seq_num'):</b>&nbsp;{{ $invoice->Inv_SeqNum }}<br/>
                 @php
-                    $datum = Carbon\Carbon::parse($invoice->DueDate)->format($format);
+                    //$datum = Carbon\Carbon::parse($invoice->DueDate)->format($format);
                 @endphp
-                <b>@lang('global.invoice.payment_due'):</b>&nbsp;{{ $datum }}<br>
+                <b>@lang('global.invoice.payment_due'):</b>&nbsp;{{ $invoice->DueDate }}<br>
 
                 <b>{{ trans('global.app_pay_status') }}:&nbsp;{{ $invoice->PayStatus }}</b><br/>
             </div>
@@ -315,7 +315,7 @@
         <div class="row">
 
             <div class="col-xs-12">
-                <p class="lead">@lang('global.invoice.payment_due'): {{ $datum }}</p>
+                <p class="lead">@lang('global.invoice.payment_due'): {{ $invoice->DueDate }}</p>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">

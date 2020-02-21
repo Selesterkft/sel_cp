@@ -41,6 +41,8 @@ class InvoiceModel extends Model
 
     public static function all($columns = ['*'])
     {
+        //$start = microtime(true);
+
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
         $loggedUser = Auth::user();
         $supervisor_id = $loggedUser->Supervisor_ID;
@@ -50,9 +52,14 @@ class InvoiceModel extends Model
         $client_id = (int)$loggedUser->CompanyID;
         $cp_users_id = $loggedUser->ID;
         $lang = app()->getLocale();
+        //$start = 0;
+        //$end = 0;
+        //$time = 0;
+        $total = 0;
         $limit = 0;
         $offset = 0;
         $where = '';
+        $sort = '';
 
         if( !empty(request()->get('s_invNum')) )
         {
@@ -83,13 +90,9 @@ class InvoiceModel extends Model
             if( !empty(request()->get('s_type')) )
             {
                 $where .= ((strlen($where) == 0) ? 'WHERE ' : ' AND ') . 'Inv_Type_ID = ' . request()->get('s_type');
-                //dd('Invoice2Model::all', $where);
             }
         }
 
-        //dd('Invoice2Model::all', request()->all());
-
-        $sort = '';
         if( !empty(request()->get('sort')) )
         {
             $sort = request()->get('sort');
@@ -101,8 +104,6 @@ class InvoiceModel extends Model
             $sort .= " {$order}";
         }
 
-        //dd('Invoice2Model::all', $sort);
-
         if( request()->has('limit') )
         {
             $limit = request()->get('limit');
@@ -112,27 +113,44 @@ class InvoiceModel extends Model
             $offset = request()->get('offset');
         }
 
-        $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}',''";
+        //$elokeszites = microtime(true)- $start;
 
-        $res = DB::connection($config['connection'])
-            ->select(DB::raw($query));
+        //$start = microtime(true);
 
-        $total = count($res);
+        //$query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}',''";
+        $query = "SELECT COUNT(*) count FROM Inv WHERE ClientID = {$client_id}";
+
+        $res = DB::connection($config['connection'])->select(DB::raw($query));
+
+        //dd('InvoiceModel::all', $res[0]->count);
+
+        $total = (int)$res[0]->count;
+        //$elso_lekerdezes = microtime(true) - $start;
+
+        //$start = microtime(true);
 
         $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',{$offset},{$limit},'{$where}', '{$sort}'";
-        //dd('Invoice2Model::all', $query);
-        $res = DB::connection($config['connection'])
-            ->select(DB::raw($query));
-        //dd('Invoice2Model::all', $res);
+        //dd('InvoiceModel::all', $query);
+        $res = DB::connection($config['connection'])->select(DB::raw($query));
+
+        //$end = microtime(true);
+        //$time = $end - $start;
+
+        //dd('Invoice2Model::all',"start:{$start} elokesz: {$elokeszites} elso: {$elso_lekerdezes}",$end,$time);
+
         $invoices = [
             'query' => $query,
-            'where' => $where,
+            //'start' => $start,
+            //'end' => $end,
+            //'time' => $time,
             'total' => $total,
             'totalNotFiltered' => count($res),
             'rows' => $res,
         ];
+
+        //dd('Invoice2Model::all', $invoices);
+
         return json_encode($invoices);
-        //dd('Invoice2Model::all', "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',{$offset},{$limit},'{$where}'", $res);
     }
 
     /*

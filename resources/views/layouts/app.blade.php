@@ -55,9 +55,9 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
 @yield('css')
 
 <!-- jQuery 3 -->
-    {{--<script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>--}}
+    <script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
 
 
 </head>

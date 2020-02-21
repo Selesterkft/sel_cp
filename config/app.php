@@ -170,8 +170,8 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
-        Way\Generators\GeneratorsServiceProvider::class,
-        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+        //Way\Generators\GeneratorsServiceProvider::class,
+        //Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         //Prettus\Repository\Providers\RepositoryServiceProvider::class,
         // Minta alkalmazás:
@@ -181,10 +181,10 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
 
         // Példa: php artisan krlove:generate:model Inv --table-name=Inv --connection=azure
-        Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        //Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
 
-        EloquentFilter\ServiceProvider::class,
-        
+        //EloquentFilter\ServiceProvider::class,
+
         Intervention\Image\ImageServiceProvider::class,
 
         /*
