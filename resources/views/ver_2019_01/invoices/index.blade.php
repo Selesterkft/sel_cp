@@ -196,10 +196,22 @@
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.bank_code') }}
                             </th>
+                            {{-- Period_From_To --}}
                             <th data-field="Period_From_To" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.period_to_from') }}
                             </th>
+                            {{-- Period_FROM --}}
+                            <th data-field="Period_FROM" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.period_from') }}
+                            </th>
+                            {{-- Period_TO --}}
+                            <th data-field="Period_TO" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.period_to') }}
+                            </th>
+
                             <th data-field="PayStatus" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.pay_status') }}
