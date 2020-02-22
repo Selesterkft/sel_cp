@@ -64,6 +64,7 @@
                            class="table table-striped table-bordered"
                            data-toolbar="#toolbar"
                            data-buttons-class="primary"
+                           data-query-params="queryParams"
                            data-url="{{ url('invoices') }}"
                            data-toggle="table"
 
@@ -80,58 +81,114 @@
                         <thead>
                         <tr>
                             <th  data-switchable="false"></th>
+                            {{-- ID --}}
                             <th data-field="ID"
                                 data-switchable="false"
                                 data-visible="false">
                                 ID
                             </th>
-
+                            {{-- SELEXPED_INV_ID --}}
                             <th data-field="SELEXPED_INV_ID"
                                 data-switchable="false" data-visible="false">
                                 SELEXPED_INV_ID
                             </th>
-
+                            {{-- Inv_Num --}}
                             <th data-field="Inv_Num" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.inv_num') }}
                             </th>
+                            {{-- Inv_SeqNum --}}
                             <th data-field="Inv_SeqNum" data-sortable="true"
-                                data-align="left" data-halign="center">
+                                data-align="right" data-halign="center">
                                 {{ trans('global.invoices.fields.seq_num') }}
                             </th>
+                            {{-- ACCT_Period --}}
                             <th data-field="ACCT_Period" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.period') }}
                             </th>
-
+                            {{-- INV_Type_ID --}}
                             {{--<th data-field="INV_Type_ID" data-sortable="true">
                                 INV_Type_ID
                             </th>--}}
-
+                            {{-- InvType --}}
                             <th data-field="InvType" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.type_of_document') }}
                             </th>
-
+                            {{-- Ref_Inv --}}
                             <th data-field="Ref_Inv" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.num_ref_doc') }}
                             </th>
+                            {{-- Cancellation_ReasonCode --}}
                             <th data-field="Cancellation_ReasonCode" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.cancellation_reason_code') }}
                             </th>
+                            {{-- Partner_ID --}}
                             {{--<th data-field="Partner_ID" data-sortable="true">Partner_ID</th>--}}
-
+                            {{-- Partner_Name --}}
                             <th data-field="Partner_Name" data-sortable="true"
                                 data-align="left" data-halign="center">
                                 {{ trans('global.invoices.fields.account_partner_name') }}
                             </th>
-
-                            <th data-field="Partner_Address" data-sortable="true"
+                            {{-- Partner_Addr --}}
+                            <th data-field="Partner_Addr" data-sortable="true"
                                 data-align="left" data-halign="center">
-                                {{ trans('global.invoices.fields.partner_address') }}
+                                {{ trans('global.invoices.fields.Partner_Addr') }}
                             </th>
+                            {{-- Partner_Addr_District --}}
+                            <th data-field="Partner_Addr_District" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_district') }}
+                            </th>
+                            {{-- Partner_Addr_ps_type --}}
+                            <th data-field="Partner_Addr_ps_type" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_ps_type') }}
+                            </th>
+                            {{-- Partner_Addr_housenr --}}
+                            <th data-field="Partner_Addr_housenr" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_housenr') }}
+                            </th>
+                            {{-- Partner_Addr_building --}}
+                            <th data-field="Partner_Addr_building" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_building') }}
+                            </th>
+                            {{-- Partner_Addr_stairway --}}
+                            <th data-field="Partner_Addr_stairway" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_stairway') }}
+                            </th>
+                            {{-- Partner_Addr_floor --}}
+                            <th data-field="Partner_Addr_floor" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_floor') }}
+                            </th>
+                            {{-- Partner_Addr_door --}}
+                            <th data-field="Partner_Addr_door" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_addr_door') }}
+                            </th>
+                            {{-- Partner_Country --}}
+                            <th data-field="Partner_Country" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_country') }}
+                            </th>
+                            {{-- Partner_ZIP --}}
+                            <th data-field="Partner_ZIP" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_zip') }}
+                            </th>
+                            {{-- Partner_City --}}
+                            <th data-field="Partner_City" data-sortable="true"
+                                data-align="left" data-halign="center">
+                                {{ trans('global.invoices.fields.partner_city') }}
+                            </th>
+
                             {{--<th data-field="Partner_Country_ZIP_City" data-sortable="true">
                                 Partner_Country_ZIP_City
                             </th>--}}
@@ -492,6 +549,25 @@
             initTable();
         });
 
+        function queryParams(params)
+        {
+            var urlParams = getAllUrlParams();
+            params.s_invNum = $s_invNum.val();
+            params.s_vendor = $s_vendor.val();
+            params.s_customer = $s_customer.val();
+            params.s_type = $s_type.val();
+
+            if( urlParams.s_due_date != undefined && urlParams.s_due_date != '' )
+            {
+                params.s_due_date = urlParams.s_due_date.replace('+-+', ' - ');
+            }
+            if( urlParams.s_delivery_date != undefined && urlParams.s_delivery_date != '' )
+            {
+                params.s_delivery_date = urlParams.s_delivery_date.replace('+-+', ' - ');
+            }
+            return params;
+        }
+
         function operateFormatter(value, row, index) {
 
             //console.log(row);
@@ -506,6 +582,9 @@
             ].join('')
         }
 
+
+
+        /*
         function FormatNumber(number, numberOfDigits = 2)
         {
             try
@@ -517,6 +596,7 @@
 
             return retVal;
         }
+        */
 
     </script>
 @endsection
