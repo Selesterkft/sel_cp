@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
-@section('title', __('BEÁLLÍTÁSOK'))
+@section('title', trans('settings.title'))
 
 @section('content')
 
 <section class="content-header">
     <h1>
-        {{ __('BEÁLLÍTÁSOK') }}
-        <small>{{ __('EGYÉNI BEÁLLÍTÁSOK') }}</small>
+        {{ trans('settings.title') }}
+        <small>{{ trans('settings.sub_title') }}</small>
     </h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ url('/') }}">
                 <i class="fa fa-dashboard"></i>&nbsp;
-                {{ __('global.app_dashboard') }}
+                {{ trans('app.dashboard') }}
             </a>
         </li>
 
         <li class="active">
             <i class="fa fa-users"></i>&nbsp;
-            {{ __('BEÁLLÍTÁSOK') }}
+            {{ trans('settings.title') }}
         </li>
 
     </ol>
@@ -37,14 +37,14 @@
         @if( $setting->PropertyName == 'Login_Wallpaper' )
         @include($n, ['id' => $setting->ID, 'value' => $setting->PropertyValue])
         @endif
-        
+
         {{--@if( $settings->PropertyName == 'favicon' )--}}
         @includeIf('settings.partials.favicon')
         {{--@endif--}}
-        
+
         @endforeach
     @endif
-    
+
 </section>
 
 @endsection

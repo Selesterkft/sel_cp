@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('SD Helper'))
+@section('title', trans('SD Helper'))
 
 @section('content')
 
@@ -13,21 +13,21 @@
             <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        {{ __('global.sd_helper.title') }}
+                        {{ trans('global.sd_helper.title') }}
                     </h3>
                     <!--
                         <div class="box-tools pull-right">
                             <a class="btn btn-xs btn-success"
                                href="{{ url('roles.create') }}">&nbsp;
-                                {{ __('global.app_add_new') }}
+                                {{ trans('global.app_add_new') }}
                             </a>
                         </div>
                     -->
                 </div>
                 <div class="box-body">
-                    
+
                     <div class="table-responsive mailbox-messages">
-                        
+
                         <table id="table" name="table" class="table table-striped"
                                data-buttons-class="primary"
                                data-id-field="ID"
@@ -56,16 +56,16 @@
                             <thead>
                                 <tr>
                                     <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">
-                                        {{ __('global.app_id') }}
+                                        {{ trans('app.id') }}
                                     </th>
                                     <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">
-                                        {{ __('global.app_name') }}
+                                        {{ trans('app.name') }}
                                     </th>
                                     <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">
-                                        {{ __('global.sd_helper.fields.sd') }}
+                                        {{ trans('global.sd_helper.fields.sd') }}
                                     </th>
                                     <th data-halign="center" data-align="left" data-sortable="true" data-searchable="true" data-switchable="true">
-                                        {{ __('global.sd_helper.fields.url') }}
+                                        {{ trans('global.sd_helper.fields.url') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -85,7 +85,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
                 <div class="box-footer"></div>
             </div>
@@ -97,7 +97,7 @@
 
 @section('css')
     <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/bootstrap-table.css') }}" rel="stylesheet"/>
-    
+
 @php
 echo "<!-- BACGROUND COLOR -->\n";
 echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . \App\Classes\Helper::getMenuBgColor() . ";}</style>\n";
@@ -117,7 +117,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/bootstrap-table.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/extensions/export/bootstrap-table-export.js') }}" type="text/javascript"></script>
-    
+
     <script>
 
         var $table = $('#table');
@@ -138,5 +138,5 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
         });
 
     </script>
-    
+
 @endsection

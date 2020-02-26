@@ -5,27 +5,27 @@
 
     <section class="content-header">
         <h1>
-            {{ __('global.user.title') }}
-            <small>{{ __('global.user.sub_titles.show') }}</small>
+            {{ trans('users.title') }}
+            <small>{{ trans('users.user_title_show') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li>
                 <a href="{{ url('users') }}">
                     <i class="fa fa-users"></i>&nbsp;
-                    {{ __('global.users.title') }}
+                    {{ trans('users.title') }}
                 </a>
             </li>
 
             <li class="active">
                 <i class="fa fa-user"></i>&nbsp;
-                {{ __('global.user.title') }}
+                {{ trans('users.title') }}
             </li>
 
         </ol>
@@ -42,15 +42,15 @@
                     <div class="box box-default">
 
                         <div class="box-header with-border">
-                            <h3 class="box-title">{{ __('global.user.title') }}</h3>
-                            <small>{{ __('global.user.sub_titles.show') }}</small>
+                            <h3 class="box-title">{{ trans('users.title') }}</h3>
+                            <small>{{ trans('users.user_title_show') }}</small>
                         </div>
 
                         <div class="box-body">
 
                             <div class="form-group">
                                 <label for="Name" class="col-sm-2 control-label">
-                                    {{ __('global.app_name') }}:
+                                    {{ trans('app.name') }}:
                                 </label>
                                 <div class="col-sm-10">
                                     <input id="Name" name="Name" class="form-control" type="text"
@@ -63,7 +63,7 @@
 
                             <div class="form-group">
                                 <label for="Email" class="col-sm-2 control-label">
-                                    {{ __('global.user.fields.email') }}:
+                                    {{ trans('app.email') }}:
                                 </label>
                                 <div class="col-sm-10">
                                     <input id="Email" name="Email" class="form-control" type="text"
@@ -77,7 +77,7 @@
 
                         <div class="form-group">
                             <label for="CompanyID" class="col-sm-2 control-label">
-                                {{ __('global.user.fields.company') }}:
+                                {{ trans('app.company') }}:
                             </label>
                             <div class="col-sm-10">
                                 <input id="CompanyID" name="CompanyID" type="text" class="form-control"
@@ -111,7 +111,7 @@
 
                             <div class="form-group">
                                 <label for="password" class="col-sm-2 control-label">
-                                    {{ __('global.user.fields.password') }}:
+                                    {{ trans('users.password') }}:
                                 </label>
                                 <div class="col-sm-10">
                                     <input id="password" name="password" class="form-control" type="password" disabled/>
@@ -124,10 +124,10 @@
                             <div class="form-group">
                                 <label for="confirm-password"
                                        class="col-sm-2 control-label">
-                                    {{ __('global.user.fields.password_confirm') }}:
+                                    {{ trans('users.password_confirm') }}:
                                 </label>
                                 <div class="col-sm-10">
-                                    <input id="confirm-password" name="confirm-password" 
+                                    <input id="confirm-password" name="confirm-password"
                                            class="form-control" type="password" disabled/>
                                     <span id="span_confirm-password" name="span_confirm-password" class="help-block">
                                         {{-- ($errors->has('confirm-password')) ? $errors->first('confirm-password') : '' --}}
@@ -139,7 +139,7 @@
 
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 control-label">
-                                        {{ __('global.roles.title') }}
+                                        {{ trans('roles.title') }}
                                     </label>
                                     <div class="col-sm-10" style="margin-top: 10px;">
 
@@ -165,14 +165,14 @@
                                                         'style' => 'margin-left: 5px;',
                                                         'disabled'
                                                     ]) }}
-                                                {{ __('global.role.role_names.' . $role) }}
+                                                {{ trans('roles.' . $role) }}
                                             </label>
                                         @endforeach
                                     </div>
                                 </div>
 
                             @else
-                                <input id="roles[]" name="roles[]" type="hidden" 
+                                <input id="roles[]" name="roles[]" type="hidden"
                                        value="{{ $userRoles }}" disabled/>
                             @endif
 
@@ -183,9 +183,9 @@
                                class="btn btn-default">
                                 @lang('global.app_cancel')
                             </a>
-                            <a href="{{ url('users.edit', ['id' => $user->ID]) }}" 
+                            <a href="{{ url('users.edit', ['id' => $user->ID]) }}"
                                class="btn btn-info pull-right">
-                                {{ __('global.app_edit') }}
+                                {{ trans('app.edit') }}
                             </a>
                         </div>
 

@@ -40,9 +40,9 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = \App\Classes\Helper::getAllSettings();
-        
+
         //dd('SettingsController.index', $settings);
-        
+
         return view('settings.index', [
             'settings' => $settings
         ]);
@@ -51,22 +51,22 @@ class SettingsController extends Controller
     public function saveGeneral(Request $request)
     {
         //dd('SettingsController.saveGeneral', $request->all() );
-        
+
         // FAVICON
         if( $request->general_favicon_value != null )
         {
             $this->validate($request, [
                 'general_favicon_value'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
-            
+
             //$faviconImageName = \App\Classes\Helper::uploadFile(config('appConfig.favicons.folder'), $request->general_favicon_value);
             $faviconImageName = \App\Classes\Helper::uploadWithResize(
-                    config('appConfig.favicons.folder'), 
-                    $request->general_favicon_value, 
-                    config('appConfig.favicons.width'), 
+                    config('appConfig.favicons.folder'),
+                    $request->general_favicon_value,
+                    config('appConfig.favicons.width'),
                     config('appConfig.favicons.height')
             );
-            
+
             if( $request->get('general_favicon_id') == 0 )
             {
                 $favicon = new SettingModel();
@@ -81,23 +81,23 @@ class SettingsController extends Controller
                 $old_imageName = $favicon->PropertyValue;
                 $favicon->PropertyValue = $faviconImageName;
                 $favicon->save();
-                
+
                 \App\Classes\Helper::deleteUploadedImage(config('appConfig.favicons.folder'), $old_imageName);
             }
-            
+
             session()->put('settings.general_favicon_value', $faviconImageName);
-            
+
         }
-        
+
         // LOGO
         if( $request->general_logo_value != null )
         {
             $this->validate($request, [
                 'general_logo_value'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
-            
+
             $logoImageName = \App\Classes\Helper::uploadFile(config('appConfig.logos_folder'), $request->general_logo_value);
-            
+
             if( $request->get('general_logo_id') == 0 )
             {
                 $logo = new SettingModel();
@@ -111,24 +111,24 @@ class SettingsController extends Controller
                 $logo = SettingModel::find($request->get('general_logo_id'));
                 $old_logo = $logo->PropertyValue;
                 $logo->PropertyValue = $logoImageName;
-                
+
                 $logo->save();
-                
+
                 \App\Classes\Helper::deleteUploadedImage(config('appConfig.logos_folder'), $old_logo);
             }
-            
+
             session()->put('settings.general_logo_value', $logoImageName);
         }
-        
+
         // PROFIL IMAGE
         if( $request->general_profil_image_value != null )
         {
             $this->validate($request, [
                 'general_profil_image_value'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
-            
+
             $profileImageName = \App\Classes\Helper::uploadFile(config('appConfig.profiles_folder'), $request->general_profil_image_value);
-            
+
             if( $request->get('general_profil_image_id') == 0 )
             {
                 $profile = new SettingModel();
@@ -136,7 +136,7 @@ class SettingsController extends Controller
                 $profile->PropertyName = 'general_profil_image_value';
                 $profile->PropertyValue = $profileImageName;
                 $profile->save();
-                
+
             }
             else
             {
@@ -144,57 +144,57 @@ class SettingsController extends Controller
                 $old_profile = $profile->PropertyValue;
                 $profile->PropertyValue = $profileImageName;
                 $profile->save();
-                
+
                 \App\Classes\Helper::deleteUploadedImage(config('appConfig.profiles_folder'), $old_profile);
             }
-            
+
             session()->put('session.general_profil_image_value', $profileImageName);
         }
-        
+
         // MENU BACKGROUND COLOR
-        if( $request->get('general_menu_bg_color_value') !== null )
+        if( $request->get('menu_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                request()->get('general_menu_bg_color_id'), 
-                'general_menu_bg_color_value', 
+                request()->get('general_menu_bg_color_id'),
+                'general_menu_bg_color_value',
                 request()->get('general_menu_bg_color_value'));
         }
-        
+
         // HEADER BACKGROUND
         if( request()->get('general_header_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('general_header_bg_color_id'), 
-                    'general_header_bg_color_value', 
+                    request()->get('general_header_bg_color_id'),
+                    'general_header_bg_color_value',
                     request()->get('general_header_bg_color_value'));
         }
-        
+
         // PANEL AND TAB LINE COLOR
         if( request()->get('general_panel_tab_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('general_panel_tab_color_id'), 
-                    'general_panel_tab_color_value', 
+                    request()->get('general_panel_tab_color_id'),
+                    'general_panel_tab_color_value',
                     request()->get('general_panel_tab_color_value'));
         }
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.update_successfully', ['name' => 'általános beállítások']));
+                ->with('success', trans('messages.update_successfully', ['name' => trans('settings.general_title')]));
     }
-    
+
     public function restoreGeneral()
     {
         //dd('SettingsController.restoreGeneral');
         SettingModel::where('CompanyID', '=', \Auth::user()->CompanyID)
                 ->where('PropertyName', 'like', 'general_%')
                 ->forceDelete();
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.restore_successfully', ['name' => 'alap értékek']));
+                ->with('success', trans('messages.restore_successfully', ['name' => trans('settings.general_title')]));
     }
-    
+
     public function saveLogin(Request $request)
     {
         //dd('SettingsController.saveLogin', $request->all());
@@ -204,11 +204,11 @@ class SettingsController extends Controller
             $this->validate($request, [
                 'login_image'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
-            
+
             $wallpaperName = \App\Classes\Helper::uploadFile(
-                    config('appConfig.wallpapers_folder'), 
+                    config('appConfig.wallpapers_folder'),
                     $request->login_image);
-            
+
             if( $request->get('login_wallpaper_id') == 0 )
             {
                 $wallpaper = new SettingModel();
@@ -223,42 +223,42 @@ class SettingsController extends Controller
                 $old_wallpaper = $wallpaper->PropertyValue;
                 $wallpaper->PropertyValue = $wallpaperName;
                 $wallpaper->save();
-                
+
                 \App\Classes\Helper::deleteUploadedImage(
-                        config('appConfig.wallpapers_folder'), 
+                        config('appConfig.wallpapers_folder'),
                         $old_wallpaper
                 );
             }
-            
+
             session()->put('settings.login_wallpaper_value', $wallpaperName);
         }
-        
+
         // BACGROUND COLOR
         if( $request->get('login_background_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    $request->get('login_background_color_id'), 
-                    'login_background_color_value', 
+                    $request->get('login_background_color_id'),
+                    'login_background_color_value',
                     $request->get('login_background_color_value'));
         }
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.update_successfully', ['name' => 'Login beállítások']));
+                ->with('success', trans('messages.update_successfully', ['name' => trans('settings.login_page_title')]));
     }
-    
+
     public function restoreLogin()
     {
         //dd('SettingsController.restoreGeneral');
         SettingModel::where('CompanyID', '=', \Auth::user()->CompanyID)
                 ->where('PropertyName', 'like', 'login_%')
                 ->forceDelete();
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.restore_successfully', ['name' => 'Login értékek']));
+                ->with('success', trans('messages.restore_successfully', ['name' => trans('settings.login_page_title')]));
     }
-    
+
     public function saveDashboard(Request $request)
     {
         //dd('SettingsController.saveDashboard', $request->all());
@@ -266,147 +266,147 @@ class SettingsController extends Controller
         if( $request->get('dashboard_menu_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    $request->get('dashboard_menu_bg_color_id'), 
-                    'dashboard_menu_bg_color_value', 
+                    $request->get('dashboard_menu_bg_color_id'),
+                    'dashboard_menu_bg_color_value',
                     $request->get('dashboard_menu_bg_color_value'));
         }
-        
+
         // HEADER BG COLOR
         if(request()->get('dashboard_header_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    $request->get('dashboard_header_bg_color_id'), 
-                    'dashboard_header_bg_color_value', 
+                    $request->get('dashboard_header_bg_color_id'),
+                    'dashboard_header_bg_color_value',
                     $request->get('dashboard_header_bg_color_value'));
         }
-        
+
         // PANEL AND TAB LINE COLOR
         if($request->get('dashboard_panel_tab_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    $request->get('dashboard_panel_tab_color_id'), 
-                    'dashboard_panel_tab_color_value', 
+                    $request->get('dashboard_panel_tab_color_id'),
+                    'dashboard_panel_tab_color_value',
                     $request->get('dashboard_panel_tab_color_value'));
         }
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.update_successfully', ['name' => 'Műszerfal beállítások']));
+                ->with('success', trans('messages.update_successfully', ['name' => trans('settings.dashboard_page_title')]));
     }
-    
+
     public function restoreDashboard()
     {
         //dd('SettingsController.restoreGeneral');
         SettingModel::where('CompanyID', '=', \Auth::user()->CompanyID)
                 ->where('PropertyName', 'like', 'dashboard_%')
                 ->forceDelete();
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.restore_successfully', ['name' => 'Műszerfal értékek']));
+                ->with('success', trans('messages.restore_successfully', ['name' => trans('settings.dashboard_page_title')]));
     }
-    
+
     public function saveInvoices(Request $request)
     {
         // MENU BG COLOR
         if( request()->get('invoices_menu_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('invoices_menu_bg_color_id'), 
-                    'invoices_menu_bg_color_value', 
+                    request()->get('invoices_menu_bg_color_id'),
+                    'invoices_menu_bg_color_value',
                     request()->get('invoices_menu_bg_color_value'));
         }
-        
+
         // HEADER BG COLOR
         if(request()->get('invoices_header_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('invoices_header_bg_color_id'), 
-                    'invoices_header_bg_color_value', 
+                    request()->get('invoices_header_bg_color_id'),
+                    'invoices_header_bg_color_value',
                     request()->get('invoices_header_bg_color_value'));
         }
-        
+
         // PANEL AND TAB LINE COLOR
         if(request()->get('invoices_panel_tab_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('invoices_panel_tab_color_id'), 
-                    'invoices_panel_tab_color_value', 
+                    request()->get('invoices_panel_tab_color_id'),
+                    'invoices_panel_tab_color_value',
                     request()->get('invoices_panel_tab_color_value'));
         }
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.update_successfully', ['name' => 'Számlák beállítások']));
+                ->with('success', trans('messages.update_successfully', ['name' => trans('settings.dashboard_page_title')]));
     }
-    
+
     public function restoreInvoices()
     {
         SettingModel::where('CompanyID', '=', \Auth::user()->CompanyID)
                 ->where('PropertyName', 'like', 'invoices_%')
                 ->forceDelete();
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.restore_successfully', ['name' => 'Számlák értékek']));
+                ->with('success', trans('messages.restore_successfully', ['name' => trans('settings.invoices_page_title')]));
     }
-    
+
     public function saveUsers(Request $request)
     {
         // MENU BG COLOR
         if( request()->get('users_menu_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('users_menu_bg_color_id'), 
-                    'users_menu_bg_color_value', 
+                    request()->get('users_menu_bg_color_id'),
+                    'users_menu_bg_color_value',
                     request()->get('users_menu_bg_color_value'));
         }
-        
+
         // HEADER BG COLOR
         if(request()->get('users_header_bg_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('users_header_bg_color_id'), 
-                    'users_header_bg_color_value', 
+                    request()->get('users_header_bg_color_id'),
+                    'users_header_bg_color_value',
                     request()->get('users_header_bg_color_value'));
         }
-        
+
         // PANEL AND TAB LINE COLOR
         if(request()->get('users_panel_tab_color_value') !== null )
         {
             \App\Classes\ColorHelper::saveColor(
-                    request()->get('users_panel_tab_color_id'), 
-                    'users_panel_tab_color_value', 
+                    request()->get('users_panel_tab_color_id'),
+                    'users_panel_tab_color_value',
                     request()->get('users_panel_tab_color_value'));
         }
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.update_successfully', ['name' => 'Felhasználók beállítások']));
+                ->with('success', trans('messages.update_successfully', ['name' => trans('settings.users_page_title')]));
     }
-    
+
     public function restoreUsers()
     {
         SettingModel::where('CompanyID', '=', \Auth::user()->CompanyID)
                 ->where('PropertyName', 'like', 'users_%')
                 ->forceDelete();
-        
+
         return redirect()
                 ->to('settings')
-                ->with('success', __('global.app_messages.restore_successfully', ['name' => 'Felhasználók értékek']));
+                ->with('success', trans('messages.restore_successfully', ['name' => trans('settings.users_page_title')]));
     }
-    
+
     public function saveLoginWallpaper(Request $request, $id)
     {
         $this->validate($request, [
             'image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        
+
         $imageName = time() . '.' . $request->image->getClientOriginalName();
         $aa = $request->image->move(public_path(config('appConfig.wallpapers_folder')), $imageName);
-        
+
         $old_image = '';
-     
+
         // Ha nincs bejegyzés
         if( $id == '0' )
         {
@@ -418,18 +418,18 @@ class SettingsController extends Controller
             $model = SettingModel::find($id);
             $old_image = $model->PropertyValue;
         }
-        
+
         $model->CompanyID = session()->get('company_id');
-        
+
         $model->PropertyValue = $imageName;
         $model->save();
-        
+
         // File deleting
         if($old_image != '' && \File::exists(public_path(config('appConfig.wallpapers_folder')) . '\\' . $old_image ) )
         {
             \File::delete(public_path(config('appConfig.wallpapers_folder')) . '\\' . $old_image);
         }
-        
+
         return redirect()
                 ->to('settings');
     }
@@ -439,28 +439,28 @@ class SettingsController extends Controller
         $this->validate($request, [
             'image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        
+
         $image = $request->file('image');
-        
+
         $image_name = time() . '.' . $image->getClientOriginalExtension();
-        
+
         $destinationPath = public_path('/thumbnail');
-        
+
         $resize_image = \Spatie\Image\Image::make($image->getRealPath());
-        
+
         $resize_image->resize(1920, 1080, function($constraint){
             $constraint->aspectRatio();
             })
                 ->save($destinationPath . '/' . $image_name);
-            
+
         $destinationPath = public_path('/images');
         $image->move($destinationPath, $image_name);
-        
+
         return redirect()
                 ->to('settings');
     }
     */
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -475,7 +475,7 @@ class SettingsController extends Controller
     {
         return view('settings.createWallpaper');
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -486,7 +486,7 @@ class SettingsController extends Controller
     {
         /*
         $wallpaper = \App\Models\WallpaperModel::create($request->all());
-        
+
         foreach( $request->input('document', []) as $file )
         {
             $wallpaper
@@ -530,7 +530,7 @@ class SettingsController extends Controller
     {
         /*
         $wallpaper->update($request->all());
-        
+
         if( count($wallpaper->document) > 0 )
         {
             foreach( $wallpaper->document as $media )
@@ -541,9 +541,9 @@ class SettingsController extends Controller
                 }
             }
         }
-        
+
         $media = $wallpaper->document->pluck('file_name')->toArray();
-        
+
         foreach( $request->input('document', []) as $file )
         {
             if( count($media) === 0 || !in_array($file, $media) )
@@ -570,7 +570,7 @@ class SettingsController extends Controller
     public function fileStore(Request $request)
     {
         dd('SettingsController', $request->all());
-        
+
         $image = $request->file('file');
         $imageName = $image->getClientOriginalName();
         $image->move(public_path('image'), $imageName);
@@ -609,21 +609,21 @@ class SettingsController extends Controller
     {
         dd('SettingsController.storeMedia', $request->all());
         $path = storage_path('tmp/uploads');
-        
+
         if( !file_exists($path) )
         {
             mkdir($path, 0777, true);
         }
-        
+
         $file = $request->file('file');
         $name = uniqid() . '_' . trim($file->getClientOriginalName());
         $file->move($path, $name);
-        
+
         return response()->json([
             'name' => $name,
             'original_name' => $file->getClientOriginalName(),
         ]);
-        
+
     }
     */
 }

@@ -9,10 +9,10 @@ $countOfInvoices = InvoiceModel::getCountOfInvoices();
     <!-- small box -->
     <div class="small-box bg-red invoicesBox">
         <div class="inner invoicesBox">
-            <h3 class="invoicesBox">{{ __('global.invoices.title') }}</h3>
+            <h3 class="invoicesBox">{{ trans('inv.title') }}</h3>
 
             <p class="invoicesBox">
-                {{ $countOfInvoices }}&nbsp;{{ __('global.app_amount') }}
+                {{ $countOfInvoices }}&nbsp;{{ trans('app.amount') }}
             </p>
         </div>
         <div class="icon invoicesBox">
@@ -20,7 +20,7 @@ $countOfInvoices = InvoiceModel::getCountOfInvoices();
         </div>
         <a href="{{ url('invoices') }}"
            class="small-box-footer invoicesBox">
-            {{ __('global.app_more_info') }}&nbsp;
+            {{ trans('app.more_info') }}&nbsp;
             <i class="fa fa-arrow-circle-right invoicesBox"></i>
         </a>
     </div>

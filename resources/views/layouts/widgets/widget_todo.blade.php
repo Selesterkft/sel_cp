@@ -2,7 +2,9 @@
     <div class="box-header">
         <i class="ion ion-clipboard"></i>
 
-        <h3 class="box-title">@lang('widget.todo_list.title')</h3>
+        <h3 class="box-title">
+            {{ trans('todo_list.title') }}
+        </h3>
 
         <div class="box-tools pull-right">
             <!--
@@ -19,10 +21,10 @@
     <!-- /.box-header -->
     <div class="box-body">
         <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-		{{ __('global.todos.nothing_todo') }}
+		{{ trans('todo_list.nothing_todo') }}
         <!--
 		<ul class="todo-list">
-            
+
 			<li>
                 <span class="handle">
                         <i class="fa fa-ellipsis-v"></i>
@@ -101,16 +103,16 @@
                     <i class="fa fa-trash-o"></i>
                 </div>
             </li>
-			
+
         </ul>
 		-->
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix no-border">
-        <!--
+        {{--
 		<button type="button" class="btn btn-default pull-right">
-            <i class="fa fa-plus"></i>&nbsp;@lang('global.app_add_new')
+            <i class="fa fa-plus"></i>&nbsp;{{ trans('app.add_new') }}
         </button>
-		-->
+		--}}
     </div>
 </div>

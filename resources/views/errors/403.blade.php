@@ -1,5 +1,5 @@
 @extends('errors::minimal')
 
-@section('title', __('Forbidden'))
+@section('title', trans('app.forbidden'))
 @section('code', '403')
-@section('message', __($exception->getMessage() ?: 'Forbidden'))
+@section('message', trans($exception->getMessage() ?: 'app.forbidden'))

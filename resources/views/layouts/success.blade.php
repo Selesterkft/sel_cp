@@ -3,7 +3,7 @@
     <button type="button" class="close" data-dismiss="alert"
             aria-hidden="true">&times;</button>
     <h4>
-        <i class="icon fa fa-check"></i>&nbsp;{{ __('global.app_success') }}
+        <i class="icon fa fa-check"></i>&nbsp;{{ trans('app.success') }}
     </h4>
 
     @if( is_array($messages) )

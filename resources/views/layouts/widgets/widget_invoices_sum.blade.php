@@ -9,7 +9,7 @@ $data = $invModel->getWidgetData();
         <div class="box-header with-border">
             <h3 class="box-title">
                 <i class="fa fa-money"></i>&nbsp;
-                {{ __('global.invoices_widget.title') }}
+                {{ trans('inv.widget_title') }}
             </h3>
             <!--
             <div class="box-tools pull-right">
@@ -37,12 +37,12 @@ $data = $invModel->getWidgetData();
                         <th>{{-- trans('global.invoices_widget.overdue_debts') --}}</th>
                         <th>{{-- trans('global.invoices_widget.paid_so_far') --}}</th>
                         -->
-                            <th class="text-center">{{ trans('global.invoices_widget.type') }}</th>
-                            <th class="text-center">{{ trans('global.app_currency') }}</th>
-                            <th class="text-center">{{ trans('global.invoices_widget.net_total') }}</th>
-                            <th class="text-center">{{ trans('global.invoices_widget.vat_total') }}</th>
-                            <th class="text-center">{{ trans('global.invoices_widget.brut_total') }}</th>
-                            <th class="text-center">{{ trans('global.invoices_widget.debit') }}</th>
+                            <th class="text-center">{{ trans('inv.widget_type') }}</th>
+                            <th class="text-center">{{ trans('app.curr') }}</th>
+                            <th class="text-center">{{ trans('inv.widget_net_total') }}</th>
+                            <th class="text-center">{{ trans('inv.widget_tax_total') }}</th>
+                            <th class="text-center">{{ trans('inv.widget_gross_total') }}</th>
+                            <th class="text-center">{{ trans('inv.widget_debit') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,7 +53,7 @@ $data = $invModel->getWidgetData();
                     @foreach($data as $sum)
                         <tr>
                             <td>
-                                {{ __('global.account_type.' . $sum->TypeID) }}
+                                {{ trans('app.account_type_' . $sum->TypeID) }}
                             </td>
                             <td>{{ $sum->Penznem }}</td>
                             <td>

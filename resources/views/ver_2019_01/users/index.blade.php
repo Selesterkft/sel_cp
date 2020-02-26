@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', Lang::get('global.users.title'))
+@section('title', trans('users.title'))
 
 @section('search')
     <!--
-    <form action="{{ url('users.search') }}"
+    <form action="{{-- url('users.search') --}}"
           method="get" class="sidebar-form">
         <div class="input-group">
             <input type="text" name="q" class="form-control"
@@ -22,19 +22,19 @@
 
     <section class="content-header">
         <h1>
-            {{ __('global.users.title') }}
-            <small>{{ __('global.users.sub_title') }}</small>
+            {{ trans('users.title') }}
+            <small>{{ trans('users.sub_title') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li class="active">
-                <i class="fa fa-users"></i>&nbsp;{{ __('global.users.title') }}
+                <i class="fa fa-users"></i>&nbsp;{{ trans('users.title') }}
             </li>
 
         </ol>
@@ -59,14 +59,14 @@
 
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            {{ __('global.users.title') }}
+                            {{ trans('users.title') }}
                         </h3>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-success btn-xs"
                                style="margin-top: 5px;"
                                href="{{ url('users.create') }}">&nbsp;
-                                {{ __('global.app_add_new') }}
+                                {{ trans('app.add_new') }}
                             </a>
                         </div>
 
@@ -78,9 +78,8 @@
 
                             <div id="toolbar" class="select">
                                 <select class="form-control">
-                                    {{--<option value="">Export Basic</option>--}}
-                                    <option value="all">{{ __('global.export_types.export_all') }}</option>
-                                    <option value="selected">{{ __('global.export_types.export_selected') }}</option>
+                                    <option value="all">{{ trans('app.export_all') }}</option>
+                                    <option value="selected">{{ trans('app.export_selected') }}</option>
                                 </select>
                             </div>
 
@@ -122,14 +121,15 @@
                                 <tr>
                                     <th data-field="state" data-checkbox="true"></th>
                                     {{--<th data-field="ID" data-sortable="true">{{ __('global.app_fields.id') }}</th>--}}
-                                    <th data-field="Name" data-sortable="true" data-filter-control="input">
-                                        {{ __('global.app_name') }}
+                                    <th data-field="Name" data-sortable="true"
+                                        data-filter-control="input">
+                                        {{ trans('app.name') }}
                                     </th>
                                     <th data-field="Email" data-sortable="true" data-filter-control="input">
-                                        {{ __('global.user.fields.email') }}
+                                        {{ trans('app.email') }}
                                     </th>
                                     <th data-field="language" data-sortable="true" data-filter-control="select">
-                                        {{ __('global.user.fields.language') }}
+                                        {{ trans('app.language') }}
                                     </th>
 <!--
                                     <th data-field="CompanyName" data-valign="top">
@@ -138,10 +138,10 @@
 -->
                                     <th data-field="" data-sortable="true"
                                         data-filter-control="input">
-                                        {{ __('global.user.fields.roles') }}
+                                        {{ trans('roles.title') }}
                                     </th>
                                     <th data-valign="top" data-switchable="false">
-                                        {{ __('global.app_fields.operations') }}
+                                        {{ trans('app.operations') }}
                                     </th>
                                 </tr>
                                 </thead>
@@ -187,7 +187,7 @@
                                                         ?>
                                                         <div class="label {{ $label }}" style="margin-left: 2px;">
                                                             {{-- $roleName --}}
-                                                            {{ __('global.role.role_names.' . $roleName) }}
+                                                            {{ trans('roles.' . $roleName) }}
                                                         </div>
                                                         <?php
                                                     }

@@ -1,16 +1,14 @@
 {{-- Számla típusok --}}
 <div class="form-group col-sm-12">
-    <label for="s_customer" class="control-label">
-        {{ __('global.invoices.search.type') }}:
-    </label>
+    <label for="s_customer" class="control-label">{{ trans('app.type') }}:</label>
     <div class="">
         <select id="s_type" name="s_type"
                 class="form-control tooltip-enabled"
                 data-toggle="tooltip"
-                title="{{ __('SZÁMLATÍPUS') }}">
-            <option value="">{{ __('Összes') }}</option>
-            <option value="201" @if(request()->get('s_type') == '201') selected @endif >{{ __('Kimenő') }}</option>
-            <option value="202" @if(request()->get('s_type') == '202') selected @endif >{{ __('Bejövő') }}</option>
+                title="{{ trans('app.type') }}">
+            <option value="">{{ trans('app.type_all') }}</option>
+            <option value="201" @if(request()->get('s_type') == '201') selected @endif >{{ trans('app.type_outgoing') }}</option>
+            <option value="202" @if(request()->get('s_type') == '202') selected @endif >{{ trans('app.type_incoming') }}</option>
         </select>
     </div>
 </div>
@@ -18,27 +16,22 @@
 
 {{-- Számlaszám --}}
 <div class="form-group col-sm-12">
-    <label for="s_invNum" class="control-label">
-        {{ __('global.invoice.account_number') }}:
-    </label>
-
+    <label for="s_invNum" class="control-label">{{ trans('inv.inv_num') }}:</label>
     <div class="">
-        <input id="s_invNum" name="s_invNum" class="form-control"
-               value="{{ request()->get('s_invNum') }}">
+        <input id="s_invNum" name="s_invNum" class="form-control" value="{{ request()->get('s_invNum') }}">
     </div>
-
 </div>
 {{-- /.Számlaszám --}}
 @if( \Auth::user()->Supervisor_ID == 0 )
     <div class="form-group col-sm-12">
         <label for="s_customer" class="control-label">
-            {{ __('global.invoices.search.customer') }}:
+            {{ trans('inv.customer') }}:
         </label>
         <div class="">
             <select id="s_customer" name="s_customer" class="form-control tooltip-enabled"
                     data-toggle="tooltip"
-                    title="{{ __('global.invoices.search.customer') }}">
-                <option value="0">{{ __('global.app_select_first_element') }}</option>
+                    title="{{ trans('inv.customer') }}">
+                <option value="0">{{ trans('app.select_first_element') }}</option>
                 <?php
                 /** @var TYPE_NAME $customers */
                 foreach($customers as $customer)
@@ -59,13 +52,13 @@
 
     <div class="form-group col-sm-12">
         <label for="s_vendor" class="control-label">
-            {{ __('global.invoices.search.vendor') }}:
+            {{ trans('inv.vendor') }}:
         </label>
         <div class="">
             <select id="s_vendor" name="s_vendor" class="form-control tooltip-enabled"
                     data-toggle="tooltip"
-                    title="__('global.invoices.search.vendor')">
-                <option value="0">{{ __('global.app_select_first_element') }}</option>
+                    title="{{ trans('invoices.vendor') }}">
+                <option value="0">{{ trans('app.select_first_element') }}</option>
 
                 <?php
                 /** @var TYPE_NAME $vendors */
@@ -88,9 +81,7 @@
 @endif
 
 <div class="form-group col-sm-12">
-    <label for="s_delivery_date" class="control-label">
-        {{ __('global.invoices.fields.delivery_date') }}:
-    </label>
+    <label for="s_delivery_date" class="control-label">{{ trans('inv.delivery_date') }}:</label>
 
     <div class="input-group">
         <div class="input-group-addon">
@@ -103,7 +94,7 @@
 
 <div class="form-group col-sm-12">
     <label for="s_due_date" class="control-label">
-        {{ __('global.invoices.fields.due_date') }}:
+        {{ trans('inv.due_date') }}:
     </label>
 
     <div class="input-group">

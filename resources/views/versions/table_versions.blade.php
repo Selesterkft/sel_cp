@@ -3,10 +3,10 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ __('global.app_fields.id') }}</th>
-            <th>{{ __('global.versions.fields.version') }}</th>
-            <th>{{ __('global.versions.fields.active') }}</th>
-            <th class="text-center col-md-4">{{ __('global.app_fields.operations') }}</th>
+            <th>{{ trans('app.id') }}</th>
+            <th>{{ trans('versions.version') }}</th>
+            <th>{{ trans('app.active') }}</th>
+            <th class="text-center col-md-4">{{ trans('app.operations') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -16,14 +16,16 @@
                 <td>{{ $version->Version }}</td>
 
                 <td>
-                    @php
+                    <?php
                         $label = 'label-primary';
                         $active = 'inactive';
-                    @endphp
-                    @if( $version->Active == 1 )
-                        $label = 'label-success';
-                        $active = 'active';
-                    @endif
+                    /** @var VersionModel $version */
+                    if( $version->Active == 1)
+                        {
+                            $label = 'label-success';
+                            $active = 'active';
+                        }
+                    ?>
                     <div class="label {{ $label }}">{{ $active }}</div>
                 </td>
 

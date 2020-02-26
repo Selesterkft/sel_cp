@@ -33,7 +33,7 @@ return [
         'created_at' => 'Time',
         'fields' => [
             'name' => 'Név',
-            'permission' => 'Permissions',
+            'permission' => 'Engedély',
         ],
     ],
     'role' => [
@@ -52,7 +52,7 @@ return [
         ],
         'fields' => [
             'name' => 'Név',
-            'permissions' => 'Szerepkörök',
+            'permissions' => 'Engedélyek',
         ],
     ],
 
@@ -135,17 +135,15 @@ return [
             ],
         ],
         'fields' => [
-            'inv_num' => 'Szla szám',
-            'seq_num' => 'Iktatószám',
+            'inv_num' => 'Szla szám',   //OK
+            'seq_num' => 'Iktatószám',  //OK
             'period' => 'Periódus',
             'period_to_from' => 'Periódus tól-ig',
-            'period_from' => 'Tól',
-            'period_to' => 'Ig',
             'cancellation_reason_code' => 'Javítás oka',
-            'type_of_document' => 'Bizonylat típusa',
+            'type_of_document' => 'Bizonylat típusa',   //OK
             'num_ref_doc' => 'Hivatkozott bizonylat száma',
             'account_repair_reason' => 'Számla javítás oka',
-            'account_partner_name' => 'Számlapartner neve',
+            'account_partner_name' => 'Partner neve', //OK
             'partner_address' => 'Partner címe',
             'vendor_address' => 'Eladó címe',
             'cust_bank_code' => 'Vevő Pénzforg.jelző',
@@ -154,13 +152,12 @@ return [
             'date' => 'Kelte',
             'completed' => 'Teljesítve',
             'payment' => 'Fizetési mód',
-            'pay_status' => 'Fizetési állapot',
             'expiry' => 'Lejárat',
             'date_of_arrival' => 'Beérkezés dátuma',
             'net_total' => 'Nettó összesen',
             'tax_total' => 'ÁFA összesen',
             'brut_total' => 'Bruttó összesen',
-            'fully_paid_date' => 'Teljesítés dátuma',
+            'fully_paid_date' => 'Teljes kifizetés',
             'paid_so_far' => 'Eddig fizetve',
             'paid_so_far_eur' => 'Eddig fizetve EUR',
             'paid_so_far_fibu' => 'Eddig fizetve könyvelési devizában',
@@ -169,9 +166,9 @@ return [
             'added_user_name' => 'Rögzítette',
 
             'Partner_Name' => 'Partner név',
-            'Partner_Addr' => 'Partner cím',
+            'Partner_Addr' => 'Közt. név',
             'partner_addr_district' => 'Kerület',
-            'partner_addr_ps_type' => 'Típus',
+            'partner_addr_ps_type' => 'Közterület tip.',
             'partner_addr_housenr' => 'Házszám',
             'partner_addr_building' => 'Épület',
             'partner_addr_stairway' => 'Lépcsőház',
@@ -180,37 +177,24 @@ return [
             'partner_country' => 'Ország',
             'partner_zip' => 'Irszám',
             'partner_city' => 'Város',
+            'partner_state' => 'Megye',
+            'partner_full_address' => 'Teljes cím',
 
-            'net_dc' => 'Nettó össz.(DC)',
-            'tax_dc' => 'AFA össz.(DC)',
-            'gross_dc' => 'Brutto össz.(DC)',
-
-            'net_lc' => 'Nettó össz.(LC)',
-            'tax_lc' => 'AFA össz.(LC)',
-            'gross_lc' => 'Brutto össz.(LC)',
-
-            'paid_amount_lc' => 'Kintlevőség (LC)',
-            'paid_amount_dc' => 'Kintlevőség (DC)',
-            'paid_amount_fc' => 'Kintlevőség (FC)',
-
-            'curr_lc' => 'Deviza LC',
-            'curr_dc' => 'Deviza DC',
             'curr_fc' => 'Deviza FC',
             'curr_fc2' => 'Deviza FC2',
 
             'net_fc' => 'Nettó (FC)',
             'tax_fc' => 'ÁFA (FC)',
-            'gross_fc' => 'Bruttó (FC)',
+            'gross_fc' => 'Bruttó össz. (FC)',
 
             'net_eur' => 'Net EUR',
-            'gross_eur' => 'Gross EUR',
+            'gross_eur' => 'Bruttó EUR',
             'bemerkung' => 'Megjegyzés',
             'attachment' => 'Melléklet',
             'iktatta' => 'Iktatta',
             'subcontracted_services' => 'Közvetített szolgáltatás',
             'payment_due' => 'Fizetési határidő',
-            'payment_method' => 'Fizetési mód',
-            'postin_date' => 'Beérkezés dátuma',
+            'postin_date' => 'Beérkezés',
 
             'cancel_inv_id' => 'Stornó sz.',
             'ref_inv_id' => 'Ref.Inv.ID',
@@ -218,11 +202,8 @@ return [
             'vendor_name' => 'Eladó név',
 
             'cust_name' => 'Vevő név',
-            'period_from' => 'TÓL',
-            'period_to' => 'IG',
             'inv_date' => 'Kelte',
             'delivery_date' => 'Teljesítve',
-
             'due_date' => 'Lejárat',
         ],
     ],
@@ -234,10 +215,10 @@ return [
         'inv_seq_num' => 'Iktatószám',
         'order_id' => 'Megrendelésszám',
         'payment_due' => 'Fizetési határidő',
-        'payment_method' => 'Fizetési mód',
         'account_number' => 'Számla szám',
         'fields' => [
-            'descr' => 'Leírás',
+            'pos_id' => 'Pozíció ID',
+            'descr' => 'Megnevezés',
             'pcs' => 'Mennyiség',
             'product' => 'Termék',
             'unit' => 'Egység',
@@ -245,20 +226,19 @@ return [
             'unit_price_dc' => 'Egységár DC',
             'unit_price_fc' => 'Egységár FC',
             'unit_price_fc2' => 'Egységár FC2',
-            'net_lc' => 'Nettó LC',
-            'net_dc' => 'Nettó DC',
+
+
             'net_fc' => 'Nettó FC',
             'net_fc2' => 'Nettó FC2',
             'tax_rate' => 'ÁFA',
-            'tax_lc' => 'ÁFA LC',
-            'tax_dc' => 'ÁFA DC',
+
+
             'tax_fc2' => 'ÁFA FC2',
-            'gross_lc' => 'Bruttó LC',
-            'gross_dc' => 'ÁFA DC',
+
+
             'gross_fc' => 'ÁFA FC',
             'gross_fc2' => 'ÁFA FC2',
-            'curr_lc' => 'Deviza LC',
-            'curr_dc' => 'Deviza DC',
+
             'curr_fc' => 'Deviza FC',
             'curr_fc2' => 'Deviza FC2',
             'postin_date' => 'Beérkezés dátuma',
@@ -397,7 +377,7 @@ return [
     ],
 
     'permissions' => [
-        'title' => 'Jogosultságok',
+        'title' => 'Engedélyek',
         'created_at' => 'Time',
         'fields' => [
             'name' => 'Név',
@@ -582,6 +562,20 @@ return [
     'app_pay_status' => 'Fizetési állapot',
     'app_curr_id' => 'Valuta',
     'app_tax_fc' => 'ÁFA FC',
+    'app_payment_method' => 'Fizetési mód',
+
+    'app_lc' => 'Helyi deviza',
+    'app_dc' => 'Számla deviza',
+    'app_fc' => 'Könyvelési deviza',
+    'app_curr' => 'Deviza',
+    'app_net' => 'Nettó',
+    'app_tax' => 'ÁFA',
+    'app_gross' => 'Bruttó',
+
+    'app_paid_amount' => 'Eddig fizetve',
+
+    'app_period_from' => 'Tól',
+    'app_period_to' => 'Ig',
 
     'app_activity' => [
         'active' => 'Active',

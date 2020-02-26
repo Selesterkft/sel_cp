@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
-@section('title', __('global.versions.title'))
+@section('title', trans('versions.title'))
 
 @section('content')
     <section class="content-header">
         <h1>
-            {{ __('global.versions.title') }}
-            <small>{{ __('global.versions.sub_title') }}</small>
+            {{ trans('versions.title') }}
+            <small>{{ trans('versions.sub_title') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li class="active">
-                <i class="fa fa-users"></i>&nbsp;{{ __('global.versions.title') }}
+                <i class="fa fa-users"></i>&nbsp;{{ trans('versions.title') }}
             </li>
 
         </ol>
@@ -46,13 +46,13 @@
 
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            {{ __('global.company_version.title') }}
+                            {{ trans('company_version.title') }}
                         </h3>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-success btn-xs"
                                style="margin-top: 5px;"
-                               href="{{ url('version_company.create') }}">&nbsp;{{ __('global.app_add_new') }}
+                               href="{{ url('version_company.create') }}">&nbsp;{{ trans('app.add_new') }}
                             </a>
                         </div>
 
@@ -72,14 +72,14 @@
 
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            {{ __('global.versions.title') }}
+                            {{ trans('versions.title') }}
                         </h3>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-success btn-xs"
                                style="margin-top: 5px;"
                                href="{{ url('versions.create') }}">&nbsp;
-                                {{ __('global.app_add_new') }}
+                                {{ trans('app.add_new') }}
                             </a>
                         </div>
 
@@ -102,13 +102,13 @@
 
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            {{ __('global.company_subdomain.menu_title') }}
+                            {{ trans('company_subdomain.menu_title') }}
                         </h3>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-success btn-xs"
                                style="margin-top: 5px;"
-                               href="{{ url('companysubdomain.create') }}">&nbsp;{{ __('global.app_add_new') }}
+                               href="{{ url('companysubdomain.create') }}">&nbsp;{{ trans('app.add_new') }}
                             </a>
                         </div>
 

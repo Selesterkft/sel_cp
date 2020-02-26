@@ -92,27 +92,38 @@
         <ul class="sidebar-menu" data-widget="tree">
 
             <li class="header">
-                {{ __('global.app_main_navigation') }}
+                {{ trans('app.main_navigation') }}
             </li>
 
             <li class="{{ $request->segment(1) == null ? 'active' : '' }}">
                 <a href="{{ route('home') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
                     <span>
-                        {{ __('global.app_dashboard') }}
+                        {{ trans('app.dashboard') }}
                     </span>
                 </a>
             </li>
 
             @can('invoices-menu')
+            {{--
             <li class="{{ $request->segment(1) == 'invoices' || $request->segment(1) == 'invoices.show' ? 'active' : '' }}">
                 <a href="{{ url('invoices') }}">
                     <i class="ion ion-ios-list-outline"></i>&nbsp;
                     <span>
-                        {{ __('global.invoices.title') }}
+                        {{ trans('inv.title') }}
                     </span>
                 </a>
             </li>
+--}}
+            <li class="{{ ($request->is('invoices*')) ? 'active' : '' }}">
+                <a href="{{ url('invoices') }}">
+                    <i class="ion ion-ios-list-outline"></i>&nbsp;
+                    <span>
+                    {{ trans('inv.title') }}
+                </span>
+                </a>
+            </li>
+
 {{--
             <li class="{{ $request->segment(1) == 'inv_new*' ? 'active' : '' }}">
                 <a href="{{ url('inv_new') }}">
@@ -136,35 +147,32 @@
             @endcan
 
             @can('stocks-menu')
-             <!--<li class="{{ $request->segment(1) == 'stocks' ? 'active' : '' }}">
+             <!--<li class="{{ ($request->is('stocks*')) ? 'active' : '' }}">
                 <a href="{{ url('stocks') }}">
                     <i class="ion ion-clipboard"></i>&nbsp;
                     <span>
-                        {{ __('global.stocks.title') }}
+                        {{ trans('stocks.title') }}
                     </span>
                 </a>
             </li>-->
             @endcan
 
             @can('transports-menu')
-            <!--<li class="{{ $request->segment(1) == 'transports' ? 'active' : '' }}">
+            <!--<li class="{{ ($request->is('transports*')) ? 'active' : '' }}">
                 <a href="{{ url('transports') }}">
                     <i class="fa fa-shopping-cart"></i>&nbsp;
                     <span>
-                        {{ __('global.transports.title') }}
+                        {{ trans('transports.title') }}
                     </span>
                 </a>
             </li>-->
             @endcan
             @can('users-menu')
-            <li class="{{ ($request->segment(1) == 'users' ||
-                        $request->segment(1) == 'users.show' ||
-                        $request->segment(1) == 'users.create' ||
-                        $request->segment(1) == 'users.edit') ? 'active' : '' }}">
+            <li class="{{ ($request->is('users*')) ? 'active' : '' }}">
                 <a href="{{ url('users') }}">
                     <i class="ion ion-android-contacts"></i>&nbsp;
                     <span>
-                        {{ __('global.users.title') }}
+                        {{ trans('users.title') }}
                     </span>
                 </a>
             </li>
@@ -185,11 +193,11 @@
 
             @if( Auth::user()->CompanyID == 71 )
             @can('roles-menu')
-            <li class="{{ $request->segment(1) == 'roles' ? 'active' : '' }}">
+            <li class="{{ ($request->is('roles*')) ? 'active' : '' }}">
                 <a href="{{ url('roles') }}">
                     <i class="fa  fa-users"></i>&nbsp;
                     <span>
-                        {{ __('global.roles.title') }}
+                        {{ trans('roles.title') }}
                     </span>
                 </a>
             </li>
@@ -198,11 +206,11 @@
 
             @can('settings-menu')
             @if(Auth::user()->Supervisor_ID == 0)
-            <li class="{{ $request->segment(1) == 'settings' ? 'active' : '' }}">
+            <li class="{{ ($request->is('settings')) ? 'active' : '' }}">
                 <a href="{{ url('settings') }}">
                     <i class="fa fa-wrench"></i>
                     <span>
-                        {{ __('global.settings.title') }}
+                        {{ trans('settings.title') }}
                     </span>
                 </a>
             </li>
@@ -210,29 +218,21 @@
             @endcan
 
             @if(Auth::user()->hasRole('Admin') && Auth::user()->CompanyID == 71)
-            <li class="{{ $request->segment(1) == 'companysubdomain' ||
-                        $request->segment(1) == 'companysubdomain.show' ||
-                        $request->segment(1) == 'companysubdomain.create' ||
-                        $request->segment(1) == 'companysubdomain.edit' ? 'active' : '' }}">
+            <li class="{{ ($request->is('companysubdomain*')) ? 'active' : '' }}">
                 <a href="{{ url('companysubdomain') }}">
                     <i class="fa fa-paw"></i>&nbsp;
-                    <span>{{ __('global.company_subdomain.menu_title') }}</span>
+                    <span>{{ trans('company_subdomain.menu_title') }}</span>
                 </a>
             </li>
             @endif
 
             @if(Auth::user()->hasRole('Admin') && Auth::user()->CompanyID == 71)
-            <li class="{{ $request->segment(1) == 'versions' ||
-                        $request->segment(1) == 'versions.show' ||
-                        $request->segment(1) == 'versions.create' ||
-                        $request->segment(1) == 'versions.edit' ||
-                        $request->segment(1) == 'version_company.show' ||
-                        $request->segment(1) == 'version_company.create' ||
-                        $request->segment(1) == 'version_company.edit' ? 'active' : '' }}">
+            <li class="{{ ($request->is('versions*') ||
+                            $request->is('version_company*')) ? 'active' : '' }}">
                 <a href="{{ url('versions') }}">
                     <i class="fa fa-clone"></i>&nbsp;
                     <span>
-                        {{ __('global.versions.title') }}
+                        {{ trans('versions.title') }}
                     </span>
                 </a>
             </li>

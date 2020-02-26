@@ -80,7 +80,7 @@ class RoleController extends Controller
 
         return redirect()
                 ->to('roles')
-                ->with('success', __('global.app_messages.create_successfully', ['name' => __('global.role.title')]));
+                ->with('success', trans('messages.create_successfully', ['name' => trans('roles.role_title')]));
     }
 
     /**
@@ -154,7 +154,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-            ->with('success', __('global.app_messages.create_successfully', ['name' => __('global.role.title')]));
+            ->with('success', trans('messages.create_successfully', ['name' => trans('roles.role_title')]));
     }
 
     /**
@@ -167,6 +167,6 @@ class RoleController extends Controller
     {
         DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index')
-            ->with('success',__('global.app_messages.create_successfully', ['name' => __('global.role.title')]));
+            ->with('success',trans('messages.create_successfully', ['name' => trans('roles.role_title')]));
     }
 }

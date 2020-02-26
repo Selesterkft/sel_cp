@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', __('global.dashboard.title'))
+@section('title', trans('app.dashboard'))
 
 @section('content')
 
 <section class="content-header">
     <h1>
-        @lang('global.dashboard.title')
-        <small>@lang('global.dashboard.sub-title')</small>
+        {{ trans('app.dashboard') }}
+        <small>{{ trans('app.dashboard_title') }}</small>
     </h1>
     <ol class="breadcrumb">
         <li class="active">
-            <i class="fa fa-dashboard"></i>&nbsp;@lang('global.app_dashboard')
+            <i class="fa fa-dashboard"></i>&nbsp;{{ trans('app.dashboard') }}
         </li>
     </ol>
 </section>

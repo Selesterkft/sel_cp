@@ -76,7 +76,7 @@ class CompanySubdomainController extends Controller
             //dd('CompanySubdomainController.store', $e->getMessage());
             return redirect()
                     ->back()
-                    ->withErrors('errors', __('Hiba a mentés folyamán'))
+                    ->withErrors('errors', trans('messages.errors_save'))
                     ->withInput();
         }
 
@@ -136,7 +136,7 @@ class CompanySubdomainController extends Controller
 
         return redirect()
             ->to('versions')
-            ->with('success', __('global.app_messages.update_successfully', ['name' => __('global.app_data')]));
+            ->with('success', trans('messages.update_successfully', ['name' => trans('app.data')]));
     }
 
     /**
@@ -153,7 +153,7 @@ class CompanySubdomainController extends Controller
 
         return redirect()
             ->route('companysubdomain.index')
-            ->with('success', __('appConfig.app_messages.delete_successfully', ['name' => __('global.app_data')]));
+            ->with('success', trans('app.delete_successfully', ['name' => trans('app.data')]));
     }
 
     function __construct()

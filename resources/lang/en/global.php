@@ -79,7 +79,7 @@ return [
             'PaymentMethod' => 'Payment Method',
             'DueDate' => 'Due Date',
             'PostInDate' => 'Beérkezés dátuma',
-            'Net_LC' => 'Net Totla',
+            'Net_LC' => 'Net Total',
             'Tax_LC' => 'Tax Total',
             'Gross_LC' => 'Gross Total',
             'PayStatus_ID' => 'Fizetési státusz ID',
@@ -162,7 +162,7 @@ return [
             'delivery_date' => 'Delivery D.',
 
             'due_date' => 'Due Date',
-            'net_lc' => 'Net LC',
+
             'tax_lc' => 'Tax LC',
             'gross_lc' => 'Gross LC',
 
@@ -192,7 +192,7 @@ return [
             'unit_price_dc' => 'Unit Price DC',
             'unit_price_fc' => 'Unit Price FC',
             'unit_price_fc2' => 'Unit Price FC2',
-            'net_lc' => 'Net LC',
+
             'net_dc' => 'Net DC',
             'net_fc' => 'Net FC',
             'net_fc2' => 'Net FC2',
@@ -205,7 +205,7 @@ return [
             'gross_fc' => 'Gross FC',
             'gross_fc2' => 'Gross FC2',
 
-            'curr_lc' => 'Currency LC',
+
             'curr_dc' => 'Currency DC',
             'curr_fc' => 'Currency FC',
             'curr_fc2' => 'Currency FC2',
@@ -548,6 +548,8 @@ return [
     'app_pay_status' => 'Pay Status',
     'app_curr_id' => 'Currency',
     'app_tax_fc' => 'Tax FC',
+
+    'app_net_lc' => 'Net LC',
 
     'app_activity' => [
         'active' => 'Aktive',

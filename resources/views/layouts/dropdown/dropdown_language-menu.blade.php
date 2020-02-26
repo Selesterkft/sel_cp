@@ -25,7 +25,7 @@
             @endswitch
     </a>
     <ul class="dropdown-menu" id="xxx" name="xxx">
-        <li class="header">Választható nyelvek </li>
+        <li class="header">{{ trans('app.selectable_languages') }}</li>
         <li>
             <ul class="menu">
                 <li>
@@ -36,7 +36,7 @@
                                  alt="flag image">
                         </div>
                         <h4 style="margin-top: 10px;">
-                            Magyar
+                            {{ trans('app.hu') }}
                         </h4>
                     </a>
                 </li>
@@ -53,7 +53,7 @@
                                  alt="flag image">
                         </div>
                         <h4 style="margin-top: 10px;">
-                            United Kingdom
+                            {{ trans('app.en') }}
                         </h4>
                     </a>
                 </li>

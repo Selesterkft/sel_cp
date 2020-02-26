@@ -173,7 +173,7 @@ class UsersController extends Controller
             // Visszairányítás az index oldalra üzenettel.
         return redirect()
                 ->to('users')
-                ->with('error', __('global.users.messages.create_error'));
+                ->with('error', trans('messages.errors_create'));
         }
         else
         {
@@ -184,7 +184,7 @@ class UsersController extends Controller
         // Visszairányítás az index oldalra üzenettel.
         return redirect()
                 ->to('users')
-                ->with('success', __('global.users.messages.success_create'));
+                ->with('success', trans('messages.success_create'));
     }
 
     /**
@@ -303,7 +303,7 @@ class UsersController extends Controller
             // Visszairányítás az USERS.INDEX hiba üzenettel
             return redirect()
                     ->to('users')
-                    ->with('error', __('global.users.messages.update_error'));
+                    ->with('error', trans('messages.errors_update'));
         }
         else
         {
@@ -323,7 +323,7 @@ class UsersController extends Controller
         // Visszairányítás az USERS.INDEX oldalra
         return redirect()
                 ->to('users')
-                ->with('success', __('global.users.messages.success_update'));
+                ->with('success', trans('messages.success_update'));
     }
 
     /**
@@ -343,13 +343,13 @@ class UsersController extends Controller
             // Visszairányítás az USERS.INDEX oldalra hiba üzenettel
             return redirect()
                     ->to('users')
-                    ->with('error', __('global.users.messages.delete_error'));
+                    ->with('error', trans('messages.errors_delete'));
         }
 
         // Visszairánytás az USER.INDEX oldalra üzenettel.
         return redirect()
                 ->to('users')
-                ->with('success', __('global.users.messages.delete_successfully'));
+                ->with('success', trans('messages.success_delete'));
     }
 
     public function restore($id)
@@ -358,6 +358,6 @@ class UsersController extends Controller
 
         return redirect()
                 ->to('users')
-                ->with('success', __('global.users.messages.success_restore'));
+                ->with('success', trans('messages.success_restore'));
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', Lang::get('global.users.title'))
+@section('title', trans('users.title'))
 
 @section('search')
 
@@ -9,25 +9,25 @@
 
     <section class="content-header">
         <h1>
-            KERESÉS
-            <small>EREDMÉNY</small>
+            {{ trans('app.search') }}
+            <small>{{ trans('app.result') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    @lang('global.app_dashboard')
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('users', ['version' => $version,]) }}">
-                    <i class="fa fa-users"></i>&nbsp;@lang('global.users.title')
+                    <i class="fa fa-users"></i>&nbsp;{{trans('users.title')}}
                 </a>
             </li>
 
             <li class="active">
-                <i class="fa fa-search"></i>&nbsp;KERESÉS
+                <i class="fa fa-search"></i>&nbsp;{{ trans('app.search') }}
             </li>
 
         </ol>
@@ -41,16 +41,10 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            KERESÉS
+                            {{ trans('app.search') }}
                         </h3>
 
                         <div class="box-tools pull-right">
-                            <!--
-                            <a class="btn btn-success btn-xs"
-                               href="{{-- route('users.create',
-                                ['company' => $company, 'version' => $version]) --}}">&nbsp;@lang('global.app_add_new')
-                            </a>
-                            -->
                         </div>
                         <div class="box-body">
 

@@ -1,5 +1,5 @@
 @extends('errors::minimal')
 
-@section('title', __('Not Found'))
+@section('title', trans('app.not_found'))
 @section('code', '404')
-@section('message', __('Not Found'))
+@section('message', trans('app.not_found'))

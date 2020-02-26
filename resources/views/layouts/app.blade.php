@@ -24,7 +24,7 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@lang('global.global_sort_title') | @yield('title')</title>
+    <title>{{ trans('app.sort_title') }} | @yield('title')</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -70,9 +70,9 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
         <a href="{{ url('/') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <!--<span class="logo-mini"><b>A</b>LT</span>-->
-            <span class="logo-mini">@lang('global.global_sort_title')</span>
+            <span class="logo-mini">{{trans('app.sort_title')}}</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">@lang('global.global_title')</span>
+            <span class="logo-lg">{{trans('app.title')}}</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -130,11 +130,11 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>{{ __('global.version.title') }}:</b>&nbsp;{{ session()->get('version') }}
+            <b>{{ trans('versions.version') }}:</b>&nbsp;{{ session()->get('version') }}
         </div>
         <strong>
-            {{ __('global.app_copyright_1') }}&nbsp;<a href="http://selester.hu" target="_blank">Selester Kft</a>
-        </strong>{{ __('global.app_copyright_2') }}
+            {{ trans('app.copyright_1') }}&nbsp;<a href="http://selester.hu" target="_blank">Selester Kft</a>
+        </strong>{{ trans('app.copyright_2') }}
         <!--
         <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
         -->

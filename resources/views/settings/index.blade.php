@@ -1,53 +1,36 @@
 @extends('layouts.app')
 
-@section('title', __('global.settings.title'))
+@section('title', trans('settings.title'))
 
 @section('content')
 
 <section class="content-header">
     <h1>
-        {{ __('global.settings.title') }}
-        <small>{{ __('global.settings.sub_title') }}</small>
+        {{ trans('settings.title') }}
+        <small>{{ trans('settings.sub_title') }}</small>
     </h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ url('/') }}">
                 <i class="fa fa-dashboard"></i>&nbsp;
-                {{ __('global.app_dashboard') }}
+                {{ trans('app.dashboard') }}
             </a>
         </li>
 
         <li class="active">
             <i class="fa fa-users"></i>&nbsp;
-            {{ __('global.settings.title') }}
+            {{ trans('settings.title') }}
         </li>
 
     </ol>
 </section>
 
 <section class="content">
-    @php
-    
-    //echo '<pre>';
-    //print_r($errors);
-    //echo '<pre>';
-    
-    @endphp
-    {{--
-    @if( session()->has('success') )
 
-        @includeIf('layouts.success', ['messages' => session()->get('success') ])
-
-    @elseif( session()->has('errors') )
-
-        @includeIf('layouts.alert', ['messages' => session()->get('errors')] )
-
-    @endif
-    --}}
     {{-- GENERAL SETTINGS --}}
     @includeIf('settings.general', [
-        'general_logo_id' =>            $settings['general_logo_id'],                          'general_logo_value' =>  $settings['general_logo_value'], 
-        'general_favicon_id' =>         $settings['general_favicon_id'],                    'general_favicon_value' =>  $settings['general_favicon_value'], 
+        'general_logo_id' =>            $settings['general_logo_id'],                          'general_logo_value' =>  $settings['general_logo_value'],
+        'general_favicon_id' =>         $settings['general_favicon_id'],                    'general_favicon_value' =>  $settings['general_favicon_value'],
         'general_profil_image_id' =>    $settings['general_profil_image_id'],          'general_profil_image_value' =>  $settings['general_profil_image_value'],
         'general_menu_bg_color_id' =>   $settings['general_menu_bg_color_id'],        'general_menu_bg_color_value' =>  $settings['general_menu_bg_color_value'],
         'general_header_bg_color_id' => $settings['general_header_bg_color_id'],    'general_header_bg_color_value' =>  $settings['general_header_bg_color_value'],
@@ -60,27 +43,27 @@
         'login_logo_id'             => $settings['login_logo_id'], 'login_logo_value' => $settings['login_logo_value'],
         'login_background_color_id' => $settings['login_background_color_id'], 'login_background_color_value' => $settings['login_background_color_value'],
     ])
-    
+
     {{-- DASHBOARD PAGE --}}
     @includeIf('settings.dashboardPage', [
         'dashboard_menu_bg_color_id'    => $settings['dashboard_menu_bg_color_id'],     'dashboard_menu_bg_color_value' => $settings['dashboard_menu_bg_color_value'],
         'dashboard_header_bg_color_id'  => $settings['dashboard_header_bg_color_id'],   'dashboard_header_bg_color_value' => $settings['dashboard_header_bg_color_value'],
         'dashboard_panel_tab_color_id'  => $settings['dashboard_panel_tab_color_id'],   'dashboard_panel_tab_color_value' => $settings['dashboard_panel_tab_color_value']
     ])
-    
+
     {{-- INVOICES PAGE --}}
     @includeIf('settings.invoicesPage', [
         'invoices_menu_bg_color_id'     => $settings['invoices_menu_bg_color_id'], 'invoices_menu_bg_color_value' => $settings['invoices_menu_bg_color_value'],
         'invoices_header_bg_color_id'   => $settings['invoices_header_bg_color_id'], 'invoices_header_bg_color_value' => $settings['invoices_header_bg_color_value'],
         'invoices_panel_tab_color_id'   => $settings['invoices_panel_tab_color_id'], 'invoices_panel_tab_color_value' => $settings['invoices_panel_tab_color_value']
     ])
-    
+
     @includeIf('settings.usersPage', [
         'users_menu_bg_color_id'    => $settings['users_menu_bg_color_id'], 'users_menu_bg_color_value' => $settings['users_menu_bg_color_value'],
         'users_header_bg_color_id'  => $settings['users_header_bg_color_id'], 'users_header_bg_color_value' => $settings['users_header_bg_color_value'],
         'users_panel_tab_color_id'  => $settings['users_panel_tab_color_id'], 'users_panel_tab_color_value' => $settings['users_panel_tab_color_value']
     ])
-    
+
 </section>
 
 @endsection
@@ -161,7 +144,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                 }
             }
         });
-        
+
         $('#general_panel_tab_color').colorpicker({
             format: "hex",
             customClass: 'colorpicker-2x',
@@ -178,7 +161,7 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                 }
             }
         });
-        
+
         $('#login_background_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -194,16 +177,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['login_background_color_value'] != '' )
-            {
-                echo ",color: '{$settings['login_background_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#dashboard_menu_bg_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -219,16 +194,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['dashboard_menu_bg_color_value'] != '' )
-            {
-                echo ",color: '{$settings['dashboard_menu_bg_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#dashboard_header_bg_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -244,16 +211,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['dashboard_header_bg_color_value'] != '' )
-            {
-                echo ",color: '{$settings['dashboard_header_bg_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#dashboard_panel_tab_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -269,16 +228,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['dashboard_panel_tab_color_value'] != '' )
-            {
-                echo ",color: '{$settings['dashboard_panel_tab_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#invoices_menu_bg_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -294,17 +245,9 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['invoices_menu_bg_color_value'] != '' )
-            {
-                echo ",color: '{$settings['invoices_menu_bg_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
-        
+        });
+
+
         $('#invoices_header_bg_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -320,16 +263,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['invoices_header_bg_color_value'] != '' )
-            {
-                echo ",color: '{$settings['invoices_header_bg_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#invoices_panel_tab_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -345,16 +280,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['invoices_panel_tab_color_value'] != '' )
-            {
-                echo ",color: '{$settings['invoices_panel_tab_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#users_menu_bg_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -370,16 +297,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['users_menu_bg_color_value'] != '' )
-            {
-                echo ",color: '{$settings['users_menu_bg_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#users_header_bg_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -395,16 +314,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['users_header_bg_color_value'] != '' )
-            {
-                echo ",color: '{$settings['users_header_bg_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
         $('#users_panel_tab_color').colorpicker({
             format: 'hex',
             customClass: 'colorpicker-2x',
@@ -420,16 +331,8 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
                     maxTop: 200
                 }
             }
-        }/*{
-            horizontal: true
-            @php
-            if( $settings['users_panel_tab_color_value'] != '' )
-            {
-                echo ",color: '{$settings['users_panel_tab_color_value']}'\n";
-            }
-            @endphp
-        }*/);
-        
+        });
+
     </script>
 
 @endsection

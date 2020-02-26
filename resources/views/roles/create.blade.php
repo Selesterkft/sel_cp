@@ -1,31 +1,31 @@
 @extends('layouts.app')
-@section('title', __('global.roles.title'))
+@section('title', trans('roles.title'))
 
 @section('content')
 
     <section class="content-header">
         <h1>
-            {{ __('global.roles.title') }}
-            <small>{{ __('global.roles.sub_subtitle') }}</small>
+            {{ trans('roles.title') }}
+            <small>{{ trans('roles.create_sub_title') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li>
                 <a href="{{ url('roles') }}">
                     <i class="fa fa-files-o"></i>&nbsp;
-                    {{ __('global.roles.title') }}
+                    {{ trans('roles.title') }}
                 </a>
             </li>
 
             <li class="active">
                 <i class="fa fa-file-text-o"></i>&nbsp;
-                {{ __('global.role.title') }}
+                {{ trans('roles.create_sub_title') }}
             </li>
 
         </ol>
@@ -47,14 +47,16 @@
                     <div class="box box-default">
                         <div class="box-header">
                             <h3 class="box-title">
-                                {{ __('global.app_add_new') }}
+                                {{ trans('app.add_new') }}
                             </h3>
                         </div>
 
                         <div class="box-body">
 
                             <div class="form-group {{ ($errors->has('name')) ? 'has-error' : '' }}">
-                                <label for="name" class="col-sm-2 control-label">{{ __('NÉV') }}:</label>
+                                <label for="name" class="col-sm-2 control-label">
+                                    {{ trans('app.name') }}:
+                                </label>
                                 <div class="col-sm-10">
                                     <input id="name" name="name" class="form-control" type="text"/>
                                     <span id="span_name" name="span_name" class="help-block">
@@ -64,14 +66,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label" 
-                                       style="padding-top: 0px;">
-                                    {{ __('global.role.fields.permissions') }}:
+                                <label for="name" class="col-sm-2 control-label" style="padding-top: 0px;">
+                                    {{ trans('permissions.title') }}:
                                 </label>
                                 <div class="col-sm-10">
                                     @foreach($permission as $value)
                                         <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                                            {{ $value->name }}</label>
+                                            &nbsp;{{ trans('roles.' . $value->name) }}</label>
                                         <br/>
                                     @endforeach
                                 </div>
@@ -80,10 +81,10 @@
                         </div>
 
                         <div class="box-footer">
-                            <a href="{{ url('roles') }}" 
-                               class="btn btn-default">{{ __('global.app_cancel') }}</a>
+                            <a href="{{ url('roles') }}"
+                               class="btn btn-default">{{ trans('app.cancel') }}</a>
                             <button type="submit" class="btn btn-info pull-right">
-                                {{ __('global.app_save') }}
+                                {{ trans('app.save') }}
                             </button>
                         </div>
                     </div>

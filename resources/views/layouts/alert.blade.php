@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="alert"
             aria-hidden="true">&times;</button>
     <h4>
-        <i class="icon fa fa-ban"></i>&nbsp;{{ __('global.app_alert') }}
+        <i class="icon fa fa-ban"></i>&nbsp;{{ trans('app.alert') }}
     </h4>
     {{-- @dd('alert.blade', $messages->all(), is_array($messages->all())) --}}
     @if( is_array($messages->all()) )

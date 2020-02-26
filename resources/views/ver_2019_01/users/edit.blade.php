@@ -3,33 +3,33 @@ $loggedUser = Auth::user();
 @endphp
 
 @extends('layouts.app')
-@section('title', __('global.user.title'))
+@section('title', trans('users.user_title'))
 
 @section('content')
 
     <section class="content-header">
         <h1>
-            {{ __('global.user.title') }}
-            <small>{{ __('global.user.sub_titles.update') }}</small>
+            {{ trans('users.user_title') }}
+            <small>{{ trans('users.user_title_update') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li>
                 <a href="{{ url('users') }}">
                     <i class="fa fa-users"></i>&nbsp;
-                    {{ __('global.users.title') }}
+                    {{ trans('users.title') }}
                 </a>
             </li>
 
             <li class="active">
                 <i class="fa fa-user"></i>&nbsp;
-                {{ __('global.user.title') }}
+                {{ trans('users.user_title_update') }}
             </li>
 
         </ol>
@@ -50,10 +50,10 @@ $loggedUser = Auth::user();
 
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            {{ __('global.user.title') }}
+                            {{ trans('users.user_title') }}
                         </h3>
                         <small>
-                            {{ __('global.user.sub_titles.update') }}
+                            {{ trans('users.user_title_update') }}
                         </small>
                     </div>
 
@@ -61,7 +61,7 @@ $loggedUser = Auth::user();
 
                         <div class="form-group {{ ($errors->has('Name')) ? 'has-error' : '' }}">
                             <label for="Name" class="col-sm-2 control-label">
-                                {{ __('global.app_name') }}:
+                                {{ trans('app.name') }}:
                             </label>
                             <div class="col-sm-10">
                                 <input id="Name" name="Name" class="form-control" type="text"
@@ -74,7 +74,7 @@ $loggedUser = Auth::user();
 
                         <div class="form-group {{ ($errors->has('Email')) ? 'has-error' : '' }}">
                             <label for="Email" class="col-sm-2 control-label">
-                                {{ __('global.user.fields.email') }}:
+                                {{ trans('app.email') }}:
                             </label>
                             <div class="col-sm-10">
                                 <input id="Email" name="Email" class="form-control" type="text"
@@ -101,12 +101,12 @@ $loggedUser = Auth::user();
                                 </div>
                             </div>
                         @else
-                            <input id="CompanyID" name="CompanyID" 
-                                   value="{{-- $user->CompanyID --}}" 
+                            <input id="CompanyID" name="CompanyID"
+                                   value="{{-- $user->CompanyID --}}"
                                    type="hidden"/>
                         @endif-->
-                        <input id="CompanyID" name="CompanyID" 
-                                   value="{{ $user->CompanyID }}" 
+                        <input id="CompanyID" name="CompanyID"
+                                   value="{{ $user->CompanyID }}"
                                    type="hidden"/>
                         <!-- NYELV -->
                         @php
@@ -119,7 +119,7 @@ $loggedUser = Auth::user();
 
                         <div class="form-group {{ ($errors->has('language')) ? 'has-error' : '' }}">
                             {{ Form::label('language',
-                                __('global.user.fields.language') . ':',
+                                trans('app.language') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 {!! Form::select('language',
@@ -127,7 +127,7 @@ $loggedUser = Auth::user();
                                     $user->language,
                                     ['class' => 'form-control'])
                                 !!}
-                                <span id="span_company_id" name="span_company_id" 
+                                <span id="span_company_id" name="span_company_id"
                                       class="help-block">
                                     {{ ($errors->has('language')) ? $errors->first('language') : '' }}
                                 </span>
@@ -154,7 +154,7 @@ $loggedUser = Auth::user();
                                 {{ __('global.user.fields.password_confirm') }}:
                             </label>
                             <div class="col-sm-10">
-                                <input id="confirm-password" name="confirm-password" 
+                                <input id="confirm-password" name="confirm-password"
                                        class="form-control"
                                        type="password"/>
                                 <span id="span_confirm-password" name="span_confirm-password" class="help-block">
@@ -164,10 +164,10 @@ $loggedUser = Auth::user();
                         </div>
                         --}}
                         <!-- JELSZÓ VÉGE -->
-                        
+
                         <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">
-                                    {{ __('global.roles.title') }}:
+                                    {{ trans('roles.title') }}:
                                 </label>
                                 <div class="col-sm-10" style="margin-top: 10px;">
                                     @foreach($roles as $role)
@@ -207,21 +207,21 @@ $loggedUser = Auth::user();
                                                     'style' => 'margin-left: 5px;',
                                                     $disabled
                                                 ]) }}
-                                                {{ __('global.role.role_names.' . $role) }}
+                                                {{ trans('roles.' . $role) }}
                                         </label><br/>
                                     @endforeach
                                 </div>
                             </div>
-                        
+
                     </div>
 
                     <div class="box-footer">
                         <a href="{{ url('users') }}"
                            class="btn btn-default">
-                            {{ __('global.app_cancel') }}
+                            {{ trans('app.cancel') }}
                         </a>
                         <button type="submit" class="btn btn-info pull-right">
-                            {{ __('global.app_save') }}
+                            {{ trans('app.save') }}
                         </button>
                     </div>
 

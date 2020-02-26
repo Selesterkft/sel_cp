@@ -84,7 +84,7 @@ class VersionController extends Controller {
         // Visszairányítás az INDEX oldalra üzenettel.
         return redirect()
                 ->to('versions')
-                ->with('success', __('global.app_messages.create_successfully', ['name' => __('global.version.title')]));
+                ->with('success', trans('global.app_messages.create_successfully', ['name' => trans('versions.title')]));
     }
 
     /**
@@ -142,7 +142,7 @@ class VersionController extends Controller {
         // Visszairányítás a VERSIONS oldalra üzenetekkel
         return redirect()
                 ->to('versions')
-                ->with('success', __('global.app_messages.update_successfully', ['name' => __('global.version.title')]));
+                ->with('success', trans('messages.update_successfully', ['name' => trans('versions.title')]));
     }
 
     /**
@@ -166,13 +166,13 @@ class VersionController extends Controller {
             // Visszairányítás az USERS.INDEX oldalra hiba üzenettel
             return redirect()
                     ->to('versions')
-                    ->with('error', __('global.app_messages.delete_error', ['name' => __('global.version.title')]));
+                    ->with('error', trans('messages.delete_error', ['name' => trans('versions.title')]));
         }
 
         // Visszairánytás az USER.INDEX oldalra üzenettel.
         return redirect()
                 ->to('versions')
-                ->with('success', __('global.app_messages.delete_successfully', ['name' => __('global.version.title')]));
+                ->with('success', trans('messages.delete_successfully', ['name' => trans('versions.title')]));
     }
 
     public function restore($id) {
@@ -184,13 +184,13 @@ class VersionController extends Controller {
         {
             return redirect()
                     ->to('versions')
-                    ->with('error', __('global.app_messages.restore_error', ['name' => __('global.version.title')]));
+                    ->with('error', trans('messages.restore_error', ['name' => trans('versions.title')]));
         }
 
         //
         return redirect()
                 ->to('versions')
-                ->with('success', __('global.app_messages.restore_successfully', ['name' => __('global.version.title')]));
+                ->with('success', trans('messages.restore_successfully', ['name' => title('versions.title')]));
     }
 
 }

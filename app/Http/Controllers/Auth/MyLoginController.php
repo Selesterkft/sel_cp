@@ -65,7 +65,7 @@ class MyLoginController extends Controller
         {
             // Visszairányítás a hibákkal
             return \Redirect::back()
-                ->withErrors(['email' => [__('global.login.messages.error_user_not_found')]])
+                ->withErrors(['email' => [trans('messages.errors_user_not_found')]])
                 ->withInput(Input::except('password'));
         }
 
@@ -80,7 +80,7 @@ class MyLoginController extends Controller
         if( $subdomain != $companyNickName )
         {
             return \Redirect::back()
-                ->withErrors(['company' => [ __('global.app_messages.login_company_error') ]])
+                ->withErrors(['company' => [ trans('messages.errors_login_company') ]])
                 ->withInput(Input::except('password'));
         }
         else

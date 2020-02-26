@@ -7,6 +7,7 @@ namespace App\Classes;
 //use Spatie\Permission\Models\Role;
 use App\Models\SettingModel;
 use App\Models\VersionModel;
+use Spatie\Permission\Models\Role;
 
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Session;
@@ -517,7 +518,7 @@ class Helper
                 ->orderBy('Nev1', 'asc')
                 ->pluck('Nev1', 'ID')
                 ->all();
-            $companies = ['0' => __('global.app_select_first_element')] + $companies;
+            $companies = ['0' => trans('app.select_first_element')] + $companies;
         }
         else
         {
@@ -541,7 +542,7 @@ class Helper
             ->pluck('Version', 'ID')
             ->all();
 
-        $versions = ['0' => __('global.app_select_first_element')] + $versions;
+        $versions = ['0' => trans('app.select_first_element')] + $versions;
 
         return $versions;
 
@@ -550,10 +551,10 @@ class Helper
     public static function getBizonylatTipusok()
     {
         $retVal = [
-            null => __('global.app_select_first_element'),
-            '1' => __('global.invoices.search.types.all'),
-            '201' => __('global.invoices.search.types.incoming'),
-            '202' => __('global.invoices.search.types.outgoing'),
+            null => trans('app.select_first_element'),
+            '1' => trans('app.type_all'),
+            '201' => trans('app.type_incoming'),
+            '202' => trans('app.type_outgoing'),
         ];
         //dd($retVal);
         return $retVal;

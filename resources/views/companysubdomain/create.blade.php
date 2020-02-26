@@ -1,29 +1,29 @@
 @extends('layouts.app')
-@section('title', __('global.company_subdomain.title'))
+@section('title', trans('company_subdomain.create_title'))
 
 @section('content')
 
 <section class="content-header">
     <h1>
-        {{ __('global.company_subdomain.title') }}
-        <small>{{ __('global.company_subdomain.sub_title') }}</small>
+        {{ trans('company_subdomain.create_title') }}
+        <small>{{ trans('company_subdomain.sub_title') }}</small>
     </h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ url('/') }}">
                 <i class="fa fa-dashboard"></i>&nbsp;
-                {{ __('global.app_dashboard') }}
+                {{ trans('app.dashboard') }}
             </a>
         </li>
 
         <li>
             <a href="{{ url('companysubdomain') }}">
-                <i class="fa fa-users"></i>&nbsp;{{ __('global.company_subdomain.menu_title') }}
+                <i class="fa fa-users"></i>&nbsp;{{ trans('company_subdomain.menu_title') }}
             </a>
         </li>
 
         <li class="active">
-            <i class="fa fa-user"></i>&nbsp;{{ __('global.company_subdomain.title') }}
+            <i class="fa fa-user"></i>&nbsp;{{ trans('company_subdomain.create_title') }}
         </li>
 
     </ol>
@@ -57,8 +57,8 @@
                 <div class="box box-default">
 
                     <div class="box-header with-border">
-                        <h3 class="box-title">{{ __('global.company_subdomain.title') }}</h3>
-                        <small>{{ __('global.company_subdomain.sub_title') }}</small>
+                        <h3 class="box-title">{{ trans('company_subdomain.create_title') }}</h3>
+                        <small>{{ trans('company_subdomain.sub_title') }}</small>
                     </div>
 
                     <div class="box-body">
@@ -66,7 +66,7 @@
                         {{-- COMPANIES --}}
                         <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
                             {{ Form::label('CompanyID',
-                                __('global.company_subdomain.fields.company') . ':',
+                                trans('company_subdomain.company') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 {!! Form::select('CompanyID', $companies,
@@ -81,7 +81,7 @@
 
                         {{-- SUBDOMAIN --}}
                         <div class="form-group {{ ($errors->has('SubdomainName')) ? 'has-error' : '' }}">
-                            {{ Form::label('SubdomainName', __('global.company_subdomain.fields.subdomain') . ':',
+                            {{ Form::label('SubdomainName', trans('company_subdomain.subdomain') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 <input id="SubdomainName" name="SubdomainName" class="form-control" type="text"
@@ -96,14 +96,14 @@
 
                     <div class="box-footer">
                         <div class="box-footer">
-                        <a href="{{ url('versions') }}"
-                           class="btn btn-default">
-                            {{ __('global.app_cancel') }}
-                        </a>
-                        <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
-                            {{ __('global.app_save') }}
-                        </button>
-                    </div>
+                            <a href="{{ url('versions') }}"
+                               class="btn btn-default">
+                                {{ trans('app.cancel') }}
+                            </a>
+                            <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
+                                {{ trans('app.save') }}
+                            </button>
+                        </div>
                     </div>
 
                 </div>

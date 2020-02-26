@@ -1,29 +1,29 @@
 @extends('layouts.app')
-@section('title', __('global.version.title'))
+@section('title', trans('versions.version'))
 
 @section('content')
 
     <section class="content-header">
         <h1>
-            {{ __('global.version.title') }}
-            <small>{{ __('global.version.sub_title') }}</small>
+            {{ trans('versions.version') }}
+            <small>{{ trans('versions.sub_title') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li>
                 <a href="{{ url('versions') }}">
-                    <i class="fa fa-files-o"></i>&nbsp;{{ __('global.versions.title') }}
+                    <i class="fa fa-files-o"></i>&nbsp;{{ trans('versions.title') }}
                 </a>
             </li>
 
             <li class="active">
-                <i class="fa fa-file-text-o"></i>&nbsp;{{ __('global.version.title') }}
+                <i class="fa fa-file-text-o"></i>&nbsp;{{ trans('versions.show_sub_title') }}
             </li>
 
         </ol>
@@ -44,19 +44,19 @@
 
                 <div class="box box-default">
                     <div class="box-header">
-                        <h3 class="box-title">{{ __('global.version.edit_title') }}</h3>
+                        <h3 class="box-title">{{ trans('versions.show_sub_title') }}</h3>
                     </div>
 
                     <div class="box-body">
 
                         <div class="form-group {{ ($errors->has('Version')) ? 'has-error' : '' }}">
                             <label for="Version" class="col-sm-2 control-label">
-                                {{ __('global.version.fields.version') }}:
+                                {{ trans('versions.version') }}:
                             </label>
                             <div class="col-sm-10">
                                 <input id="Version" name="Version" class="form-control"
                                        type="text"
-                                       value="{{ (old('Version')) ? old('Version') : $version->Version }}" 
+                                       value="{{ (old('Version')) ? old('Version') : $version->Version }}"
                                        disabled/>
                                 <!--
                                 <span id="span_Version" name="span_Version" class="help-block">
@@ -67,11 +67,12 @@
                         </div>
 
                         <div class="form-group {{ ($errors->has('Active')) ? 'has-error' : '' }}">
-                            <label for="Version" class="col-sm-2 control-label">{{ __('global.version.fields.active') }}:</label>
+                            <label for="Version" class="col-sm-2 control-label">{{ trans('app.active') }}:</label>
                             <div class="col-sm-10">
                                 <label>
                                     @php
                                     $checked = '';
+                                    /** @var TYPE_NAME $version */
                                     if( $version->Active == 1 )
                                     {
                                         $checked = 'checked';
@@ -81,12 +82,7 @@
                                            style="margin-left: 5px;margin-top: 10px;"
                                            type="checkbox" value="1" {{ $checked }} disabled>
                                 </label>
-                            <!--
-                                <input id="Active" name="Active" class="form-control" type="text"/>
-                                <span id="span_Version" name="span_Version" class="help-block">
-                                    {{-- ($errors->has('Active')) ? $errors->first('Active') : '' --}}
-                                    </span>
--->
+
                             </div>
                         </div>
 
@@ -94,11 +90,7 @@
 
                     <div class="box-footer">
                         <a href="{{ url('versions') }}" class="btn btn-default">
-                            <i class="fa fa-chevron-left"></i>&nbsp;{{ __('global.app_cancel') }}
-                        </a>
-                        <a href="{{ url('versions.edit', ['id' => $version->ID]) }}" 
-                           class="btn btn-info pull-right">
-                            {{ __('global.app_edit') }}
+                            <i class="fa fa-chevron-left"></i>&nbsp;{{ trans('app.back_to_list') }}
                         </a>
                     </div>
                 </div>

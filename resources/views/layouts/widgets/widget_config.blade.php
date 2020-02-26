@@ -2,7 +2,7 @@
     <!-- small box -->
     <div class="small-box bg-yellow configBox">
         <div class="inner configBox">
-            <h3 class="configBox">{{ __('global.settings.title') }}</h3>
+            <h3 class="configBox">{{ trans('settings.title') }}</h3>
 
             <p class="configBox" style="color: #f39c12;">__</p>
         </div>
@@ -11,7 +11,7 @@
             <i class="fa fa-cog configBox"></i>
         </div>
         <a href="{{ url('settings') }}" class="small-box-footer configBox">
-            {{ __('global.app_more_info') }}&nbsp;
+            {{ trans('app.more_info') }}&nbsp;
             <i class="fa fa-arrow-circle-right configBox"></i>
         </a>
     </div>

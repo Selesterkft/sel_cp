@@ -71,7 +71,7 @@ class VersionCompanyController extends Controller
 
         return redirect()
             ->to('versions')
-            ->with('success', __('global.app_messages.create_successfully', ['name' => __('global.version.connection')]));
+            ->with('success', trans('messages.create_successfully', ['name' => trans('global.versions.connection')]));
     }
 
     /**
@@ -157,7 +157,7 @@ class VersionCompanyController extends Controller
         // Átirányítás a VERSIONS.INDEX oldalra üzenetekkel
         return redirect()
             ->to('versions')
-            ->with('success', __('global.app_messages.update_successfully', ['name' => __('global.version.connection')]));
+            ->with('success', trans('messages.update_successfully', ['name' => trans('versions.connection')]));
 
     }
 
@@ -175,6 +175,6 @@ class VersionCompanyController extends Controller
 
         return redirect()
             ->route('versions.index')
-            ->with('success', __('appConfig.app_messages.delete_successfully', ['name' => __('global.version.connection')]));
+            ->with('success', trans('messages.delete_successfully', ['name' => trans('versions.connection')]));
     }
 }

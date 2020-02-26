@@ -16,8 +16,8 @@
                  style="background-color:white;"
                  alt="User Image">
             <p>
-                {{ __('global.app_hello') }}&nbsp;{{ Auth::user()->Name }}
-                <small>{{ __('global.global_member_since') }}&nbsp;{{ \Carbon::parse(Auth::user()->created_at)->format((config('appConfig.dateFormats'))[config('app.locale')]['carbon']) }}</small>
+                {{ trans('app.hello') }}&nbsp;{{ Auth::user()->Name }}
+                <small>{{ trans('app.member_since') }}:&nbsp;{{ \Carbon::parse(Auth::user()->created_at)->format((config('appConfig.dateFormats'))[config('app.locale')]['carbon']) }}</small>
             </p>
         </li>
         <!-- Menu Body -->
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-xs-4 text-center">
                     <a href="{{ url('profile', ['id' => Auth::user()->ID]) }}">
-                        {{ __('global.profile.title') }}
+                        {{ trans('users.profile') }}
                     </a>
                 </div>
                 <!--
@@ -44,8 +44,16 @@
             @guest
                 <div class="pull-left">
                     <!--<a href="{{-- route('login') --}}" class="btn btn-default btn-flat">Belépés</a>-->
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    <li>
+                        <a class="nav-link" href="{{ route('login') }}">
+                            {{ trans('users.login') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ route('register') }}">
+                            {{ trans('users.register') }}
+                        </a>
+                    </li>
                 </div>
             @else
                 <div class="pull-left">
@@ -58,7 +66,7 @@
                 <div class="pull-right">
                     <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        <i class="fa fa-sign-in"></i>&nbsp;{{ __('global.app_logout') }}
+                        <i class="fa fa-sign-in"></i>&nbsp;{{ trans('users.logout') }}
                     </a>
                 </div>
             @endguest
@@ -66,7 +74,8 @@
     </ul>
 </li>
 
-<form id="logout-form" name="logout-form" action="{{ route('logout') }}" method="POST"
+<form id="logout-form" name="logout-form" action="{{ route('logout') }}"
+      method="POST"
       style="display: none;">
     {{ csrf_field() }}
 </form>

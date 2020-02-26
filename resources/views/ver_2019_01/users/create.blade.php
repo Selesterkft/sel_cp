@@ -1,29 +1,29 @@
 @extends('layouts.app')
-@section('title', __('global.user.title'))
+@section('title', trans('users.user_title'))
 
 @section('content')
 
     <section class="content-header">
         <h1>
-            {{ __('global.user.title') }}
-            <small>{{ __('global.user.sub_titles.create') }}</small>
+            {{ trans('users.user_title') }}
+            <small>{{ trans('users.user_title_create') }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li>
                 <a href="{{ url('users') }}">
-                    <i class="fa fa-users"></i>&nbsp;{{ __('global.users.title') }}
+                    <i class="fa fa-users"></i>&nbsp;{{ trans('users.title') }}
                 </a>
             </li>
 
             <li class="active">
-                <i class="fa fa-user"></i>&nbsp;{{ __('global.user.title') }}
+                <i class="fa fa-user"></i>&nbsp;{{ trans('users.user_title_create') }}
             </li>
 
         </ol>
@@ -43,8 +43,8 @@
                 <div class="box box-default">
 
                     <div class="box-header with-border">
-                        <h3 class="box-title">{{ __('global.user.title') }}</h3>
-                        <small>{{ __('global.user.sub_titles.create') }}</small>
+                        <h3 class="box-title">{{ trans('users.user_title') }}</h3>
+                        <small>{{ trans('users.user_title_create') }}</small>
                     </div>
 
                     <div class="box-body">
@@ -52,7 +52,7 @@
                         <input id="sendEmail" name="sendEmail" type="hidden" value="0"/>
 
                         <div class="form-group {{ ($errors->has('Name')) ? 'has-error' : '' }}">
-                            {{ Form::label('Name', __('global.app_name') . ':',
+                            {{ Form::label('Name', trans('app.name') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
 
                             <div class="col-sm-10">
@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="form-group {{ ($errors->has('Email')) ? 'has-error' : '' }}">
-                            {{ Form::label('Email', __('global.user.fields.email') . ':',
+                            {{ Form::label('Email', trans('app.email') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 <input id="Email" name="Email" class="form-control" type="text"
@@ -80,7 +80,7 @@
 
                             <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
                                 {{ Form::label('CompanyID',
-                                    __('global.user.fields.company') . ':',
+                                    trans('users.company') . ':',
                                     ['class' => 'col-sm-2 control-label']) }}
                                 <div class="col-sm-10">
                                     {{ Form::select('CompanyID', $companies,
@@ -106,13 +106,13 @@
                         $languages = config('appConfig.languages');
                         foreach ($languages as $key => $value)
                         {
-                            $languages[$key] = __("global.languages." . $key);
+                            $languages[$key] = trans("app." . $key);
                         }
                         @endphp
 
                         <div class="form-group {{ ($errors->has('language')) ? 'has-error' : '' }}">
                             {{ Form::label('language',
-                                __('global.user.fields.language') . ':',
+                                trans('app.language') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 {!! Form::select('language', $languages,
@@ -127,7 +127,7 @@
 
                         <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' }}">
                             {{ Form::label('password',
-                                __('global.user.fields.password') . ':',
+                                trans('users.password') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 <input id="password" name="password" class="form-control" type="password"/>
@@ -139,7 +139,7 @@
 
                         <div class="form-group {{ ($errors->has('confirm-password')) ? 'has-error' : '' }}">
                             {{ Form::label('confirm-password',
-                                __('global.user.fields.password_confirm') . ':',
+                                trans('users.password_confirm') . ':',
                                 ['class' => 'col-sm-2 control-label']) }}
                             <div class="col-sm-10">
                                 <input id="confirm-password" name="confirm-password" class="form-control"
@@ -152,7 +152,7 @@
 
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">
-                                {{ __('global.user.fields.roles') }}:
+                                {{ trans('roles.title') }}:
                             </label>
                             <div class="col-sm-10" style="margin-top: 10px;">
 
@@ -171,7 +171,7 @@
                                                 'id' => $role
                                             ]
                                         ) }}
-                                        {{ __('global.role.role_names.' . $role) }}
+                                        {{ trans('roles.' . $role) }}
                                     </label><br/>
                                 @endforeach
                             </div>
@@ -181,15 +181,15 @@
                     <div class="box-footer">
                         <a href="{{ url('users') }}"
                            class="btn btn-default">
-                            {{ __('global.app_cancel') }}
+                            {{ trans('app.cancel') }}
                         </a>
                         <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
-                            {{ __('global.app_save') }}
+                            {{ trans('app.save') }}
                         </button>
                         <!--
                         <button class="btn btn-default pull-right" id="btnSendMail"
                                 name="btnSendMail">
-                            {{ __('SAVE AND SEND MAIL') }}
+                            {{-- __('SAVE AND SEND MAIL') --}}
                         </button>
                         -->
                     </div>

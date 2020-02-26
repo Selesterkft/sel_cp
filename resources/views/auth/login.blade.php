@@ -35,7 +35,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ __('global.global_sort_title') }} | {{ __('global.login.button') }}</title>
+    <title>{{ trans('app.sort_title') }} | {{ trans('users.login') }}</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -92,7 +92,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">{{ __('global.login.title') }}</p>
+        <p class="login-box-msg">{{ trans('users.login_title') }}</p>
 
         <form class="form-horizontal" role="form" method="POST"
               action="{{ url('login') }}" autocomplete="off">
@@ -107,7 +107,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
 
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                 <input id="email" name="email" type="email" class="form-control"
-                       placeholder="{{ __('global.login.fields.email') }}">
+                       placeholder="{{ trans('app.email') }}">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 <span id="span_email" name="span_email"
                       class="help-block">
@@ -119,7 +119,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
             <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                 <input id="password" name="password" type="password"
                        class="form-control"
-                       placeholder="{{ __('global.login.fields.password') }}">
+                       placeholder="{{ trans('users.password') }}">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 <span id="span_password" name="span_password" class="help-block">
                     {{ ($errors->has('password')) ? $errors->first('password') : '' }}
@@ -138,7 +138,7 @@ $bgColor = \App\Classes\Helper::getLoginBgColor($company_id);
                 <div class="col-xs-4">
                     <button type="submit"
                             class="btn btn-primary btn-block">
-                        {{ __('global.login.button') }}
+                        {{ trans('users.login') }}
                     </button>
                 </div>
                 <!-- /.col -->

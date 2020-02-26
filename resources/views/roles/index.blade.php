@@ -1,24 +1,24 @@
 @extends('layouts.app')
-@section('title', __('global.roles.title'))
+@section('title', trans('roles.title'))
 
 @section('content')
 
     <section class="content-header">
         <h1>
-            {{ __('global.roles.title') }}
+            {{ trans('roles.title') }}
             <small></small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ url('/') }}">
                     <i class="fa fa-dashboard"></i>&nbsp;
-                    {{ __('global.app_dashboard') }}
+                    {{ trans('app.dashboard') }}
                 </a>
             </li>
 
             <li class="active">
                 <i class="fa fa-file-text-o"></i>&nbsp;
-                {{ __('global.roles.title') }}
+                {{ trans('roles.title') }}
             </li>
 
         </ol>
@@ -34,13 +34,13 @@
 
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            {{ __('global.roles.title') }}
+                            {{ trans('roles.title') }}
                         </h3>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-xs btn-success"
                                href="{{ url('roles.create') }}">&nbsp;
-                                {{ __('global.app_add_new') }}
+                                {{ trans('app.add_new') }}
                             </a>
                             <!--
                             <div class="has-feedback">
@@ -59,9 +59,9 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('global.app_fields.id') }}</th>
-                                    <th>{{ __('global.app_name') }}</th>
-                                    <th width="280px">{{ __('global.app_fields.operations') }}</th>
+                                    <th>{{ trans('app.id') }}</th>
+                                    <th>{{ trans('app.name') }}</th>
+                                    <th width="280px">{{ trans('app.operations') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -70,30 +70,30 @@
                                         <td>{{ $role->id }}</td>
                                         <td>{{ $role->name }}</td>
                                         <td>
-                                            <a class="btn btn-info" 
+                                            <a class="btn btn-info"
                                                href="{{ url('roles.show',$role->id) }}"
-                                               title="{{ __('global.app_view') }}">
+                                               title="{{ trans('app.view') }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
                                             {{--@can('role-edit')--}}
-                                            <a class="btn btn-primary" 
+                                            <a class="btn btn-primary"
                                                href="{{ url('roles.edit',$role->id) }}"
-                                               style="margin-left: 10px;" 
-                                               title="{{ __('global.app_edit') }}">
+                                               style="margin-left: 10px;"
+                                               title="{{ trans('app.edit') }}">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             {{--@endcan--}}
 
                                             @can('role-delete')
                                                 {!! Form::open([
-                                                    'method' => 'DELETE', 
-                                                    'url' => ['roles.destroy', $role->id], 
+                                                    'method' => 'DELETE',
+                                                    'url' => ['roles.destroy', $role->id],
                                                     'style' => 'display:inline']) !!}
 
                                                 <button type="submit" class="btn btn-danger"
-                                                        style="margin-left: 10px;" 
-                                                        title="{{ __('global.app_delete') }}">
+                                                        style="margin-left: 10px;"
+                                                        title="{{ trans('app.delete') }}">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
 
