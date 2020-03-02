@@ -48,6 +48,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapRolesRoutes();
         $this->mapSettingsRoutes();
         $this->mapCompanySubdomain();
+        $this->mapTranslationsRoutes();
+        $this->mapLanguagesRoutes();
     }
 
     /**
@@ -113,32 +115,46 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/Companies.php'));
     }
-    
-    protected function mapVersionsRoutes() 
+
+    protected function mapVersionsRoutes()
     {
         \Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/versions.php'));
     }
-    
-    protected function mapRolesRoutes() 
+
+    protected function mapRolesRoutes()
     {
         \Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/roles.php'));
     }
-    
-    protected function mapSettingsRoutes() 
+
+    protected function mapSettingsRoutes()
     {
         \Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/settings.php'));
     }
-    
+
     protected function mapCompanySubdomain()
     {
         \Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/companysubdomain.php'));
+    }
+
+    protected function mapTranslationsRoutes()
+    {
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/translations.php'));
+    }
+
+    protected function mapLanguagesRoutes()
+    {
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/languages.php'));
     }
 }

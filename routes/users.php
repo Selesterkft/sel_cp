@@ -46,38 +46,35 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
     Route::get('users.create', function()
     {
         //dd('route.users.create');
-        
+
         $controller = app()->make('\App\Http\Controllers\\' . session()->get('version') . '\UsersController');
         return $controller->callAction('create', $parameters = []);
-        
+
     })->name('users.create');
 
     // Ide kell a $company változó!! NE TÖRÖLD KI
     Route::get('users.edit/{id}', function($company, $id)
     {
         //dd('route.users.edit');
-        
+
         $controller = app()->make('\App\Http\Controllers\\' . session()->get('version') . '\UsersController');
         return $controller->callAction('edit', $parameters = ['id' => $id]);
-        
+
     })->name('users.edit');
 
     Route::post('users.store', function()
     {
-        //dd('route.users.store');
-        
         $controller = app()->make('\App\Http\Controllers\\' . session()->get('version') . '\UsersController');
         return $controller->callAction('store', $parameters = ['request' => request()]);
     })->name('users.store');
 
-    // TODO: Tesztelve.
     Route::put('users.update/{id}', function($company, $id)
     {
         //dd('route.users.update');
-        
+
         $controller = app()->make('\App\Http\Controllers\\' . session()->get('version') . '\UsersController');
         return $controller->callAction('update', $parameters = ['request' => request(), 'id' => $id]);
-        
+
     })->name('users.update');
 
     Route::delete('users.destroy/{id}', function($id)

@@ -3,13 +3,13 @@
 $domain = App\Classes\Helper::getAppDomain();
 $controller = app()->make(App\Http\Controllers\SettingsController::class);
 
-Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function() use($controller)
+Route::group( [ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function() use($controller)
 {
     Route::get('settings', function($company) use($controller)
     {
         return $controller->callAction('index', $parameters = []);
     })->name('settings');
-    
+
     // GENERAL settings
     Route::put('settings.saveGeneral', function($company) use($controller)
     {
@@ -22,7 +22,7 @@ Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function()
         return $controller->callAction('restoreGeneral', $parameters = []);
     })->name('settings.restoreGeneral');
     // ============================
-    
+
     // LOGIN Settings
     Route::put('settings.saveLogin', function($company) use($controller)
     {
@@ -35,7 +35,7 @@ Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function()
         return $controller->callAction('restoreLogin', $parameters = []);
     })->name('settings.restoreLogin');
     // ============================
-    
+
     // DASHBOARD Settings
     Route::put('settings.saveDashboard', function($company) use($controller)
     {
@@ -48,7 +48,7 @@ Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function()
         return $controller->callAction('restoreDashboard', $parameters = []);
     })->name('settings.restoreDashboard');
     // ============================
-    
+
     // USERS Settings
     Route::put('settings.saveUsers', function($company) use($controller)
     {
@@ -61,7 +61,7 @@ Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function()
         return $controller->callAction('restoreUsers', $parameters = []);
     })->name('settings.restoreUsers');
     // ============================
-    
+
     // INVOICES Settings
     Route::put('settings.saveInvoices', function($company) use($controller)
     {
@@ -74,7 +74,7 @@ Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function()
         return $controller->callAction('restoreInvoices', $parameters = []);
     })->name('settings.restoreInvoices');
     // ============================
-    
+
     /*
     Route::put('settings.LoginWallpaperSave/{id}', function($company, $id) use($controller)
     {
@@ -83,12 +83,12 @@ Route::group( [ 'domain' => '{company}.' . $domain, '' => ['auth'] ], function()
             'request' => request(), 'id' => $id
         ]);
     })->name('settings.LoginWallpaperSave');
-    
+
     Route::post('settings.StoreMedia', function()
     {
         dd('route.StoreMedia');
     })->name('settings.StoreMedia');
-    
+
     Route::post('settings.FaviconSave/{id}', function($company, $id) use($controller)
     {
         return $controller->callAction('saveFavicon', $parameters = [

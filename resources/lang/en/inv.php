@@ -1,37 +1,37 @@
 <?php
 
 return [
-    'title' => 'Számláim',                  //global.invoices.title
-    'sub_title' => 'Számlaadatok',           //global.invoices.sub_title
-    'search_title' => 'Keresés a számlák között',
+    'title' => 'Invoices',                  //global.invoices.title
+    'sub_title' => 'Account data',           //global.invoices.sub_title
+    'search_title' => 'Search accounts',
 
-    'customer' => 'Vevő',
-    'vendor' => 'Szállító',
+    'customer' => 'Customer',
+    'vendor' => 'Vendor',
 
-    'widget_title' => 'Egyenleg',
-    'widget_currency' => 'Deviza',
-    'widget_type' => 'Típus',
-    'widget_debts' => 'Tartozások',
-    'widget_overdue_debts' => 'Lejárt tartozások',
-    'widget_open_invoices' => 'Nyitott számlák',
-    'widget_paid_so_far' => 'Eddig kifizetve',
-    'widget_net_total' => 'Nettó össz.',
-    'widget_gross_total' => 'Bruttó össz.',
-    'widget_tax_total' => 'ÁFA össz.',
-    'widget_debit' => 'Tartozás',
+    'widget_title' => 'Balance',
+    'widget_currency' => 'Currency',
+    'widget_type' => 'Type',
+    'widget_debts' => 'Debts',
+    'widget_overdue_debts' => 'Overdue Debts',
+    'widget_open_invoices' => 'Open Invoices',
+    'widget_paid_so_far' => 'Paid so Far',
+    'widget_net_total' => 'Net total',
+    'widget_gross_total' => 'Gross total',
+    'widget_tax_total' => 'Tax total.',
+    'widget_debit' => 'Debit',
 
     'ID' => '',
     'SELEXPED_INV_ID' => '',
     'ClientID' => '',
     'TransactID' => '',
-    'inv_num' => 'Számla szám',              //global.invoices.fields.inv_num
+    'inv_num' => 'Inv. Num',              //global.invoices.fields.inv_num
     'CancelInv_Num' => '',
     'Inv_Num_int' => '',
-    'inv_seqnum' => 'Iktatószám',           //global.invoices.fields.seq_num
+    'inv_seqnum' => 'Inv.Seq Num',           //global.invoices.fields.seq_num
     'ACCT_Periods_ID' => '',
 
-    'ACCT_Period' => 'Periódus',            //global.invoices.fields.period
-    'period_to_from' => 'Periódus tól-ig',  //global.invoices.fields.period_to_from
+    'ACCT_Period' => 'Period',            //global.invoices.fields.period
+    'period_to_from' => 'Period To From',  //global.invoices.fields.period_to_from
 
     'TypeID' => '',
     'inv_typeid' => '',
@@ -45,7 +45,7 @@ return [
     'Printed' => '',
     'ClosedYN' => '',
     'Note2' => '',
-    'cancellation_reasoncode' => 'Törlési ok kódja',
+    'cancellation_reasoncode' => 'Cancellation Reason Code',
     'Vendor_ID' => '',
     'Vendor_Name1' => '',
     'Vendor_Name2' => '',
@@ -97,19 +97,19 @@ return [
     'Period_FROM' => '',
     'Period_TO' => '',
     'inv_date' => 'Kelte',
-    'delivery_date' => 'Teljesítve',
+    'delivery_date' => 'delivery Date',
     'Curr_Dates_Method' => '',
     'CurrDate' => '',
     'AccDate' => '',
     'PaymentMethod' => '',
-    'due_date' => 'Lejárat',
-    'post_in_date' => 'Beérkezés dátuma',
+    'due_date' => 'Due Date',
+    'post_in_date' => 'Post in Date',
     'InvInDueDate' => '',
     'Net_LC' => '',
     'Tax_LC' => '',
     'Gross_LC' => '',
     'PayStatus' => '',
-    'fully_paid_date' => 'Teljes kifizetés',
+    'fully_paid_date' => 'Fully Paid Date',
     'PaidAmount_DC' => '',
     'PaidAmount_FC' => '',
     'PaidAmount_LC' => '',
@@ -129,9 +129,9 @@ return [
     //'Attachments' => '',      //app
     'Added_Date' => '',
     'Added_User' => '',
-    'added_user_name' => 'Rögzítette',
+    'added_user_name' => 'Added User Name',
     'ACC_Info' => '',
-    'subcontracted_services' => 'Közvetített szolgáltatás', //
+    'subcontracted_services' => 'Subcontracted Services', //
     'Wrhs_Tran_ID' => '',
     'Prev_Ref_INV_ID' => '',
     'UserFld_int01' => '',
@@ -147,19 +147,19 @@ return [
     'UserFld_date02' => '',
     'UserFld_date03' => '',
 
-    'partner_full_address' => 'Teljes cím',
-    'partner_country' => 'Ország',
-    'partner_state' => 'Megye',
-    'partner_zip' => 'Irszám',
-    'partner_city' => 'Város',
-    'partner_addr_district' => 'Kerület',
-    'partner_addr' => 'Közt. név',
+    'partner_full_address' => 'Full Address',
+    'partner_country' => 'Country',
+    'partner_state' => 'State',
+    'partner_zip' => 'ZIP',
+    'partner_city' => 'City',
+    'partner_addr_district' => 'District',
+    'partner_addr' => 'Address',
     'partner_addr_ps_type' => 'Közterület tip.',
-    'partner_addr_housenr' => 'Házszám',
-    'partner_addr_building' => 'Épület',
-    'partner_addr_stairway' => 'Lépcsőház',
-    'partner_addr_floor' => 'Emelet',
-    'partner_addr_door' => 'Ajtó',
+    'partner_addr_housenr' => 'House number',
+    'partner_addr_building' => 'Biulding',
+    'partner_addr_stairway' => 'Stairway',
+    'partner_addr_floor' => 'Floor',
+    'partner_addr_door' => 'Door',
     '' => '',
     '' => '',
     '' => '',

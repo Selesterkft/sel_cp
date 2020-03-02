@@ -161,7 +161,11 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
+
+        // Nelvkezelés átirányítása
+        //Illuminate\Translation\TranslationServiceProvider::class,
+        Waavi\Translation\TranslationServiceProvider::class,
+
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
@@ -251,6 +255,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Carbon' => Carbon\Carbon::class,
         'Image' => Intervention\Image\Facades\Image::class,
+
+        'TranslationCache' => Waavi\Translation\Facades\TranslationCache::class,
     ],
 
 ];

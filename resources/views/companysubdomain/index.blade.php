@@ -64,7 +64,7 @@
                                 <tr>
                                     {{--<th>#</th>--}}
                                     {{--<th>CompanyID</th>--}}
-                                    <th>{{ trans('company_subdomain.company') }}</th>
+                                    <th>{{ trans('app.company') }}</th>
                                     <th>{{ trans('company_subdomain.company_nickname') }}</th>
                                     <th>{{ trans('company_subdomain.subdomain') }}</th>
                                     <th>{{ trans('app.operations') }}</th>

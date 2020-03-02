@@ -22,7 +22,8 @@
         "ramsey/uuid": "^3.8",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^2.37",
-        "spatie/laravel-searchable": "^1.4"
+        "spatie/laravel-searchable": "^1.4",
+        "waavi/translation": "2.3.x"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

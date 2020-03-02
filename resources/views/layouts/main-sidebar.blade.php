@@ -202,6 +202,24 @@
                 </a>
             </li>
             @endcan
+
+                <li class="{{ ($request->is('languages*')) ? 'active' : '' }}">
+                    <a href="{{ url('languages') }}">
+                        <i class="fa  fa-users"></i>&nbsp;
+                        <span>
+                            {{ trans('languages.title') }}
+                        </span>
+                    </a>
+                </li>
+
+                <li class="{{ ($request->is('translations*')) ? 'active' : '' }}">
+                    <a href="{{ url('translations', app()->getLocale()) }}">
+                        <i class="fa  fa-users"></i>&nbsp;
+                        <span>
+                            {{ trans('translations.title') }}
+                        </span>
+                    </a>
+                </li>
             @endif
 
             @can('settings-menu')

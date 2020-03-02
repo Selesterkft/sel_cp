@@ -275,7 +275,7 @@
                         </table>
 
                         <!-- SEARCH MODAL -->
-                        @includeIf('modals.modal_search2', [
+                        @includeIf('modals.modal_search', [
                             'fields' => session()->get('version') . '.invoices.partials.fields_search',
                             'title' => trans('app.search_title'),
                             'url' => 'invoices',

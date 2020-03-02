@@ -67,7 +67,7 @@
                             <!-- COMPANIES -->
                             <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
                                 {{ Form::label('CompanyID',
-                                    trans('company_subdomain.company') . ':',
+                                    trans('app.company') . ':',
                                     ['class' => 'col-sm-2 control-label']) }}
                                 <div class="col-sm-10">
                                     {!! Form::select(

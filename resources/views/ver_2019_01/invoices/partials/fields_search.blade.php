@@ -57,7 +57,7 @@
         <div class="">
             <select id="s_vendor" name="s_vendor" class="form-control tooltip-enabled"
                     data-toggle="tooltip"
-                    title="{{ trans('invoices.vendor') }}">
+                    title="{{ trans('inv.vendor') }}">
                 <option value="0">{{ trans('app.select_first_element') }}</option>
 
                 <?php
