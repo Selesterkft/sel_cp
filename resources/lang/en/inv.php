@@ -1,19 +1,19 @@
 <?php
 
 return [
-    'title' => 'Invoices',                  //global.invoices.title
-    'sub_title' => 'Account data',           //global.invoices.sub_title
-    'search_title' => 'Search accounts',
+    'title'                 => 'Invoices',                  //global.invoices.title
+    'sub_title'             => 'Account data',           //global.invoices.sub_title
+    'search_title'          => 'Search accounts',
 
-    'customer' => 'Customer',
-    'vendor' => 'Vendor',
+    'customer'              => 'Customer',
+    'vendor'                => 'Vendor',
 
-    'widget_title' => 'Balance',
-    'widget_currency' => 'Currency',
-    'widget_type' => 'Type',
-    'widget_debts' => 'Debts',
-    'widget_overdue_debts' => 'Overdue Debts',
-    'widget_open_invoices' => 'Open Invoices',
+    'widget_title'          => 'Balance',
+    'widget_currency'       => 'Currency',
+    'widget_type'           => 'Type',
+    'widget_debts'          => 'Debts',
+    'widget_overdue_debts'  => 'Overdue Debts',
+    'widget_open_invoices'  => 'Open Invoices',
     'widget_paid_so_far' => 'Paid so Far',
     'widget_net_total' => 'Net total',
     'widget_gross_total' => 'Gross total',
