@@ -205,7 +205,7 @@
 
                 <li class="{{ ($request->is('languages*')) ? 'active' : '' }}">
                     <a href="{{ url('languages') }}">
-                        <i class="fa  fa-users"></i>&nbsp;
+                        <i class="fa  fa-language"></i>&nbsp;
                         <span>
                             {{ trans('languages.title') }}
                         </span>
@@ -214,7 +214,7 @@
 
                 <li class="{{ ($request->is('translations*')) ? 'active' : '' }}">
                     <a href="{{ url('translations', app()->getLocale()) }}">
-                        <i class="fa  fa-users"></i>&nbsp;
+                        <i class="fa  fa-language"></i>&nbsp;
                         <span>
                             {{ trans('translations.title') }}
                         </span>

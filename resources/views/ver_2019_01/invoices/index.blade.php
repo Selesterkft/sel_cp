@@ -68,6 +68,9 @@
                                data-url="{{ url('invoices') }}"
                                data-toggle="table"
 
+                               data-cookie="true"
+                               data-cookie-id-table="saveId"
+
                                data-show-refresh="true"
                                data-show-columns="true"
                                data-show-export="true"
@@ -80,11 +83,11 @@
                                data-page-list="[10, 25, 50, 100]">
                             <thead>
                             <tr>
-                                <th data-rowspan="2"></th>
+                                <th data-switchable="false" data-rowspan="2"></th>
                                 <th data-field="Inv_Num" data-rowspan="2">
                                     {{ trans('inv.inv_num') }}
                                 </th>
-                                <th data-field="Inv_SeqNum" data-rowspan="2">
+                                <th data-field="Inv_SeqNum" data-rowspan="2" data-align="right">
                                     {{ trans('inv.inv_seqnum') }}
                                 </th>
                                 <th data-field="Partner_Name" data-rowspan="2">
@@ -93,11 +96,6 @@
                                 <th data-field="InvType" data-rowspan="2">
                                     {{ trans('app.type_of_invoice') }}
                                 </th>
-                                {{--
-                                <th data-field="PaymentMethod_ID" data-rowspan="2">
-                                    PaymentMethod_ID
-                                </th>
-                                --}}
                                 <th data-field="PaymentMethod" data-rowspan="2">
                                     {{ trans('app.payment_method') }}
                                 </th>
@@ -105,99 +103,115 @@
                                 <th data-field="PayStatus" data-rowspan="2">
                                     {{ trans('app.pay_status') }}
                                 </th>
-
+{{-- Bank & Tax --}}
+                                <th data-colspan="4">
+                                    {{ trans('bank_and_tax_num') }}
+                                </th>
+{{-- LC --}}
                                 <th data-colspan="5">
                                     {{ trans('app.lc') }}
                                 </th>
+{{-- DC --}}
                                 <th data-colspan="5">
                                     {{ trans('app.dc') }}
                                 </th>
+{{-- FC --}}
                                 <th data-colspan="5">
                                     {{ trans('app.fc') }}
                                 </th>
-
+{{-- Dátumok --}}
                                 <th data-colspan="5">
                                     {{ trans('app.dates') }}
                                 </th>
-
+{{-- Sub Service --}}
                                 <th data-field="Subcontracted_Services" data-rowspan="2">
                                     {{ trans('inv.subcontracted_services') }}
                                 </th>
-
-                                <th data-colspan="13">
+{{-- Pertner Address --}}
+                                <th data-colspan="15">
                                     {{ trans('app.partner_address') }}
                                 </th>
-
+{{-- Period --}}
                                 <th data-colspan="4">
                                     {{ trans('inv.ACCT_Period') }}
                                 </th>
-
+{{-- Cancellation --}}
                                 <th data-field="Cancellation_ReasonCode" data-rowspan="2">
                                     {{ trans('inv.cancellation_reasoncode')}}
                                 </th>
+{{-- Ref Inv --}}
                                 <th data-field="Ref_Inv" data-rowspan="2">
                                     {{ trans('inv.ref_inv') }}
                                 </th>
+{{-- Remarks --}}
                                 <th data-field="Remarks" data-rowspan="2">
                                     {{ trans('app.remarks') }}
                                 </th>
+{{-- Attachment --}}
                                 <th data-field="Attachments" data-rowspan="2">
                                     {{ trans('app.attachments') }}
                                 </th>
+{{-- Added user --}}
                                 <th data-field="Added_User_Name" data-rowspan="2">
                                     {{ trans('inv.added_user_name') }}
                                 </th>
 
                             </tr>
                             <tr>
+{{-- Bank & Tax --}}
+                                <th data-field="Partner_Bank_Account">{{ trans('inv.partner_bank_account') }}</th>
+                                <th data-field="Partner_Tax_Num">{{ trans('inv.partner_tax_num') }}</th>
+                                <th data-field="Partner_Tax_Num2">{{ trans('inv.partner_tax_num2') }}</th>
+                                <th data-field="Partner_IBAN">{{ trans('inv.partner_iban') }}</th>
+{{-- LC --}}
                                 <th data-field="Curr_LC">
                                     {{ trans('app.curr') }}
                                 </th>
-                                <th data-field="Net_LC">
+                                <th data-field="Net_LC" data-align="right">
                                     {{ trans('app.net') }}
                                 </th>
-                                <th data-field="Tax_LC">
+                                <th data-field="Tax_LC" data-align="right">
                                     {{ trans('app.tax') }}
                                 </th>
-                                <th data-field="Gross_LC">
+                                <th data-field="Gross_LC" data-align="right">
                                     {{ trans('app.gross') }}
                                 </th>
-                                <th data-field="PaidAmount_LC">
+                                <th data-field="PaidAmount_LC" data-align="right">
                                     {{ trans('app.paid_amount') }}
                                 </th>
-
+{{-- DC --}}
                                 <th data-field="Curr_DC">
                                     {{ trans('app.curr') }}
                                 </th>
-                                <th data-field="Net_DC">
+                                <th data-field="Net_DC" data-align="right">
                                     {{ trans('app.net') }}
                                 </th>
-                                <th data-field="Tax_DC">
+                                <th data-field="Tax_DC" data-align="right">
                                     {{ trans('app.tax') }}
                                 </th>
-                                <th data-field="Gross_DC">
+                                <th data-field="Gross_DC" data-align="right">
                                     {{ trans('app.gross') }}
                                 </th>
-                                <th data-field="PaidAmount_DC">
+                                <th data-field="PaidAmount_DC" data-align="right">
                                     {{ trans('app.paid_amount') }}
                                 </th>
-
+{{-- FC --}}
                                 <th data-field="Curr_FC">
-                                    {{ trans('global.app_curr') }}
+                                    {{ trans('app.curr') }}
                                 </th>
-                                <th data-field="Net_FC">
+                                <th data-field="Net_FC" data-align="right">
                                     {{ trans('app.net') }}
                                 </th>
-                                <th data-field="Tax_FC">
+                                <th data-field="Tax_FC" data-align="right">
                                     {{ trans('app.tax') }}
                                 </th>
-                                <th data-field="Gross_FC">
+                                <th data-field="Gross_FC" data-align="right">
                                     {{ trans('app.gross') }}
                                 </th>
-                                <th data-field="PaidAmount_FC">
+                                <th data-field="PaidAmount_FC" data-align="right">
                                     {{ trans('app.paid_amount') }}
                                 </th>
-
+{{-- Dátumok --}}
                                 {{-- Kelte --}}
                                 <th data-field="InvDate">
                                     {{ trans('inv.inv_date') }}
@@ -212,13 +226,16 @@
                                 <th data-field="DueDate">
                                     {{ trans('inv.due_date') }}
                                 </th>
-
                                 <th data-field="Fully_paid_date">
                                     {{ trans('inv.fully_paid_date') }}
                                 </th>
-
+{{-- Sub Service --}}
+{{-- Perner Address --}}
                                 <th data-field="Partner_Full_Address">
                                     {{ trans('inv.partner_full_address') }}
+                                </th>
+                                <th data-field="Partner_Country_State_ZIP_City">
+                                    {{ trans('inv.partner_country_state_zip_city') }}
                                 </th>
                                 <th data-field="Partner_Country">
                                     {{ trans('inv.partner_country') }}
@@ -241,6 +258,9 @@
                                 <th data-field="Partner_Addr_ps_type">
                                     {{ trans('inv.partner_addr_ps_type') }}
                                 </th>
+                                <th data-field="Partner_District_PsType_HouseNr">
+                                    {{ trans('inv.partner_district_pstype_housenr') }}
+                                </th>
                                 <th data-field="Partner_Addr_housenr">
                                     {{ trans('inv.partner_addr_housenr') }}
                                 </th>
@@ -256,7 +276,7 @@
                                 <th data-field="Partner_Addr_door">
                                     {{ trans('inv.partner_addr_door') }}
                                 </th>
-
+{{-- Period --}}
                                 <th data-field="ACCT_Period">
                                     {{ trans('inv.ACCT_Period') }}
                                 </th>
@@ -269,7 +289,7 @@
                                 <th data-field="Period_TO">
                                     {{ trans('app.to') }}
                                 </th>
-
+{{----}}
                             </tr>
                             </thead>
                         </table>
@@ -296,8 +316,8 @@
     {{-- <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">--}}
 
     {{-- Daterange Picker --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
-    {{--<link href="{{ asset('assets/bower_components/bootstrap-daterangepicker/datepicker.min.css') }}" rel="stylesheet">--}}
+    {{--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>--}}
+    <link href="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
 
     @php
         echo "<!-- MENU BACGROUND COLOR -->\n";
@@ -318,6 +338,18 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        table.table-bordered{
+            border:1px solid darkgray;
+            margin-top:20px;
+        }
+        table.table-bordered > thead > tr > th{
+            border:1px solid darkgray;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid darkgray;
+        }
+
     </style>
 
 @endsection
@@ -338,9 +370,9 @@
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
-    {{--
+
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
-    --}}
+
     <!--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
     -->
@@ -349,7 +381,6 @@
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     {{-- Daterange Picker --}}
-{{--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>--}}
     <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
 
     <script>

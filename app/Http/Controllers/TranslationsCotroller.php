@@ -38,7 +38,21 @@ class TranslationsCotroller extends Controller
         }
 
         $model = new Translation();
-        $model = $model->where('locale', $language);
+
+        if( request()->has('filter') && request()->get('filter') )
+        {
+            $model = $model
+                ->where('text', 'like', '%' . request()->get('filter') .'%');
+        }
+        else
+        {
+            if( request()->has('group') && request()->get('group') )
+            {
+                $model = $model->where('group', request()->get('group'));
+            }
+        }
+
+        /*$model = $model->where('locale', $language);
 
         if( request()->has('group') && request()->get('group') )
         {
@@ -47,20 +61,32 @@ class TranslationsCotroller extends Controller
 
         if( request()->has('filter') && request()->get('filter') )
         {
-            $model = $model->where('text', '%' . request()->get('group') .'%');
-        }
+            $model = $model
+                ->where('text', 'like', '%' . request()->get('filter') .'%');
+        }*/
 
-        $languages = Language::select('locale', 'name')->get()->toArray();
+        $model = $model
+            ->orderBy('locale')
+            ->orderBy('group')
+            ->orderBy('item');
+        //dd('TranslationsCotroller::index', request()->all(), $model->toSql());
+        $sql = $model->toSql();
+
+        $translations = $model
+            ->paginate(10);
+
+        $languages = Language::select('locale', 'name')->orderBy('name')->get()->toArray();
         $groups = Translation::groupBy('group')
+            ->orderBy('group')
             ->select('group')
             ->get()->toArray();
-        $translations = $model->get();
 
         return view('vendor.translation.languages.translations.index', [
             'translations' => $translations,
             'languages' => $languages,
             'groups' => $groups,
             'language' => $language,
+            'sql' => $sql
         ]);
     }
 
@@ -156,6 +182,19 @@ class TranslationsCotroller extends Controller
         return redirect()
             ->to('translations/' . $language)
             ->with('success', trans('messages.translation_updated'));
+    }
+
+    public function editTranslate($language)
+    {
+        //dd('TranslationsCotroller::editTranslate', request()->all(), $language);
+        if( request()->ajax() )
+        {
+            $this->repository->update((int)request()->get('pk'), request()->get('value'));
+
+            TranslationCache::flushAll();
+
+            return json_encode(['result' => 'OK']);
+        }
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Waavi\Translation\Facades\TranslationCache;
 
 class LocalizationController extends Controller
 {
@@ -17,8 +18,10 @@ class LocalizationController extends Controller
 
         session()->put('locale', $locale);
 
+        TranslationCache::flushAll();
+
         //dd('LocalizationController.index', "locale: {$locale}", app()->getLocale(), session()->all());
-        
+
         return redirect()->back();
     }
 

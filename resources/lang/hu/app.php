@@ -11,6 +11,7 @@ return [
     'more_info'				=> 'További információ',
     'operations'			=> 'Műveletek',
     'id'					=> '#',
+    'add'                   => 'Új elem',
     'add_new'				=> 'Új hozzáadása',
 
     'view'					=> 'Nézet',

@@ -48,6 +48,7 @@
                             <input type="hidden" id="locale" name="locale" value="{{ $language }}">
                             <input type="hidden" id="unstable" name="unstable" value="0">
                             <input type="hidden" id="locked" name="locked" value="0">
+                            <input type="hidden" id="namespace" name="namespace" value="*">
 
                             @include('vendor.translation.forms.text', [
                                 'field' => 'group',
@@ -70,20 +71,20 @@
                                 'value' => '',
                             ])
 
-                            @include('vendor.translation.forms.text', [
+                            {{--@include('vendor.translation.forms.text', [
                                 'field' => 'namespace',
                                 'label' => trans('translations.namespace_label'),
                                 'placeholder' => trans('translations.namespace_placeholder'),
                                 'value' => '',
-                            ])
+                            ])--}}
                         </div>
-                        <div class="panel-footer">
+                        <div class="panel-footer with-border">
 
-                            <a href="{{ url()->previous() }}"
-                               class="btn btn-default">
+                            <a href="{{ url()->to('translations', $language) }}"
+                               class="btn btn-info">
                                 {{ trans('app.back_to_list') }}
                             </a>
-                            <button type="submit" class="btn btn-default pull-right">
+                            <button type="submit" class="btn btn-success pull-right">
                                 {{ trans('app.save') }}
                             </button>
                         </div>

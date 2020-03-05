@@ -31,7 +31,7 @@ class InvoicesController extends Controller
         $loggedUser = auth()->user();
         $datum = null;
         $clientID = $loggedUser->CompanyID;
-        $supervisor_id = $loggedUser->Supervisor_ID;
+        //$supervisor_id = $loggedUser->Supervisor_ID;
 
         if( $request->ajax() )
         {

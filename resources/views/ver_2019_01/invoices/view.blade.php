@@ -113,134 +113,26 @@
                            data-show-footer="true">
                         <thead>
                         <tr>
-                            {{-- Pos_ID --}}
-                            <th data-field="Pos_ID" data-align="left" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true">
-                                {{ trans('inv_l.pos_id') }}
-                            </th>
-                            {{-- Descr --}}
-                            <th data-field="Descr" data-align="left" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true">
-                                {{ trans('inv_l.descr') }}
-                            </th>
-                            {{-- Pcs --}}
-                            <th data-field="Pcs"
-                                data-align="right" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true"
-                                data-formatter="pcs_formatter">
-                                {{ trans('inv_l.pcs') }}
-                            </th>
-                            {{-- Unit --}}
-                            <th data-field="Unit" data-align="left" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true">
-                                {{ trans('inv_l.unit') }}
-                            </th>
-                            {{-- DC --}}
-                            {{-- Curr_DC --}}
-                            <th data-field="Curr_DC"
-                                data-align="left" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true">
-                                {{ trans('inv_l.curr_dc') }}
-                            </th>
-                            <th data-field="UnitPrice_DC" data-formatter="decimalFormatter"
-                                data-align="right" data-halign="center"
-                                data-sortable="true" data-searchable="true" data-switchable="true">
-                                {{ trans('inv_l.unit_price_dc') }}
-                            </th>
-                            <th data-field="Net_DC" data-formatter="decimalFormatter"
-                                data-align="right" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true">
-                                {{ trans('inv_l.net_dc') }}
-                            </th>
-                            <th data-field="Tax_DC" data-formatter="decimalFormatter"
-                                data-align="right" data-halign="center"
-                                data-sortable="true" data-searchable="true" data-switchable="true">
-                                {{ trans('inv_l.tax_dc') }}
-                            </th>
-                            <th data-field="Gross_DC" data-formatter="decimalFormatter"
-                                data-align="right" data-halign="center"
-                                data-sortable="true" data-searchable="true"
-                                data-switchable="true">
-                                {{ trans('inv_l.gross_dc') }}
-                            </th>
-                            {{----}}
-                            {{-- LC --}}
-                            {{--
-                                                    <th data-field="UnitPrice_LC" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.unit_price_lc') }}
-                                                    </th>
-                                                    <th data-field="Net_LC" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.net_lc') }}
-                                                    </th>
-                                                    <th data-field="Tax_LC" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.tax_lc') }}
-                                                    </th>
-                                                    <th data-field="GROSS_LC"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.gross_lc') }}
-                                                    </th>
-                            --}}
-                            {{--
-                                                    <th data-field="UnitPrice_FC" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.unit_price_fc') }}
-                                                    </th>
-                                                    <th data-field="UnitPrice_FC2" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.unit_price_fc2') }}
-                                                    </th>
-
-
-                                                    <th data-field="Net_FC" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.net_fc') }}
-                                                    </th>
-                                                    <th data-field="Netto_FC2" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.net_fc2') }}
-                                                    </th>
-                                                    <th data-field="TaxRate" data-formatter="percentFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.tax_rate') }}
-                                                    </th>
-
-                                                    <th data-field="Tax_FC" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.app_tax_fc') }}
-                                                    </th>
-                                                    <th data-field="Tax_FC2" data-formatter="decimalFormatter"
-                                                        data-align="right" data-halign="center"
-                                                        data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.tax_fc2') }}
-                                                    </th>
-
-
-                                                    <th data-field="GROSS_FC" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.gross_fc') }}
-                                                    </th>
-                                                    <th data-field="GROSS_FC2" data-align="right" data-halign="center" data-sortable="true" data-searchable="true" data-switchable="true">
-                                                        {{ trans('global.invoice.fields.gross_fc2') }}
-                                                    </th>
-                            --}}
+                            <th data-field="Ord_Num">{{ trans('PozSzam') }}</th>
+                            <th data-field="PosInfo">{{ trans('PozAzonosito') }}</th>
+                            <th data-field="Rates_ID">{{ trans('Jogcim') }}</th>
+                            <th data-field="Note">{{ trans('Megnevezes') }}</th>
+                            <th data-field="Note">{{ trans('Negjegyzes') }}</th>
+                            <th data-field="Pcs" data-align="right">{{ trans('Darabszam') }}</th>
+                            <th data-field="Unit">{{ trans('ME') }}</th>
+                            <th data-field="UnitPrice_DC" data-align="right">{{ trans('Egysegar') }}</th>
+                            <th data-field="Netto_DC" data-align="right">{{ trans('Tetelsor Netto') }}</th>
+                            <th data-field="ACCT_TaxCodes_ID">{{ trans('ÁFA Kód') }}</th>
+                            <th data-field="TaxRate" data-align="right">{{ trans('ÁFA kulcs') }}</th>
+                            <th data-field="Tax_DC" data-align="right">{{ trans('Tax DC') }}</th>
+                            <th data-field="Brutto_DC" data-align="right">{{ trans('Brutto') }}</th>
+                            <th data-field="UnitPrice_FC2" data-align="right">{{ trans('Egysegar') }}</th>
+                            <th data-field="Tax_FC2" data-align="right">{{ trans('tételsor ÁFA') }}</th>
+                            <th data-field="Brutto_FC2" data-align="right">{{ trans('tételsor Brutto') }}</th>
+                            <th data-field="Curr_ID">{{ trans('tételsor devizanem') }}</th>
+                            <th data-field="Period_From_To">{{ trans('period tol ig') }}</th>
+                            <th data-field="Period_FROM">{{ trans('period tól') }}</th>
+                            <th data-field="Period_TO">{{ trans('period ig') }}</th>
                         </tr>
                         </thead>
 
@@ -256,6 +148,7 @@
                     </p>
 
                     <div class="table-responsive">
+
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -332,6 +225,7 @@
                                 </td>
                             </tr>
                         </table>
+
                     </div>
                 </div>
             </div>

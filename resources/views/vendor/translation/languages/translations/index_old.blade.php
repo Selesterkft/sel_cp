@@ -69,43 +69,40 @@
                     <div class="box-body with-border">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
-                                <thead>
+                            <thead>
+                            <tr>
+                                <th>{{ trans('app.operations') }}</th>
+                                {{--<th>{{ trans('app.id') }}</th>--}}
+                                <th>{{ trans('language.locale') }}</th>
+                                <th>{{ trans('translation.namespace') }}</th>
+                                <th>{{ trans('translation.group') }}</th>
+                                <th>{{ trans('translation.item') }}</th>
+                                <th>{{ trans('translation.text') }}</th>
+                                <th>{{ trans('translation.unstable') }}</th>
+                                <th>{{ trans('translation.locked') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($translations as $translation)
                                 <tr>
-                                    {{--<th>{{ trans('app.id') }}</th>--}}
-                                    <th>{{ trans('language.locale') }}</th>
-                                    {{--<th>{{ trans('translation.namespace') }}</th>--}}
-                                    <th>{{ trans('translations.group') }}</th>
-                                    <th>{{ trans('translations.item') }}</th>
-                                    <th>{{ trans('translations.text') }}</th>
-                                    {{--<th>{{ trans('translation.unstable') }}</th>--}}
-                                    {{--<th>{{ trans('translation.locked') }}</th>--}}
+                                    <td>
+                                        <a href="{{ url('translations') . '/' . $language . '/' . $translation->id}}"
+                                           class="btn btn-default">
+                                            {{ trans('app.edit') }}
+                                        </a>
+                                    </td>
+                                    {{--<td>{{ $translation->id }}</td>--}}
+                                    <td>{{ $translation->locale }}</td>
+                                    <td>{{ $translation->namespace }}</td>
+                                    <td>{{ $translation->group }}</td>
+                                    <td>{{ $translation->item }}</td>
+                                    <td>{{ $translation->text }}</td>
+                                    <td>{{ $translation->unstable }}</td>
+                                    <td>{{ $translation->locked }}</td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($translations as $translation)
-                                    <tr>
-                                        {{--<td>{{ $translation->id }}</td>--}}
-                                        <td>{{ $translation->locale }}</td>
-                                        {{--<td>{{ $translation->namespace }}</td>--}}
-                                        <td>{{ $translation->group }}</td>
-                                        <td>{{ $translation->item }}</td>
-                                        <td>
-                                            <a href="#"
-                                               id="text" name="text"
-                                               class="editable editable-pre-wrapped editable-click"
-                                               data-type="textarea"
-                                               data-name="{{ $language }}"
-                                               data-pk="{{ $translation->id }}"
-                                               data-url="{{ url("api/translations/{$language}/edit") }}"
-                                               data-title="Szerkesztés">{{ $translation->text }}</a>
-                                        </td>
-                                        {{--<td>{{ $translation->unstable }}</td>--}}
-                                        {{--<td>{{ $translation->locked }}</td>--}}
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            {{ $translations->links() }}
+                            @endforeach
+                            </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>
@@ -115,45 +112,14 @@
     </section>
 
 @endsection
-@section('css')
-    <link href="{{ asset('assets/x-editable/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet">
-@endsection
 @section('js')
-    <script src="{{ asset('assets/x-editable/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
     <script>
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $(function()
-        {
-            $.fn.editable.defaults.mode = 'popup';
-        });
-
         $(document).ready(function()
         {
-            $('.editable').editable({
-                rows: 10,
-                showbuttons: 'bottom',
-                emptytext: '{{ trans('app.empty') }}',
-                ajaxOptions: {
-                    type: 'post',
-                    dataType: 'json'
-                },
-                success: function(response, newValue) {
-                    location.reload();
-                }
-            });
-
             $('select').on('change', function()
             {
                 $('#frmTranslation').submit();
             });
-
         });
-
     </script>
 @endsection

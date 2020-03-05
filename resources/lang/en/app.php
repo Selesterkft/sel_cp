@@ -10,6 +10,7 @@ return [
     'more_info'				=> 'More Information',
     'operations'			=> 'Operations',
     'id'					=> '#',
+    'add'                   => 'Add',
     'add_new'				=> 'New Record',
 
     'view'					=> 'View',
