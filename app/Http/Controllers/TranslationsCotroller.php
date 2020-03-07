@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\TranslationImport;
 use Illuminate\Http\Request;
+use App\Exports\TranslationExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Waavi\Translation\Facades\TranslationCache;
 use Waavi\Translation\Models\Language;
 use Waavi\Translation\Models\Translation;
@@ -28,16 +31,23 @@ class TranslationsCotroller extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $language
      * @return \Illuminate\Http\Response
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function index($language)
     {
+        //dd('TranslationsCotroller::index', request()->all());
+
         if( request()->has('language') && request()->get('language') !== $language )
         {
             $language = request()->get('language');
         }
 
         $model = new Translation();
+
+        $model = $model->where('locale', $language);
 
         if( request()->has('filter') && request()->get('filter') )
         {
@@ -65,12 +75,23 @@ class TranslationsCotroller extends Controller
                 ->where('text', 'like', '%' . request()->get('filter') .'%');
         }*/
 
+        $model = $model->select('locale', 'group', 'item', 'text');
+
         $model = $model
             ->orderBy('locale')
             ->orderBy('group')
             ->orderBy('item');
         //dd('TranslationsCotroller::index', request()->all(), $model->toSql());
         $sql = $model->toSql();
+
+        if( request()->has('export') && request()->get('export') == 1 )
+        {
+            $tExport = new TranslationExport();
+            //dd('TranslationsCotroller::index', $sql);
+            $tExport->setModel($model->get());
+            //dd('TranslationsCotroller::index', $tExport);
+            return \Excel::download($tExport, "translations_{$language}.xlsx");;
+        }
 
         $translations = $model
             ->paginate(10);
@@ -88,6 +109,35 @@ class TranslationsCotroller extends Controller
             'language' => $language,
             'sql' => $sql
         ]);
+    }
+
+    public function import(Request $request)
+    {
+        $path = $request->file('file')->getRealPath();
+        $import = new TranslationImport();
+
+        Excel::import($import, $path);
+        $data = $import->getData();
+
+        $count = 0;
+        if( !empty($data) )
+        {
+            $count = count($data);
+            //$data->update();
+            //echo '<pre>';
+            foreach($data as $trans)
+            {
+
+                //dd($trans);
+                //print_r("item: {$trans->item} text: {$trans->text}\n");
+                $trans->update();
+                //$count += 1;
+            }
+            //echo '</pre>';
+            //dd(count($data));
+        }
+
+        return redirect()->back()->with('success', "Frissítve: {$count} sor");
     }
 
     /**

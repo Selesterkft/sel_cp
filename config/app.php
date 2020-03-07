@@ -190,6 +190,7 @@ return [
         //EloquentFilter\ServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -257,6 +258,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
 
         'TranslationCache' => Waavi\Translation\Facades\TranslationCache::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

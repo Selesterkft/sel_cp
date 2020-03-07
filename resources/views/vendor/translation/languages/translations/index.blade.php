@@ -37,9 +37,10 @@
                     </div>
                     <div class="box-body">
                         <div class="row">
-                            <form id="frmTranslation" name="frmTranslation" action="{{ url('translations') . '/' . $language }}" method="get">
+                            <form id="frmTranslation" name="frmTranslation"
+                                  action="{{ url('translations') . '/' . $language }}"
+                                  method="get" onsubmit="afterSubmit()">
                                 <div class="col-xs-5">
-                                    {{--<input type="text" class="form-control" placeholder=".col-xs-3">--}}
                                     @include('vendor.translation.forms.search', ['name' => 'filter', 'value' => Request::get('filter')])
                                 </div>
                                 <div class="col-xs-3">
@@ -51,6 +52,7 @@
                                 <div class="col-xs-2">
                                     <a href="{{ url('translations/create', $language) }}" class="btn btn-default">{{ trans('app.add') }}</a>
                                 </div>
+                                <input type="hidden" id="export" name="export" value="0">
                             </form>
                         </div>
                     </div>
@@ -67,6 +69,19 @@
                         </h3>
                     </div>
                     <div class="box-body with-border">
+                        <div class="box-tools">
+                            <form class="form-horizontal" action="{{ url('translations/import') }}" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <button id="btnExport" name="btnExport" class="btn btn-default btn-sm" style="display:inline;">Export</button>
+                                <span class="control-fileupload" style="display:inline;">
+                                    <label for="file" style="display:inline;margin-left: 10px;">Fájl kiválasztása :</label>
+                                    {{--<input type="file" id="importFile" name="importFile" style="display:inline;">--}}
+                                    <input type="file" id="file" name="file" class="form-control">
+                                </span>
+                                <button id="btnImport" name="btnImport" class="btn btn-default btn-sm" style="display:inline;">Import</button>
+                            </form>
+                        </div>
+
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -153,7 +168,23 @@
                 $('#frmTranslation').submit();
             });
 
+            $('#btnExport').click(function(e)
+            {
+                e.preventDefault();
+
+                $('#export').val(1);
+                $('#frmTranslation').submit();
+            });
+
         });
+
+        function afterSubmit()
+        {
+            setTimeout(function()
+            {
+                $('#export').val(0);
+            }, 1000);
+        }
 
     </script>
 @endsection

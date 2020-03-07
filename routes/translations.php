@@ -53,5 +53,13 @@ Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth']], fun
     {
         return $controller->callAction('', $parameters = ['language' => $language, 'id' => $id]);
     })->name('translations.destroy');
+
+    Route::post('translations/import', 'TranslationsCotroller@import');
+/*
+    Route::post('translations/import', function()use($controller)
+    {
+        return $controller->callAction('import', $parameters = ['request' => request()]);
+    })->name('translations.import');
+*/
 });
 
