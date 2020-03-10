@@ -548,6 +548,18 @@ class Helper
 
     }
 
+    public static function getPartners($client_id)
+    {
+        $config = config('appConfig.tables.invoices.' . session()->get('version'));
+        $partners = \DB::connection($config['connection'])
+            ->select(\DB::raw("SELECT [ClientID],[ID],[Name] 
+                                        FROM [dbo].[{$config['getPartners']}] 
+                                        WHERE ClientID = ? 
+                                        ORDER BY [Name]"), [$client_id]);
+
+        return $partners;
+    }
+
     public static function getBizonylatTipusok()
     {
         $retVal = [

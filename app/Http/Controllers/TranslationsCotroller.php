@@ -51,8 +51,12 @@ class TranslationsCotroller extends Controller
 
         if( request()->has('filter') && request()->get('filter') )
         {
-            $model = $model
-                ->where('text', 'like', '%' . request()->get('filter') .'%');
+            /*$model = $model->where('text', 'like', '%' . request()->get('filter') .'%');*/
+            $model = $model->where(function($query)
+            {
+                $query->where('item', 'like', '%' . request()->get('filter') . '%')
+                    ->orWhere('text', 'like', '%' . request()->get('filter') . '%');
+            });
         }
         else
         {
@@ -92,7 +96,7 @@ class TranslationsCotroller extends Controller
             //dd('TranslationsCotroller::index', $tExport);
             return \Excel::download($tExport, "translations_{$language}.xlsx");;
         }
-
+//dd(request()->get('filter'), $model->toSql());
         $translations = $model
             ->paginate(10);
 

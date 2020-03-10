@@ -23,61 +23,90 @@
 </div>
 {{-- /.Számlaszám --}}
 @if( \Auth::user()->Supervisor_ID == 0 )
+
     <div class="form-group col-sm-12">
         <label for="s_customer" class="control-label">
-            {{ trans('inv.customer') }}:
+            {{ trans('app.partners') }}:
+        </label>
+        <div class="">
+            <select id="s_partner" name="s_partner" class="form-control tooltip-enabled"
+                    data-toggle="tooltip"
+                    title="{{ trans('app.partners') }}">
+                <option value="0">{{ trans('app.select_first_element') }}</option>
+                <?php
+                /** @var Collection $partners */
+                foreach($partners as $partner)
+                {
+                $selected = '';
+                if( $partner->ID == request()->get('s_partner') )
+                {
+                    $selected = 'selected';
+                }
+                ?>
+                <option value="{{ $partner->ID }}" {{ $selected }}>{{ $partner->Name }}</option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+
+    <!--<div class="form-group col-sm-12">
+        <label for="s_customer" class="control-label">
+            {{-- trans('inv.customer') --}}:
         </label>
         <div class="">
             <select id="s_customer" name="s_customer" class="form-control tooltip-enabled"
                     data-toggle="tooltip"
-                    title="{{ trans('inv.customer') }}">
-                <option value="0">{{ trans('app.select_first_element') }}</option>
+                    title="{{-- trans('inv.customer') --}}">
+                <option value="0">{{-- trans('app.select_first_element') --}}</option>
                 <?php
                 /** @var TYPE_NAME $customers */
-                foreach($customers as $customer)
+                //foreach($customers as $customer)
+                //{
+                //$selected = '';
+                //if( $customer->Cust_ID == request()->get('s_customer') )
                 {
-                $selected = '';
-                if( $customer->Cust_ID == request()->get('s_customer') )
-                {
-                    $selected = 'selected';
+                    //$selected = 'selected';
                 }
                 ?>
-                <option value="{{ $customer->Cust_ID }}" {{ $selected }}>{{ $customer->Cust_Name1 }}</option>
+                <option value="{{-- $customer->Cust_ID --}}" {{-- $selected --}}>{{-- $customer->Cust_Name1 --}}</option>
                 <?php
-                }
+                //}
                 ?>
             </select>
         </div>
-    </div>
+    </div>-->
 
-    <div class="form-group col-sm-12">
+    <!--<div class="form-group col-sm-12">
         <label for="s_vendor" class="control-label">
-            {{ trans('inv.vendor') }}:
+            {{-- trans('inv.vendor') --}}:
         </label>
         <div class="">
             <select id="s_vendor" name="s_vendor" class="form-control tooltip-enabled"
                     data-toggle="tooltip"
-                    title="{{ trans('inv.vendor') }}">
-                <option value="0">{{ trans('app.select_first_element') }}</option>
+                    title="{{-- trans('inv.vendor') --}}">
+                <option value="0">{{-- trans('app.select_first_element') --}}</option>
 
                 <?php
                 /** @var TYPE_NAME $vendors */
-                foreach($vendors as $vendor)
-                {
-                $selected = '';
-                if( $vendor->Vendor_ID == request()->get('s_vendor') )
-                {
-                    $selected = 'selected';
-                }
+                //foreach($vendors as $vendor)
+                //{
+                //$selected = '';
+                //if( $vendor->Vendor_ID == request()->get('s_vendor') )
+                //{
+                //    $selected = 'selected';
+                //}
                 ?>
-                <option value="{{ $vendor->Vendor_ID }}" {{ $selected }}>{{ $vendor->Vendor_Name1 }}</option>
+                <option value="{{-- $vendor->Vendor_ID --}}" {{-- $selected --}}>{{-- $vendor->Vendor_Name1 --}}</option>
                 <?php
-                }
+                //}
                 ?>
 
             </select>
         </div>
-    </div>
+    </div>-->
+
 @endif
 
 <div class="form-group col-sm-12">

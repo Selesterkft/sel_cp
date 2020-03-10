@@ -105,7 +105,7 @@
                                 </th>
 {{-- Bank & Tax --}}
                                 <th data-colspan="4">
-                                    {{ trans('bank_and_tax_num') }}
+                                    {{ trans('inv.bank_and_tax_num') }}
                                 </th>
 {{-- LC --}}
                                 <th data-colspan="5">
@@ -284,10 +284,10 @@
                                     {{ trans('inv.period_to_from') }}
                                 </th>
                                 <th data-field="Period_FROM">
-                                    {{ trans('app.from') }}
+                                    {{ trans('inv.period_from') }}
                                 </th>
                                 <th data-field="Period_TO">
-                                    {{ trans('app.to') }}
+                                    {{ trans('inv.period_to') }}
                                 </th>
 {{----}}
                             </tr>
@@ -389,8 +389,12 @@
         var $local_short = '{{ app() ->getLocale() }}';
         var $searchModal = $('#searchRekord');
         var $s_invNum    = $('#s_invNum');
+        /*
         var $s_customer  = $('#s_customer');
         var $s_vendor    = $('#s_vendor');
+        */
+        var $s_partner    = $('#s_partner');
+
         var $s_delivery_date = $('#s_delivery_date');
         var $s_due_date = $('#s_due_date');
         var $s_type = $('#s_type');
@@ -399,8 +403,12 @@
         {
             var urlParams = getAllUrlParams();
             params.s_invNum = $s_invNum.val();
+            /*
             params.s_vendor = $s_vendor.val();
             params.s_customer = $s_customer.val();
+            */
+            params.s_partner = $s_partner.val();
+
             params.s_type = $s_type.val();
 
             if( urlParams.s_due_date != undefined && urlParams.s_due_date != '' )
@@ -536,8 +544,12 @@
         {
             var urlParams = getAllUrlParams();
             params.s_invNum = $s_invNum.val();
+            /*
             params.s_vendor = $s_vendor.val();
             params.s_customer = $s_customer.val();
+            */
+            params.s_partner = $s_partner.val();
+
             params.s_type = $s_type.val();
 
             if( urlParams.s_due_date != undefined && urlParams.s_due_date != '' )

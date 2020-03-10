@@ -178,6 +178,7 @@ return array(
                 'read2'         => 'CP_Inv_Read_Data',
                 'getCustomers'  => 'CP_getCustomers',
                 'getVendors'    => 'CP_getVendors',
+                'getPartners'   => 'CP_get_Invoice_Partners',
                 'widget_read'   => 'CP_Invoices_Widget',
             ]
         ],

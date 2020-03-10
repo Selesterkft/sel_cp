@@ -42,6 +42,7 @@ class InvoiceModel extends Model
     public static function all($columns = ['*'])
     {
         //$start = microtime(true);
+        //dd(request()->all());
 
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
         $loggedUser = Auth::user();
@@ -70,10 +71,15 @@ class InvoiceModel extends Model
             if( $supervisor_id != 0 )
             {
                 $where .= ( strlen($where) == 0 ) ? 'WHERE ' : ' AND ' . 'Partner_ID = ' . $supervisor_id;
-            }elseif( !empty(request()->get('s_customer')) )
+            }
+            elseif( !empty(request()->get('s_partner')) )
+            {
+                $where .= (( strlen($where) == 0 ) ? 'WHERE ' : ' AND ') . 'Partner_ID = ' . request()->get('s_partner');
+            }
+            /*elseif( !empty(request()->get('s_customer')) )
             {
                 $where .= (( strlen($where) == 0 ) ? 'WHERE ' : ' AND ') . 'Partner_ID = ' . request()->get('s_customer');
-            }
+            }*/
 
             if( !empty(request()->get('s_delivery_date')) )
             {

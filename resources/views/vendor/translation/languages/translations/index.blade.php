@@ -70,16 +70,28 @@
                     </div>
                     <div class="box-body with-border">
                         <div class="box-tools">
-                            <form class="form-horizontal" action="{{ url('translations/import') }}" method="POST" enctype="multipart/form-data">
-                                {{ csrf_field() }}
-                                <button id="btnExport" name="btnExport" class="btn btn-default btn-sm" style="display:inline;">Export</button>
-                                <span class="control-fileupload" style="display:inline;">
-                                    <label for="file" style="display:inline;margin-left: 10px;">Fájl kiválasztása :</label>
-                                    {{--<input type="file" id="importFile" name="importFile" style="display:inline;">--}}
-                                    <input type="file" id="file" name="file" class="form-control">
-                                </span>
-                                <button id="btnImport" name="btnImport" class="btn btn-default btn-sm" style="display:inline;">Import</button>
-                            </form>
+
+                            <div class="row" style="margin-bottom: 10px;">
+                                <form action="{{ url('translations/import') }}"
+                                      method="POST"
+                                      enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+
+                                    <div class="col-lg-2">
+                                        <button id="btnExport" name="btnExport" class="btn btn-default btn-sm">Export</button>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <input type="file" id="file" name="file" class="form-control">
+                                            <span class="input-group-btn" style="padding-left: 10px;">
+                                                <button id="btnImport" name="btnImport" class="btn btn-default btn-sm">Import</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
 
                         <div class="table-responsive">
