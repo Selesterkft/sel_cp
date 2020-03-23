@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ColorHelper as ColorHelper;
+use App\Classes\Helper;
 use App\Models\SettingModel;
 use Illuminate\Http\Request;
 
@@ -39,7 +41,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = \App\Classes\Helper::getAllSettings();
+        $settings = Helper::getAllSettings();
 
         //dd('SettingsController.index', $settings);
 
@@ -59,8 +61,7 @@ class SettingsController extends Controller
                 'general_favicon_value'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
-            //$faviconImageName = \App\Classes\Helper::uploadFile(config('appConfig.favicons.folder'), $request->general_favicon_value);
-            $faviconImageName = \App\Classes\Helper::uploadWithResize(
+            $faviconImageName = Helper::uploadWithResize(
                     config('appConfig.favicons.folder'),
                     $request->general_favicon_value,
                     config('appConfig.favicons.width'),
@@ -82,7 +83,7 @@ class SettingsController extends Controller
                 $favicon->PropertyValue = $faviconImageName;
                 $favicon->save();
 
-                \App\Classes\Helper::deleteUploadedImage(config('appConfig.favicons.folder'), $old_imageName);
+                Helper::deleteUploadedImage(config('appConfig.favicons.folder'), $old_imageName);
             }
 
             session()->put('settings.general_favicon_value', $faviconImageName);
@@ -96,7 +97,7 @@ class SettingsController extends Controller
                 'general_logo_value'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
-            $logoImageName = \App\Classes\Helper::uploadFile(config('appConfig.logos_folder'), $request->general_logo_value);
+            $logoImageName = Helper::uploadFile(config('appConfig.logos_folder'), $request->general_logo_value);
 
             if( $request->get('general_logo_id') == 0 )
             {
@@ -114,7 +115,7 @@ class SettingsController extends Controller
 
                 $logo->save();
 
-                \App\Classes\Helper::deleteUploadedImage(config('appConfig.logos_folder'), $old_logo);
+                Helper::deleteUploadedImage(config('appConfig.logos_folder'), $old_logo);
             }
 
             session()->put('settings.general_logo_value', $logoImageName);
@@ -127,7 +128,7 @@ class SettingsController extends Controller
                 'general_profil_image_value'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
-            $profileImageName = \App\Classes\Helper::uploadFile(config('appConfig.profiles_folder'), $request->general_profil_image_value);
+            $profileImageName = Helper::uploadFile(config('appConfig.profiles_folder'), $request->general_profil_image_value);
 
             if( $request->get('general_profil_image_id') == 0 )
             {
@@ -145,7 +146,7 @@ class SettingsController extends Controller
                 $profile->PropertyValue = $profileImageName;
                 $profile->save();
 
-                \App\Classes\Helper::deleteUploadedImage(config('appConfig.profiles_folder'), $old_profile);
+                Helper::deleteUploadedImage(config('appConfig.profiles_folder'), $old_profile);
             }
 
             session()->put('session.general_profil_image_value', $profileImageName);
@@ -154,7 +155,7 @@ class SettingsController extends Controller
         // MENU BACKGROUND COLOR
         if( $request->get('menu_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                 request()->get('general_menu_bg_color_id'),
                 'general_menu_bg_color_value',
                 request()->get('general_menu_bg_color_value'));
@@ -163,7 +164,7 @@ class SettingsController extends Controller
         // HEADER BACKGROUND
         if( request()->get('general_header_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('general_header_bg_color_id'),
                     'general_header_bg_color_value',
                     request()->get('general_header_bg_color_value'));
@@ -172,7 +173,7 @@ class SettingsController extends Controller
         // PANEL AND TAB LINE COLOR
         if( request()->get('general_panel_tab_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('general_panel_tab_color_id'),
                     'general_panel_tab_color_value',
                     request()->get('general_panel_tab_color_value'));
@@ -236,7 +237,7 @@ class SettingsController extends Controller
         // BACGROUND COLOR
         if( $request->get('login_background_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     $request->get('login_background_color_id'),
                     'login_background_color_value',
                     $request->get('login_background_color_value'));
@@ -265,7 +266,7 @@ class SettingsController extends Controller
         // MENU BG COLOR
         if( $request->get('dashboard_menu_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     $request->get('dashboard_menu_bg_color_id'),
                     'dashboard_menu_bg_color_value',
                     $request->get('dashboard_menu_bg_color_value'));
@@ -274,7 +275,7 @@ class SettingsController extends Controller
         // HEADER BG COLOR
         if(request()->get('dashboard_header_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     $request->get('dashboard_header_bg_color_id'),
                     'dashboard_header_bg_color_value',
                     $request->get('dashboard_header_bg_color_value'));
@@ -283,7 +284,7 @@ class SettingsController extends Controller
         // PANEL AND TAB LINE COLOR
         if($request->get('dashboard_panel_tab_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     $request->get('dashboard_panel_tab_color_id'),
                     'dashboard_panel_tab_color_value',
                     $request->get('dashboard_panel_tab_color_value'));
@@ -311,7 +312,7 @@ class SettingsController extends Controller
         // MENU BG COLOR
         if( request()->get('invoices_menu_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('invoices_menu_bg_color_id'),
                     'invoices_menu_bg_color_value',
                     request()->get('invoices_menu_bg_color_value'));
@@ -320,7 +321,7 @@ class SettingsController extends Controller
         // HEADER BG COLOR
         if(request()->get('invoices_header_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('invoices_header_bg_color_id'),
                     'invoices_header_bg_color_value',
                     request()->get('invoices_header_bg_color_value'));
@@ -329,7 +330,7 @@ class SettingsController extends Controller
         // PANEL AND TAB LINE COLOR
         if(request()->get('invoices_panel_tab_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('invoices_panel_tab_color_id'),
                     'invoices_panel_tab_color_value',
                     request()->get('invoices_panel_tab_color_value'));
@@ -356,7 +357,7 @@ class SettingsController extends Controller
         // MENU BG COLOR
         if( request()->get('users_menu_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('users_menu_bg_color_id'),
                     'users_menu_bg_color_value',
                     request()->get('users_menu_bg_color_value'));
@@ -365,7 +366,7 @@ class SettingsController extends Controller
         // HEADER BG COLOR
         if(request()->get('users_header_bg_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('users_header_bg_color_id'),
                     'users_header_bg_color_value',
                     request()->get('users_header_bg_color_value'));
@@ -374,7 +375,7 @@ class SettingsController extends Controller
         // PANEL AND TAB LINE COLOR
         if(request()->get('users_panel_tab_color_value') !== null )
         {
-            \App\Classes\ColorHelper::saveColor(
+            ColorHelper::saveColor(
                     request()->get('users_panel_tab_color_id'),
                     'users_panel_tab_color_value',
                     request()->get('users_panel_tab_color_value'));

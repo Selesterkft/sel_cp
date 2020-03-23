@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends(session()->get('design').'.layouts.app')
 
-@section('title', tran('company_version.show_title') )
+@section('title', trans('company_version.show_title') )
 
 @section('content')
     <section class="content-header">
@@ -124,15 +124,16 @@
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/iCheck/all.css') }}">
 @php
+use App\Classes\ColorHelper as ColorHelper;
 echo "<!-- BACGROUND COLOR -->\n";
-echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . \App\Classes\Helper::getMenuBgColor() . ";}</style>\n";
+echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . ColorHelper::getMenuBgColor() . ";}</style>\n";
 echo "<!-- HEADER BG COLOR -->\n";
-$header_bg_color = \App\Classes\Helper::getHeaderBgColor();
+$header_bg_color = ColorHelper::getHeaderBgColor();
 echo "<style>.skin-blue .main-header .navbar {background-color: " . $header_bg_color . ";}</style>\n";
 echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
 
 echo "<!-- PANEL AND TAB COLOR -->\n";
-echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPanelTabLineColor() . ";}</style>\n";
+echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLineColor() . ";}</style>\n";
 @endphp
 
 @section('js')

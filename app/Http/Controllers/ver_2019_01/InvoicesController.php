@@ -14,11 +14,9 @@ class InvoicesController extends Controller
      */
     public function __construct()
     {
-        /*
         $this->middleware('permission:invoices-menu', [
             'only' => ['index']
         ]);
-        */
     }
 
     /**
@@ -43,10 +41,17 @@ class InvoicesController extends Controller
         //$vendors = InvoiceModel::getVendors($clientID);
         $partners = \App\Classes\Helper::getPartners($clientID);
         //dd('InvoicesController::index', $partners);
+        /*
+        return view(session()->get('design').'.'. session()->get('version') .'.invoices.index', [
+            'partners' => $partners
+        ]);
+        */
+
 
         return view(session()->get('version') . '.invoices.index', [
             'partners' => $partners,
         ]);
+
 
         /*return view(session()->get('version') . '.invoices.index', [
             'partners' => $partners,

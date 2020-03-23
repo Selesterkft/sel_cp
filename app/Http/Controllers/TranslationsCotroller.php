@@ -106,7 +106,7 @@ class TranslationsCotroller extends Controller
             ->select('group')
             ->get()->toArray();
 
-        return view('vendor.translation.languages.translations.index', [
+        return view('translation.languages.translations.index', [
             'translations' => $translations,
             'languages' => $languages,
             'groups' => $groups,
@@ -151,7 +151,8 @@ class TranslationsCotroller extends Controller
      */
     public function create($language)
     {
-        return view('vendor.translation.languages.translations.create', ['language' => $language]);
+        dd('TranslationController::create', $language);
+        return view('translation.languages.translations.create', ['language' => $language]);
     }
 
     /**
@@ -203,7 +204,7 @@ class TranslationsCotroller extends Controller
         //dd('TranslationsCotroller::edit', $language, $id);
         $translation = Translation::find($id);
 
-        return view('vendor.translation.languages.translations.edit', [
+        return view('translation.languages.translations.edit', [
             'id' => $id,
             'language' => $language,
             'translation' => $translation,

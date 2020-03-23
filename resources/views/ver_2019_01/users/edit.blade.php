@@ -1,12 +1,12 @@
 @php
-$loggedUser = Auth::user();
+    $loggedUser = Auth::user();
 @endphp
 
-@extends('layouts.app')
-@section('title', trans('users.user_title'))
+@extends(session()->get('design') . '.layouts.app')
 
-@section('content')
+@section('title', trans('users.user_title_update'))
 
+@section('content-header')
     <section class="content-header">
         <h1>
             {{ trans('users.user_title') }}
@@ -34,17 +34,17 @@ $loggedUser = Auth::user();
 
         </ol>
     </section>
+@endsection
 
-    <section class="content">
+@section('content')
+    <div class="row">
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <form id="frm" name="frm" method="POST" class="form-horizontal"
-                      action="{{ url("users.update", ['id' => $user->ID]) }}">
-                    <input type="hidden" name="_method" value="PUT"/>
-                    @csrf
-                    <input type="hidden" id="ID" name="ID" value="{{ $user->ID }}"/>
+        <div class="col-md-12">
+            <form id="frm" name="frm" method="POST" class="form-horizontal"
+                  action="{{ url("users.update", ['id' => $user->ID]) }}">
+                <input type="hidden" name="_method" value="PUT"/>
+                @csrf
+                <input type="hidden" id="ID" name="ID" value="{{ $user->ID }}"/>
 
                 <div class="box box-default">
 
@@ -84,58 +84,59 @@ $loggedUser = Auth::user();
                         </span>
                             </div>
                         </div>
-<!--
+                    <!--
                         @if( $loggedUser->hasRole('Admin') )
-                            <div class="form-group {{-- ($errors->has('CompanyID')) ? 'has-error' : '' --}}">
+                        <div class="form-group {{-- ($errors->has('CompanyID')) ? 'has-error' : '' --}}">
                                 {{-- Form::label('CompanyID',
                                     __('global.user.fields.company') . ':',
                                     ['class' => 'col-sm-2 control-label']) --}}
-                                <div class="col-sm-10">
-                                    {{-- Form::select('CompanyID', $companies,
+                            <div class="col-sm-10">
+{{-- Form::select('CompanyID', $companies,
                                         $user->CompanyID,
                                         ['class' => 'form-control'])
                                     --}}
-                                    <span id="span_company_id" name="span_company_id" class="help-block">
-                                        {{-- ($errors->has('CompanyID')) ? $errors->first('CompanyID') : '' --}}
-                                    </span>
-                                </div>
-                            </div>
+                            <span id="span_company_id" name="span_company_id" class="help-block">
+{{-- ($errors->has('CompanyID')) ? $errors->first('CompanyID') : '' --}}
+                            </span>
+                        </div>
+                    </div>
                         @else
-                            <input id="CompanyID" name="CompanyID"
-                                   value="{{-- $user->CompanyID --}}"
+                        <input id="CompanyID" name="CompanyID"
+                               value="{{-- $user->CompanyID --}}"
                                    type="hidden"/>
                         @endif-->
-                        <input id="CompanyID" name="CompanyID"
+                            <input id="CompanyID" name="CompanyID"
                                    value="{{ $user->CompanyID }}"
                                    type="hidden"/>
-                        <!-- NYELV -->
+
+                            {{-- NYELV --}}
+
                         @php
                             $languages = config('appConfig.languages');
                             foreach ($languages as $key => $value)
                             {
-                                $languages[$key] = Lang::get("global.languages." . $key);
+                                $languages[$key] = trans("app." . $key);
                             }
                         @endphp
 
-                        <div class="form-group {{ ($errors->has('language')) ? 'has-error' : '' }}">
-                            {{ Form::label('language',
-                                trans('app.language') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
-                            <div class="col-sm-10">
-                                {!! Form::select('language',
-                                    $languages,
-                                    $user->language,
-                                    ['class' => 'form-control'])
-                                !!}
-                                <span id="span_company_id" name="span_company_id"
-                                      class="help-block">
+                            <div class="form-group {{ ($errors->has('language')) ? 'has-error' : '' }}">
+                                {{ Form::label('language',
+                                    trans('app.language') . ':',
+                                    ['class' => 'col-sm-2 control-label']) }}
+                                <div class="col-sm-10">
+                                    {!! Form::select('language', $languages,
+                                        [],
+                                        ['class' => 'form-control'])
+                                    !!}
+                                    <span id="span_language" name="span_language" class="help-block">
                                     {{ ($errors->has('language')) ? $errors->first('language') : '' }}
                                 </span>
+                                </div>
                             </div>
-                        </div>
-                        <!-- NYELV VÉGE -->
 
-                        <!-- JELSZÓ -->
+                        {{-- NYELV VÉGE --}}
+
+                            <!-- JELSZÓ -->
                         {{--
                         <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' }}">
                             <label for="password" class="col-sm-2 control-label">
@@ -165,7 +166,7 @@ $loggedUser = Auth::user();
                         --}}
                         <!-- JELSZÓ VÉGE -->
 
-                        <div class="form-group">
+                            <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">
                                     {{ trans('roles.title') }}:
                                 </label>
@@ -173,30 +174,32 @@ $loggedUser = Auth::user();
                                     @foreach($roles as $role)
                                         <label>
                                             @php
-                                            $vanJoga = false;
+                                                $vanJoga = false;
 
-                                            $class = 'role' . ($role == 'Admin' ? '1' : '2') ;
+                                                /** @var string $role */
+                                                $class = 'role' . ($role == 'Admin' ? '1' : '2') ;
 
-                                            foreach($userRoles as $v)
-                                            {
-                                                if( $v == $role )
+                                                /** @var array $userRoles */
+                                                foreach($userRoles as $v)
                                                 {
-                                                    $vanJoga = true;
-                                                    break;
+                                                    if( $v == $role )
+                                                    {
+                                                        $vanJoga = true;
+                                                        break;
+                                                    }
                                                 }
-                                            }
 
-                                            $disabled = '';
-                                            // A felhasználó nem szerkesztheti a saját jogait
-                                            if($loggedUser->ID == $user->ID)
-                                            {
-                                                $disabled = 'disabled';
-                                            }
-                                            elseif( $vanJoga == false )
-                                            {
-                                                //$disabled = 'disabled';
-                                                //$disabled = ( count($userRoles) == 0 ) ? '' : 'disabled';
-                                            }
+                                                $disabled = '';
+                                                // A felhasználó nem szerkesztheti a saját jogait
+                                                if($loggedUser->ID == $user->ID)
+                                                {
+                                                    $disabled = 'disabled';
+                                                }
+                                                elseif( $vanJoga == false )
+                                                {
+                                                    //$disabled = 'disabled';
+                                                    //$disabled = ( count($userRoles) == 0 ) ? '' : 'disabled';
+                                                }
                                             @endphp
                                             {{ Form::checkbox(
                                                 'roles[]',
@@ -207,7 +210,7 @@ $loggedUser = Auth::user();
                                                     'style' => 'margin-left: 5px;',
                                                     $disabled
                                                 ]) }}
-                                                {{ trans('roles.' . $role) }}
+                                            {{ trans('roles.' . $role) }}
                                         </label><br/>
                                     @endforeach
                                 </div>
@@ -217,7 +220,7 @@ $loggedUser = Auth::user();
 
                     <div class="box-footer">
                         <a href="{{ url('users') }}"
-                           class="btn btn-default">
+                           class="btn btn-warning">
                             {{ trans('app.cancel') }}
                         </a>
                         <button type="submit" class="btn btn-info pull-right">
@@ -227,78 +230,12 @@ $loggedUser = Auth::user();
 
                 </div>
 
-                </form>
+            </form>
 
-            </div>
         </div>
-    </section>
-
+    </div>
 @endsection
 
-@section('css')
-@php
-echo "<!-- BACGROUND COLOR -->\n";
-echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . \App\Classes\Helper::getMenuBgColor('users') . ";}</style>\n";
-echo "<!-- HEADER BG COLOR -->\n";
-$header_bg_color = \App\Classes\Helper::getHeaderBgColor("users");
-echo "<style>.skin-blue .main-header .navbar {background-color: " . $header_bg_color . ";}</style>\n";
-echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
+@section('css')@endsection
 
-echo "<!-- PANEL AND TAB COLOR -->\n";
-echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPanelTabLineColor('users') . ";}</style>\n";
-@endphp
-@endsection
-
-@section('js')
-
-    <script>
-        $(document).ready(function()
-        {
-            var frm = $('#frm');
-
-            frm.on('submit', function()
-            {
-                $('input').prop('disabled', false);
-            });
-
-            // Admin checkboxra kattintás
-            $('.role1').on('click', function(event)
-            {
-                // Ha be van pipálva, akkor...
-                if($(this).prop('checked') == true)
-                {
-                    $('input.role2').prop('checked', false);
-                    $('input.role2').attr('disabled', true);
-                }
-                // Ha nincs bepipálva, akkor...
-                else
-                {
-                    $('input.role2').removeAttr('disabled');
-                }
-            });
-
-            // Adminon kívül másik checkboxra kattintás
-            $('.role2').on('click', function(event)
-            {
-                var numberOfChecked = $('.role2').filter(':checked').length;
-                //var totalCheckboxes = $('.role2').length;
-                //var numberNotChecked = totalCheckboxes - numberOfChecked;
-
-                if($(this).prop('checked') == true)
-                {
-                    $('input.role1').prop('checked', false);
-                    $('input.role1').attr('disabled', true);
-                }
-                // Ha nincs bepipálva, akkor...
-                else
-                {
-                    if( numberOfChecked == 0 )
-                    {
-                        $('input.role1').removeAttr('disabled');
-                    }
-                }
-            });
-        });
-    </script>
-
-@endsection
+@section('js')@endsection

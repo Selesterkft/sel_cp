@@ -1,11 +1,8 @@
-@extends('layouts.app')
+@extends(session()->get('design') . '.layouts.app')
+
 @section('title', trans('inv_l.title'))
 
-@section('content')
-    @php
-        $format = (config('appConfig.dateFormats'))[config('app.locale')]['carbon'];
-    @endphp
-
+@section('content-header')
     <section class="content-header">
         <h1>
             {{ trans('inv_l.title') }}
@@ -30,13 +27,15 @@
             </li>
         </ol>
     </section>
+@endsection
 
+@section('content')
     <div class="row">
         <section class="invoice">
 
             <div class="row">
                 <a href="{{ url()->previous() }}"
-                   class="btn btn-default">
+                   class="btn btn-success">
                     {{ trans('app.back_to_list') }}
                 </a>
             </div>
@@ -57,7 +56,7 @@
 
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
-                    <b>{{ trans('global.app_partner') }}</b>
+                    <b>{{ trans('app.partner') }}:</b>
                     <address>
                         {{ $invoice->Partner_Name }}<br>
                         {{-- $invoice->Partner_Country_ZIP_City --}}
@@ -159,7 +158,7 @@
                             </tr>
                             </thead>
                             <tr>
-                                <th>{{ trans('app.net') }}</th>
+                                <td><b>{{ trans('app.net') }}</b></td>
                                 <td>
                                     <div class="pull-right">
                                         {{ number_format($invoice->Net_LC, 2) }}
@@ -177,7 +176,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>{{ trans('app.tax') }}</th>
+                                <td><b>{{ trans('app.tax') }}</b></td>
                                 <td>
                                     <div class="pull-right">
                                         {{ number_format($invoice->Tax_LC, 2) }}
@@ -195,7 +194,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>{{ trans('app.paid_amount') }}</th>
+                                <td><b>{{ trans('app.paid_amount') }}</b></td>
                                 <td class="text-right">
                                     {{ number_format($invoice->PaidAmount_LC, 2) }}
                                 </td>
@@ -207,7 +206,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>{{ trans('app.gross') }}</th>
+                                <td><b>{{ trans('app.gross') }}</b></td>
                                 <td>
                                     <div class="pull-right">
                                         {{ number_format($invoice->Gross_LC, 2) }}
@@ -232,7 +231,7 @@
 
             <div class="row">
                 <a href="{{ url()->previous() }}"
-                   class="btn btn-default">
+                   class="btn btn-success">
                     {{ trans('app.back_to_list') }}
                 </a>
             </div>
@@ -244,48 +243,50 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    @php
-        use App\Classes\Helper;
-        echo "<!-- MENU BACGROUND COLOR -->\n";
-        echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . Helper::getMenuBgColor('invoices') . ";}</style>\n";
-        echo "<!-- HEADER BG COLOR -->\n";
-        $header_bg_color = Helper::getHeaderBgColor('users');
-        echo "<style>.skin-blue .main-header .navbar {background-color: " . $header_bg_color . ";} .skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
-        echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
+    {{--
+        @php
+            use App\Classes\ColorHelper;
 
-        echo "<!-- PANEL AND TAB COLOR -->\n";
-        echo "<style>.box.box-default {border-top-color: " . Helper::getPanelTabLineColor('invoices') . ";}</style>\n";
-    @endphp
+            echo "<!-- MENU BACGROUND COLOR -->\n";
+            echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . ColorHelper::getMenuBgColor('invoices') . ";}</style>\n";
+            echo "<!-- HEADER BG COLOR -->\n";
+            $header_bg_color = ColorHelper::getHeaderBgColor('users');
+            echo "<style>.skin-blue .main-header .navbar {background-color: " . $header_bg_color . ";} .skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
+            echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
+
+            echo "<!-- PANEL AND TAB COLOR -->\n";
+            echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLineColor('invoices') . ";}</style>\n";
+        @endphp
+--}}
 
     <style>
-        table.table.table-striped.table-bordered td,
-        table.table.table-striped.table-bordered {
+        table.table.table-striped.table-bordered td{
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        table.table-bordered{
+            border:1px solid darkgray;
+            margin-top:20px;
+        }
+        table.table-bordered > thead > tr > th{
+            border:1px solid darkgray;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid darkgray;
+        }
+
     </style>
 
+
 @endsection
+
 @section('js')
-    {{-- Bootstrap Table --}}
-    <!--
-    <script src="{{-- asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') --}}" type="text/javascript"></script>
-    -->
-    <!--
-    <script src="{{-- asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.min.js') --}}" type="text/javascript"></script>
-    <script src="{{-- asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.plugin.autotable.js') --}}" type="text/javascript"></script>
-    -->
+
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>
-    <!--
-    <script src="{{-- asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') --}}" type="text/javascript"></script>
-    -->
-    {{-- Moment --}}
-    <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>-->
 
-    {{-- Daterange Picker --}}
-    <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>-->
     <script>
         var $table = $('#table');
         var $local = '{{ app() ->getLocale() }}' + '-' + '{{ strtoupper(app()->getLocale()) }}';
@@ -329,6 +330,7 @@
             $table
                 .bootstrapTable('destroy')
                 .bootstrapTable({
+                    undefinedText: ' ',
                     locale: $local
                 });
         }
@@ -338,4 +340,5 @@
         });
 
     </script>
+
 @endsection

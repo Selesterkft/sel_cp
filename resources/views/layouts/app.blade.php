@@ -18,16 +18,16 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
     <!-- FAVICONS -->
     <link href="{{ \App\Classes\Helper::getFavicon() }}" rel="shortcut icon" type="image/x-icon" sizes="32x32"/>
 <!--
-    <meta property="og:image" content="{{ asset('assets/dist/img/facebook-thumb.png') }}"/>
-    <link rel="image_src" href="{{ asset('assets/dist/img/facebook-thumb.png') }}"/>
+    <meta property="og:image" content="{{-- asset('assets/dist/img/facebook-thumb.png') --}}"/>
+    <link rel="image_src" href="{{-- asset('assets/dist/img/facebook-thumb.png') --}}"/>
 -->
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ trans('app.sort_title') }} | @yield('title')</title>
 
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {{--<!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">--}}
 
     <!-- Bootstrap v3.4.1 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <!--[endif]-->
+    <[endif]-->
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -128,17 +128,7 @@ $locale = (session()->has('locale')) ? session()->get('locale') : config('app.lo
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>{{ trans('versions.version') }}:</b>&nbsp;{{ session()->get('version') }}
-        </div>
-        <strong>
-            {{ trans('app.copyright_1') }}&nbsp;<a href="http://selester.hu" target="_blank">Selester Kft</a>
-        </strong>{{ trans('app.copyright_2') }}
-        <!--
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
-        -->
-    </footer>
+    @includeIf('layouts.footer')
 
     <!-- Control Sidebar -->
     {{-- @include('layouts.control_sidebar') --}}

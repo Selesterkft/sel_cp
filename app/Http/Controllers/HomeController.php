@@ -21,8 +21,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*
+        $design = session()->get('design');
+        return view("{$design}/home", [
+            'design' => $design,
+        ]);
+        */
+        /*
         return \view(\session()->get('version') . "/home", [
             'company' => \session()->get('company'),
         ]);
+        */
+        return view(session()->get('design').'.home');
     }
 }

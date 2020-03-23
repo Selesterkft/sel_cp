@@ -9,7 +9,7 @@
                     onclick="event.preventDefault();document.getElementById('frmGeneral').submit()">
                 <i class="fa fa-save"></i>&nbsp;{{ trans('app.save') }}
             </button>
-            <!--<a href="#" class="btn btn-default btn-sm">## Delete</a>-->
+            <!--<a href="#" class="btn btn-warning btn-sm">## Delete</a>-->
             <a href="{{ url('settings.restoreGeneral') }}" class="btn btn-danger btn-sm">
                 <i class="fa fa-recycle">&nbsp;
                     {{ trans('app.restore') }}
@@ -39,11 +39,12 @@
 
                 <div class="col-sm-8">
                     @php
-                        use App\Classes\Helper as HelperAlias;
-                        /** @var TYPE_NAME $general_favicon_id */
+                        use App\Classes\Helper;
+                        /** @var int $general_favicon_id */
                         if( $general_favicon_id != 0 )
                         {
-                            $general_favicon_name = HelperAlias::timestampRemover($general_favicon_value);
+                            /** @var string $general_favicon_value */
+                            $general_favicon_name = Helper::timestampRemover($general_favicon_value);
                         }
                     @endphp
                     <input type="text" class="form-control" value="{{ $general_favicon_name }}" disabled>
@@ -64,9 +65,11 @@
 
                 <div class="col-sm-8">
                     @php
+                        /** @var int $general_logo_id */
                         if( $general_logo_id != 0 )
                         {
-                            $general_logo_name = HelperAlias::timestampRemover($general_logo_value);
+                            /** @var string $general_logo_value */
+                            $general_logo_name = Helper::timestampRemover($general_logo_value);
                         }
                     @endphp
                     <input type="text" class="form-control"
@@ -88,10 +91,12 @@
 
                 <div class="col-sm-8">
                     @php
-                    if( $general_profil_image_id != 0 )
-                    {
-                        $general_profil_image_name = HelperAlias::timestampRemover($general_profil_image_value);
-                    }
+                        /** @var int $general_profil_image_id */
+                        if( $general_profil_image_id != 0 )
+                        {
+                            /** @var string $general_profil_image_value */
+                            $general_profil_image_name = Helper::timestampRemover($general_profil_image_value);
+                        }
                     @endphp
                     <input type="text" class="form-control"
                            value="{{ $general_profil_image_value }}" disabled>

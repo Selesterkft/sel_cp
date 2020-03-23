@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends(session()->get('design').'.layouts.app')
+
 @section('title', trans('roles.title'))
 
-@section('content')
-
+@section('content-header')
     <section class="content-header">
         <h1>
             {{ trans('roles.title') }}
@@ -30,7 +30,9 @@
 
         </ol>
     </section>
+@endsection
 
+@section('content')
     <section class="content">
 
         <div class="box box-default">
@@ -84,14 +86,15 @@
 
 @section('css')
 @php
+use App\Classes\ColorHelper;
 echo "<!-- BACGROUND COLOR -->\n";
-echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . \App\Classes\Helper::getMenuBgColor() . ";}</style>\n";
+echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . ColorHelper::getMenuBgColor() . ";}</style>\n";
 echo "<!-- HEADER BG COLOR -->\n";
-$header_bg_color = \App\Classes\Helper::getHeaderBgColor();
+$header_bg_color = ColorHelper::getHeaderBgColor();
 echo "<style>.skin-blue .main-header .navbar {background-color: " . $header_bg_color . ";}</style>\n";
 echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
 
 echo "<!-- PANEL AND TAB COLOR -->\n";
-echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPanelTabLineColor() . ";}</style>\n";
+echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLineColor() . ";}</style>\n";
 @endphp
 @endsection

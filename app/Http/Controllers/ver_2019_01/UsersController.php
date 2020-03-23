@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\ver_2019_01;
 
 use App\Classes\Helper;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Searchable\Search;
 
 class UsersController extends Controller
 {
     /**
-     * UsersController constructor.
+     * Users2Controller constructor.
      */
     public function __construct()
     {
@@ -30,45 +30,19 @@ class UsersController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Bejelentkezett felhasználó
-        $loggedUser = \Auth::user();
-        /*
-        // Az összes felhasználó név szerint rendezve
-        $model = User::where('CompanyID', '=', $loggedUser->CompanyID)
-                ->where('Supervisor_ID', '=', $loggedUser->Supervisor_ID)
-                ->orderBy('Name');
-        */
-
-        $config = config('appConfig.tables.users');
-
-        $model = \DB::connection($config['connection'])
-            ->table($config['read'])
-            ->where('CompanyID', '=', $loggedUser->CompanyID)
-            ->where('Supervisor_ID', '=', $loggedUser->Supervisor_ID)
-            ->orderBy('Name', 'desc');
-        //dd('UsersController.index', $model->toSql());
-
-        $users = $model->get();
-        $users2 = [];
-
-        foreach($users as $user)
+        if( $request->ajax() )
         {
-            $usr = new \App\User();
-            foreach( $user as $key => $val )
-            {
-                $usr->$key = $val;
-            }
-            $users2[] = $usr;
+            $users = User::all();
+
+            return $users;
         }
 
-        $users = $users2;
-
-        return view(session()->get('version') . '.users.index', [
-            'users' => $users
-        ]);
+        //return view(session()->get('design') . '.' . session()->get('version') . '.users.index');
+        return view(session()->get('version') . '.users.index');
     }
 
     public function search(Request $request)
@@ -84,43 +58,26 @@ class UsersController extends Controller
     }
 
     /**
-     * Mutassa meg az új erőforrás létrehozásának űrlapját.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function create()
     {
-        // Szerepkörök listája
-        //$roles = Helper::getRoles();
-        $roles = Role::raw(config('appConfig.raw'))
-                ->pluck('name', 'name');
+        $roles = Role::pluck('name', 'name');
 
-        // Cégek listája
         $companies = Helper::getCompanies();
-        // Alap jogkör
-        //$defaultRole = '';
 
-        //dd('UsersController.create', $roles, $companies);
-
-        // Ha a bejelentkezett felhasználó Admin jogkörrel rendelkezik, akkor...
-        /*
-        if( \Auth::user()->hasRole('Admin') )
-        {
-            $defaultRole = 'Master';
-        }
-        */
-        // users.create oldal betöltése
-        return view(session()->get('version') . "/users/create", [
-            'companies' => $companies,
-            'roles' => $roles,
-            //'defaultRole' => $defaultRole,
-        ]);
+        return view(session()->get('version') . '.users.create',
+            compact('roles', 'companies')
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -171,7 +128,7 @@ class UsersController extends Controller
             // Tranzakció visszavonása
             \DB::rollBack();
             // Visszairányítás az index oldalra üzenettel.
-        return redirect()
+            return redirect()
                 ->to('users')
                 ->with('error', trans('messages.errors_create'));
         }
@@ -183,12 +140,12 @@ class UsersController extends Controller
 
         // Visszairányítás az index oldalra üzenettel.
         return redirect()
-                ->to('users')
-                ->with('success', trans('messages.success_create'));
+            ->to('users')
+            ->with('success', trans('messages.success_create'));
     }
 
     /**
-     * A megadott erőforrás megjelenítése.
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -220,7 +177,7 @@ class UsersController extends Controller
         $user = User::find($id);
         // Jogkörök listája
         $roles = Role::raw(config('appConfig.raw'))
-                ->pluck('name', 'name');
+            ->pluck('name', 'name');
 
         // Cégek listája
         //$companies = Helper::getCompanies();
@@ -244,10 +201,9 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -302,8 +258,8 @@ class UsersController extends Controller
             \DB::rollBack();
             // Visszairányítás az USERS.INDEX hiba üzenettel
             return redirect()
-                    ->to('users')
-                    ->with('error', trans('messages.errors_update'));
+                ->to('users')
+                ->with('error', trans('messages.errors_update'));
         }
         else
         {
@@ -322,8 +278,8 @@ class UsersController extends Controller
 
         // Visszairányítás az USERS.INDEX oldalra
         return redirect()
-                ->to('users')
-                ->with('success', trans('messages.success_update'));
+            ->to('users')
+            ->with('success', trans('messages.success_update'));
     }
 
     /**
@@ -342,14 +298,14 @@ class UsersController extends Controller
         {
             // Visszairányítás az USERS.INDEX oldalra hiba üzenettel
             return redirect()
-                    ->to('users')
-                    ->with('error', trans('messages.errors_delete'));
+                ->to('users')
+                ->with('error', trans('messages.errors_delete'));
         }
 
         // Visszairánytás az USER.INDEX oldalra üzenettel.
         return redirect()
-                ->to('users')
-                ->with('success', trans('messages.success_delete'));
+            ->to('users')
+            ->with('success', trans('messages.success_delete'));
     }
 
     public function restore($id)
@@ -357,7 +313,7 @@ class UsersController extends Controller
         $res = User::restore($id);
 
         return redirect()
-                ->to('users')
-                ->with('success', trans('messages.success_restore'));
+            ->to('users')
+            ->with('success', trans('messages.success_restore'));
     }
 }

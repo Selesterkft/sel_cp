@@ -1,6 +1,5 @@
 <li class="dropdown user user-menu">
-    <a href="#" class="dropdown-toggle"
-       data-toggle="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <img src="{{ \App\Classes\Helper::getProfile() }}"
              class="user-image"
              style="background-color:white;"
@@ -64,7 +63,7 @@
                     -->
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                    <a class="btn btn-warning btn-flat" href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <i class="fa fa-sign-in"></i>&nbsp;{{ trans('users.logout') }}
                     </a>

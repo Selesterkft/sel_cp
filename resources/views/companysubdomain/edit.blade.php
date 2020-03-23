@@ -1,9 +1,8 @@
-@extends('layouts.app')
+@extends(session()->get('design').'.layouts.app')
 
 @section('title', trans('company_subdomain.edit_title'))
 
-@section('content')
-
+@section('content-header')
     <section class="content-header">
         <h1>
             {{ trans('company_subdomain.edit_title') }}
@@ -29,7 +28,9 @@
 
         </ol>
     </section>
+@endsection
 
+@section('content')
     <section class="content">
 
         <div class="row">
@@ -97,16 +98,14 @@
                         </div>
 
                         <div class="box-footer">
-                            <div class="box-footer">
-                                <a href="{{ url('companysubdomain') }}"
-                                   class="btn btn-default">
-                                    {{ trans('app.cancel') }}
-                                </a>
-                                <button type="submit" class="btn btn-info pull-right"
-                                        style="margin-left: 10px;">
-                                    {{ trans('app.save') }}
-                                </button>
-                            </div>
+                            <a href="{{ url('companysubdomain') }}"
+                               class="btn btn-default">
+                                {{ trans('app.cancel') }}
+                            </a>
+                            <button type="submit" class="btn btn-info pull-right"
+                                    style="margin-left: 10px;">
+                                {{ trans('app.save') }}
+                            </button>
                         </div>
 
                     </div>

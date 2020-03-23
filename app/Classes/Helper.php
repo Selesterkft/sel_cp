@@ -8,6 +8,7 @@ namespace App\Classes;
 use App\Models\SettingModel;
 use App\Models\VersionModel;
 use Spatie\Permission\Models\Role;
+use Waavi\Translation\Models\Language;
 
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Session;
@@ -151,6 +152,20 @@ class Helper
         return $domain;
     }
 
+    public static function getAvailableLanguages()
+    {
+        $languages = Language::select(['locale', 'name'])->get()->toArray();
+
+        $res = [];
+        foreach( $languages as $language)
+        {
+            //$res[$language['locale']] = $language['name'];
+            $res[$language['locale']] = trans('app.' . $language['locale']);
+        }
+        //dd('Helper::getLocales()', $languages, $res);
+        return $res;
+    }
+
     public static function getFavicon()
     {
         // Visszatérő érték
@@ -228,55 +243,6 @@ class Helper
         return $retVal;
     }
 
-    public static function getMenuBgColor($page = 'general')
-    {
-        $menuBgColor = '';
-
-        if( !session()->has('settings.' . $page . '_menu_bg_color_value') || session()->get('settings.' . $page . '_menu_bg_color_value') == '' )
-        {
-            $menuBgColor = session()->get('settings.general_menu_bg_color_value');
-        }
-        else
-        {
-            $menuBgColor = session()->get('settings.' . $page . '_menu_bg_color_value');
-        }
-
-        return $menuBgColor;
-    }
-
-    public static function getHeaderBgColor($page = 'general')
-    {
-        $headerBgColor = '';
-
-
-        if( !session()->has('settings.' . $page . '_header_bg_color_value') || session()->get('settings.' . $page . '_header_bg_color_value') == '')
-        {
-            $headerBgColor = session()->get('settings.general_header_bg_color_value');
-        }
-        else
-        {
-            $headerBgColor = session()->get('settings.' . $page . '_header_bg_color_value');
-        }
-
-        return $headerBgColor;
-    }
-
-    public static function getPanelTabLineColor($page = 'general')
-    {
-        $lineColor = '';
-
-        if( !session()->has('settings.' . $page . '_panel_tab_color_value') || session()->get('settings.' . $page . '_panel_tab_color_value') == '' )
-        {
-            $lineColor = session()->get('settings.general_panel_tab_color_value');
-        }
-        else
-        {
-            $lineColor = session()->get('settings.' . $page . '_panel_tab_color_value');
-        }
-        //dd('Helper.getPanelTabLineColor', $lineColor);
-        return $lineColor;
-    }
-
     public static function getAppSubdomain()
     {
         $url_array = explode(
@@ -329,6 +295,23 @@ class Helper
          }
 
         return $companyNickName;
+    }
+
+    public static function getDesign(int $company_id) : string
+    {
+        $design = config('appConfig.default_design');
+
+        $config = config('appConfig.tables.design');
+        $result = \DB::connection($config['connection'])
+            ->select(\DB::raw("SELECT [design] FROM [{$config['table']}] WHERE company_id = :id"),
+                ['id' => $company_id]);
+
+        if( !empty($result) )
+        {
+            $design = $result[0]->design;
+        }
+
+        return $design;
     }
 
     public static function getCompanyNickName(string $company_name)
@@ -405,26 +388,6 @@ class Helper
         }
         //dd('Helper.getWallpaper', $wallpaper);
         return $wallpaper;
-    }
-
-    public static function getLoginBgColor($company_id)
-    {
-        $bgColor = '';
-
-        $settings = SettingModel::where('CompanyID', '=', $company_id)
-                ->where('PropertyName', '=', 'login_background_color_value')
-                ->first();
-
-        if( !empty($settings) )
-        {
-            $bgColor = $settings->PropertyValue;
-        }
-        else
-        {
-            $bgColor = config('appConfig.default_settings.login_background_color_value');
-        }
-
-        return $bgColor;
     }
 
     public static function getCompanyIDByCompanyNickName($companyNickName)

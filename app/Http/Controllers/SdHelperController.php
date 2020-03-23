@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class SdHelperController extends Controller
-{    
-    function __construct() 
+{
+    function __construct()
     {
         $this->middleware('role:Admin', [
             'only' => [
@@ -28,7 +28,7 @@ class SdHelperController extends Controller
         $data = [];
         $companyModel = '\App\Models\\' . session()->get('version') . '\CompanyModel';
         $query = $companyModel::orderBy('Nev1', 'asc')->get();
-        
+
         $map = $query->map(function($items)
         {
             $subdomain = \App\Classes\Helper::getCompanyNickName($items->Nev1);
@@ -36,12 +36,12 @@ class SdHelperController extends Controller
             $data['Nev1'] = $items->Nev1;
             $data['Subdomain'] = $subdomain;
             $data['Url'] = "http://{$subdomain}.webandtrace.com/cp/public/index.php";
-            
+
             return $data;
         });
-        
+
         //dd('SdHelperController.index', $map);
-        
+
         return view('subdomain_helper.index', [
             'companies' => $map
         ]);

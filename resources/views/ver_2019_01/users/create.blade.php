@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends(session()->get('design') . '.layouts.app')
+
 @section('title', trans('users.user_title'))
 
-@section('content')
-
+@section('content-header')
     <section class="content-header">
         <h1>
             {{ trans('users.user_title') }}
@@ -28,7 +28,9 @@
 
         </ol>
     </section>
+@endsection
 
+@section('content')
     <section class="content">
 
         <div class="row">
@@ -38,188 +40,175 @@
                 <form id="frm" name="frm"
                       action="{{ url('users.store') }}"
                       method="POST" class="form-horizontal">
-                @csrf
+                    @csrf
 
-                <div class="box box-default">
+                    <div class="box box-default">
 
-                    <div class="box-header with-border">
-                        <h3 class="box-title">{{ trans('users.user_title') }}</h3>
-                        <small>{{ trans('users.user_title_create') }}</small>
-                    </div>
-
-                    <div class="box-body">
-
-                        <input id="sendEmail" name="sendEmail" type="hidden" value="0"/>
-
-                        <div class="form-group {{ ($errors->has('Name')) ? 'has-error' : '' }}">
-                            {{ Form::label('Name', trans('app.name') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
-
-                            <div class="col-sm-10">
-                                <input id="Name" name="Name" class="form-control" type="text"
-                                       value="{{ old('Name') }}"/>
-                                <span id="span_name" name="span_name" class="help-block">
-                                    {{ ($errors->has('Name')) ? $errors->first('Name') : '' }}
-                                </span>
-                            </div>
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{ trans('users.user_title_create') }}</h3>
+                            <small>{{-- trans('users.user_title_create') --}}</small>
                         </div>
 
-                        <div class="form-group {{ ($errors->has('Email')) ? 'has-error' : '' }}">
-                            {{ Form::label('Email', trans('app.email') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
-                            <div class="col-sm-10">
-                                <input id="Email" name="Email" class="form-control" type="text"
-                                       value="{{ old('Email') }}"/>
-                                <span id="span_email" name="span_email" class="help-block">
-                                    {{ ($errors->has('Email')) ? $errors->first('Email') : '' }}
-                                </span>
-                            </div>
-                        </div>
+                        <div class="box-body">
 
-                        @if(Auth::user()->CompanyID == 71 && Auth::user()->hasRole('Admin'))
+                            <input id="sendEmail" name="sendEmail" type="hidden" value="0"/>
 
-                            <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
-                                {{ Form::label('CompanyID',
-                                    trans('users.company') . ':',
+                            <div class="form-group {{ ($errors->has('Name')) ? 'has-error' : '' }}">
+                                {{ Form::label('Name', trans('app.name') . ':',
                                     ['class' => 'col-sm-2 control-label']) }}
+
                                 <div class="col-sm-10">
-                                    {{ Form::select('CompanyID', $companies,
-                                        [],
-                                        ['class' => 'form-control'])
-                                    }}
-                                    <span id="span_company_id" name="span_company_id" class="help-block">
-                                    {{ ($errors->has('CompanyID')) ? $errors->first('CompanyID') : '' }}
+                                    <input id="Name" name="Name" class="form-control" type="text"
+                                           value="{{ old('Name') }}"/>
+                                    <span id="span_name" name="span_name" class="help-block">
+                                    {{ ($errors->has('Name')) ? $errors->first('Name') : '' }}
                                 </span>
                                 </div>
                             </div>
 
-                        @else
-                            <input id="CompanyID" name="CompanyID" type="hidden" value="{{ Auth::user()->CompanyID }}"/>
-                        @endif
+                            <div class="form-group {{ ($errors->has('Email')) ? 'has-error' : '' }}">
+                                {{ Form::label('Email', trans('app.email') . ':',
+                                    ['class' => 'col-sm-2 control-label']) }}
+                                <div class="col-sm-10">
+                                    <input id="Email" name="Email" class="form-control" type="text"
+                                           value="{{ old('Email') }}"/>
+                                    <span id="span_email" name="span_email" class="help-block">
+                                    {{ ($errors->has('Email')) ? $errors->first('Email') : '' }}
+                                </span>
+                                </div>
+                            </div>
 
-                        {{-- CSAK CÉGEN BELLÜLI FELHASZNÁLÓNAK HOZHAT LÉTRE HOZZÁFÉRÉST --}}
-                        {{--<input id="CompanyID" name="CompanyID" type="hidden" value="{{ Auth::user()->CompanyID }}"/>--}}
-                        <input id="Supervisor_ID" name="Supervisor_ID" type="hidden" value="{{ Auth::user()->Supervisor_ID }}"/>
-                        <input id="Supervisor_Name" name="Supervisor_Name" type="hidden" value="{{ Auth::user()->Supervisor_Name }}"/>
+                            @if(Auth::user()->CompanyID == 71 && Auth::user()->hasRole('Admin'))
 
-                        @php
-                        $languages = config('appConfig.languages');
-                        foreach ($languages as $key => $value)
-                        {
-                            $languages[$key] = trans("app." . $key);
-                        }
-                        @endphp
+                                <div class="form-group {{ ($errors->has('CompanyID')) ? 'has-error' : '' }}">
+                                    {{ Form::label('CompanyID',
+                                        trans('users.company') . ':',
+                                        ['class' => 'col-sm-2 control-label']) }}
+                                    <div class="col-sm-10">
+                                        {{ Form::select('CompanyID', $companies,
+                                            [],
+                                            ['class' => 'form-control'])
+                                        }}
+                                        <span id="span_company_id" name="span_company_id" class="help-block">
+                                    {{ ($errors->has('CompanyID')) ? $errors->first('CompanyID') : '' }}
+                                </span>
+                                    </div>
+                                </div>
 
-                        <div class="form-group {{ ($errors->has('language')) ? 'has-error' : '' }}">
-                            {{ Form::label('language',
-                                trans('app.language') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
-                            <div class="col-sm-10">
-                                {!! Form::select('language', $languages,
-                                    [],
-                                    ['class' => 'form-control'])
-                                !!}
-                                <span id="span_language" name="span_language" class="help-block">
+                            @else
+                                <input id="CompanyID" name="CompanyID" type="hidden" value="{{ Auth::user()->CompanyID }}"/>
+                            @endif
+
+                            {{-- CSAK CÉGEN BELLÜLI FELHASZNÁLÓNAK HOZHAT LÉTRE HOZZÁFÉRÉST --}}
+                            {{--<input id="CompanyID" name="CompanyID" type="hidden" value="{{ Auth::user()->CompanyID }}"/>--}}
+                            <input id="Supervisor_ID" name="Supervisor_ID" type="hidden" value="{{ Auth::user()->Supervisor_ID }}"/>
+                            <input id="Supervisor_Name" name="Supervisor_Name" type="hidden" value="{{ Auth::user()->Supervisor_Name }}"/>
+
+                            @php
+                                $languages = config('appConfig.languages');
+                                foreach ($languages as $key => $value)
+                                {
+                                    $languages[$key] = trans("app." . $key);
+                                }
+                            @endphp
+
+                            <div class="form-group {{ ($errors->has('language')) ? 'has-error' : '' }}">
+                                {{ Form::label('language',
+                                    trans('app.language') . ':',
+                                    ['class' => 'col-sm-2 control-label']) }}
+                                <div class="col-sm-10">
+                                    {!! Form::select('language', $languages,
+                                        [],
+                                        ['class' => 'form-control'])
+                                    !!}
+                                    <span id="span_language" name="span_language" class="help-block">
                                     {{ ($errors->has('language')) ? $errors->first('language') : '' }}
                                 </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' }}">
-                            {{ Form::label('password',
-                                trans('users.password') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
-                            <div class="col-sm-10">
-                                <input id="password" name="password" class="form-control" type="password"/>
-                                <span id="span_password" name="span_password" class="help-block">
+                            <div class="form-group {{ ($errors->has('password')) ? 'has-error' : '' }}">
+                                {{ Form::label('password',
+                                    trans('users.password') . ':',
+                                    ['class' => 'col-sm-2 control-label']) }}
+                                <div class="col-sm-10">
+                                    <input id="password" name="password" class="form-control" type="password"/>
+                                    <span id="span_password" name="span_password" class="help-block">
                             {{ ($errors->has('password')) ? $errors->first('password') : '' }}
                         </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group {{ ($errors->has('confirm-password')) ? 'has-error' : '' }}">
-                            {{ Form::label('confirm-password',
-                                trans('users.password_confirm') . ':',
-                                ['class' => 'col-sm-2 control-label']) }}
-                            <div class="col-sm-10">
-                                <input id="confirm-password" name="confirm-password" class="form-control"
-                                       type="password"/>
-                                <span id="span_confirm-password" name="span_confirm-password" class="help-block">
+                            <div class="form-group {{ ($errors->has('confirm-password')) ? 'has-error' : '' }}">
+                                {{ Form::label('confirm-password',
+                                    trans('users.password_confirm') . ':',
+                                    ['class' => 'col-sm-2 control-label']) }}
+                                <div class="col-sm-10">
+                                    <input id="confirm-password" name="confirm-password" class="form-control"
+                                           type="password"/>
+                                    <span id="span_confirm-password" name="span_confirm-password" class="help-block">
                                 {{ ($errors->has('confirm-password')) ? $errors->first('confirm-password') : '' }}
                             </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">
+                                    {{ trans('roles.title') }}:
+                                </label>
+                                <div class="col-sm-10" style="margin-top: 10px;">
+
+                                    @foreach($roles as $role)
+
+                                        @php
+                                            $class = 'role';
+                                            /** @var string $role */
+                                            if($role == 'Admin'){ $class .= '1'; }else{ $class .= '2'; }
+                                        @endphp
+
+                                        <label>
+                                            {{ Form::checkbox(
+                                                'roles[]', $role, false, [
+                                                    'class' => $class,
+                                                    'style' => 'margin-left: 5px;',
+                                                    'id' => $role
+                                                ]
+                                            ) }}
+                                            {{ trans('roles.' . $role) }}
+                                        </label><br/>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">
-                                {{ trans('roles.title') }}:
-                            </label>
-                            <div class="col-sm-10" style="margin-top: 10px;">
-
-                                @foreach($roles as $role)
-
-                                    @php
-                                        $class = 'role';
-                                        if($role == 'Admin'){ $class .= '1'; }else{ $class .= '2'; }
-                                    @endphp
-
-                                    <label>
-                                        {{ Form::checkbox(
-                                            'roles[]', $role, false, [
-                                                'class' => $class,
-                                                'style' => 'margin-left: 5px;',
-                                                'id' => $role
-                                            ]
-                                        ) }}
-                                        {{ trans('roles.' . $role) }}
-                                    </label><br/>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="box-footer">
-                        <a href="{{ url('users') }}"
-                           class="btn btn-default">
-                            {{ trans('app.cancel') }}
-                        </a>
-                        <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
-                            {{ trans('app.save') }}
-                        </button>
+                        <div class="box-footer">
+                            <a href="{{ url('users') }}"
+                               class="btn btn-warning">
+                                {{ trans('app.cancel') }}
+                            </a>
+                            <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
+                                {{ trans('app.save') }}
+                            </button>
                         <!--
                         <button class="btn btn-default pull-right" id="btnSendMail"
                                 name="btnSendMail">
                             {{-- __('SAVE AND SEND MAIL') --}}
-                        </button>
-                        -->
+                            </button>
+-->
+                        </div>
+
                     </div>
 
-                </div>
-
-            </form>
+                </form>
             </div>
         </div>
 
     </section>
-
 @endsection
 
-@section('css')
-@php
-echo "<!-- MENU BACGROUND COLOR -->\n";
-echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . \App\Classes\Helper::getMenuBgColor('users') . ";}</style>\n";
-echo "<!-- HEADER BG COLOR -->\n";
-$header_bg_color = \App\Classes\Helper::getHeaderBgColor('users');
-echo "<style>.skin-blue .main-header .navbar {background-color: " . $header_bg_color . ";}</style>\n";
-echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_color . ";}</style>\n";
-
-echo "<!-- PANEL AND TAB COLOR -->\n";
-echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPanelTabLineColor('users') . ";}</style>\n";
-@endphp
-@endsection
+@section('css')@endsection
 
 @section('js')
-
     <script>
         $(document).ready(function()
         {
@@ -297,11 +286,4 @@ echo "<style>.box.box-default {border-top-color: " . \App\Classes\Helper::getPan
             });
         });
     </script>
-
 @endsection
-<script>
-    import Options from "../../../../public/assets/bower_components/bootstrap-colorpicker-3.2.0/src/js/options";
-    export default {
-        components: {Options}
-    }
-</script>

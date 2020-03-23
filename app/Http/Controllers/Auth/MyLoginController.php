@@ -30,16 +30,18 @@ class MyLoginController extends Controller
 
     public function showLogin()
     {
-        //dd('MyLoginController.showLogin');
-        $checkCompanyNickName = Helper::getCompanyNickName(Helper::getAppSubdomain());
-        //dd('MyLoginController.showLogin', $checkCompanyNickName);
-        if( !$checkCompanyNickName )
+        $subdomain = Helper::getAppSubdomain();
+
+        if( !$subdomain )
         {
             return redirect()->to('http://webandtrace.com');
         }
         else
         {
-            return view('auth.login');
+            $company_id = Helper::getCompanyIDByCompanyNickName($subdomain);
+            $design = Helper::getDesign($company_id);
+
+            return view("{$design}.auth.login", ['design' => $design]);
         }
     }
 

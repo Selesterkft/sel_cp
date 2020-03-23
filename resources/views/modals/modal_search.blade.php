@@ -1,4 +1,4 @@
-<div class="modal fade" id="searchRekord" name="searchRekord"
+<div class="modal fade" id="searchModal" name="searchModal"
      role="dialog" aria-label="modal_search" aria-hidden="true">
 
     <div class="modal-dialog">

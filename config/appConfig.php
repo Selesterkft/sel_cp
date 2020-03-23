@@ -80,6 +80,8 @@ return array(
         'en' => 'English'
     ),
 
+    'default_design' => 'adminlte',
+
     'default_settings' => [
         'general_logo_value' => 'guest.png', // asset('assets/dist/img/guest.png')
         'general_favicon_value' => 'favicon.png', // asset('assets/dist/img/favicon.png')
@@ -140,6 +142,10 @@ return array(
             'delete'        => 'CP_Version_Company_Delete',
             'restore'       => 'CP_Version_Company_RestoreDeleted',
         ),
+        'design' => [
+            'connection' => 'azure',
+            'table' => 'CP_company_design',
+        ],
         'wallpapers' => array(
             'connection' => 'azure',
             'table' => 'wallpapers',
@@ -214,6 +220,21 @@ return array(
             'connection' => 'azure',
             'table' => 'menus',
         ),
+        /*
+        'users' => [
+            'ver_2019_01' => [
+                'connection' => 'azure',
+                'table' => 'CP_Users',
+                'read' => 'CP_Users_Read',
+                'insert' => 'CP_Users_Insert',
+                'update' => 'CP_Users_Update',
+                'register' => 'CP_User_Register_Login',
+                'delete' => 'CP_Users_Delete',
+                'restore' => 'CP_Users_RestoreDeleted',
+            ],
+        ],
+        */
+
         'users' => array(
             'connection' => 'azure',
             'table' => 'CP_Users',
@@ -224,6 +245,7 @@ return array(
             'delete' => 'CP_Users_Delete',
             'restore' => 'CP_Users_RestoreDeleted',
         ),
+
         'model_has_roles' => array(
             'connection' => 'azure',
             'table' => 'model_has_roles',

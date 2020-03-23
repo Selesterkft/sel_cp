@@ -84,13 +84,13 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
         //dd('routes.web.sd_helper');
         $controller = app()->make(App\Http\Controllers\SdHelperController::class);
         return $controller->callAction('index', $parameters = []);
-        
+
     })->name('sd_helper');
     */
 });
 
 Route::get('/clear-cache', function() {
-    
+
     try
     {
         Artisan::call('cache:clear');

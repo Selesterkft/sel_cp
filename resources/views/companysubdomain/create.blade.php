@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(session()->get('design').'.layouts.app')
 @section('title', trans('company_subdomain.create_title'))
 
 @section('content')
@@ -95,15 +95,13 @@
                     </div>
 
                     <div class="box-footer">
-                        <div class="box-footer">
-                            <a href="{{ url('versions') }}"
-                               class="btn btn-default">
-                                {{ trans('app.cancel') }}
-                            </a>
-                            <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
-                                {{ trans('app.save') }}
-                            </button>
-                        </div>
+                        <a href="{{ url('versions') }}"
+                           class="btn btn-warning">
+                            {{ trans('app.cancel') }}
+                        </a>
+                        <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;">
+                            {{ trans('app.save') }}
+                        </button>
                     </div>
 
                 </div>

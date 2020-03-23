@@ -9,7 +9,7 @@
                     onclick="event.preventDefault();document.getElementById('frmInvoices').submit()">
                 <i class="fa fa-save"></i>&nbsp;{{ trans('app.save') }}
             </button>
-            <!--<a href="#" class="btn btn-default btn-sm">## Delete</a>-->
+            <!--<a href="#" class="btn btn-warning btn-sm">## Delete</a>-->
             <a href="{{ url('settings.restoreInvoices') }}" class="btn btn-danger btn-sm">
                 <i class="fa fa-recycle">&nbsp;
                     {{ trans('app.restore') }}

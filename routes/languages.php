@@ -10,11 +10,13 @@ Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth']], fun
     {
         return $controller->callAction('index', $parameters = []);
     })->name('languages');
+
     // create
     Route::get('languages/create', function($company) use($controller)
     {
         return $controller->callAction('create', $parameters = []);
     })->name('languages.create');
+
     // store
     Route::post('languages', function($company) use($controller)
     {

@@ -31,7 +31,7 @@ class LanguagesCotroller extends Controller
     public function index()
     {
         $languages = Language::all();
-        return view('vendor.translation.languages.index', ['languages' => $languages]);
+        return view('translation.languages.index', ['languages' => $languages]);
     }
 
     /**
@@ -41,7 +41,7 @@ class LanguagesCotroller extends Controller
      */
     public function create()
     {
-        return view('vendor.translation.languages.create');
+        return view('translation.languages.create');
     }
 
     /**

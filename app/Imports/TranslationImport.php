@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Classes\Helper as Helper;
 use Illuminate\Support\Collection;
 //use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -26,10 +27,10 @@ class TranslationImport implements ToModel, WithHeadingRow
      */
     public function __construct()
     {
-        $this->locale = \App\Classes\Helper::remove_accents(strtolower(trans('language.locale')));
-        $this->group = \App\Classes\Helper::remove_accents(strtolower(trans('translations.group')));
-        $this->item = \App\Classes\Helper::remove_accents(strtolower(trans('translations.item')));
-        $this->text = \App\Classes\Helper::remove_accents(trans('translations.text'));
+        $this->locale = Helper::remove_accents(strtolower(trans('language.locale')));
+        $this->group = Helper::remove_accents(strtolower(trans('translations.group')));
+        $this->item = Helper::remove_accents(strtolower(trans('translations.item')));
+        $this->text = Helper::remove_accents(trans('translations.text'));
     }
 
     /**

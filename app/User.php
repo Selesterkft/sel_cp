@@ -58,10 +58,61 @@ class User extends Authenticatable implements Searchable
     {
         parent::__construct();
 
+        //dd('User.construct', session()->get('version'), request()->all());
+
         $config = config('appConfig.tables.users');
-        //dd('User.construct', $config['table'], $config['connection'], $config);
+
         $this->table = $config['table'];
         $this->connection = $config['connection'];
+    }
+
+    public static function all($columns = '*')
+    {
+        $config = config('appConfig.tables.users');
+        $loggedUser = \Auth::user();
+        $supervisor_id = (int)$loggedUser->Supervisor_ID;
+        $company_id = (int)$loggedUser->CompanyID;
+        $sort = '';
+        $order = 'asc';
+        $limit = 0;
+        $offset = 0;
+
+        $model = new User();
+        $model->setConnection($config['connection']);
+        $model->setTable($config['read']);
+        $model = $model
+            ->where('CompanyID', '=', $company_id)
+            ->where('Supervisor_ID', '=', $supervisor_id);
+
+        $total = $model->count();
+
+        if( !empty(request()->get('sort')) )
+        {
+            $model = $model->orderBy(request()->get('sort'), $order);
+        }
+
+        if( request()->has('limit') )
+        {
+            //$limit = (int)request()->get('limit');
+            $model = $model->limit($limit);
+        }
+        if( request()->has('offset') )
+        {
+            //$offset = request()->get('offset');
+            $model = $model->offset($offset);
+        }
+
+        $res = $model
+            ->get()
+            ->toArray();
+
+        $users = [
+            'total' => $total,
+            'totalNotFiltered' => count($res),
+            'rows' => $res,
+        ];
+        //dd('User::all', $users);
+        return json_encode($users);
     }
 
     public function company()

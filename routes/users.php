@@ -20,7 +20,7 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
         //dd('routes.users:12', session()->get('version'), session()->all());
 
         $controller = app()->make('\App\Http\Controllers\\' . session()->get('version') . '\UsersController');
-        return $controller->callAction('index', $parameters = []);
+        return $controller->callAction('index', $parameters = ['request' => request()]);
 
     })->name('users');
 

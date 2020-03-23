@@ -1,27 +1,28 @@
-<div class="box box-default">
-    <div class="box-header">
-        <i class="ion ion-clipboard"></i>
+<section class="col-lg-12 connectedSortable">
+    <div class="box box-default">
+        <div class="box-header">
+            <i class="ion ion-clipboard"></i>
 
-        <h3 class="box-title">
-            {{ trans('todo_list.title') }}
-        </h3>
+            <h3 class="box-title">
+                {{ trans('todo_list.title') }}
+            </h3>
 
-        <div class="box-tools pull-right">
-            <!--
-			<ul class="pagination pagination-sm inline">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
-			-->
+            <div class="box-tools pull-right">
+                <!--
+                <ul class="pagination pagination-sm inline">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+                -->
+            </div>
         </div>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-		{{ trans('todo_list.nothing_todo') }}
+        <!-- /.box-header -->
+        <div class="box-body">
+            <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+        {{ trans('todo_list.nothing_todo') }}
         <!--
 		<ul class="todo-list">
 
@@ -106,13 +107,14 @@
 
         </ul>
 		-->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix no-border">
+            {{--
+            <button type="button" class="btn btn-default pull-right">
+                <i class="fa fa-plus"></i>&nbsp;{{ trans('app.add_new') }}
+            </button>
+            --}}
+        </div>
     </div>
-    <!-- /.box-body -->
-    <div class="box-footer clearfix no-border">
-        {{--
-		<button type="button" class="btn btn-default pull-right">
-            <i class="fa fa-plus"></i>&nbsp;{{ trans('app.add_new') }}
-        </button>
-		--}}
-    </div>
-</div>
+</section>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(session()->get('design') . '.layouts.app')
 
 @section('title', trans('app.dashboard'))
 
@@ -40,7 +40,8 @@
     </div>
 
     <div class="row">
-        @includeIf('layouts.widgets.widget_invoices_sum')
+        {{--@includeIf('layouts.widgets.widget_invoices_sum')--}}
+        @includeIf('adminlte.widgets.widget_invoices_sum')
     </div>
 
     <div class="row">

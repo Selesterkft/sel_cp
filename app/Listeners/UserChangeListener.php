@@ -30,14 +30,15 @@ class UserChangeListener
         //dd('UserChangeListener.handle', 'aaa');
         $user = $event->user;
         //dd('UserChangeListener.handle', $user);
-        $settings = \App\Classes\Helper::getAllSettings();
+        $settings = Helper::getAllSettings();
 
-        $tz = \App\Classes\Helper::get_user_tz_array();
+        $tz = Helper::get_user_tz_array();
 
         $sessionData = [
             'company_id' => $user->CompanyID,
             'company_name' => Helper::getCompanyNickNameByID($user->CompanyID),
             'version' => Helper::getVersionString($user->CompanyID),
+            'design' => Helper::getDesign($user->CompanyID),
             //'locale' => $user->language,
             'settings' => $settings,
             'tz' => $tz
