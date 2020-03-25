@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\ColorHelper as ColorHelper;
 use App\Classes\Helper;
 use App\Models\SettingModel;
+use App\Models\DesignModel;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -14,16 +15,6 @@ class SettingsController extends Controller
      */
     public function __construct()
     {
-        /*
-        $this->middleware('role:Admin', [
-            'only' => [
-                'index', 'show',
-                'create', 'store',
-                'edit', 'update',
-                'destroy', 'restore'
-            ]
-        ]);
-        */
         $this->middleware('permission:settings-menu', [
             'only' => [
                 'index', 'show',
@@ -43,10 +34,11 @@ class SettingsController extends Controller
     {
         $settings = Helper::getAllSettings();
 
-        //dd('SettingsController.index', $settings);
+        $designs = DesignModel::all();
 
         return view('settings.index', [
-            'settings' => $settings
+            'settings' => $settings,
+            'designs' => $designs
         ]);
     }
 
@@ -567,6 +559,33 @@ class SettingsController extends Controller
     {
         //
     }
+
+    public function designUpdate()
+    {
+        if( request()->ajax() )
+        {
+            $id = (int)request()->get('pk');
+            $name = request()->get('value');
+
+            $design = DesignModel::findOrFail($id);
+            $design->name = $name;
+
+            if( !empty($design) )
+            {
+                $design->name = request()->get('value');
+                $design->save();
+
+                return json_encode([
+                    'success' => false,
+                    'pk' => $id,
+                    'newValue' => $name,
+                ]);
+            }
+
+            return 'false';
+        }
+    }
+
 /*
     public function fileStore(Request $request)
     {

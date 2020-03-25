@@ -33,6 +33,8 @@
     </style>
     <section class="content">
 
+        @includeIf('settings.designs', ['designs' => $designs])
+
         {{-- GENERAL SETTINGS --}}
         @includeIf('settings.general', [
             'general_logo_id' =>            $settings['general_logo_id'],                          'general_logo_value' =>  $settings['general_logo_value'],
@@ -90,7 +92,7 @@ echo "<style>.skin-blue .main-header .logo {background-color: " . $header_bg_col
 echo "<!-- PANEL AND TAB COLOR -->\n";
 echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLineColor() . ";}</style>\n";
 @endphp
-
+    <link href="{{ asset('assets/x-editable/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet">
 <style>
     .colorpicker-2x .colorpicker-saturation {
         width: 200px;
@@ -116,6 +118,8 @@ echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLin
     <!-- bootstrap color picker -->
     <script src="{{ asset('assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
     {{--<script src="{{ asset('assets/bower_components/bootstrap-colorpicker-3.2.0/src/bootstrap-colorpicker.js') }}"></script>--}}
+    <script src="{{ asset('assets/x-editable/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
+
     <script>
         // COLOR PICKER
         $('#general_menu_bg_color').colorpicker({

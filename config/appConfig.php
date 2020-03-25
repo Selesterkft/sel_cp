@@ -142,6 +142,10 @@ return array(
             'delete'        => 'CP_Version_Company_Delete',
             'restore'       => 'CP_Version_Company_RestoreDeleted',
         ),
+        'designs' => [
+            'connection' => 'azure',
+            'table' => 'CP_designs',
+        ],
         'design' => [
             'connection' => 'azure',
             'table' => 'CP_company_design',

@@ -9,3 +9,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/database/migrations/2020_03_10_153625_create_company_design_table.php

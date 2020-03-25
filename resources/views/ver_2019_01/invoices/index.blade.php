@@ -29,25 +29,32 @@
 @section('content')
     <section class="content">
         <div class="row">
+            <div class="col-sm-12">
 
-            <div class="box box-default">
-                <div class="box-body">
-                    <div class="table-responsive">
+                @if( session()->has('success') )
+                    @includeIf('layouts.success', ['messages' => session()->get('success') ])
+                @elseif( session()->has('errors') )
+                    @includeIf('layouts.alert', ['messages' => session()->get('errors')] )
+                @endif
 
-                    {{-- TÁBLÁZAT --}}
-                    @includeIf(session()->get('version') . '.invoices.inv_table')
+                <div class="box box-default">
+                    <div class="box-body">
+                        <div class="table-responsive">
 
-                    <!-- SEARCH MODAL -->
-                        @includeIf('modals.modal_search', [
-                            'fields' => session()->get('version') . '.invoices.fields_search',
-                            'title' => trans('app.search_title'),
-                            'url' => 'invoices',
-                        ])
+                        {{-- TÁBLÁZAT --}}
+                        @includeIf(session()->get('version') . '.invoices.inv_table')
 
+                        <!-- SEARCH MODAL -->
+                            @includeIf('modals.modal_search', [
+                                'fields' => session()->get('version') . '.invoices.fields_search',
+                                'title' => trans('app.search_title'),
+                                'url' => 'invoices',
+                            ])
+
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 @endsection
@@ -81,8 +88,10 @@
             type="text/javascript"></script>
 
     <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
+    <script
+        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
+    <script
+        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
 
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
 
@@ -94,7 +103,8 @@
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     {{-- Daterange Picker --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"
+            type="text/javascript"></script>
 
     @yield('inv_script')
 

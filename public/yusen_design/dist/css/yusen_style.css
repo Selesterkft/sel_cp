@@ -1,0 +1,65 @@
+body
+{
+    font-family: "GTPressuraMono","NotoSanLao-Medium",sans-serif;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+    font-family: "GTPressuraMono","NotoSanLao-Medium",sans-serif;
+}
+.skin-blue .main-header .navbar
+{
+    background-color: #06183d;
+}
+.box-header.with-border
+{
+    background-color: #4cc5f2;
+    color: white;
+    text-align: center;
+}
+/*
+.box-body, .login-box-body {
+    background: #f2f2f2;
+}
+*/
+.login-box-msg, .box-title {
+    color: #fff;
+}
+
+.btn-default {
+    display: table;
+    margin: 0 auto;
+    font-family: "GTPressuraMono","NotoSanLao-Medium",sans-serif;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 0;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-size: 1.3rem;
+    background: #ff6d10;
+    color: #fff;
+    font-weight: 400;
+    border-radius: 0;
+    -webkit-transition: all 0.32s ease;
+    transition: all 0.32s ease;
+}
+
+input[type="submit" i] {
+    -webkit-appearance: push-button;
+    user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: buttontext;
+    background-color: buttonface;
+    box-sizing: border-box;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+.active {
+    background-color: transparent; color: rgb(255, 109, 16);
+}

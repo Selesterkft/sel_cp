@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('translations/{language}/edit', 'TranslationsCotroller@editTranslate');
+Route::post('settings/design/edit', 'SettingsController@designUpdate');

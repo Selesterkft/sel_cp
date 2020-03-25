@@ -1,0 +1,58 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'GothamBlack';
+    src: local("Gotham-Black"),
+    url("https://www.yusen-logistics.com/sites/all/themes/custom/ylk/font/Gotham-Black.woff2") format("woff2"),
+    url("https://www.yusen-logistics.com/sites/all/themes/custom/ylk/font/Gotham-Black.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GTPressuraMono";
+    src: url("../font/GT-Pressura-Mono-Regular.eot");
+    src: url("../font/GT-Pressura-Mono-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../font/GT-Pressura-Mono-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Akkurat-Light";
+    src: url("../font/lineto-akkurat-light.eot");
+    src: url("../font/lineto-akkurat-light.eot?#iefix") format("embedded-opentype"),
+    url("../font/lineto-akkurat-light.woff2") format("woff2"),
+    url("../font/lineto-akkurat-light.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Akkurat-Bold";
+    src: url("../font/lineto-akkurat-bold.eot");
+    src: url("../font/lineto-akkurat-bold.eot?#iefix") format("embedded-opentype"),
+    url("../font/lineto-akkurat-bold.woff2") format("woff2"),
+    url("../font/lineto-akkurat-bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NotoSanLao-Medium";
+    src: url("../font/NotoSansLao-Medium.eot");
+    /* IE9 Compat Modes */
+    src: url("../font/NotoSansLao-Medium.woff") format("woff"),
+    url("../font/NotoSansLao-Medium.ttf") format("truetype"),
+    url("../font/NotoSansLao-Medium.svg#svgFontName") format("svg");
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "NotoSanLao-Light";
+    src: url("../font/NotoSansLao-Light.eot");
+    /* IE9 Compat Modes */
+    src: url("../font/NotoSansLao-Light.woff") format("woff"),
+    url("../font/NotoSansLao-Light.ttf") format("truetype"),
+    url("../font/NotoSansLao-Light.svg#svgFontName") format("svg");
+    /* Legacy iOS */
+}
