@@ -2,28 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Helper;
-use App\Models\CompanyModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class CompaniesController extends Controller
+class PageSettingsController extends Controller
 {
-    /**
-     * CompaniesController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('role:Admin', [
-            'only' => [
-                'index', 'show',
-                'create', 'store',
-                'edit', 'update',
-                'destroy', 'restore'
-            ]
-        ]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -31,14 +13,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        //$user = Auth::user();
-        //$company = strtolower(str_replace(' ', '_', $user->company));
-        //$version = str_replace('.', '_', config("appConfig.version.{$company}"));
-        //$url = "{$company}/{$version}/companies";
-
-        //$companies = CompanyModel::get();
-
-        //return view("{$url}/index", ['version' => $version, 'companies' => $companies,]);
+        return view('settings.page.index');
     }
 
     /**
@@ -103,11 +78,6 @@ class CompaniesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-    }
-
-    public function getAllCompanyToSelect()
     {
         //
     }

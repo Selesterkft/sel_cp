@@ -27,6 +27,7 @@ class InvoicesController extends Controller
     public function index(Request $request)
     {
         $loggedUser = auth()->user();
+        //dd('InvoicesController::index', $loggedUser);
         $datum = null;
         $clientID = $loggedUser->CompanyID;
         //$supervisor_id = $loggedUser->Supervisor_ID;

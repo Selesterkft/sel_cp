@@ -87,6 +87,34 @@ class VersionController extends Controller {
                 ->with('success', trans('global.app_messages.create_successfully', ['name' => trans('versions.title')]));
     }
 
+    public function storeVersion(Request $request){
+
+        $config = config('appConfig.tables.versions');
+        $this->validate($request, [
+            'Version' => 'required|unique:' . $config['table'] . ',Version'
+        ]);
+
+        $version = new Version();
+        $res = $version->save($request->all());
+
+        return $res;
+    }
+
+    public function updateVersion(Request $request, $id){
+
+        //dd('VersionController::updateVersion', $request->all(), $id);
+        $config = config('appConfig.tables.versions');
+
+        $this->validate($request, [
+            'Version' => 'required|unique:' . $config['table'] . ',Version,' . $id
+        ]);
+
+        $version = VersionModel::find($id);
+        $res = $version->update($request->all());
+
+        return $res;
+    }
+
     /**
      * Display the specified resource.
      *
@@ -191,6 +219,35 @@ class VersionController extends Controller {
         return redirect()
                 ->to('versions')
                 ->with('success', trans('messages.restore_successfully', ['name' => title('versions.title')]));
+    }
+
+    public function getVersions()
+    {
+        $versions = VersionModel::latest()->paginate(5);
+
+        $response = [
+            'pagination' => [
+                'total' => $versions->total(),
+                'per_page' => $versions->perPage(),
+                'current_page' => $versions->currentPage(),
+                //'current_page' => $request->get('page'),
+                'last_page' => $versions->lastPage(),
+                'from' => $versions->firstItem(),
+                'to' => $versions->lastItem(),
+            ],
+            'versions' => $versions
+        ];
+        return $response;
+    }
+
+    public function getVersionsToSelect()
+    {
+        $res = VersionModel::where('Active', '=', 1)
+            ->select('ID', 'Version')
+            ->get()
+            ->toArray();
+
+        return $res;
     }
 
 }

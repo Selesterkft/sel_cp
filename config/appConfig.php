@@ -155,7 +155,10 @@ return array(
             'table' => 'wallpapers',
         ),
         'company' => array(
-            'ver_2019_01' => [
+            'connection' => 'azure3',
+            'table' => 'Cegek',
+            'read' => 'CP_Cegek_Read',
+            /*'ver_2019_01' => [
                 'connection' => 'azure3',
                 'table' => 'Cegek',
                 'read' => 'CP_Cegek_Read',
@@ -164,7 +167,7 @@ return array(
                 'connection' => 'azure3',
                 'table' => 'Cegek',
                 'read' => 'CP_Cegek_Read',
-            ],
+            ],*/
         ),
         /*
         'invoices' => array(

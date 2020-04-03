@@ -117,10 +117,17 @@ class User extends Authenticatable implements Searchable
 
     public function company()
     {
+        /*
         $res = $this->hasOne(
             '\App\Models\\' . session()->get('version') . '\CompanyModel',
             'ID',
             'CompanyID')->select(['Nev1']);
+        */
+        $res = $this->hasOne(
+            'App\Models\CompanyModel',
+            'ID',
+            'CompanyID')
+            ->select(['Nev1']);
         return $res;
     }
 

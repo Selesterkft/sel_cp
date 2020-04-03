@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\ver_2019_01;
+namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +20,9 @@ class CompanyModel extends \Eloquent implements Searchable
      */
     public function __construct()
     {
-        $config = config('appConfig.tables.company.' . session()->get('version'));
+        //$config = config('appConfig.tables.company.' . session()->get('version'));
+        $config = config('appConfig.tables.company');
+
         $this->connection = $config['connection'];
 
         //$this->table = $config['table'];

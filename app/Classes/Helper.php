@@ -5,6 +5,7 @@ namespace App\Classes;
 //use App\Models\VersionCompanyModel;
 //use App\Models\VersionModel;
 //use Spatie\Permission\Models\Role;
+use App\Models\CompanyModel;
 use App\Models\SettingModel;
 use App\Models\VersionModel;
 use Spatie\Permission\Models\Role;
@@ -471,9 +472,11 @@ class Helper
     public static function getCompanies()
     {
         $loggedUser = \Auth::user();
+
         $companies = null;
 
-        $companyModel = app()->make('\App\Models\\' . session()->get('version') . '\CompanyModel');
+        //$companyModel = app()->make('\App\Models\\' . session()->get('version') . '\CompanyModel');
+        $companyModel = new CompanyModel();
 
         if( $loggedUser->hasRole('Admin') )
         {
@@ -511,14 +514,25 @@ class Helper
 
     }
 
-    public static function getPartners($client_id)
+    public static function getPartners($client_id, $version = null)
     {
-        $config = config('appConfig.tables.invoices.' . session()->get('version'));
+        if( empty($version) ){
+            $version = session()->get('version');
+        }
+
+        $config = config('appConfig.tables.invoices.' . $version);
         $partners = \DB::connection($config['connection'])
             ->select(\DB::raw("SELECT [ClientID],[ID],[Name] 
                                         FROM [dbo].[{$config['getPartners']}] 
                                         WHERE ClientID = ? 
                                         ORDER BY [Name]"), [$client_id]);
+
+        return $partners;
+    }
+
+    public function getPartnersToSelect($client_id, $version)
+    {
+        $partners = Helper::getPartners($client_id, $version);
 
         return $partners;
     }

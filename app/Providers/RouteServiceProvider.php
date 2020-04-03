@@ -50,6 +50,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapCompanySubdomain();
         $this->mapTranslationsRoutes();
         $this->mapLanguagesRoutes();
+
+        $this->mapCompanySettings();
+        $this->mapPageSettings();
     }
 
     /**
@@ -157,4 +160,21 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/languages.php'));
     }
+
+    protected function mapPageSettings()
+    {
+
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/page_settings.php'));
+
+    }
+
+    protected function mapCompanySettings()
+    {
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/company_settings.php'));
+    }
+
 }

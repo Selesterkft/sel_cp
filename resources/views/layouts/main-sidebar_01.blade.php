@@ -147,22 +147,22 @@
             @endcan
 
             @can('stocks-menu')
-            <!--<li class="{{-- ($request->is('stocks*')) ? 'active' : '' --}}">
-                <a href="{{-- url('stocks') --}}">
+            <!--<li class="{{ ($request->is('stocks*')) ? 'active' : '' }}">
+                <a href="{{ url('stocks') }}">
                     <i class="ion ion-clipboard"></i>&nbsp;
                     <span>
-                        {{-- trans('stocks.title') --}}
+                        {{ trans('stocks.title') }}
                 </span>
             </a>
         </li>-->
             @endcan
 
             @can('transports-menu')
-            <!--<li class="{{-- ($request->is('transports*')) ? 'active' : '' --}}">
-                <a href="{{-- url('transports') }}">
+            <!--<li class="{{ ($request->is('transports*')) ? 'active' : '' }}">
+                <a href="{{ url('transports') }}">
                     <i class="fa fa-shopping-cart"></i>&nbsp;
                     <span>
-                        {{-- trans('transports.title') --}}
+                        {{ trans('transports.title') }}
                 </span>
             </a>
         </li>-->
@@ -244,13 +244,13 @@
                         <ul class="treeview-menu">
                             <li class="{{ ($request->is('company_settings*')) ? 'active' : '' }}">
                                 <a href="{{ url('company_settings') }}">
-                                    <i class="fa fa-circle-o"></i>&nbsp;{{ trans('company_settings.title') }}
+                                    <i class="fa fa-circle-o"></i>&nbsp;{{ trans('COMPANY SETTINGS') }}
                                 </a>
                             </li>
-                            {{--<li class="{{ ($request->is('page_settings*')) ? 'active' : '' }}">
+                            <li class="{{ ($request->is('page_settings*')) ? 'active' : '' }}">
                                 <a href="{{ url('page_settings') }}"><i
                                         class="fa fa-circle-o"></i>&nbsp;{{ trans('PAGE SETTINGS') }}</a>
-                            </li>--}}
+                            </li>
                             {{--
                             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                             <li class="treeview">

@@ -1,6 +1,7 @@
 <?php
 
 $domain = App\Classes\Helper::getAppDomain();
+
 $controller = app()->make(App\Http\Controllers\SettingsController::class);
 
 Route::group( [ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function() use($controller)

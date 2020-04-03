@@ -100,6 +100,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
 
                 @includeIf('layouts.dropdown.dropdown_user-menu')
+                {{--@includeIf('adminlte.menus.sidebar_menu')--}}
 
                 <!-- Control Sidebar Toggle Button -->
                     <!--<li>
@@ -114,7 +115,8 @@
     <!-- =============================================== -->
 
     <!-- Left side column. contains the sidebar -->
-@include('layouts.main-sidebar')
+    {{--@include('layouts.main-sidebar')--}}
+    @includeIf('adminlte.menus.sidebar_menu')
 <!-- =============================================== -->
 
     <!-- Content Wrapper. Contains page content -->
@@ -150,8 +152,8 @@
 <!-- ./wrapper -->
 
 <!-- Bootstrap v3.4.1 -->
-{{--<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>--}}
 
 <!-- SlimScroll -->
 <script src="{{ asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>

@@ -36,6 +36,7 @@ class VersionCompanyController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function create()
     {
@@ -176,5 +177,75 @@ class VersionCompanyController extends Controller
         return redirect()
             ->route('versions.index')
             ->with('success', trans('messages.delete_successfully', ['name' => trans('versions.connection')]));
+    }
+
+    /*
+     * Vue.js-hez szolgáltat adatokat
+     */
+    public function getCompanyVersions(Request $request)
+    {
+        $companies_versions = VersionCompanyModel::latest()->paginate(5);
+
+        foreach( $companies_versions as $c_version)
+        {
+            //dd('VersionCompany::getCompanyVersions', $c_version->version->Version);
+            $c_version->CompanyName = $c_version->company->Nev1;
+            $c_version->Version = $c_version->version->Version;
+        }
+
+        //dd('VersionCompany::getCompanyVersions', $companies_versions);
+
+        $response = [
+            'pagination' => [
+                'total' => $companies_versions->total(),
+                'per_page' => $companies_versions->perPage(),
+                'current_page' => $companies_versions->currentPage(),
+                'last_page' => $companies_versions->lastPage(),
+                'from' => $companies_versions->firstItem(),
+                'to' => $companies_versions->lastItem(),
+            ],
+            'compaies_versions' => $companies_versions
+        ];
+
+        return $response;
+    }
+
+    public function storeCompanyVersion(Request $request){
+
+        $config = config('appConfig.tables.version_has_company');
+        $this->validate($request, [
+            'CompanyID' => 'required|numeric|not_in:0|unique:' . $config['table'] . ',CompanyID',
+            'VersionID' => 'required|numeric|not_in:0'
+        ]);
+
+        $vc = new VersionCompanyModel();
+        $res = $vc->save($request->all());
+
+        return $res;
+    }
+
+    public function updateCompanyVersion(Request $request, $id){
+
+        $config = config('appConfig.tables.version_has_company');
+
+        $this->validate($request, [
+            'CompanyID' => 'required|numeric|not_in:0|unique:' . $config['table'] . ',CompanyID,' . $id,
+            'VersionID' => 'required|numeric|not_in:0'
+        ]);
+
+        $vc = VersionCompanyModel::getByID($id);
+        $res = $vc->update($request->all());
+
+        if ($request->get('CompanyID') == session()->get('company_id')){
+
+            $version_name = (VersionModel::find($request->get('VersionID')))->Version;
+
+            if(session()->get('version') != $version_name ){
+
+                Session::put('version', $version_name);
+            }
+        }
+
+        return $res;
     }
 }

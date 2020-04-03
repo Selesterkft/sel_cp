@@ -15,6 +15,7 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
         return $controller->callAction('index', $parameters = ['request' => request()]);
     })->name('users2');
 
+    // index
     Route::get('users', function($company){
 
         //dd('routes.users:12', session()->get('version'), session()->all());
@@ -24,6 +25,7 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
 
     })->name('users');
 
+    // search
     Route::get('users.search', function()
     {
         //dd('route.users.search');

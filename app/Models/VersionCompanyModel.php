@@ -111,7 +111,14 @@ class VersionCompanyModel extends Model
 
     public function company()
     {
-        return $this->hasOne('App\Models\\' . session()->get('version') . '\CompanyModel', 'ID', 'CompanyID')->select(['Nev1']);
+        /*return $this->hasOne(
+            'App\Models\\' . session()->get('version') . '\CompanyModel',
+            'ID',
+            'CompanyID')->select(['Nev1']);*/
+
+        return $this->hasOne(\App\Models\CompanyModel::class,
+            'ID',
+            'CompanyID');
     }
 
     public function version()
