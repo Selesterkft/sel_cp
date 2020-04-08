@@ -147,14 +147,11 @@
             @endcan
 
             @can('stocks-menu')
-            <!--<li class="{{-- ($request->is('stocks*')) ? 'active' : '' --}}">
-                <a href="{{-- url('stocks') --}}">
-                    <i class="ion ion-clipboard"></i>&nbsp;
-                    <span>
-                        {{-- trans('stocks.title') --}}
-                </span>
-            </a>
-        </li>-->
+            <li class=" ($request->is('stocks*')) ? 'active' : '' ">
+                <a href="{{ url('stocks') }}">
+                    <i class="ion ion-clipboard"></i>&nbsp;<span>{{ trans('stocks.title') }}</span>
+                </a>
+            </li>
             @endcan
 
             @can('transports-menu')
@@ -233,7 +230,7 @@
                         </a>
                     </li>
 
-                    <li class="treeview {{ $request->is('company_settings*') || $request->is('page_settings*') ? 'active menu-open' : '' }}">
+                    {{--<li class="treeview {{ $request->is('company_settings*') || $request->is('page_settings*') ? 'active menu-open' : '' }}">
                         <a href="#">
                             <i class="fa fa-wrench"></i>&nbsp;
                             <span>{{ trans('settings.title') }}</span>
@@ -247,37 +244,8 @@
                                     <i class="fa fa-circle-o"></i>&nbsp;{{ trans('company_settings.title') }}
                                 </a>
                             </li>
-                            {{--<li class="{{ ($request->is('page_settings*')) ? 'active' : '' }}">
-                                <a href="{{ url('page_settings') }}"><i
-                                        class="fa fa-circle-o"></i>&nbsp;{{ trans('PAGE SETTINGS') }}</a>
-                            </li>--}}
-                            {{--
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                            <li class="treeview">
-                                <a href="#"><i class="fa fa-circle-o"></i> Level One
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                                    <li class="treeview">
-                                        <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                                            <span class="pull-right-container">
-                                                <i class="fa fa-angle-left pull-right"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="treeview-menu">
-                                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                            --}}
                         </ul>
-                    </li>
+                    </li>--}}
 
                 @endif
             @endcan

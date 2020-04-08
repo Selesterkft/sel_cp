@@ -1,4 +1,4 @@
-<style>
+<style xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     .modal-active {
         display: block;
     }

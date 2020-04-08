@@ -112,26 +112,26 @@
                            data-show-footer="true">
                         <thead>
                         <tr>
-                            <th data-field="Ord_Num">{{ trans('PozSzam') }}</th>
-                            <th data-field="PosInfo">{{ trans('PozAzonosito') }}</th>
-                            <th data-field="Rates_ID">{{ trans('Jogcim') }}</th>
-                            <th data-field="Note">{{ trans('Megnevezes') }}</th>
-                            <th data-field="Note">{{ trans('Negjegyzes') }}</th>
-                            <th data-field="Pcs" data-align="right">{{ trans('Darabszam') }}</th>
-                            <th data-field="Unit">{{ trans('ME') }}</th>
-                            <th data-field="UnitPrice_DC" data-align="right">{{ trans('Egysegar') }}</th>
-                            <th data-field="Netto_DC" data-align="right">{{ trans('Tetelsor Netto') }}</th>
-                            <th data-field="ACCT_TaxCodes_ID">{{ trans('ÁFA Kód') }}</th>
-                            <th data-field="TaxRate" data-align="right">{{ trans('ÁFA kulcs') }}</th>
-                            <th data-field="Tax_DC" data-align="right">{{ trans('Tax DC') }}</th>
-                            <th data-field="Brutto_DC" data-align="right">{{ trans('Brutto') }}</th>
-                            <th data-field="UnitPrice_FC2" data-align="right">{{ trans('Egysegar') }}</th>
-                            <th data-field="Tax_FC2" data-align="right">{{ trans('tételsor ÁFA') }}</th>
-                            <th data-field="Brutto_FC2" data-align="right">{{ trans('tételsor Brutto') }}</th>
-                            <th data-field="Curr_ID">{{ trans('tételsor devizanem') }}</th>
-                            <th data-field="Period_From_To">{{ trans('period tol ig') }}</th>
-                            <th data-field="Period_FROM">{{ trans('period tól') }}</th>
-                            <th data-field="Period_TO">{{ trans('period ig') }}</th>
+                            <th data-field="Ord_Num">{{ trans('inv_l.ord_num') }}</th>
+                            <th data-field="PosInfo">{{ trans('inv_l.pos_info') }}</th>
+                            <th data-field="Rates_ID">{{ trans('inv_l.rates_id') }}</th>
+                            <th data-field="Descr">{{ trans('app.descr') }}</th>
+                            <th data-field="Note">{{ trans('inv_l.note') }}</th>
+                            <th data-field="Pcs" data-align="right">{{ trans('app.pcs') }}</th>
+                            <th data-field="Unit">{{ trans('app.unit') }}</th>
+                            <th data-field="UnitPrice_DC" data-align="right">{{ trans('app.unit_price_dc') }}</th>
+                            <th data-field="Netto_DC" data-align="right">{{ trans('app.net_dc') }}</th>
+                            <th data-field="ACCT_TaxCodes_ID">{{ trans('inv_l.acct_tax_codes_id') }}</th>
+                            <th data-field="TaxRate" data-align="right">{{ trans('inv_l.tax_rate') }}</th>
+                            <th data-field="Tax_DC" data-align="right">{{ trans('inv_l.tax_dc') }}</th>
+                            <th data-field="Gross_DC" data-align="right">{{ trans('inv_l.gross_dc') }}</th>
+                            <th data-field="UnitPrice_FC2" data-align="right">{{ trans('inv_l.unit_price_fc2') }}</th>
+                            <th data-field="Tax_FC2" data-align="right">{{ trans('inv_l.tax_fc2') }}</th>
+                            <th data-field="Brutto_FC2" data-align="right">{{ trans('inv_l.gross_fc2') }}</th>
+                            <th data-field="Curr_ID">{{ trans('inv_l.curr_id') }}</th>
+                            <th data-field="Period_From_To">{{ trans('inv_l.period_from_to') }}</th>
+                            <th data-field="Period_FROM">{{ trans('inv_l.period_from') }}</th>
+                            <th data-field="Period_TO">{{ trans('inv_l.period_to') }}</th>
                         </tr>
                         </thead>
 

@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapUsersRoutes();
         $this->mapInvoicesRoutes();
-        //$this->mapStocksRoutes();
+        $this->mapStocksRoutes();
         $this->mapTransportsRoutes();
         //$this->mapCompaniesRoutes();
         $this->mapVersionsRoutes();

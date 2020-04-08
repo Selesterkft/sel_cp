@@ -1,6 +1,6 @@
 @includeIf('layouts.toolbars.search_toolbar', ['url' => url('invoices')])
 
-<table id="table" name="table"
+<table id="inv_table" name="inv_table"
        class="table table-striped table-bordered"
        data-toolbar="#toolbar"
        data-buttons-class="primary"
@@ -9,7 +9,7 @@
        data-toggle="table"
 
        data-cookie="true"
-       data-cookie-id-table="saveId"
+       data-cookie-id-table="inv_table"
 
        data-show-refresh="true"
        data-show-columns="true"
@@ -258,7 +258,7 @@
 
 @section('inv_script')
     <script>
-        var $table = $('#table');
+        var $table = $('#inv_table');
         var $local = '{{ app() ->getLocale() }}' + '-' + '{{ strtoupper(app()->getLocale()) }}';
         var $local_short = '{{ app() ->getLocale() }}';
         var $searchModal = $('#searchRekord');

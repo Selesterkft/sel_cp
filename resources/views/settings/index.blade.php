@@ -33,7 +33,7 @@
     </style>
     <section class="content">
 
-        @includeIf('settings.designs', ['designs' => $designs])
+        {{--@includeIf('settings.designs', ['designs' => $designs])--}}
 
         {{-- GENERAL SETTINGS --}}
         @includeIf('settings.general', [

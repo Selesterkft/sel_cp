@@ -61,7 +61,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-bus/dist/vue-bus.min.js"></script>
 
 @endsection
 

@@ -169,20 +169,13 @@ return array(
                 'read' => 'CP_Cegek_Read',
             ],*/
         ),
-        /*
-        'invoices' => array(
+        'stocks' => array(
             'ver_2019_01' => [
-                'connection'    => 'azure',
-                'table'         => 'CP_Inv',
-                'read'          => 'CP_Inv_Read',
-                'widget_read'   => 'CP_Invoices_Widget',
-            ],
-            'ver_2019_02' => [
                 'connection' => 'azure',
-                'table' => 'Inv',
+                'table' => 'CP_Stocks',
+                'read' => 'CP_getStocks'
             ],
         ),
-        */
         'invoices' => [
             'ver_2019_01' => [
                 'connection'    => 'azure',
@@ -227,21 +220,6 @@ return array(
             'connection' => 'azure',
             'table' => 'menus',
         ),
-        /*
-        'users' => [
-            'ver_2019_01' => [
-                'connection' => 'azure',
-                'table' => 'CP_Users',
-                'read' => 'CP_Users_Read',
-                'insert' => 'CP_Users_Insert',
-                'update' => 'CP_Users_Update',
-                'register' => 'CP_User_Register_Login',
-                'delete' => 'CP_Users_Delete',
-                'restore' => 'CP_Users_RestoreDeleted',
-            ],
-        ],
-        */
-
         'users' => array(
             'connection' => 'azure',
             'table' => 'CP_Users',
@@ -276,11 +254,6 @@ return array(
         'vehicles' => array(
             'connection' => 'azure',
             'table' => 'Jarmuvek',
-        ),
-
-        'stocks' => array(
-            'connection' => 'azure',
-            'table' => 'stocks',
         ),
         'currencies' => [
             'connection' => 'azure',

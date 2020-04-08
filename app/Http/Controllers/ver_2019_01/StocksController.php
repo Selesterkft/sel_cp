@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ver_2019_01;
 
 use App\Classes\Helper;
+use App\Models\ver_2019_01\StockModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,13 +25,16 @@ class StocksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $a = Helper::getCompanyAndVersion();
-        return view($a['url'].'/stocks/index', [
-            'company' => $a['company'],
-            'version' => $a['version'],
-        ]);
+        if( $request->ajax() )
+        {
+            $stocks = StockModel::all();
+
+            return $stocks;
+        }
+
+        return view(session()->get('version') . '.stocks.index');
     }
 
     /**
