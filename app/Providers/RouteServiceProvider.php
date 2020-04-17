@@ -46,6 +46,7 @@ class RouteServiceProvider extends ServiceProvider
         //$this->mapCompaniesRoutes();
         $this->mapVersionsRoutes();
         $this->mapRolesRoutes();
+        $this->mapPermissions();
         $this->mapSettingsRoutes();
         $this->mapCompanySubdomain();
         $this->mapTranslationsRoutes();
@@ -175,6 +176,13 @@ class RouteServiceProvider extends ServiceProvider
         \Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/company_settings.php'));
+    }
+
+    private function mapPermissions()
+    {
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/permissions.php'));
     }
 
 }

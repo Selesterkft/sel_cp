@@ -42,7 +42,7 @@ Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth']], fun
 
     Route::post('roles.store', function()
     {
-        dd('roles.store', request());
+        //dd('roles.store', request());
         $controller = app()->make(App\Http\Controllers\RoleController::class);
         return $controller->callAction('store', $parameters = ['request' => request()]);
     })->name('roles.store');

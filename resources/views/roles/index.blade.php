@@ -1,4 +1,5 @@
 @extends(session()->get('design').'.layouts.app')
+
 @section('title', trans('roles.title'))
 
 @section('content')

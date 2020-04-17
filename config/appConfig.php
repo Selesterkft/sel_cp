@@ -176,6 +176,20 @@ return array(
                 'read' => 'CP_getStocks'
             ],
         ),
+
+        'wrhs_stocks' => [
+            'connection' => 'azure',
+            'table' => 'cp_wrhs_stocks',
+        ],
+        'wrhs_trans' => [
+            'connection' => 'azure',
+            'table' => 'cp_wrhs_trans',
+        ],
+        'wrhs_trans_l' => [
+            'connection' => 'azure',
+            'table' => 'cp_wrhs_trans_l',
+        ],
+
         'invoices' => [
             'ver_2019_01' => [
                 'connection'    => 'azure',
@@ -235,9 +249,13 @@ return array(
             'connection' => 'azure',
             'table' => 'model_has_roles',
         ),
+        'roles' => [
+            'connection' => 'azure',
+            'table' => 'roles',
+        ],
         'permissions' => array(
             'connection' => 'azure',
-            'table' => '',
+            'table' => 'permissions',
         ),
         'password_reset' => array(
             'connection' => 'azure',

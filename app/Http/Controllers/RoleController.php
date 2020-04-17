@@ -70,6 +70,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $config = config('appConfig.tables.roles');
+
         $this->validate($request, [
             'name' => 'required|unique:' . $config['table'] . ',name',
             'permission' => 'required',

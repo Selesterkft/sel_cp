@@ -227,13 +227,12 @@ class VersionController extends Controller {
 
         $response = [
             'pagination' => [
-                'total' => $versions->total(),
-                'per_page' => $versions->perPage(),
-                'current_page' => $versions->currentPage(),
-                //'current_page' => $request->get('page'),
-                'last_page' => $versions->lastPage(),
-                'from' => $versions->firstItem(),
-                'to' => $versions->lastItem(),
+                'total'         => $versions->total(),
+                'per_page'      => $versions->perPage(),
+                'current_page'  => $versions->currentPage(),
+                'last_page'     => $versions->lastPage(),
+                'from'          => $versions->firstItem(),
+                'to'            => $versions->lastItem(),
             ],
             'versions' => $versions
         ];

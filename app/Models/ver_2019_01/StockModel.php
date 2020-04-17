@@ -55,11 +55,11 @@ class StockModel extends Model
 
         $stocks = [
             //'sql' => $model->toSql(),
-            'total' => $total,
-            'totalNotFiltered' => count($res),
-            'rows' => $res,
+            'total'             => $total,
+            'totalNotFiltered'  => count($res),
+            'rows'              => $res,
         ];
-        //dd('StockModel::all', $stocks);
+
         return json_encode($stocks);
     }
 }

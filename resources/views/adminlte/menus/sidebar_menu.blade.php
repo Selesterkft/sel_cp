@@ -147,23 +147,30 @@
             @endcan
 
             @can('stocks-menu')
-            <li class=" ($request->is('stocks*')) ? 'active' : '' ">
+            {{--<li class="{{ ($request->is('stocks*')) ? 'active' : '' }}">
                 <a href="{{ url('stocks') }}">
                     <i class="ion ion-clipboard"></i>&nbsp;<span>{{ trans('stocks.title') }}</span>
                 </a>
-            </li>
+            </li>--}}
+
+                <li class="{{ ($request->is('wrhs_stocks*')) ? 'active' : '' }}">
+                    <a href="{{ url('wrhs_stocks') }}">
+                        <i class="ion ion-clipboard"></i>&nbsp;<span>{{ trans('stocks.title') }}</span>
+                    </a>
+                </li>
+
             @endcan
 
-            @can('transports-menu')
-            <!--<li class="{{-- ($request->is('transports*')) ? 'active' : '' --}}">
-                <a href="{{-- url('transports') }}">
+        {{--@can('transports-menu')
+            <li class="{{ ($request->is('transports*')) ? 'active' : '' }}">
+                <a href="{{ url('transports') }}">
                     <i class="fa fa-shopping-cart"></i>&nbsp;
                     <span>
-                        {{-- trans('transports.title') --}}
-                </span>
-            </a>
-        </li>-->
-            @endcan
+                        {{ trans('transports.title') }}
+                    </span>
+                </a>
+            </li>
+            @endcan--}}
             @can('users-menu')
                 <li class="{{ ($request->is('users*')) ? 'active' : '' }}">
                     <a href="{{ url('users') }}">
@@ -190,14 +197,25 @@
 
             @if( Auth::user()->CompanyID == 71 )
                 @can('roles-menu')
-                    <li class="{{ ($request->is('roles*')) ? 'active' : '' }}">
-                        <a href="{{ url('roles') }}">
-                            <i class="fa  fa-users"></i>&nbsp;
-                            <span>
-                        {{ trans('roles.title') }}
-                    </span>
-                        </a>
-                    </li>
+                <li class="{{ ($request->is('roles*')) ? 'active' : '' }}">
+                    <a href="{{ url('roles') }}">
+                        <i class="fa  fa-users"></i>&nbsp;
+                        <span>
+                            {{ trans('roles.title') }}
+                        </span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('permissions-menu')
+                <li class="{{ ($request->is('permissions*')) ? 'active' : '' }}">
+                    <a href="{{ url('permissions') }}">
+                        <i class="fa  fa-users"></i>&nbsp;
+                        <span>
+                            {{ trans('permissions.title') }}
+                        </span>
+                    </a>
+                </li>
                 @endcan
 
                 <li class="{{ ($request->is('languages*')) ? 'active' : '' }}">

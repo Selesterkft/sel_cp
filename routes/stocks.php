@@ -10,4 +10,11 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
             'request' => request()
         ]);
     })->name('stocks');
+
+    Route::get('wrhs_stocks', function($company)
+    {
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\WrhsStocksController');
+        return $controller->callAction('index', $parameters = ['request' => request()]);
+    })->name('wrhs_stocks');
+
 });
