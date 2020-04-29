@@ -32,10 +32,19 @@ class Helper
 
     public static function get_user_tz_array() : array
     {
+        $client_ip = file_get_contents("http://ipecho.net/plain");
+        $url = 'http://ip-api.com/json/'.$client_ip;
+
+        $client_tz = file_get_contents($url);
+        $tz = json_decode($client_tz, true);
+
+        /*
         $ip = file_get_contents("http://ipecho.net/plain");
         $url = 'http://ip-api.com/json/'.$ip;
+        //dd('', $ip, $url);
         $tz = file_get_contents($url);
         $tz = json_decode($tz, true);
+        */
 
         return $tz;
     }

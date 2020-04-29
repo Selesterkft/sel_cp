@@ -17,4 +17,10 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
         return $controller->callAction('index', $parameters = ['request' => request()]);
     })->name('wrhs_stocks');
 
+    Route::get('table_teszt', function($company)
+    {
+        $controller = app()->make(\App\Http\Controllers\TableTesztController::class);
+        return $controller->callAction('index', $parameters = ['request' => request()]);
+    })->name('table_teszt');
+
 });

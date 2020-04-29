@@ -173,9 +173,15 @@ return array(
             'ver_2019_01' => [
                 'connection' => 'azure',
                 'table' => 'CP_Stocks',
-                'read' => 'CP_getStocks'
+                'read_orig' => 'CP_getStocks',
+                'read' => 'CP_STOCK_GET_Kovi_verzio',
             ],
         ),
+
+        'table_columns' => [
+            'connection' => 'azure',
+            'table' => 'CP_Table_Columns',
+        ],
 
         'wrhs_stocks' => [
             'connection' => 'azure',

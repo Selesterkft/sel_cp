@@ -54,7 +54,7 @@
     <script>
 
         var $locale = '{{ app() ->getLocale() }}' + '-' + '{{ strtoupper(app()->getLocale()) }}';
-        $url = '{{ url('stocks') }}';
+        $url = '{{ url('stocks1') }}';
 
         $(function(){
 
@@ -68,8 +68,13 @@
                         {
                             title: '{{ trans('app.descr') }}',
                             field: 'ProductName',
-                            sortable: true,
-                            switchable: true
+                            sortable: false,
+                            switchable: true,
+                            events: {
+                                'column-switch': (field, checked) => {
+                                    console.log('field:', field);
+                                }
+                            }
                         },
                         {
                             title: '{{ trans('app.pcs') }}',
@@ -95,6 +100,7 @@
                             sortable: true,
                             switchable: true
                         }
+
                     ],
                     options: {
                         locale: $locale,
@@ -103,8 +109,8 @@
                         striped: true,
                         search: false,
                         url: $url,
-                        showColumns: true,
-                        showRefresh: true,
+                        showColumns: false,
+                        showRefresh: false,
                         showExport: true,
                         exportTypes: ['excel'],
 
@@ -119,7 +125,6 @@
             });
 
         });
-
 /*
         var $table = $('#stocks_table');
         var $local = '{{-- app()->getLocale() }}' + '-' + '{{ strtoupper(app()->getLocale()) --}}';
@@ -149,7 +154,7 @@
 
         $(function(){
 
-            initTable();
+            //initTable();
         });
 
         function operateFormatter(value, row, index){
