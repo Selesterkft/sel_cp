@@ -18,6 +18,15 @@
         </li>
         @endcan
 
+        @can('stocks-menu')
+        <li>
+            <a href="{{ url('wrhs_stocks') }}"
+               style="{{ ($request->is('settings*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
+                {{ trans('stocks.title') }}
+            </a>
+        </li>
+        @endcan
+
         {{-- USERS MENU --}}
         @can('users-menu')
         <li>
@@ -33,15 +42,6 @@
             <a href="{{ url('settings') }}"
                style="{{ ($request->is('settings*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
                 {{ trans('settings.title') }}
-            </a>
-        </li>
-        @endcan
-
-        @can('stocks-menu')
-        <li>
-            <a href="{{ url('stocks') }}"
-               style="{{ ($request->is('settings*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
-                {{ trans('stocks.title') }}
             </a>
         </li>
         @endcan

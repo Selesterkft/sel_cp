@@ -33,8 +33,9 @@ class TableColumnModel extends Model
      */
     public static function getTableColumns(
         int $client_id, int $cust_id,
-        string $table_name, string $model_name)
+        string $table_name)
     {
+        // A tábla oszlopadatainak betöltése
         $model = new TableColumnModel();
         $model = $model
             ->where('Client_ID', $client_id)
@@ -44,18 +45,20 @@ class TableColumnModel extends Model
 
         $resource = $model->get()->toArray();
 
-        //dd('TableColumnModel::getTableColumns', $resource);
-
+        // Ha nincsenek oszlop adatok, akkor ...
         if( count($resource) == 0 )
         {
-            // Mezők betöltése a modellből
+            // Mezők betöltése a konfigurációs fájlból
+            $res = config('TableColumns.' . $table_name);
+            /* // Mezők betöltése a modellből
             $wrhs_model = app()
                 ->make('App\Models\\' . session()->get('version') . '\\' . $model_name);
             $res = [
                 'VisibleColumns' => json_encode($wrhs_model->getFillable()),
                 'HiddenColumns' => json_encode([]),
-            ];
+            ]; */
 
+            // Új táblaadatok mentése
             self::saveColumns($client_id, $cust_id, $table_name, $res);
 
         }
@@ -74,6 +77,7 @@ class TableColumnModel extends Model
             'Client_ID' => $client_id,
             'Cust_ID' => $cust_id,
             'TableName' => $table_name,
+            'Columns' => '[]',
             'VisibleColumns' => $columns['VisibleColumns'],
             'HiddenColumns' => $columns['HiddenColumns'],
         ];

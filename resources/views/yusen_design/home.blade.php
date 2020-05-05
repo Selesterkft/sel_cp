@@ -25,6 +25,10 @@
             @includeIf('yusen_design.widgets.widget_invoices')
             @endcan
 
+            @can('stocks-menu')
+                @includeIf('layouts.widgets.widget_stocks')
+            @endcan
+
             @can('settings-menu')
                 @includeIf('yusen_design.widgets.widget_config')
             @endcan

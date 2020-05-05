@@ -118,6 +118,7 @@
         }
 
         function initTable(){
+            console.log({!! $table_columns !!});
             $table
                 .bootstrapTable('destroy')
                 .bootstrapTable({

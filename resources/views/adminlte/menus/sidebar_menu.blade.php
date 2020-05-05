@@ -147,11 +147,6 @@
             @endcan
 
             @can('stocks-menu')
-            {{--<li class="{{ ($request->is('stocks*')) ? 'active' : '' }}">
-                <a href="{{ url('stocks') }}">
-                    <i class="ion ion-clipboard"></i>&nbsp;<span>{{ trans('stocks.title') }}</span>
-                </a>
-            </li>--}}
 
                 <li class="{{ ($request->is('wrhs_stocks*')) ? 'active' : '' }}">
                     <a href="{{ url('wrhs_stocks') }}">

@@ -20,64 +20,33 @@ class WrhsStocksController extends Controller
     {
         if( $request->ajax() )
         {
-            $wrhs_stocks = wrhsStockModel::all();
-
-            $cols = [];
-
-            //dd('WrhsStocksController::index', $wrhs_stocks['table_columns']['Fields']);
-            //echo '<pre>';
-            foreach($wrhs_stocks['table_columns'] as $table_columns )
-            {
-                foreach( $table_columns as $field )
-                {
-                    $cols[] = ['field' => $field, 'title' => $field];
-                    //print_r($field) . "\n";
-                }
-            }
-            //echo '</pre>';
-            //dd('WrhsStocksController::index', json_encode($cols), $cols);
-            $wrhs_stocks['table_columns'] = json_encode($cols);
-            //dd('WrhsStocksController::index', $wrhs_stocks);
-
-            return $wrhs_stocks;
+            $data = wrhsStockModel::all();
         }
 
-        $loggedUser = \Auth::user();
+        //$loggedUser = \Auth::user();
         //$customer_id = (int)$loggedUser->Supervisor_ID;
         //$client_id = (int)$loggedUser->CompanyID;
-
         $customer_id = 37127568;
         $client_id = 1038482;
 
         $table_name = (new wrhsStockModel())->getTable();
 
-        $cols = TableColumnModel::getTableColumns(
-            $client_id  = $client_id,
-            $cust_id    = $customer_id,
-            $table_name = $table_name,
-            $model_name = 'wrhsStockModel'
-        );
-
-        $table_columns['Fields'] = json_decode($cols['VisibleColumns']);
-        $table_columns['HiddenFields'] = json_decode($cols['HiddenColumns']);
-
-        //dd('WrhsStocksController::index', $cols, $table_columns);
-
-        $cols = [];
-
-        foreach( $table_columns as $table_fields)
+        // A megjelenítendő oszloplista eltárolása a Session-ben, ha még nem történt meg
+        // Ha megtalálható a Session-ben, akkor...
+        if( session()->has($table_name) )
         {
-            foreach( $table_fields as $field)
-            {
-                $cols[] = ['field' => $field, 'title' => $field];
-            }
+            // Az oszloplista kivétele a Session-ből.
+            $table_columns = session()->get($table_name);
+        }
+        else
+        {
+            // Az oszloplista kivétele az adatbázisból és eltárolása a Session-ben.
+            $table_columns = TableColumnModel::getTableColumns($client_id, $customer_id, $table_name);
+            session()->put($table_name, $table_columns);
         }
 
-        //dd('WrhsStocksController::index', json_encode($cols));
-
-        return view(session()->get('version') . '.wrhs_stocks.index', [
-            'table_columns' => json_encode($cols)
-        ]);
+        //dd('WrhsStocksController::index', session()->all());
+        return view(session()->get('version') . '.wrhs_stocks.index', ['table_columns' => $table_columns['VisibleColumns']]);
     }
 
     /**

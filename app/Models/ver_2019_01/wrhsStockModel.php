@@ -3,6 +3,8 @@
 namespace App\Models\ver_2019_01;
 
 use App\Models\TableColumnModel;
+use DB;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 
 class wrhsStockModel extends Model
@@ -10,12 +12,13 @@ class wrhsStockModel extends Model
     protected $connection = 'azure';
     protected $table = 'CP_WRHS_STOCKS';
     protected $primaryKey = 'ID';
-    protected $fillable = array(
+    protected $fillable = [
         'ID', 'ClientID', 'Cust_ID', 'Stock_Date', 'Items_No',
         'Items_Description_1', 'Items_Description_2', 'Expire_Date', 'Prod_Date', 'LOT_1',
         'LOT_2', 'Warehouse', 'Location', 'Status', 'Price_UnitPrice',
         'Price_Currency', 'Price_Unit', 'Weight_Net', 'Weight_Gross', 'Stock_Available',
-        'Stock_Reserved', 'Stock_External_1', 'Stock_External_2', 'Stock_External_3');
+        'Stock_Reserved', 'Stock_External_1', 'Stock_External_2', 'Stock_External_3'
+    ];
 
     /**
      * wrhs_stock constructor.
@@ -23,6 +26,7 @@ class wrhsStockModel extends Model
      */
     public function __construct()
     {
+        parent::__construct();
         $config = config('appConfig.tables.wrhs_stocks');
         $this->connection = $config['connection'];
         $this->table = $config['table'];
@@ -30,8 +34,17 @@ class wrhsStockModel extends Model
 
     public static function all($columns = ['*'])
     {
-        $visibleColumns = request()->get('visibleColumns');
-        $hiddenColumns = request()->get('hiddenColumns');
+        //$visibleColumns = request()->get('visibleColumns');
+        //$hiddenColumns = request()->get('hiddenColumns');
+
+        // Ha az oldaltól jön oszlop adat, az azt jelenti,
+        // hogy változtattak a táblázat összeállításán.
+        // Frissíteni kell az adatbázisban és a Session-ben a mező listákat.
+        $table_columns = [];
+        if( request()->has('visibleColumns') )
+        {
+            //
+        }
 
         $total = 0;
         $limit = 0;
@@ -39,9 +52,74 @@ class wrhsStockModel extends Model
         $where = '';
         $sort = '';
 
-        //$config = config('appConfig.tables.stocks.' . session()->get('version'));
-        $loggedUser = \Auth::user();
+        //$loggedUser = \Auth::user();
+        //$customer_id = (int)$loggedUser->Supervisor_ID;
+        //$client_id = (int)$loggedUser->CompanyID;
 
+        $customer_id = 37127568;
+        $client_id = 1038482;
+
+        $table_name = (new wrhsStockModel())->getTable();
+
+        $model = new wrhsStockModel();
+        $model = $model
+            ->where('ClientID', $client_id)
+            ->where('Cust_ID', $customer_id)
+            ->get();
+        $total = $model->count();
+
+        // Oldaltörés paraméterei
+        if( request()->has('limit') )
+        {
+            $limit = request()->get('limit');
+        }
+        if( request()->has('offset') )
+        {
+            $offset = request()->get('offset');
+        }
+
+        // Rendezés paraméterei
+        if( request()->has('sort') )
+        {
+            $sort = request()->get('sort');
+            $order = 'asc';
+            if( request()->has('order') )
+            {
+                $order = request()->get('order');
+            }
+            $sort .= " {$order}";
+        }
+
+        $query = "EXECUTE [dbo].[CP_STOCK_GET_01] {$client_id}, {$customer_id}, '{$table_name}', {$offset}, {$limit}, '{$where}', '{$sort}';";
+
+        dd('wrhsStockModel::all ajax', $query);
+
+        $rows = [];
+
+        $stocks = [
+            'table_columns' => $table_columns,
+            'total' => $total,
+            'totalNotFiltered' => count($rows),
+            'rows' => $rows,
+        ];
+
+        return $stocks;
+    }
+
+    public static function all_01($columns = ['*'])
+    {
+        $visibleColumns = request()->get('visibleColumns');
+        $hiddenColumns = request()->get('hiddenColumns');
+
+        //$total = 0;
+        $limit = 0;
+        $offset = 0;
+        //$where = '';
+        $sort = '';
+
+        //$config = config('appConfig.tables.stocks.' . session()->get('version'));
+
+        //$loggedUser = \Auth::user();
         //$customer_id = (int)$loggedUser->Supervisor_ID;
         //$client_id = (int)$loggedUser->CompanyID;
 
@@ -81,41 +159,27 @@ class wrhsStockModel extends Model
             $client_id, $customer_id,
             $table_name, $visibleColumns, $hiddenColumns);
 
-        //dd('wrhsStockModel::all cols', $cols);
-
+        /** @var array $table_columns */
         $table_columns['Fields'] = json_decode($cols['VisibleColumns']);
-
-        //dd('wrhsStockModel::all columns', $table_columns);
 
         $table_columns['HiddenFields'] = json_decode($cols['HiddenColumns']);
 
         $json_columns = json_encode($table_columns);
+        //dd('wrhsStockModel::all', $json_columns, $table_columns);
+        $model = new wrhsStockModel();
+        $model = $model
+            ->where('ClientID', $client_id)
+            ->where('Cust_ID', $customer_id)
+            ->get();
 
-        //dd('wrhsStockModel::all columns', $table_columns);
-
-        $total = 0;
-
-        $rows = [];
+        $total = $model->count();
 
         $query = "EXECUTE [dbo].[CP_STOCK_GET_Kovi_verzio] "
             . $client_id . ", " . $customer_id . ", "
             . $offset . ", " . $limit . ", '"
             . $sort . "', '" . $json_columns . "'";
 
-        //dd('wrhsStockModel::all', $query);
-        $rows = \DB::connection('azure')
-            ->select(\DB::raw($query));
-
-        //dd('wrhsStockModel::all', $rows);
-
-        $str_columns = '';
-        /*
-        foreach ($table_columns['Fields'] as $column)
-        {
-            $str_columns .= '<th data-field="' . $column . '" data-sortable="true" data-switchable="true">' . $column . '</th>'. "\r\n";
-        }
-        */
-        //dd('wrhsStockModel::all', $str_columns);
+        $rows = DB::connection('azure')->select(DB::raw($query));
 
         $stocks = [
             //'cols' => $cols,
@@ -124,7 +188,7 @@ class wrhsStockModel extends Model
             'totalNotFiltered' => count($rows),
             'rows' => $rows,
         ];
-
+//dd('wrhsStockModel::all', $stocks['table_columns']);
         return $stocks;
     }
 
@@ -132,11 +196,14 @@ class wrhsStockModel extends Model
         int $client_id, int $supervisor_id,
         string $table_name, ?string $visibleColumns, ?string $hiddenColumns) : array
     {
-        $res_array = TableColumnModel::getTableColumns(
-            $client_id = $client_id,
-            $cust_id = $supervisor_id,
-            $table_name = $table_name,
-            'wrhsStockModel');
+        try {
+            $res_array = TableColumnModel::getTableColumns(
+                $client_id = $client_id,
+                $cust_id = $supervisor_id,
+                $table_name = $table_name,
+                'wrhsStockModel');
+        } catch (BindingResolutionException $e) {
+        }
 
         //dd('wrhsStockModel::all', $res_array);
 
@@ -150,5 +217,4 @@ class wrhsStockModel extends Model
     {
         return ( config('appConfig.tables.wrhs_stocks') )['table'];
     }
-
 }

@@ -26,7 +26,7 @@
             @endcan
 
             @can('stocks-menu')
-                {{--@includeIf('layouts.widgets.widget_stocks')--}}
+                @includeIf('layouts.widgets.widget_stocks')
             @endcan
 
             @can('transports-menu')

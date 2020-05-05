@@ -1,15 +1,35 @@
 <div class="col-lg-3 col-xs-6">
-    <div class="small-box bg-green">
-        <div class="inner">
+    <div class="small-box bg-green stocksBox">
+        <div class="inner stocksBox">
             <!--<h3>53<sup style="font-size: 20px">%</sup></h3>-->
-            <h3>@lang('global.stocks.title')</h3>
-            <p>53</p>
+            <h3 class="stocksBox">{{ trans('stocks.title') }}</h3>
+            <p class="stocksBox">&nbsp;</p>
         </div>
-        <div class="icon">
-            <i class="ion ion-clipboard"></i>
+        <div class="icon stocksBox">
+            <i class="ion ion-clipboard stocksBox"></i>
         </div>
-        <a href="#" class="small-box-footer">
-            @lang('global.app_more_info')&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>
+        <a href="{{ url('wrhs_stocks') }}" class="small-box-footer">
+            {{ trans('app.more_info') }}&nbsp;&nbsp;<i class="fa fa-arrow-circle-right stocksBox"></i>
         </a>
     </div>
 </div>
+<script>
+    let $stocksBox = $('.stocksBox');
+
+    $stocksBox.on('mouseleave', function()
+    {
+        $stocksBox.find('*').css('cursor', 'pointer');
+    });
+
+    $stocksBox.mouseover(function()
+    {
+        $stocksBox.find('*').css('cursor', 'hand');
+    });
+
+    $stocksBox.click(function()
+    {
+        window.location = '{{ url('wrhs_stocks') }}';
+    });
+
+
+</script>
