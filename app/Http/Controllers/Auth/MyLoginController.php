@@ -61,7 +61,7 @@ class MyLoginController extends Controller
         // Felhasználó keresése az e-mail cím alapján
         $loginUser = User::where('Email', '=', $request->get('email'))
             ->first();
-        //dd('MyLoginController.doLogin', $request->email, $loginUser);
+
         // Ha nincs meg a felhasználó, akkor...
         if( empty($loginUser) )
         {
@@ -90,6 +90,14 @@ class MyLoginController extends Controller
             if ($this->attemptLogin($request))
             {
                 return $this->sendLoginResponse($request);
+            }
+            else
+            {
+                return \Redirect::back()
+                    ->withErrors([
+                        'password' => trans('messages.errors_password')
+                    ])
+                    ->withInput(Input::except('password'));
             }
         }
 

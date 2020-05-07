@@ -453,19 +453,5 @@
 
 
 
-        /*
-        function FormatNumber(number, numberOfDigits = 2)
-        {
-            try
-            {
-                retVal = parseFloat(number).toFixed(2);
-            } catch (error) {
-                retVal =  0;
-            }
-
-            return retVal;
-        }
-        */
-
     </script>
 @endsection

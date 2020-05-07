@@ -21,6 +21,8 @@ class WrhsStocksController extends Controller
         if( $request->ajax() )
         {
             $data = wrhsStockModel::all();
+
+            return $data;
         }
 
         //$loggedUser = \Auth::user();
@@ -29,24 +31,45 @@ class WrhsStocksController extends Controller
         $customer_id = 37127568;
         $client_id = 1038482;
 
+        // Lekérem a tábla nevét
         $table_name = (new wrhsStockModel())->getTable();
 
-        // A megjelenítendő oszloplista eltárolása a Session-ben, ha még nem történt meg
-        // Ha megtalálható a Session-ben, akkor...
-        if( session()->has($table_name) )
+        // Mező adatok lekérése
+        $table_columns = TableColumnModel::getTableColumns($client_id, $customer_id, $table_name);
+        //dd('WrhsStocksController::index', $table_name, $table_columns);
+
+        // Nyelvi beállítások alkalmazása
+        $arr_table_columns = json_decode($table_columns, true);
+
+        foreach($arr_table_columns as $id => $column)
         {
-            // Az oszloplista kivétele a Session-ből.
-            $table_columns = session()->get($table_name);
-        }
-        else
-        {
-            // Az oszloplista kivétele az adatbázisból és eltárolása a Session-ben.
-            $table_columns = TableColumnModel::getTableColumns($client_id, $customer_id, $table_name);
-            session()->put($table_name, $table_columns);
+            switch( strtolower($column['title']) )
+            {
+                case 'id':
+                    $arr_table_columns[$id]['title'] = trans("app.id");
+                    break;
+                case 'warehouse':
+                    $arr_table_columns[$id]['title'] = trans("app.warehouse");
+                    break;
+                case 'status':
+                    $arr_table_columns[$id]['title'] = trans("app.status");
+                    break;
+                default:
+                    //$arr_table_columns[$id]['title'] = trans("{$table_name}.{$column['title']}");
+                    $arr_table_columns[$id]['title'] = trans("{$table_name}." . strtolower($column['title']) );
+                    break;
+            }
         }
 
-        //dd('WrhsStocksController::index', session()->all());
-        return view(session()->get('version') . '.wrhs_stocks.index', ['table_columns' => $table_columns['VisibleColumns']]);
+        //echo '<pre>';
+        //print_r($arr_table_columns);
+        //echo '</pre>';
+
+        //dd('WrhsStocksController::index', $arr_table_columns);
+
+        $table_columns = json_encode($arr_table_columns);
+
+        return view(session()->get('version') . '.wrhs_stocks.index', ['table_columns' => $table_columns]);
     }
 
     /**

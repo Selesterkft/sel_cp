@@ -181,6 +181,8 @@ return array(
         'table_columns' => [
             'connection' => 'azure',
             'table' => 'CP_Table_Columns',
+            'get_table_columns' => 'CP_GetTableColumns',
+            'column_sync' => 'CP_TableColumns_SYNC',
         ],
 
         'wrhs_stocks' => [

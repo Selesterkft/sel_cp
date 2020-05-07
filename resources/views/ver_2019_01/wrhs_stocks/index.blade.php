@@ -20,7 +20,6 @@
                 <i class="fa fa-files-o"></i>&nbsp;
                 {{ trans('stocks.title') }}
             </li>
-
         </ol>
 
     </section>
@@ -59,6 +58,26 @@
     {{-- Bootstrap Table --}}
     <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
 
+    <style>
+        table.table.table-striped.table-bordered td{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /*table.table-bordered{
+            border:1px solid darkgray;
+            margin-top:20px;
+        }
+        table.table-bordered > thead > tr > th{
+            border:1px solid darkgray;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid darkgray;
+        }*/
+
+    </style>
+
     @yield('wrhs_stocks_css')
 @endsection
 
@@ -74,6 +93,10 @@
         src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
 
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
+
+    {{-- Moment --}}
+    <script src="{{ asset('assets/bower_components/moment/moment.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     @yield('wrhs_stocks_js')
 @endsection
