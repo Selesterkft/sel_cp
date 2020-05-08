@@ -173,6 +173,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
         //Way\Generators\GeneratorsServiceProvider::class,
         //Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
@@ -259,6 +260,7 @@ return [
 
         'TranslationCache' => Waavi\Translation\Facades\TranslationCache::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

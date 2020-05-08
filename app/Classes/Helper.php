@@ -568,6 +568,34 @@ class Helper
     }
 
     /**
+     * A megadot karakterrel kezdődik a szöveg?
+     * @param string $haystack Vizsgált szöveg
+     * @param string $needle Keresett szöveg
+     * @return bool
+     */
+    public static function startsWith(string $haystack, string $needle)
+    {
+        $length = strlen($needle);
+        return (substr($haystack, 0, $length) === $needle);
+    }
+
+    /**
+     * A megadot karakterrel végződik a szöveg?
+     * @param string $haystack Vizsgált szöveg
+     * @param string $needle Keresett szöveg
+     * @return bool
+     */
+    public static function endsWith(string $haystack, string $needle)
+    {
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
+    }
+
+    /**
      * Unaccent the input string string. An example string like `ÀØėÿᾜὨζὅБю`
      * will be translated to `AOeyIOzoBY`. More complete than :
      *   strtr( (string)$str,

@@ -57,7 +57,6 @@ class wrhsStockModel extends Model
         // Oszlop lista tömbbé alakítása
         $arr_table_columns = json_decode($json_table_columns, true);
 
-        //dd('wrhsStockModel::all', $arr_table_columns);
         // Ha az oldal felől jön oszlop adat, akkor ...
         if( request()->has('visibleColumns') && request()->get('visibleColumns') != '' )
         {
@@ -101,16 +100,6 @@ class wrhsStockModel extends Model
             session()->put($table_name, $json_table_columns);
         }
 
-        foreach($arr_table_columns as $id => $arr_table_column)
-        {
-            $select .= $arr_table_column['field'];
-
-            if( $id < count($arr_table_columns) - 1 )
-            {
-                $select .= ', ';
-            }
-        }
-
         // Oldaltörés paraméterei
         if( request()->has('limit') )
         {
@@ -140,27 +129,31 @@ class wrhsStockModel extends Model
             ->get();
         $total = $model->count();
 
-        $query = "
-DECLARE @Client_ID int = {$client_id}
-DECLARE @Cust_ID int = {$cust_id}
-DECLARE @SELECT nvarchar(max) = '{$select}'
-DECLARE @WHERE nvarchar(max) = '{$where}'
-DECLARE @GROUP_BY nvarchar(max) = '{$group_by}'
-DECLARE @ORDER_BY nvarchar(max) = '{$sort}'
-DECLARE @OFFSET int = '{$offset}'
-DECLARE @LIMIT int = '{$limit}'
+        // A lekérdezés mezőinek és csoportosítandó mezők listájának összeállítása
+        foreach($arr_table_columns as $id => $arr_table_column)
+        {
+            // Ha az oszlop látható, akkor...
+            if( !isset($arr_table_column['visible']) )
+            {
+                // Beteszem a lekérdezendő mezők listájába
+                $select .= $arr_table_column['sql_field'] . ',';
 
-EXECUTE [dbo].[CP_STOCK_GET_ML_1] 
-   @Client_ID
-  ,@Cust_ID
-  ,@SELECT
-  ,@WHERE
-  ,@GROUP_BY
-  ,@ORDER_BY
-  ,@OFFSET
-  ,@LIMIT";
+                if( $arr_table_column['group'] == true)
+                {
+                    $group_by .= $arr_table_column['field'] . ',';
+                }
 
-        //dd('wrhsStockModel::all', $query);
+                if( strlen($sort) == 0 )
+                {
+                    $sort = "{$arr_table_column['sql_field']} asc";
+                }
+            }
+        }
+        $select = substr_replace($select,"",-1);
+        $group_by = substr_replace($group_by,"",-1);
+
+        $query = "EXECUTE [dbo].[CP_STOCK_GET_ML_1] 
+            {$client_id},{$cust_id},'{$select}','{$where}','{$group_by}','{$sort}','{$offset}','{$limit}';";
 
         $config = config('appConfig.tables.wrhs_stocks');
         $rows = DB::connection($config['connection'])
