@@ -1,0 +1,15 @@
+Vue.js:
+    Client Side Storage:
+    https://vuejs.org/v2/cookbook/client-side-storage.html
+
+Web SQL Database:
+    https://www.w3.org/TR/webdatabase/
+
+auto logout user when user logout on one of the opened tab:
+    https://wordpress.stackexchange.com/questions/235520/auto-logout-user-when-user-logout-on-one-of-the-opened-tab
+
+How user will Logout from all open tabs automatically when user logs out in one of them:
+    https://stackoverflow.com/questions/42111784/how-user-will-logout-from-all-open-tabs-automatically-when-user-logs-out-in-one
+
+Communication between tabs or windows:
+    https://stackoverflow.com/questions/28230845/communication-between-tabs-or-windows

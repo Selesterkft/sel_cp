@@ -43,12 +43,12 @@ class wrhsStockModel extends Model
         // Lekérdezendő oszlopok
         $select = '';
 
-        //$loggedUser = \Auth::user();
-        //$cust_id = (int)$loggedUser->Supervisor_ID;
-        //$client_id = (int)$loggedUser->CompanyID;
+        $loggedUser = \Auth::user();
+        $cust_id = (int)$loggedUser->Supervisor_ID;
+        $client_id = (int)$loggedUser->CompanyID;
 
-        $cust_id = 37127568;
-        $client_id = 1038482;
+        //$cust_id = 37127568;
+        //$client_id = 1038482;
         // Lekérem a modelltől a tábla nevét
         $table_name = (new wrhsStockModel())->getTable();
 
