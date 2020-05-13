@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ver_2019_01;
 
-use App\Models\TableColumnModel;
+use App\Models\UserQueryModel;
 use App\Models\ver_2019_01\wrhsStockModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,18 +25,20 @@ class WrhsStocksController extends Controller
             return $data;
         }
 
-        //$loggedUser = \Auth::user();
-        //$customer_id = (int)$loggedUser->Supervisor_ID;
-        //$client_id = (int)$loggedUser->CompanyID;
-        $customer_id = 37127568;
-        $client_id = 1038482;
+        $loggedUser = \Auth::user();
+        $customer_id = (int)$loggedUser->Supervisor_ID;
+        $client_id = (int)$loggedUser->CompanyID;
+        $query_name = ($request->has('query_name')) ? $request->get('query_name') : '*';
+
+        //$customer_id = 37127568;
+        //$client_id = 1038482;
 
         // Lekérem a tábla nevét
         $table_name = (new wrhsStockModel())->getTable();
 
         // Mező adatok lekérése
-        $table_columns = TableColumnModel::getTableColumns($client_id, $customer_id, $table_name);
-        //dd('WrhsStocksController::index', $table_name, $table_columns);
+        $table_columns = UserQueryModel::getTableColumns($client_id, $customer_id, $table_name, $query_name);
+        //dd('WrhsStocksController::index', $client_id, $customer_id, $table_name, $query_name, $table_columns);
 
         // Nyelvi beállítások alkalmazása
         $arr_table_columns = json_decode($table_columns, true);
@@ -61,15 +63,21 @@ class WrhsStocksController extends Controller
             }
         }
 
-        //echo '<pre>';
-        //print_r($arr_table_columns);
-        //echo '</pre>';
-
-        //dd('WrhsStocksController::index', $arr_table_columns);
-
         $table_columns = json_encode($arr_table_columns);
 
-        return view(session()->get('version') . '.wrhs_stocks.index', ['table_columns' => $table_columns]);
+        //dd('WrhsStocksController::index', $client_id, $customer_id, $table_name, $query_name, $table_columns);
+
+        $company_reports = UserQueryModel::getCompanyReports($client_id, $customer_id, $table_name);
+
+        //dd('WrhsStocksController::index', $company_reports);
+
+        return view(session()->get('version') . '.wrhs_stocks.index',
+            [
+                'table_name' => $table_name,
+                'query_name' => $query_name,
+                'table_columns' => $table_columns,
+                'company_reports' => $company_reports,
+            ]);
     }
 
     /**
@@ -90,7 +98,35 @@ class WrhsStocksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client_id = (int)$request->get('client_id');
+        $customer_id = (int)$request->get('cust_id');
+        $table_name = $request->get('table_name');
+        $old_query_name = ($request->get('old_query_name') != null) ? $request->get('old_query_name') : '';
+        $new_query_name = $request->get('query_name');
+        $query_description = $request->get('query_description');
+
+        $table_columns = UserQueryModel::getTableColumns(
+            $client_id = $client_id,
+            $customer_id = $customer_id,
+            $table_name = $table_name,
+            $query_name = $old_query_name);
+
+        //dd('WrhsStocksController::store', $request->all(), $client_id, $customer_id, $table_name, $old_query_name, $query_name, $query_description, $table_columns);
+
+        $data = [
+            'client_id' => $client_id,
+            'cust_id' => $customer_id,
+            'table_name' => $table_name,
+            'query_name' => $new_query_name,
+            'query_description' => $query_description,
+            'columns' => $table_columns,
+        ];
+
+        //dd('WrhsStocksController::store', $request->all(), $data);
+
+        $res = UserQueryModel::sync($data);
+
+        return $res;
     }
 
     /**
@@ -124,7 +160,18 @@ class WrhsStocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        /*
+         [
+            "client_id" => "1038482"
+            "cust_id" => "37127568"
+            "table_name" => "cp_wrhs_stocks"
+            "query_name" => "Teszt_query"
+            "query_description" => "LEÍRÁS"
+            "id" => "100"
+        ]
+         */
+
+        dd('WrhsStocksController::store', $request->all(), $id);
     }
 
     /**

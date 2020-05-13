@@ -179,10 +179,21 @@ return array(
         ),
 
         'table_columns' => [
-            'connection' => 'azure',
-            'table' => 'CP_Table_Columns',
-            'get_table_columns' => 'CP_GetTableColumns',
-            'column_sync' => 'CP_TableColumns_SYNC',
+            'connection'                => 'azure',
+            'table'                     => 'CP_Table_Columns',
+            'get_table_columns'         => 'CP_GetTableColumns',
+            'get_company_reports' => 'CP_GET_COMPANY_REPORTS',
+            'column_sync'               => 'CP_TableColumns_SYNC',
+        ],
+
+        'query_types' => [
+            'connection'    => 'azure',
+            'table'         => 'CP_QueryTypes',
+        ],
+
+        'user_queries' => [
+            'connection'    => 'azure',
+            'table'         => 'CP_UserQueries',
         ],
 
         'wrhs_stocks' => [

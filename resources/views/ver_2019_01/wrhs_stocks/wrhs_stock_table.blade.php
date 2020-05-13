@@ -19,7 +19,7 @@
            class="table table-striped table-bordered"
            data-toolbar="#toolbar"
            data-buttons-class="primary"
-           data-url="{{ url('wrhs_stocks') }}"
+           data-url="{{ url('wrhs_stocks?query_name=' . $query_name) }}"
            data-toggle="table"
 
            data-query-params="queryParams"
@@ -146,37 +146,6 @@
                     undefinedText: ' ',
 
                     columns: {!! $table_columns !!}
-/*
-                    columns:
-                        [
-                            {title: 'ID_1',field: 'ID'},
-                            {title:'ClientID',field:'ClientID'},
-                            {title:'Cust_ID',field:'Cust_ID'},
-                            {title:'Stock_Date',field:'Stock_Date'},
-                            {title:'Items_No',field:'Items_No'},
-
-                            {title:'Items_Description_1',field:'Items_Description_1'},
-                            {title:'Items_Description_2',field:'Items_Description_2'},
-                            {title:'Expire_Date',field:'Expire_Date'},
-                            {title:'Prod_Date',field:'Prod_Date'},
-                            {title:'LOT_1',field:'LOT_1'},
-
-                            {title:'LOT_2',field:'LOT_2'},
-                            {title:'Location',field:'Location'},
-                            {title:'Status',field:'Status'},
-                            {title:'Price_UnitPrice',field:'Price_UnitPrice'},
-                            {title:'Price_Currency',field:'Price_Currency'},
-
-                            {title:'Weight_Net',field:'Weight_Net'},
-                            {title:'Weight_Gross',field:'Weight_Gross'},
-                            {title:'Stock_Available',field:'Stock_Available'},
-                            {title:'Stock_Reserved',field:'Stock_Reserved'},
-                            {title:'Stock_External_1',field:'Stock_External_1'},
-
-                            {title:'Stock_External_2',field:'Stock_External_2'},
-                            {title:'Stock_External_3',field:'Stock_External_3'}
-                        ]
-*/
                 });
         }
 

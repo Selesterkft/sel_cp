@@ -9,13 +9,13 @@ class WrhsHelper
 {
     public static function cfg_db(string $table_name)
     {
-        //$loggedUser = \Auth::user();
-        //$customer_id = (int)$loggedUser->Supervisor_ID;
-        //$client_id = (int)$loggedUser->CompanyID;
-        //$table_name = (new wrhsStockModel())->getTable();
+        $loggedUser = \Auth::user();
+        $customer_id = (int)$loggedUser->Supervisor_ID;
+        $client_id = (int)$loggedUser->CompanyID;
+        $table_name = (new wrhsStockModel())->getTable();
 
-        $customer_id = 37127568;
-        $client_id = 1038482;
+        //$customer_id = 37127568;
+        //$client_id = 1038482;
 
         //dd('App\Classes\WrhsHelper::cfg_db', $customer_id, $client_id, $table_name);
         $data = [

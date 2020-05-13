@@ -29,6 +29,23 @@
 @section('content')
     <section class="content">
         <div class="row">
+
+            <div class="col-md-3">
+
+                <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
+
+                <div class="box box-default">
+                    <div class="box-body"></div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="box box-default">
+                    <div class="box-body"></div>
+                </div>
+            </div>
+
+            {{--
             <div class="col-sm-12">
 
                 @if( session()->has('success') )
@@ -42,7 +59,6 @@
                     <div class="box-body">
                         <div class="table-responsive">
 
-                            {{-- TÁBLÁZAT --}}
                             @includeIf(session()->get('version') . '.stocks.stocks_table')
 
                         </div>
@@ -51,6 +67,7 @@
                 </div>
 
             </div>
+        --}}
         </div>
     </section>
 @endsection
