@@ -2,7 +2,7 @@
 $domain = App\Classes\Helper::getAppDomain();
 $controller = app()->make(App\Http\Controllers\TranslationsCotroller::class);
 
-Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth']], function() use ($controller)
+Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier']], function() use ($controller)
 {
     // Languages
     // index

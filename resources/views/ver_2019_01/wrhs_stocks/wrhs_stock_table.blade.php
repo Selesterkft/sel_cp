@@ -33,9 +33,7 @@
            data-side-pagination="server"
            data-pagination="true"
            data-page-size="10"
-           data-page-list="[10, 25, 50, 100]">
-        <thead></thead>
-    </table>
+           data-page-list="[10, 25, 50, 100]"></table>
 </div>
 
 @section('wrhs_stocks_css')@endsection
@@ -112,33 +110,23 @@
                 .bootstrapTable('destroy')
                 .bootstrapTable({
 
-                    onLoadSuccess: function (data, status, jqXHR) {
-
-                        /*
-                        $visibleColumns = JSON.stringify($table.bootstrapTable('getVisibleColumns').map(function (it) {
-                            return it.field
-                        }));
-
-                        $hiddenColumns = JSON.stringify($table.bootstrapTable('getHiddenColumns').map(function (it) {
-                            return it.field
-                        }));
-
-                        console.log('visibleColumns: ', $visibleColumns);
-                        console.log('hiddenColumns: ', $hiddenColumns);
-                        */
-                    },
+                    onLoadSuccess: function (data, status, jqXHR) {},
 
                     onColumnSwitch: function(field, checked){
 
-                        $visibleColumns = JSON.stringify($table.bootstrapTable('getVisibleColumns').map(function (it) {
-                            return it.field
-                        }));
+                        $visibleColumns = JSON.stringify($table.bootstrapTable('getVisibleColumns')
+                            .map(function (it) {
+                                return it.field
+                            })
+                        );
 
                         $hiddenColumns = JSON.stringify($table.bootstrapTable('getHiddenColumns').map(function (it) {
                             return it.field
                         }));
 
-                        $table.bootstrapTable('refresh')
+                        //console.log('Tablename: ' + $.session.get('table_name'));
+
+                        $table.bootstrapTable('refresh');
                     },
 
                     exportTypes: ['excel'],

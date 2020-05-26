@@ -4,7 +4,7 @@ $domain = App\Classes\Helper::getAppDomain();
 
 $controller = app()->make(App\Http\Controllers\SettingsController::class);
 
-Route::group( [ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function() use($controller)
+Route::group( [ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function() use($controller)
 {
     Route::get('settings', function($company) use($controller)
     {

@@ -64,7 +64,7 @@ class CompanySubdomainController extends Controller
 
         try
         {
-            //dd('CompanySubdomainController.store', $request);
+            //dd('CompanySubdomainController.store', $request->all());
             $cs->save($request->all());
 
             return redirect()
@@ -73,7 +73,7 @@ class CompanySubdomainController extends Controller
         }
         catch (Exception $e)
         {
-            //dd('CompanySubdomainController.store', $e->getMessage());
+            dd('CompanySubdomainController.store error', $e->getMessage());
             return redirect()
                     ->back()
                     ->withErrors('errors', trans('messages.errors_save'))

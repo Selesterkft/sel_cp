@@ -69,18 +69,19 @@ class CompanySubdomainModel extends Model
         //dd('CompanySubdomainModel.save', $config, $options);
         $CompanyID = $options['CompanyID'];
         $CompanyName = Helper::getCompanyNameByID($CompanyID);
+        //dd('CompanySubdomainModel.save');
         $CompanyNickName = Helper::remove_accents($CompanyName);
         //dd('CompanySubdomainModel.save', $CompanyID, $CompanyName, $CompanyNickName);
         $SubdomainName = $options['SubdomainName'];
-/*
-        dd('CompanySubdomainModel.save',
+
+        /*dd('CompanySubdomainModel.save',
             $options,
             $config,
             $CompanyID,
             $CompanyName,
             $CompanyNickName,
-            $SubdomainName);
-*/
+            $SubdomainName);*/
+
         $res = DB::connection($config['connection'])
             ->select(
                 DB::connection($config['connection'])

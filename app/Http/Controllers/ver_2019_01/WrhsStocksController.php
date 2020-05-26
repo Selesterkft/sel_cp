@@ -28,7 +28,7 @@ class WrhsStocksController extends Controller
         $loggedUser = \Auth::user();
         $customer_id = (int)$loggedUser->Supervisor_ID;
         $client_id = (int)$loggedUser->CompanyID;
-        $query_name = ($request->has('query_name')) ? $request->get('query_name') : '*';
+        $query_name = ($request->has('query_name')) ? $request->get('query_name') : config('appConfig.default_query_name');
 
         //$customer_id = 37127568;
         //$client_id = 1038482;
@@ -69,7 +69,7 @@ class WrhsStocksController extends Controller
 
         $company_reports = UserQueryModel::getCompanyReports($client_id, $customer_id, $table_name);
 
-        //dd('WrhsStocksController::index', $company_reports);
+        //dd('WrhsStocksController::index');
 
         return view(session()->get('version') . '.wrhs_stocks.index',
             [
@@ -104,6 +104,7 @@ class WrhsStocksController extends Controller
         $old_query_name = ($request->get('old_query_name') != null) ? $request->get('old_query_name') : '';
         $new_query_name = $request->get('query_name');
         $query_description = $request->get('query_description');
+        $query_description = isset($query_description) ? $query_description : '';
 
         $table_columns = UserQueryModel::getTableColumns(
             $client_id = $client_id,
@@ -160,18 +161,14 @@ class WrhsStocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*
-         [
-            "client_id" => "1038482"
-            "cust_id" => "37127568"
-            "table_name" => "cp_wrhs_stocks"
-            "query_name" => "Teszt_query"
-            "query_description" => "LEÍRÁS"
-            "id" => "100"
-        ]
-         */
+        $config = config('appConfig.tables.user_queries');
 
-        dd('WrhsStocksController::store', $request->all(), $id);
+        $query = "EXECUTE [dbo].[{$config['update']}] {$id},'{$request->get('query_name')}','{$request->get('query_description')}'";
+
+        $res = \DB::connection($config['connection'])
+        ->select(\DB::raw($query));
+
+        return $res;
     }
 
     /**

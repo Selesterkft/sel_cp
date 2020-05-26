@@ -6,7 +6,7 @@ $domain = App\Classes\Helper::getAppDomain();
 $versionController = app()->make(\App\Http\Controllers\VersionController::class);
 $vcController = app()->make(\App\Http\Controllers\VersionCompanyController::class);
 
-Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth']], function() use($versionController, $vcController)
+Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier']], function() use($versionController, $vcController)
 {
     /*
      * ================================================

@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -165,6 +166,9 @@
 <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
 
 <script src="{{ asset('js/site.js')}}"></script>
+
+<!-- Session -->
+{{--<script src="{{ asset('assets/bower_components/session/jquery.session.js')}}"></script>--}}
 
 @yield('js')
 

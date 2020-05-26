@@ -34,6 +34,7 @@ class VersionModel extends Model
 
         $res = DB::connection($config['connection'])
             ->table($config['read'])
+            ->whereNull('deleted_at')
             ->select('ID', 'Version', 'Active')
             ->get();
         //dd('VersionModel.readAll', $res);

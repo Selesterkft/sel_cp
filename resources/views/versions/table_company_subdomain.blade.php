@@ -2,10 +2,10 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>{{ trans('global.company_subdomain.fields.company') }}</th>
-        <th>{{ trans('global.company_subdomain.fields.company_nickname') }}</th>
-        <th>{{ trans('global.company_subdomain.fields.subdomain') }}</th>
-        <th>{{ trans('global.app_fields.operations') }}</th>
+        <th>{{ trans('app.company') }}</th>
+        <th>{{ trans('company_subdomain.company_nickname') }}</th>
+        <th>{{ trans('company_subdomain.subdomain') }}</th>
+        <th>{{ trans('app.operations') }}</th>
     </tr>
     </thead>
     <tbody>

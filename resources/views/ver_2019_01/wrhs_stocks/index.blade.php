@@ -31,7 +31,6 @@
 @endsection
 
 @section('content')
-
     @php
         $loggedUser = \Auth::user();
         $customer_id = (int)$loggedUser->Supervisor_ID;
@@ -52,8 +51,8 @@
             <div class="col-md-3">
                 <button class="btn btn-primary btn-block margin-bottom"
                         data-toggle="modal"
-                        data-target="#exampleModal"
-                        data-modal_title="{{ trans('reports.seve_report') }}"
+                        data-target="#stocksModal"
+                        data-modal_title="{{ trans('reports.save_report') }}"
                         data-report_id="0"
                         data-report_name=""
                         data-report_desc=""
@@ -89,9 +88,9 @@
                                         <i class="fa fa-fw fa-file-text-o"></i>&nbsp;{{ $company_report->QueryName }}
                                         <span class="pull-right">
 
-                                            <button class="btn btn-success btn-xs"
+                                            <button class="btn btn-success btn-xs" onclick="event.preventDefault();"
                                                     data-toggle="modal"
-                                                    data-target="#exampleModal"
+                                                    data-target="#stocksModal"
                                                     data-modal_title="{{ trans('app.rename') }}"
                                                     data-report_id="{{ $company_report->ID }}"
                                                     data-report_name="{{ $company_report->QueryName }}"
@@ -101,9 +100,9 @@
                                                    title="{{ trans('app.rename') }}"></i>
                                             </button>
 
-                                            <button class="btn btn-danger btn-xs"
+                                            <button class="btn btn-danger btn-xs" onclick="event.preventDefault();"
                                                     data-toggle="modal"
-                                                    data-target="#exampleModal"
+                                                    data-target="#stocksModal"
                                                     data-modal_title="{{ trans('app.delete') }}"
                                                     data-report_id="{{ $company_report->ID }}"
                                                     data-action="delete">
@@ -124,11 +123,11 @@
             <div class="col-md-9">
                 <div class="box box-default">
                     <div class="box-body">
-                        <div class="table-responsive">
+                        {{--<div class="table-responsive">--}}
 
                             @includeIf(session()->get('version') . '.wrhs_stocks.wrhs_stock_table')
 
-                        </div>
+                        {{--</div>--}}
                     </div>
                 </div>
             </div>
@@ -136,8 +135,12 @@
         </div>
     </section>
 
+    {{--@includeIf('modals.modal_01', [
+        'fields' => session()->get('version') . '.wrhs_stocks.partials.modal_fields'
+    ])--}}
     @includeIf('modals.modal_01', [
-        'fields' => 'ver_2019_01.wrhs_stocks.partials.modal_fields'
+        'modal_name' => 'stocksModal',
+        'fields' => session()->get('version') . '.wrhs_stocks.partials.modal_fields'
     ])
 
 @endsection
@@ -187,8 +190,28 @@
         var report_desc = '';
         var query_name = '';
 
+        window.onload = function(event)
+        {
+            //$.session.remove('table_name');
+            //$.session.remove('report_name');
+            //$.session.remove('columns');
+        };
+
+        window.onbeforeunload = function(event)
+        {
+            //$.session.remove('table_name');
+            //$.session.remove('report_name');
+            //$.session.remove('columns');
+        };
+
+        $(document).ready(function()
+        {
+            //$.session.set('table_name', $('#table_name').val());
+            //console.log('ready: ' + $.session.get('table_name'));
+        });
+
         // Open Modal
-        $('#exampleModal').on('show.bs.modal', function (event)
+        $('#stocksModal').on('show.bs.modal', function (event)
         {
             var button = $(event.relatedTarget);// Button that triggered the modal
             //var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -207,7 +230,7 @@
         });
 
         // Close Modal
-        $('#exampleModal').on('hide.bs.modal', function(event){});
+        $('#stocksModal').on('hide.bs.modal', function(event){});
 
         // Click Save
         $('#modal_save').on('click', function(event)

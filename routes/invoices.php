@@ -8,7 +8,7 @@ $domain = \App\Classes\Helper::getAppDomain();
 // ============================================
 // Minden partner Invoices index routja
 // ============================================
-Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function()
+Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
     Route::get('invoices', function()
     {

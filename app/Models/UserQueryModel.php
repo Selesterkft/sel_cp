@@ -37,11 +37,7 @@ class UserQueryModel extends Model
             "DECLARE @Client_ID int = {$client_id}
 DECLARE @Cust_ID int = {$cust_id}
 DECLARE @Type nvarchar(30) = '{$table_name}'
-
-EXECUTE [dbo].[{$config['get_company_reports']}] 
-   @Client_ID
-  ,@Cust_ID
-  ,@Type";
+EXECUTE [dbo].[{$config['get_company_reports']}] @Client_ID,@Cust_ID,@Type";
 //dd('TableColumnModel::getCompanyReports', $query);
         $res = \DB::connection($config['connection'])
             ->select(\DB::raw($query));
@@ -59,10 +55,8 @@ EXECUTE [dbo].[{$config['get_company_reports']}]
      */
     public static function getTableColumns(int $client_id, int $cust_id, string $table_name, string $query_name)
     {
-        //dd('UserQueryModel::getTableColumns', session()->has("{$table_name}.{$query_name}"), session()->get("{$table_name}.{$query_name}"));
-        //if($query_name == ''){ $query_name = '*'; }
         // Ha asessionben van eltárolt oszlop adat, akkor ...
-        if( /*session()->has($table_name)*/session()->has("{$table_name}.{$query_name}") )
+        if( session()->has("{$table_name}.{$query_name}") )
         {
             //$columns = session()->get($table_name);
             $columns = session()->get("{$table_name}.{$query_name}");
@@ -74,7 +68,7 @@ EXECUTE [dbo].[{$config['get_company_reports']}]
             $config = config('appConfig.tables.table_columns');
 
             // Lekérdezés összeállítása
-            $query = "EXECUTE [dbo].[{$config['get_table_columns']}] {$client_id},{$cust_id},'{$table_name}', '{$query_name}';";
+            $query = "EXECUTE [dbo].[{$config['get_table_columns']}] {$client_id},{$cust_id},'{$table_name}','{$query_name}';";
 
             //dd('UserQueryModel::getTableColumns', $query);
 
@@ -142,11 +136,13 @@ EXECUTE [dbo].[{$config['get_company_reports']}]
             '{$params['columns']}';";
         */
 
+        //dd('UserQueryModel::sync', $params, $query);
         //dd('UserQueryModel::sync', $query);
 
         $res = \DB::connection($config['connection'])
             ->select(\DB::raw($query));
         //dd('UserQueryModel::sync', $res);
+
         return $res;
     }
 }

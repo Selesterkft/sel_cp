@@ -6,6 +6,7 @@ namespace App\Classes;
 //use App\Models\VersionModel;
 //use Spatie\Permission\Models\Role;
 use App\Models\CompanyModel;
+use App\Models\DesignModel;
 use App\Models\SettingModel;
 use App\Models\VersionModel;
 use Spatie\Permission\Models\Role;
@@ -307,8 +308,11 @@ class Helper
         return $companyNickName;
     }
 
-    public static function getDesign(int $company_id) : string
+    public static function getCompanyDesign(int $company_id) : string
     {
+        $design = DesignModel::getCompanyDesign($company_id);
+
+/*
         $design = config('appConfig.default_design');
 
         $config = config('appConfig.tables.design');
@@ -320,7 +324,7 @@ class Helper
         {
             $design = $result[0]->design;
         }
-
+*/
         return $design;
     }
 
@@ -350,7 +354,7 @@ class Helper
 
     public static function getCompanyNameByID($id)
     {
-        $config = config('appConfig.tables.company.' . session()->get('version'));
+        $config = config('appConfig.tables.company');
         //dd('Helper.getCompanyNameByID', $config, $id);
         $results = \DB::connection($config['connection'])
             ->table($config['read'])

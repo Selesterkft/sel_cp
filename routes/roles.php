@@ -4,7 +4,7 @@
 //$domain = $helperModel::getAppDomain();
 $domain = App\Classes\Helper::getAppDomain();
 
-Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth']], function()
+Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier']], function()
 {
     Route::get('roles', function()
     {

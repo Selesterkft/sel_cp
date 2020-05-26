@@ -17,6 +17,9 @@ Route::get('inv.data', function()
     return $controller->callAction('index', $parameters = ['request' => request()]);
 });
 
+//Route::get('/home', function(){ dd('HOME'); });
+Route::redirect('/home', '/');
+
 /*
 Route::get('/', function () {
     return view('welcome');
@@ -59,7 +62,7 @@ $domain = App\Classes\Helper::getAppDomain();
 //dd('route.web', Illuminate\Support\Facades\Session::all(), $helperModel);
 //$domain = $helperModel::getAppDomain();
 
-Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function()
+Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
     // Szerepkörök
     //Route::resource('roles', 'RoleController');

@@ -1,8 +1,26 @@
 <?php
 $domain = App\Classes\Helper::getAppDomain();
 
-Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function()
+Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
+    Route::get('keszletek', function($company)
+    {
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
+        return $controller->callAction('index', $parameters = [
+            'request' => request()
+        ]);
+    })->name('keszletek');
+
+    Route::delete('keszletek/{id}', function($company, $id){
+
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
+        return $controller->callAction('destroy', $parameters = [
+            'request' => request(),
+            'id' => (int)$id
+        ]);
+    });
+
+/*
     Route::get('stocks', function($company)
     {
         $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
@@ -10,7 +28,7 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
             'request' => request()
         ]);
     })->name('stocks');
-
+*/
     Route::get('wrhs_stocks', function($company)
     {
         $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\WrhsStocksController');

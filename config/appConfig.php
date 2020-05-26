@@ -3,6 +3,9 @@
 	A version tömbön kívül nem lehet benne szögletes zárójel!!!
 */
 return array(
+
+    'enable_minifier' => false,
+
     'company_name' => 'Selester Kft.',
     'company_addr_1' => '1113, Budapest',
     'company_addr_2' => 'Kökrcsin utca 11.',
@@ -44,8 +47,6 @@ return array(
 
     'tmp_folder' => 'tmp',
 
-    //'favicons_folder' => 'favicons',
-
     'favicons' => [
         'folder' => 'favicons',
         'width' => 32,
@@ -70,6 +71,7 @@ return array(
     'checksum_separator' => '|',
     'string_min_length' => 3,
     'string_max_length' => 255,
+    'default_query_name' => 'default_query',
 
     'date_filters' => [
         'invoice_look_back' => 90,  // Számla visszatekintés
@@ -146,9 +148,12 @@ return array(
             'connection' => 'azure',
             'table' => 'CP_designs',
         ],
-        'design' => [
+        'company_design' => [
             'connection' => 'azure',
             'table' => 'CP_company_design',
+            'insert' => 'CP_company_design_insert',
+            'update' => 'CP_company_design_update',
+            'delete' => 'CP_company_design_delete',
         ],
         'wallpapers' => array(
             'connection' => 'azure',
@@ -194,19 +199,22 @@ return array(
         'user_queries' => [
             'connection'    => 'azure',
             'table'         => 'CP_UserQueries',
+            'update'        => 'CP_UserQuery_update',
+            'delete'        => 'CP_UserQuery_delete',
         ],
 
         'wrhs_stocks' => [
             'connection' => 'azure',
-            'table' => 'cp_wrhs_stocks',
+            'table' => 'CP_WRHS_STOCKS',
         ],
         'wrhs_trans' => [
             'connection' => 'azure',
-            'table' => 'cp_wrhs_trans',
+            'table' => 'CP_WRHS_TRANS',
+            'read' => 'CP_TRANS_GET',
         ],
         'wrhs_trans_l' => [
             'connection' => 'azure',
-            'table' => 'cp_wrhs_trans_l',
+            'table' => 'CP_WRHS_TRANS_L',
         ],
 
         'invoices' => [

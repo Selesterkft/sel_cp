@@ -1,4 +1,6 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade"
+     id="{{ $modal_name }}" name="{{ $modal_name }}"
+     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,10 +15,12 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">{{ trans('app.cancel') }}</button>
+                <button type="button" class="btn btn-primary pull-left"
+                        data-dismiss="modal">
+                    {{ trans('app.cancel') }}
+                </button>
                 <button id="modal_save" name="modal_save" type="button"
-                        class="btn btn-primary">{{ trans('app.save') }}</button>
+                        class="btn btn-success">{{ trans('app.save') }}</button>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 @php
     $locale = (session()->has('locale')) ? session()->get('locale') : config('app.locale');
 @endphp
+
 <!DOCTYPE html>
 <html lang="{{ $locale }}" locale="{{ $locale }}">
 <head>
@@ -109,6 +110,9 @@
 <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
 
 <script src="{{ asset('js/site.js') }}"></script>
+
+<!-- Session -->
+{{--<script src="{{ asset('assets/bower_components/session/jquery.session.js')}}"></script>--}}
 
 @yield('js')
 

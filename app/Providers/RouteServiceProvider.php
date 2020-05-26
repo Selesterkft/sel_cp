@@ -54,6 +54,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapCompanySettings();
         $this->mapPageSettings();
+        $this->mapCompanyDesign();
     }
 
     /**
@@ -178,10 +179,17 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/company_settings.php'));
     }
 
-    private function mapPermissions()
+    protected function mapPermissions()
     {
         \Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/permissions.php'));
+    }
+
+    protected function mapCompanyDesign()
+    {
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/company_design.php'));
     }
 }

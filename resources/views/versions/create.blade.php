@@ -105,7 +105,8 @@
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/iCheck/all.css') }}">
 @php
-use App\Classes\Helper as ColorHelper;
+//use App\Classes\Helper as ColorHelper;
+use App\Classes\ColorHelper;
 echo "<!-- BACGROUND COLOR -->\n";
 echo "<style>.skin-blue .main-sidebar, .skin-blue .left-side {background-color: " . ColorHelper::getMenuBgColor() . ";}</style>\n";
 echo "<!-- HEADER BG COLOR -->\n";

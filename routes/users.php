@@ -7,7 +7,7 @@ $domain = App\Classes\Helper::getAppDomain();
 // ============================================
 // Minden partner Users index routja
 // ============================================
-Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], function()
+Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
     Route::get('users2', function($company)
     {
@@ -114,4 +114,3 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth'] ], f
     })->name('profile.update');
 
 });
-// ============================================

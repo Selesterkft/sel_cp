@@ -99,6 +99,7 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col-md-7">
                 <div class="box box-default">
 
@@ -124,6 +125,37 @@
                     <div class="box box-footer"></div>
                 </div>
             </div>
+
+            <div class="col-md-5">
+                <div class="box box-default">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            {{ trans('company_design.title') }}
+                        </h3>
+
+                        <div class="box-tools pull-right">
+                            <a class="btn btn-success btn-xs"
+                               style="margin-top: 5px;"
+                               href="{{ url('company_design.create') }}">&nbsp;
+                                {{ trans('app.add_new') }}
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="box-body">
+
+                        {{--@includeIf('versions.table_versions', ['versions' => $versions])--}}
+                        @includeIf('versions.table_company_design', ['versions' => $versions])
+
+                    </div>
+
+                    <div class="box-footer"></div>
+
+                </div>
+            </div>
+
         </div>
 
     </section>

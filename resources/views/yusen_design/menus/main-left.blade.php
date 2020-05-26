@@ -19,12 +19,21 @@
         @endcan
 
         @can('stocks-menu')
+        {{--
         <li>
             <a href="{{ url('wrhs_stocks') }}"
                style="{{ ($request->is('settings*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
                 {{ trans('stocks.title') }}
             </a>
         </li>
+        --}}
+        <li class="{{ ($request->is('keszletek*')) ? 'active' : '' }}">
+            <a href="{{ url('keszletek') }}"
+               style="{{ ($request->is('keszletek*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
+                {{ trans('stocks.title') }}
+            </a>
+        </li>
+
         @endcan
 
         {{-- USERS MENU --}}

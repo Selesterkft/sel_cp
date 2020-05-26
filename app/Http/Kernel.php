@@ -33,10 +33,10 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            
+
             // TODO: Ezt kell REM-elni a token ellenőrzés kiiktatásához.
             \App\Http\Middleware\VerifyCsrfToken::class,
-            
+
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             \App\Http\Middleware\Localization::class,
@@ -68,6 +68,8 @@ class Kernel extends HttpKernel
 
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+
+        'HtmlMinifier' => \App\Http\Middleware\HtmlMinifier::class,
     ];
 
     /**

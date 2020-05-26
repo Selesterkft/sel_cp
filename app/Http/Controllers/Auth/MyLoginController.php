@@ -39,7 +39,7 @@ class MyLoginController extends Controller
         else
         {
             $company_id = Helper::getCompanyIDByCompanyNickName($subdomain);
-            $design = Helper::getDesign($company_id);
+            $design = Helper::getCompanyDesign($company_id);
 
             return view("{$design}.auth.login", ['design' => $design]);
         }

@@ -38,7 +38,7 @@ class UserChangeListener
             'company_id' => $user->CompanyID,
             'company_name' => Helper::getCompanyNickNameByID($user->CompanyID),
             'version' => Helper::getVersionString($user->CompanyID),
-            'design' => Helper::getDesign($user->CompanyID),
+            'design' => Helper::getCompanyDesign($user->CompanyID),
             //'locale' => $user->language,
             'settings' => $settings,
             'tz' => $tz

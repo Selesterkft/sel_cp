@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 //use App\Models\ver_2019_01\CompanyModel;
+use App\Models\CompanyDesignModel;
 use App\Models\CompanySubdomainModel;
+use App\Models\DesignModel;
 use App\Models\VersionCompanyModel;
 use App\Models\VersionModel;
 use Illuminate\Http\Request;
@@ -35,12 +37,22 @@ class VersionController extends Controller {
 
         $version_companies = VersionCompanyModel::readAll();
 
+        //dd('VersionController::index 1', $version_companies);
+
         $company_subdomain = CompanySubdomainModel::readAll();
+
+        //dd('VersionController::index 2', $company_subdomain);
+
+        //$company_design = CompanyDesignModel::all();
+        $company_design = CompanyDesignModel::readAll();
+
+        //dd('VersionController::index 3', $company_design);
 
         return view('versions.index', [
             'versions' => $versions,
             'version_companies' => $version_companies,
             'company_subdomains' => $company_subdomain,
+            'company_design' => $company_design
         ]);
     }
 
