@@ -269,6 +269,7 @@ class wrhsStockModel extends Model
                     'columns' => $json_table_columns,
                 ]);
             }
+
             session()->put("{$table_name}.{$query_name}", $json_table_columns);
         }
 
@@ -334,7 +335,7 @@ class wrhsStockModel extends Model
             ->select(DB::raw($query));
 
         $stocks = [
-            //'table_columns' => $table_columns,
+            'query' => $query,
             'total' => $total,
             'totalNotFiltered' => count($rows),
             'rows' => $rows,

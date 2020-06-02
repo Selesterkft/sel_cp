@@ -175,7 +175,7 @@ class wrhsTransModel extends Model
             ->select(\DB::raw($query));
 
         $stocks = [
-            //'table_columns' => $table_columns,
+            'query' => $query,
             'total' => $total,
             'totalNotFiltered' => count($rows),
             'rows' => $rows,
