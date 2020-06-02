@@ -82,9 +82,8 @@
 
                         </ul>
                     </div>
-                    <!-- /.box-body -->
                 </div>
-                <!-- /. box -->
+
                 <div class="box box-solid">
                     <div class="box-header with-border">
                         <h3 class="box-title">
@@ -169,7 +168,7 @@
             <div class="col-md-9">
 
                 <div class="box box-solid">
-                    {{--
+{{--
                     <div class="box-header with-border">
                         <h3 class="box-title">
                             {{ $table_name }}
@@ -181,9 +180,10 @@
                             </button>
                         </div>
                     </div>
-                    --}}
+--}}
 
                     <div class="box-body">
+
                         {{-- TÁBLÁZAT --}}
                         @includeIf(session()->get('version') . '.stocks.stocks_table', [
                             'table_name' => $table_name,
@@ -220,6 +220,9 @@
     {{-- Bootstrap Table --}}
     <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
 
+    <!-- Bootstrap Datetime Picker -->
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
+
     <style>
         table.table.table-striped.table-bordered td {
             white-space: nowrap;
@@ -242,12 +245,25 @@
     src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
     <script
     src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
-
+    {{--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
+    --}}
 
     {{-- Moment --}}
     <script src="{{ asset('assets/bower_components/moment/moment.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
+
+    <!--
+        Bootstrap Datetime Picker
+        https://www.malot.fr/bootstrap-datetimepicker/index.php
+    -->
+    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
+<!--
+    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.en.js') }}"
+            charset="UTF-8"></script>
+    -->
+    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hu.js') }}"
+            charset="UTF-8"></script>
 
     <script>
         'use strict'
@@ -415,6 +431,7 @@
                 return 0;
             }
         }
+
     </script>
 
     @yield('stocks_js')

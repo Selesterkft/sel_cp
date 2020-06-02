@@ -26,6 +26,7 @@ return array(
         ],
     ],
     'dateFormats' => array(
+        'datetimepicker' => 'YYYY-MM-DD',
         'en' => array(
             'carbon' => 'd/m/Y',        // PHP date format
             'moment' => 'MM/DD/YY'    // Javascript date format
@@ -75,6 +76,7 @@ return array(
 
     'date_filters' => [
         'invoice_look_back' => 90,  // Számla visszatekintés
+        'stocks_movement_look_back' => 30, // Készletmozgás visszatekintés
     ],
 
     'languages' => array(

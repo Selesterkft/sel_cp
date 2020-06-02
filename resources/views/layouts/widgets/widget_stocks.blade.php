@@ -1,3 +1,6 @@
+<?php
+$url = 'keszletek';
+?>
 <div class="col-lg-3 col-xs-6">
     <div class="small-box bg-green stocksBox">
         <div class="inner stocksBox">
@@ -8,7 +11,7 @@
         <div class="icon stocksBox">
             <i class="ion ion-clipboard stocksBox"></i>
         </div>
-        <a href="{{ url('wrhs_stocks') }}" class="small-box-footer">
+        <a href="{{ url($url) }}" class="small-box-footer">
             {{ trans('app.more_info') }}&nbsp;&nbsp;<i class="fa fa-arrow-circle-right stocksBox"></i>
         </a>
     </div>
@@ -28,7 +31,7 @@
 
     $stocksBox.click(function()
     {
-        window.location = '{{ url('wrhs_stocks') }}';
+        window.location = '{{ url($url) }}';
     });
 
 

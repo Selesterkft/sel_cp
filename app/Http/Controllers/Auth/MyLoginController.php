@@ -32,7 +32,7 @@ class MyLoginController extends Controller
     {
         $subdomain = Helper::getAppSubdomain();
 
-        if( !$subdomain )
+        if( !$subdomain || $subdomain == 'localhost')
         {
             return redirect()->to('http://webandtrace.com');
         }

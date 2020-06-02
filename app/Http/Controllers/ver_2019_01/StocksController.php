@@ -34,6 +34,8 @@ class StocksController extends Controller
 
         if( $request->ajax() )
         {
+            //dd('StockController::index ajax', $request->all());
+
             $data = [];
             switch($table_name){
                 case 'cp_wrhs_stocks':

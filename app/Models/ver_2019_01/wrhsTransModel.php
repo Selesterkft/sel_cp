@@ -40,9 +40,13 @@ class wrhsTransModel extends Model
         // Lekérdezendő oszlopok
         $select = '';
 
+        //$where = "Booking_Date >= ''" . request()->get('startDate') . "''";
+
         $loggedUser = \Auth::user();
         $cust_id = (int)$loggedUser->Supervisor_ID;
         $client_id = (int)$loggedUser->CompanyID;
+
+        $start_date = request()->get('startDate');
 
         //$cust_id = 37127568;
         //$client_id = 1038482;
@@ -111,11 +115,11 @@ class wrhsTransModel extends Model
         // Oldaltörés paraméterei
         if( request()->has('limit') )
         {
-            $limit = request()->get('limit');
+            $limit = (int)request()->get('limit');
         }
         if( request()->has('offset') )
         {
-            $offset = request()->get('offset');
+            $offset = (int)request()->get('offset');
         }
 
         // Rendezés paraméterei
@@ -162,9 +166,9 @@ class wrhsTransModel extends Model
 
         $config = config('appConfig.tables.wrhs_trans');
         $query = "EXECUTE [dbo].[{$config['read']}]
-            {$client_id},{$cust_id},'{$select}','{$where}','{$group_by}','{$sort}','{$offset}','{$limit}';";
+            {$client_id},{$cust_id},'{$start_date}','{$select}','{$where}','{$group_by}','{$sort}',{$offset},{$limit};";
 
-        //dd('wrhsStockModel::getAll', $query);
+        //dd('wrhsTransModel::getAll', $where, request()->all(), $query);
 
         $rows = \DB::connection($config['connection'])
             ->select(\DB::raw($query));

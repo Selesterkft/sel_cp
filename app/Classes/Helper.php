@@ -335,8 +335,8 @@ class Helper
         //dd('Helper.getCompanyNickName', $config);
         $results = \DB::connection($config['connection'])
                 ->select(\DB::connection($config['connection'])
-                        ->raw("SELECT * 
-                                        FROM {$config['table']} 
+                        ->raw("SELECT *
+                                        FROM {$config['table']}
                                         WHERE SubdomainName = :name"),
                                 ['name' => $company_name]);
         //dd('Helper.getCompanyNickName', $company_name, $results, (empty($results)));
@@ -404,8 +404,12 @@ class Helper
         return $wallpaper;
     }
 
-    public static function getCompanyIDByCompanyNickName($companyNickName)
+    public static function getCompanyIDByCompanyNickName(string $companyNickName)
     {
+        if( $companyNickName == '' || $companyNickName == 'localhost') {
+            return 0;
+        }
+
         //dd('Helper.getCompanyIDByCompanyNickName', $companyNickName);
         $config = config('appConfig.tables.company_has_subdomain');
         $results = \DB::connection($config['connection'])
@@ -535,9 +539,9 @@ class Helper
 
         $config = config('appConfig.tables.invoices.' . $version);
         $partners = \DB::connection($config['connection'])
-            ->select(\DB::raw("SELECT [ClientID],[ID],[Name] 
-                                        FROM [dbo].[{$config['getPartners']}] 
-                                        WHERE ClientID = ? 
+            ->select(\DB::raw("SELECT [ClientID],[ID],[Name]
+                                        FROM [dbo].[{$config['getPartners']}]
+                                        WHERE ClientID = ?
                                         ORDER BY [Name]"), [$client_id]);
 
         return $partners;
