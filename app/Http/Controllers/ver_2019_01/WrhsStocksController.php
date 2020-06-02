@@ -98,7 +98,7 @@ class WrhsStocksController extends Controller
      */
     public function store(Request $request)
     {
-        $client_id = (int)$request->get('client_id');
+        /*$client_id = (int)$request->get('client_id');
         $customer_id = (int)$request->get('cust_id');
         $table_name = $request->get('table_name');
         $old_query_name = ($request->get('old_query_name') != null) ? $request->get('old_query_name') : '';
@@ -127,7 +127,7 @@ class WrhsStocksController extends Controller
 
         $res = UserQueryModel::sync($data);
 
-        return $res;
+        return $res;*/
     }
 
     /**
@@ -161,14 +161,14 @@ class WrhsStocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $config = config('appConfig.tables.user_queries');
+        /*$config = config('appConfig.tables.user_queries');
 
         $query = "EXECUTE [dbo].[{$config['update']}] {$id},'{$request->get('query_name')}','{$request->get('query_description')}'";
 
         $res = \DB::connection($config['connection'])
         ->select(\DB::raw($query));
 
-        return $res;
+        return $res;*/
     }
 
     /**

@@ -20,6 +20,21 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'Htm
         ]);
     });
 
+    Route::post('stocks', function($company){
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
+        return $controller->callAction('store', $parameters = [
+            'request' => request(),
+        ]);
+    })->name('stocks.store');
+
+    Route::put('stocks/{id}', function($company, $id){
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
+        return $controller->callAction('update', $parameters = [
+            'request' => request(),
+            'id' => $id
+        ]);
+    })->name('stocks.update');
+
 /*
     Route::get('stocks', function($company)
     {
@@ -29,6 +44,7 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'Htm
         ]);
     })->name('stocks');
 */
+    /*
     Route::get('wrhs_stocks', function($company)
     {
         $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\WrhsStocksController');
@@ -51,6 +67,16 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'Htm
             'id' => $id
         ]);
     })->name('wrhs_stocks.update');
+
+    Route::post('wrhs_trans', function(){
+        $controller = app()->make(App\Http\Controllers\ver_2019_01\WrhsTransController::class);
+        return $controller->callAction('store', $parameters = [
+            'request' => request()
+        ]);
+    })->name('wrhs_trans.store');
+
+    Route::put('wrhs_trans/{id}', '')->name('wrhs_trans.update');
+    */
 
     /*
     Route::get('table_teszt', function($company)

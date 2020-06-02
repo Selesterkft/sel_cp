@@ -92,6 +92,7 @@
                         </h3>
 
                         <div class="box-tools">
+                            @if(Auth::user()->hasRole('Admin'))
                             <button type="button"
                                     class="btn btn-box-tool"
                                     data-toggle="modal"
@@ -103,6 +104,7 @@
                                     data-action="save">
                                 <i class="fa fa-plus"></i>
                             </button>
+                            @endif
                         </div>
 
                     </div>
@@ -132,6 +134,7 @@
                                     <span class=pull-right>
 
                                         @if($company_report->QueryName != $default_query_name)
+                                            @if(Auth::user()->hasRole('Admin'))
                                         {{-- Szerkesztés gomb --}}
                                         <button class="btn btn-success btn-xs"
                                                 onclick="event.preventDefault();"
@@ -154,6 +157,7 @@
                                                 data-action="delete">
                                             <i class="fa fa-fw fa-trash"></i>
                                         </button>
+                                        @endif
                                         @endif
                                     </span>
                                 </a>
@@ -283,13 +287,15 @@
         var action          = '';
         var type            = 'post';
 
-        var url = '';
+        var url = 'stocks';
+        /*
         if( table_name === 'cp_wrhs_stocks' ){
             url = 'wrhs_stocks';
         }
         else if(table_name === 'cp_wrhs_trans'){
             url = 'wrhs_trans';
         }
+        */
 
         // Open Modal
         $('#{!! $table_name !!}_modal').on('show.bs.modal', function(event){
@@ -363,6 +369,16 @@
 
             event.preventDefault();
 
+            var formData = {
+                client_id:          $('#client_id').val(),
+                cust_id:            $('#cust_id').val(),
+                table_name:         $('#table_name').val(),
+                old_query_name:     $('#query_name').val(),
+                query_name:         $('#report_name').val(),
+                query_description:  $('#report_desc').val()
+            };
+
+            /*
             if(table_name == 'cp_wrhs_stocks'){
 
                 var formData = {
@@ -385,6 +401,7 @@
                     query_description:  $('#report_desc').val()
                 };
             }
+            */
 
             //type = 'post';
             var myURL = url;

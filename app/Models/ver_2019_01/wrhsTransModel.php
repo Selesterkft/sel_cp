@@ -100,15 +100,16 @@ class wrhsTransModel extends Model
             $json_table_columns = json_encode($arr_table_columns);
 
             // Új oszloplista mentése az adatbázisba és a session-be.
-            $res = UserQueryModel::sync([
-                'client_id' => $client_id,
-                'cust_id' => $cust_id,
-                'table_name' => $table_name,
-                'query_name' => $query_name,
-                'query_description' => $query_description,
-                'columns' => $json_table_columns,
-            ]);
-
+            if(Auth::user()->hasRole('Admin')) {
+                $res = UserQueryModel::sync([
+                    'client_id' => $client_id,
+                    'cust_id' => $cust_id,
+                    'table_name' => $table_name,
+                    'query_name' => $query_name,
+                    'query_description' => $query_description,
+                    'columns' => $json_table_columns,
+                ]);
+            }
             session()->put("{$table_name}.{$query_name}", $json_table_columns);
         }
 
