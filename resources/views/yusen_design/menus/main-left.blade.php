@@ -27,9 +27,9 @@
             </a>
         </li>
         --}}
-        <li class="{{ ($request->is('keszletek*')) ? 'active' : '' }}">
-            <a href="{{ url('keszletek') }}"
-               style="{{ ($request->is('keszletek*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
+        <li class="{{ ($request->is('stocks*')) ? 'active' : '' }}">
+            <a href="{{ url('stocks') }}"
+               style="{{ ($request->is('stocks*')) ? 'background-color: transparent; color: rgb(255, 109, 16);' : '' }}">
                 {{ trans('stocks.title') }}
             </a>
         </li>

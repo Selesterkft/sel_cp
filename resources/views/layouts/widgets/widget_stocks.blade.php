@@ -1,5 +1,5 @@
 <?php
-$url = 'keszletek';
+$url = 'stocks';
 ?>
 <div class="col-lg-3 col-xs-6">
     <div class="small-box bg-green stocksBox">

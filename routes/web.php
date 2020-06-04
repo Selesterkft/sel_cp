@@ -64,6 +64,7 @@ $domain = App\Classes\Helper::getAppDomain();
 
 Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
+
     // Szerepkörök
     //Route::resource('roles', 'RoleController');
     /*

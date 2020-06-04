@@ -47,6 +47,8 @@ class wrhsTransModel extends Model
         $client_id = (int)$loggedUser->CompanyID;
 
         $start_date = request()->get('startDate');
+        $end_date = request()->get('endDate');
+        $date_cell = request()->get('dateCell');
 
         //$cust_id = 37127568;
         //$client_id = 1038482;
@@ -167,7 +169,7 @@ class wrhsTransModel extends Model
 
         $config = config('appConfig.tables.wrhs_trans');
         $query = "EXECUTE [dbo].[{$config['read']}]
-            {$client_id},{$cust_id},'{$start_date}','{$select}','{$where}','{$group_by}','{$sort}',{$offset},{$limit};";
+            {$client_id},{$cust_id},'{$start_date}','{$end_date}','{$date_cell}','{$select}','{$where}','{$group_by}','{$sort}',{$offset},{$limit};";
 
         //dd('wrhsTransModel::getAll', $where, request()->all(), $query);
 

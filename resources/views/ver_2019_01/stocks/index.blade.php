@@ -67,7 +67,7 @@
                             <li class="{{ ($table_name == 'cp_wrhs_stocks') ? 'active' : '' }}"
                                 style="{{ ($table_name == 'cp_wrhs_stocks') ? 'background-color: rgb(243, 212, 155);' : '' }}">
 
-                                <a href="{{ url('keszletek?table_name=cp_wrhs_stocks') }}">
+                                <a href="{{ url('stocks?table_name=cp_wrhs_stocks') }}">
                                     {{ trans('stocks.title') }}
                                 </a>
 
@@ -75,7 +75,7 @@
 
                             <li class="{{ ($table_name == 'cp_wrhs_trans') ? 'active' : '' }}"
                                 style="{{ ($table_name == 'cp_wrhs_trans') ? 'background-color: rgb(243, 212, 155);' : '' }}">
-                                <a href="{{ url('keszletek?table_name=cp_wrhs_trans') }}">
+                                <a href="{{ url('stocks?table_name=cp_wrhs_trans') }}">
                                     {{ trans('stocks.movements_title') }}
                                 </a>
                             </li>
@@ -118,7 +118,7 @@
                             <li class="{{ ( $query_name == $company_report->QueryName ) ? 'active' : '' }}"
                                 style="{{ ( $query_name == $company_report->QueryName ) ? 'background-color: rgb(243, 212, 155);' : '' }}">
 
-                                <a href="{{ url('keszletek?table_name=' . $table_name . '&query_name=' . $company_report->QueryName) }}">
+                                <a href="{{ url('stocks?table_name=' . $table_name . '&query_name=' . $company_report->QueryName) }}">
                                     @php
 
                                     if($company_report->QueryName == $default_query_name){
@@ -170,6 +170,9 @@
             </div>
 
             <div class="col-md-9">
+                @if( $table_name == 'cp_wrhs_trans' )
+                @include(session()->get('version') . '.panels.filter_panel')
+                @endif
 
                 <div class="box box-solid">
 {{--
@@ -193,7 +196,7 @@
                             'table_name' => $table_name,
                             'query_name' => $query_name,
                             'paginate_number' => config('appConfig.paginate_number'),
-                            'url' => url('keszletek?table_name=' . $table_name . '&query_name=' . $query_name),
+                            'url' => url('stocks?table_name=' . $table_name . '&query_name=' . $query_name),
                             'locale' => app()->getLocale() . '-' . strtoupper(app()->getLocale()),
                             'table_columns' => $table_columns,
                         ])
@@ -339,11 +342,26 @@
             });
 
             event.preventDefault();
-
-            var formData = { id: $('#record_id').val() };
+            var id = $('#record_id').val();
+            //var formData = { id: id };
 
             $.ajax({
-                url: 'keszletek/' + $('#record_id').val(),
+                url: url + '/' + id,
+                type: 'DELETE',
+                dataType: 'json',
+                beforeSend: function(){},
+                success: function(data){
+                    //console.log(data);
+                    location.reload();
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
+
+            /*
+            $.ajax({
+                url: 'stocks/' + $('#record_id').val(),
                 type: 'delete',
                 data: formData,
                 dataType: 'json',
@@ -356,6 +374,7 @@
                     console.log(error);
                 }
             });
+            */
         });
 
         // Mentés

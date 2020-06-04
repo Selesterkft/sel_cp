@@ -154,12 +154,23 @@
                     </a>
                 </li>
 --}}
-                <li class="{{ ($request->is('keszletek*')) ? 'active' : '' }}">
-                    <a href="{{ url('keszletek') }}">
+                <li class="{{ ($request->is('stocks*')) ? 'active' : '' }}">
+                    <a href="{{ url('stocks') }}">
                         <i class="ion ion-clipboard"></i>&nbsp;<span>{{ trans('stocks.title') }}</span>
                     </a>
                 </li>
-
+                <?php
+                $logged_user = auth()->user();
+                if($logged_user->Name === 'Kovács Zoltán'){
+                    ?>
+                <li class="{{ ($request->is('vue_stocks*')) ? 'active' : '' }}">
+                    <a href="{{ url('vue_stocks') }}">
+                        <i class="ion ion-clipboard"></i>&nbsp;<span>{{ 'vue_' . trans('stocks.title') }}</span>
+                    </a>
+                </li>
+                    <?php
+                }
+                ?>
             @endcan
 
         {{--@can('transports-menu')

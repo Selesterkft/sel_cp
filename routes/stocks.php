@@ -3,22 +3,13 @@ $domain = App\Classes\Helper::getAppDomain();
 
 Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
-    Route::get('keszletek', function($company)
+    Route::get('stocks', function($company)
     {
         $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
         return $controller->callAction('index', $parameters = [
             'request' => request()
         ]);
-    })->name('keszletek');
-
-    Route::delete('keszletek/{id}', function($company, $id){
-
-        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
-        return $controller->callAction('destroy', $parameters = [
-            'request' => request(),
-            'id' => (int)$id
-        ]);
-    });
+    })->name('stocks');
 
     Route::post('stocks', function($company){
         $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
@@ -34,6 +25,20 @@ Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'Htm
             'id' => $id
         ]);
     })->name('stocks.update');
+
+    Route::delete('stocks/{id}', function($company, $id){
+
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\StocksController');
+        return $controller->callAction('destroy', $parameters = [
+            'request' => request(),
+            'id' => (int)$id
+        ]);
+    });
+
+    Route::get('vue_stocks', function(){
+        $controller = app()->make('App\Http\Controllers\\' . session()->get('version') . '\VueStocksController');
+        return $controller->callAction('index', $parameters = []);
+    })->name('vue_stocks');
 
 /*
     Route::get('stocks', function($company)

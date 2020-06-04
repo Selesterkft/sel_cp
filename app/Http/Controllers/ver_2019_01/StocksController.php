@@ -17,9 +17,13 @@ class StocksController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
         $this->middleware('permission:stocks-menu', [
-            'only' => ['index']
+            'only' => [
+                'index', 'show',
+                'create', 'store',
+                'edit', 'update',
+                'destroy', 'restore'
+            ]
         ]);
     }
 
@@ -132,36 +136,38 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        $client_id = (int)$request->get('client_id');
-        $customer_id = (int)$request->get('cust_id');
-        $table_name = $request->get('table_name');
-        $old_query_name = ($request->get('old_query_name') != null) ? $request->get('old_query_name') : '';
-        $new_query_name = $request->get('query_name');
-        $query_description = $request->get('query_description');
-        $query_description = isset($query_description) ? $query_description : '';
+        if( $request->ajax() ){
+            $client_id = (int)$request->get('client_id');
+            $customer_id = (int)$request->get('cust_id');
+            $table_name = $request->get('table_name');
+            $old_query_name = ($request->get('old_query_name') != null) ? $request->get('old_query_name') : '';
+            $new_query_name = $request->get('query_name');
+            $query_description = $request->get('query_description');
+            $query_description = isset($query_description) ? $query_description : '';
 
-        $table_columns = UserQueryModel::getTableColumns(
-            $client_id = $client_id,
-            $customer_id = $customer_id,
-            $table_name = $table_name,
-            $query_name = $old_query_name);
+            $table_columns = UserQueryModel::getTableColumns(
+                $client_id = $client_id,
+                $customer_id = $customer_id,
+                $table_name = $table_name,
+                $query_name = $old_query_name);
 
-        //dd('WrhsStocksController::store', $request->all(), $client_id, $customer_id, $table_name, $old_query_name, $query_name, $query_description, $table_columns);
+            //dd('WrhsStocksController::store', $request->all(), $client_id, $customer_id, $table_name, $old_query_name, $query_name, $query_description, $table_columns);
 
-        $data = [
-            'client_id' => $client_id,
-            'cust_id' => $customer_id,
-            'table_name' => $table_name,
-            'query_name' => $new_query_name,
-            'query_description' => $query_description,
-            'columns' => $table_columns,
-        ];
+            $data = [
+                'client_id' => $client_id,
+                'cust_id' => $customer_id,
+                'table_name' => $table_name,
+                'query_name' => $new_query_name,
+                'query_description' => $query_description,
+                'columns' => $table_columns,
+            ];
 
-        //dd('WrhsStocksController::store', $request->all(), $data);
+            //dd('WrhsStocksController::store', $request->all(), $data);
 
-        $res = UserQueryModel::sync($data);
+            $res = UserQueryModel::sync($data);
 
-        return $res;
+            return $res;
+        }
     }
 
     /**
@@ -195,14 +201,16 @@ class StocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $config = config('appConfig.tables.user_queries');
+        if( $request->ajax() ){
+            $config = config('appConfig.tables.user_queries');
 
-        $query = "EXECUTE [dbo].[{$config['update']}] {$id},'{$request->get('query_name')}','{$request->get('query_description')}'";
+            $query = "EXECUTE [dbo].[{$config['update']}] {$id},'{$request->get('query_name')}','{$request->get('query_description')}'";
 
-        $res = \DB::connection($config['connection'])
-            ->select(\DB::raw($query));
+            $res = \DB::connection($config['connection'])
+                ->select(\DB::raw($query));
 
-        return $res;
+            return $res;
+        }
     }
 
     /**
@@ -216,6 +224,8 @@ class StocksController extends Controller
     {
         if($request->ajax()){
 
+            //dd('StocksController::delete', $id, $request->all());
+
             $config = config('appConfig.tables.user_queries');
             $query = "EXECUTE [dbo].[{$config['delete']}] {$id}";
 
@@ -223,6 +233,7 @@ class StocksController extends Controller
                 ->select(\DB::raw($query));
 
             return json_encode(['ID' => $id, 'res' => $res]);
+
         }
     }
 }
