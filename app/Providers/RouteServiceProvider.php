@@ -55,6 +55,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapCompanySettings();
         $this->mapPageSettings();
         $this->mapCompanyDesign();
+
+        //$this->mapTableEditorRoutes();
     }
 
     /**
@@ -85,6 +87,14 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
+    /*
+    protected function mapTableEditorRoutes(){
+        \Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group('routes/table_editor.php');
+
+    }
+    */
 
     protected function mapUsersRoutes()
     {

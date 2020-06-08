@@ -65,6 +65,10 @@ $domain = App\Classes\Helper::getAppDomain();
 Route::group([ 'domain' => '{company}.' . $domain, 'middleware' => ['auth', 'HtmlMinifier'] ], function()
 {
 
+    Route::get('table_editor', function(){
+        $controller = app()->make(\App\Http\Controllers\TableEditorController::class);
+        return $controller->callAction('index', $parameters = []);
+    })->name('table_editor');
     // Szerepkörök
     //Route::resource('roles', 'RoleController');
     /*

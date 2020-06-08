@@ -6,10 +6,10 @@ namespace App\Models;
 
 use DB;
 use App\Classes\Helper;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
+//use Spatie\Searchable\Searchable;
+//use Spatie\Searchable\SearchResult;
 
-class CompanyModel extends \Eloquent implements Searchable
+class CompanyModel extends \Eloquent //implements Searchable
 {
     protected $connection, $table;
     protected $primaryKey = 'ID';

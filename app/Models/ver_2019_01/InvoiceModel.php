@@ -5,6 +5,7 @@ namespace App\Models\ver_2019_01;
 use Auth;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class InvoiceModel extends Model
 {
@@ -159,6 +160,83 @@ class InvoiceModel extends Model
         return json_encode($invoices);
     }
 
+    public static function getAll(Request $request){
+
+        //
+        $config = config('appConfig.tables.invoices.' . session()->get('version'));
+        $loggedUser = Auth::user();
+        $supervisor_id = (int)$loggedUser->Supervisor_ID;
+        $client_id = (int)$loggedUser->CompanyID;
+        $cp_users_id = (int)$loggedUser->ID;
+
+        $session_id = session()->getId();
+
+        $lang = app()->getLocale();
+        $offset = 0;
+        $limit = 10;
+        $where = '';
+        $sort = '';
+
+        if( !empty($request->get('s_invNum')) ){
+
+            $where = "WHERE Inv_Num = '{$request->get('s_invNum')}'";
+        }
+        else{
+
+            if( $supervisor_id != 0 ){
+                $where .= (strlen($where) == 0) ? 'WHERE ':' AND ' . "Partner_ID = {$supervisor_id}";
+            }
+            elseif( !empty($request->get('s_partner')) ){
+                $where .= (strlen($where) == 0) ? 'WHERE ' : ' AND ' . "Partner_ID = {$request->get('s_partner')}";
+            }
+
+            if( !empty($request->get('s_delivery_date')) )
+            {
+                $delivery_date = explode(' - ', $request->get('s_delivery_date'));
+                $where .= ((strlen($where) == 0) ? 'WHERE ' : ' AND ') . "DeliveryDate BETWEEN ''{$delivery_date[0]}'' AND ''{$delivery_date[1]}''";
+            }
+
+            if( !empty($request->get('s_due_date')) )
+            {
+                $due_date = explode(' - ', $request->get('s_due_date'));
+                $where .= ((strlen($where) == 0) ? 'WHERE ' : ' AND ') . "DueDate BETWEEN ''{$due_date[0]}'' AND ''{$due_date[1]}''";
+            }
+
+            if( !empty( $request->get('s_type')) )
+            {
+                $where .= ((strlen($where) == 0) ? 'WHERE ' : ' AND ') . 'Inv_Type_ID = ' . $request->get('s_type');
+            }
+        }
+
+        if( $request->has('limit') ){
+            $limit = (int)$request->get('limit');
+        }
+
+        if( $request->has('offset') ){
+            $offset = (int)$request->get('offset');
+        }
+
+        //dd('InvoiceModel::getAll()', 'limit: ' . $limit, 'offset: ' . $offset, $request->all());
+
+        $query = "SELECT COUNT(*) count FROM {$config['table']} WHERE ClientID = {$client_id};";
+        $res = DB::connection($config['connection'])
+            ->select(DB::raw($query));
+        $total = (int)$res[0]->count;
+
+        $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}', {$client_id}, {$cp_users_id}, {$lang}, {$offset}, {$limit}, '{$where}', '{$sort}'";
+
+        $rows = DB::connection($config['connection'])
+            ->select(DB::raw($query));
+
+        $invoices = [
+            'query' => $query,
+            'total' => $total,
+            'totalNotFiltered' => count($rows),
+            'rows' => $rows,
+        ];
+        return $invoices;
+    }
+
     /*
      *  Visszaadja a számlákon szereplő vevőket
      */
@@ -166,9 +244,9 @@ class InvoiceModel extends Model
     {
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
         $res = DB::connection($config['connection'])
-            ->select(DB::raw("SELECT Cust_ID,Cust_Name1 
-                                    FROM {$config['getCustomers']} 
-                                    WHERE ClientID = :client_id 
+            ->select(DB::raw("SELECT Cust_ID,Cust_Name1
+                                    FROM {$config['getCustomers']}
+                                    WHERE ClientID = :client_id
                                     ORDER BY Cust_Name1"), ['client_id' => $clientID]);
 
         return $res;
@@ -180,9 +258,9 @@ class InvoiceModel extends Model
     {
         $config = config('appConfig.tables.invoices.' . session()->get('version'));
         $res = DB::connection($config['connection'])
-            ->select(DB::raw("SELECT Vendor_ID,Vendor_Name1 
-                                    FROM {$config['getVendors']} 
-                                    WHERE ClientID = :client_id 
+            ->select(DB::raw("SELECT Vendor_ID,Vendor_Name1
+                                    FROM {$config['getVendors']}
+                                    WHERE ClientID = :client_id
                                     ORDER BY Vendor_Name1"), ['client_id' => $clientID]);
         return $res;
     }
@@ -304,6 +382,11 @@ class InvoiceModel extends Model
         //dd('InvoiceModel.getWidgetData', $loggedUser, $CompanyID, $Supervisor_ID, $config, $res);
         return $res;
 
+    }
+
+    public function getTable(){
+
+        return strtolower( config('appConfig.tables.invoices.' . session()->get('version'))['table'] );
     }
 
 }

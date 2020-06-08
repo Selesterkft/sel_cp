@@ -5,7 +5,7 @@ namespace App\SearchAspects;
 use App\Models\base\CompanyModel;
 use App\User;
 use Illuminate\Support\Collection;
-use Spatie\Searchable\SearchAspect;
+//use Spatie\Searchable\SearchAspect;
 
 class UsersSearchAspect extends SearchAspect
 {

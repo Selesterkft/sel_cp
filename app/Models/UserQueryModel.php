@@ -81,6 +81,8 @@ EXECUTE [dbo].[{$config['get_company_reports']}] @Client_ID,@Cust_ID,@Type";
                 // A TableColumns fájlból veszi ki a beállításokat
                 $columns = json_encode(config('TableColumns.' . $table_name));
 
+//dd('UserQueryModel::getTableColumns', 'sync előtt', $client_id, $cust_id, $table_name, $query_name, '', $columns);
+
                 // Mivel nincsenek az adatbázisban bejegyzések a táblázatra vonatkozóan, menteni kell
                 self::sync([
                     'client_id' => $client_id,
@@ -102,7 +104,7 @@ EXECUTE [dbo].[{$config['get_company_reports']}] @Client_ID,@Cust_ID,@Type";
             session()->put("{$table_name}.{$query_name}", $columns);
         }
 
-        //dd('TableColumnModel.getTableColumns', $columns);
+        //dd('UserQueryModel.getTableColumns', $columns);
         return $columns;
     }
 

@@ -358,23 +358,6 @@
                     console.log(error);
                 }
             });
-
-            /*
-            $.ajax({
-                url: 'stocks/' + $('#record_id').val(),
-                type: 'delete',
-                data: formData,
-                dataType: 'json',
-                beforeSend: function(){},
-                success: function(data){
-                    //console.log(data);
-                    location.reload();
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                }
-            });
-            */
         });
 
         // Mentés
@@ -397,32 +380,6 @@
                 query_description:  $('#report_desc').val()
             };
 
-            /*
-            if(table_name == 'cp_wrhs_stocks'){
-
-                var formData = {
-                    client_id:          $('#client_id').val(),
-                    cust_id:            $('#cust_id').val(),
-                    table_name:         $('#table_name').val(),
-                    old_query_name:     $('#query_name').val(),
-                    query_name:         $('#report_name').val(),
-                    query_description:  $('#report_desc').val()
-                };
-            }
-            else if(table_name == 'cp_wrhs_trans'){
-
-                var formData = {
-                    client_id:          $('#client_id').val(),
-                    cust_id:            $('#cust_id').val(),
-                    table_name:         $('#table_name').val(),
-                    old_query_name:     $('#query_name').val(),
-                    query_name:         $('#report_name').val(),
-                    query_description:  $('#report_desc').val()
-                };
-            }
-            */
-
-            //type = 'post';
             var myURL = url;
 
             if( action == 'rename' ){
@@ -449,7 +406,7 @@
 
         function dateFormatter(data)
         {
-            return moment().locale($local_short).format('L');
+            return moment(data).locale($local_short).format('L');
         }
 
         function decimalFormatter(data)

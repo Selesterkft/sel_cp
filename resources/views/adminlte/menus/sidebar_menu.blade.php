@@ -247,6 +247,15 @@
                         </span>
                     </a>
                 </li>
+                {{-- TABLE EDITOR --}}
+                <li class="{{ ($request->is('table_editor*')) ? 'active' : '' }}">
+                    <a href="{{ url('table_editor') }}">
+                        <i class="fa  fa-language"></i>&nbsp;
+                        <span>
+                            {{ trans('table_editor.title') }}
+                        </span>
+                    </a>
+                </li>
             @endif
 
             @can('settings-menu')

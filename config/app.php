@@ -174,7 +174,7 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Lavary\Menu\ServiceProvider::class,
+        //Lavary\Menu\ServiceProvider::class,
         //Way\Generators\GeneratorsServiceProvider::class,
         //Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -191,7 +191,6 @@ return [
         //EloquentFilter\ServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -252,14 +251,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Menu' => Lavary\Menu\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Carbon' => Carbon\Carbon::class,
         'Image' => Intervention\Image\Facades\Image::class,
 
         'TranslationCache' => Waavi\Translation\Facades\TranslationCache::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 

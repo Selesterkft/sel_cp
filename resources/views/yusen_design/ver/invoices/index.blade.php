@@ -277,7 +277,7 @@
 
         function dateFormatter(data)
         {
-            return moment().locale($local_short).format('L');
+            return moment(data).locale($local_short).format('L');
         }
 
         function decimalFormatter(data)

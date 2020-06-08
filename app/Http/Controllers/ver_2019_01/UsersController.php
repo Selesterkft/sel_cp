@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Spatie\Permission\Models\Role;
-use Spatie\Searchable\Search;
+//use Spatie\Searchable\Search;
 
 class UsersController extends Controller
 {

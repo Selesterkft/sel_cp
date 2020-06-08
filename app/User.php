@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
+//use Spatie\Searchable\Searchable;
+//use Spatie\Searchable\SearchResult;
 
-class User extends Authenticatable implements Searchable
+class User extends Authenticatable //implements Searchable
 {
     use Notifiable;
     use HasRoles;

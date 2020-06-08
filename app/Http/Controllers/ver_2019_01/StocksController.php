@@ -61,6 +61,8 @@ class StocksController extends Controller
         $client_id = (int)$loggedUser->CompanyID;
         $query_name = ($request->has('query_name')) ? $request->get('query_name') : config('appConfig.default_query_name');
 
+        // Ha az oldal felől nem jön táblanév, akkor a készletek tábla jelenjen meg.
+        // Így jó, ahogy van!!!
         $table_name = $request->get('table_name') ? $request->get('table_name') : 'cp_wrhs_stocks';
 
         //dd('StocksController::index', request()->all(), $client_id, $cust_id, $table_name, $query_name);
@@ -75,6 +77,9 @@ class StocksController extends Controller
         //dd('StocksController::index', $arr_table_columns);
 
         foreach($arr_table_columns as $id => $column){
+
+            $arr_table_columns[$id]['title'] = trans( $column['title'] );
+            /*
             switch( strtolower($column['title']) ){
                 case 'id':
                     $arr_table_columns[$id]['title'] = trans('app.id');
@@ -98,6 +103,7 @@ class StocksController extends Controller
                     $arr_table_columns[$id]['title'] = trans("{$table_name}." . strtolower($column['title']) );
                     break;
             }
+            */
         }
 //dd('StockController::index', $arr_table_columns);
         $table_columns = json_encode($arr_table_columns);

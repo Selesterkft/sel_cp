@@ -110,6 +110,7 @@
                            data-page-list="[10, 25, 50, 100]"
 
                            data-show-footer="true">
+                           <!--
                         <thead>
                         <tr>
                             <th data-field="Ord_Num">{{ trans('inv_l.ord_num') }}</th>
@@ -134,7 +135,7 @@
                             <th data-field="Period_TO">{{ trans('inv_l.period_to') }}</th>
                         </tr>
                         </thead>
-
+                        -->
                     </table>
                 </div>
             </div>
@@ -331,7 +332,30 @@
                 .bootstrapTable('destroy')
                 .bootstrapTable({
                     undefinedText: ' ',
-                    locale: $local
+                    locale: $local,
+                    columns: [
+                        {field: 'Ord_Num',          title: 'inv_l.ord_num'},
+                        {field: 'PosInfo',          title: 'inv_l.pos_info'},
+                        {field: 'Rates_ID',         title: 'inv_l.rates_id'},
+                        {field: 'Descr',            title: 'app.descr'},
+                        {field: 'Note',             title: 'inv_l.note'},
+                        {field: 'Pcs',              title: 'app.pcs',               align: 'right'},
+                        {field: 'Unit',             title: 'app.unit'},
+                        {field: 'UnitPrice_DC',     title: 'app.unit_price_dc',     align: 'right'},
+                        {field: 'Netto_DC',         title: 'app.net_dc',            align: 'right'},
+                        {field: 'ACCT_TaxCodes_ID', title: 'inv_l.acct_tax_codes_id'},
+
+                        {field: 'TaxRate',          title: 'inv_l.tax_rate',        align: 'right'},
+                        {field: 'Tax_DC',           title: 'inv_l.tax_dc',          align: 'right'},
+                        {field: 'Gross_DC',         title: 'inv_l.gross_dc',        align: 'right'},
+                        {field: 'UnitPrice_FC2',    title: 'inv_l.unit_price_fc2',  align: 'right'},
+                        {field: 'Tax_FC2',          title: 'inv_l.tax_fc2',         align: 'right'},
+                        {field: 'Brutto_FC2',       title: 'inv_l.gross_fc2',       align: 'right'},
+                        {field: 'Curr_ID',          title: 'inv_l.curr_id'},
+                        {field: 'Period_From_To',   title: 'inv_l.period_from_to'},
+                        {field: 'Period_FROM',      title: 'inv_l.period_from'},
+                        {field: 'Period_TO',        title: 'inv_l.period_to'},
+                    ]
                 });
         }
 
