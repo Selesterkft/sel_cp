@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\CompanyModel;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -117,17 +118,51 @@ class User extends Authenticatable //implements Searchable
 
     public function company()
     {
-        /*
-        $res = $this->hasOne(
-            '\App\Models\\' . session()->get('version') . '\CompanyModel',
-            'ID',
-            'CompanyID')->select(['Nev1']);
-        */
         $res = $this->hasOne(
             'App\Models\CompanyModel',
             'ID',
             'CompanyID')
             ->select(['Nev1']);
+        return $res;
+    }
+
+    public static function getRegisteredCompanies(){
+
+        $model = self::select('CompanyID')->groupBy('CompanyID');
+        $reg_companies = $model->get();
+
+        $model = self::where('Supervisor_ID', '<>', '0')
+            ->select('CompanyID', 'Supervisor_ID', 'Supervisor_Name')
+            ->groupBy('CompanyID', 'Supervisor_ID', 'Supervisor_Name');
+
+        $reg_supervisors = $model->get();
+
+        $companies = [];
+        $supervisors = [];
+
+        foreach($reg_companies as $company){
+
+            $company->CompanyName = $company->company->Nev1;
+            $companies[] = [
+                'id' => (int)$company->CompanyID,
+                'name' => $company->CompanyName
+            ];
+        }
+
+        foreach($reg_supervisors as $supervisor){
+
+            $supervisors[] = [
+                'CompanyID' => (int)$supervisor->CompanyID,
+                'Supervisor_ID' => (int)$supervisor->Supervisor_ID,
+                'Supervisor_Name' => $supervisor->Supervisor_Name
+            ];
+        }
+
+        $res = [
+            'companies' => $companies,
+            'supervisors' => $supervisors,
+        ];
+        //dd('Users::', $res);
         return $res;
     }
 
@@ -217,9 +252,11 @@ class User extends Authenticatable //implements Searchable
         return $res;
     }
 
+    /*
     public function getSearchResult(): SearchResult
     {
         //$a = Helper::getCompanyAndVersion();
         return new SearchResult($this, $this->Name, route('users.show'));
     }
+    */
 }

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanyModel;
+use App\Models\QueryTypeModel;
+use App\Models\UserQueryModel;
+use App\User;
 use Illuminate\Http\Request;
 
 class TableEditorController extends Controller
@@ -13,7 +17,34 @@ class TableEditorController extends Controller
      */
     public function index()
     {
-        return view('table_editor.index');
+        $registeredCompanies = User::getRegisteredCompanies();
+
+        $query_types = QueryTypeModel::all()->toArray();
+        foreach ($query_types as $id => $query_type){
+            $query_types[$id]['Columns'] = json_decode($query_type['Columns'], true);
+        }
+        //dd('TableEditorController::index', $query_types);
+
+        $user_queries = UserQueryModel::all()->toArray();
+        foreach($user_queries as $id => $user_query){
+            $user_queries[$id]['Columns'] = json_decode($user_query['Columns'], true);
+        }
+        //dd('TableEditorController::index', $user_queries);
+
+        $registeredCompanies['user_queries'] = $user_queries;
+        $registeredCompanies['query_types'] = $query_types;
+
+        //dd('TableEditorController::index', $registeredCompanies);
+
+        $aa = json_encode($registeredCompanies);
+
+        //dd('TableEditorController::index', $aa);
+
+        return view('table_editor.index', [
+            'registeredCompanies' => $aa,
+            'query_types' => $query_types,
+            'user_queries' => $user_queries,
+        ]);
     }
 
     /**
