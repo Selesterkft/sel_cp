@@ -60,7 +60,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('js')

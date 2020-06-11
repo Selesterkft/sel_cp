@@ -79,7 +79,6 @@
 @section('css')
     <!-- Bootstrap Color Picker -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
-    {{--<link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-colorpicker-3.2.0/src/bootstrap-colorpicker.css') }}">--}}
 @php
 use App\Classes\ColorHelper as ColorHelper;
 echo "<!-- BACGROUND COLOR -->\n";
@@ -117,7 +116,7 @@ echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLin
 
     <!-- bootstrap color picker -->
     <script src="{{ asset('assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
-    {{--<script src="{{ asset('assets/bower_components/bootstrap-colorpicker-3.2.0/src/bootstrap-colorpicker.js') }}"></script>--}}
+
     <script src="{{ asset('assets/x-editable/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
 
     <script>

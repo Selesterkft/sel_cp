@@ -53,15 +53,11 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
-    {{--<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">--}}
+    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}" rel="stylesheet"/>
 
-    {{--<link href="{{ asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">--}}
-    {{-- <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">--}}
 
     {{-- Daterange Picker --}}
-    {{--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>--}}
-    <link href="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bower_components/bootstrap-daterangepicker/dist/daterangepicker.css') }}" rel="stylesheet">
 
     {{--@php
         echo "<!-- MENU BACGROUND COLOR -->\n";
@@ -101,23 +97,17 @@
 @endsection
 @section('js')
     {{-- Bootstrap Table --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/tableExport.min.js') }}"
             type="text/javascript"></script>
-    {{--
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/libs/jspdf.plugin.autotable.js') }}"
-            type="text/javascript"></script>
-    --}}
 
     {{--<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-hu-HU.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>--}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/locale/bootstrap-table-hu-HU.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/extensions/export/bootstrap-table-export.js') }}"></script>
 
-    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
+    {{--<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>--}}
 
     <!--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
@@ -127,7 +117,7 @@
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     {{-- Daterange Picker --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/dist/daterangepicker.js') }}" type="text/javascript"></script>
 
     @yield('users_script')
 

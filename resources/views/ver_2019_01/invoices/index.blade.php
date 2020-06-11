@@ -61,10 +61,10 @@
 
 @section('css')
     {{-- Bootstrap Table --}}
-    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}" rel="stylesheet"/>
 
     {{-- Daterange Picker --}}
-    <link href="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bower_components/bootstrap-daterangepicker/dist/daterangepicker.css') }}" rel="stylesheet">
 
     {{--@php
         echo "<!-- MENU BACGROUND COLOR -->\n";
@@ -84,14 +84,14 @@
 @endsection
 @section('js')
     {{-- Bootstrap Table --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/tableExport.min.js') }}"
             type="text/javascript"></script>
 
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.min.js') }}"></script>
     <script
-        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
+        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/locale/bootstrap-table-hu-HU.js') }}"></script>
     <script
-        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
+        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/extensions/export/bootstrap-table-export.js') }}"></script>
     <!--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
     -->
@@ -104,7 +104,7 @@
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     {{-- Daterange Picker --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-daterangepicker/dist/daterangepicker.js') }}"
             type="text/javascript"></script>
 
     @yield('inv_script')

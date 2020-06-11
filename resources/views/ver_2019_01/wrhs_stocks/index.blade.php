@@ -147,7 +147,7 @@
 
 @section('css')
     {{-- Bootstrap Table --}}
-    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}" rel="stylesheet"/>
 
     <style>
         table.table.table-striped.table-bordered td {
@@ -162,14 +162,14 @@
 
 @section('js')
     {{-- Bootstrap Table --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/tableExport.min.js') }}"
             type="text/javascript"></script>
 
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.min.js') }}"></script>
     <script
-        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
+        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/locale/bootstrap-table-hu-HU.js') }}"></script>
     <script
-        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
+        src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/extensions/export/bootstrap-table-export.js') }}"></script>
 
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
 

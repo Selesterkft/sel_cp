@@ -66,7 +66,7 @@
 
                 <div class="col-sm-4 invoice-col">
                     <b>{{ trans('inv.inv_num') }}:</b>&nbsp;{{ $invoice->Inv_Num }}<br/>
-                    <b>@lang('global.invoice.inv_seq_num'):</b>&nbsp;{{ $invoice->Inv_SeqNum }}<br/>
+                <b>{{ trans('inv.inv_seqnum') }}:</b>&nbsp;{{ $invoice->Inv_SeqNum }}<br/>
                     @php
                         //$datum = Carbon\Carbon::parse($invoice->DueDate)->format($format);
                     @endphp
@@ -84,7 +84,7 @@
 
                            data-toolbar="#toolbar"
 
-                           data-url="{{ url('invoices.show', $invoice->SELEXPED_INV_ID) }}"
+                           data-url="{{ url('invoices.show', $invoice->ID) }}"
 
                            data-buttons-class="primary"
                            data-toggle="table"
@@ -242,7 +242,7 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     {{--
         @php
@@ -285,13 +285,22 @@
 
 @section('js')
 
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>
+
+    {{-- Moment --}}
+    <script src="{{ asset('assets/bower_components/moment/moment.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
     <script>
         var $table = $('#table');
         var $local = '{{ app() ->getLocale() }}' + '-' + '{{ strtoupper(app()->getLocale()) }}';
         var $local_short = '{{ app() ->getLocale() }}';
+
+        function dateFormatter(data)
+        {
+            return moment(data).locale($local_short).format('L');
+        }
 
         function pcs_formatter(value)
         {
@@ -334,27 +343,27 @@
                     undefinedText: ' ',
                     locale: $local,
                     columns: [
-                        {field: 'Ord_Num',          title: 'inv_l.ord_num'},
-                        {field: 'PosInfo',          title: 'inv_l.pos_info'},
-                        {field: 'Rates_ID',         title: 'inv_l.rates_id'},
-                        {field: 'Descr',            title: 'app.descr'},
-                        {field: 'Note',             title: 'inv_l.note'},
-                        {field: 'Pcs',              title: 'app.pcs',               align: 'right'},
-                        {field: 'Unit',             title: 'app.unit'},
-                        {field: 'UnitPrice_DC',     title: 'app.unit_price_dc',     align: 'right'},
-                        {field: 'Netto_DC',         title: 'app.net_dc',            align: 'right'},
-                        {field: 'ACCT_TaxCodes_ID', title: 'inv_l.acct_tax_codes_id'},
+                        {field: 'Ord_Num',          title: '{{ trans('inv_l.ord_num') }}'},
+                        {field: 'PosInfo',          title: '{{ trans('inv_l.pos_info') }}'},
+                        {field: 'Rates_ID',         title: '{{ trans('inv_l.rates_id') }}'},
+                        {field: 'Descr',            title: '{{ trans('app.descr') }}'},
+                        {field: 'Note',             title: '{{ trans('inv_l.note') }}'},
+                        {field: 'Pcs',              title: '{{ trans('app.pcs') }}',               align: 'right', 'formatter': 'pcs_formatter'},
+                        {field: 'Unit',             title: '{{ trans('app.unit') }}'},
+                        {field: 'UnitPrice_DC',     title: '{{ trans('app.unit_price_dc') }}',     align: 'right'},
+                        {field: 'Netto_DC',         title: '{{ trans('app.net_dc') }}',            align: 'right', 'formatter': 'decimalFormatter'},
+                        {field: 'ACCT_TaxCodes_ID', title: '{{ trans('inv_l.acct_tax_codes_id') }}'},
 
-                        {field: 'TaxRate',          title: 'inv_l.tax_rate',        align: 'right'},
-                        {field: 'Tax_DC',           title: 'inv_l.tax_dc',          align: 'right'},
-                        {field: 'Gross_DC',         title: 'inv_l.gross_dc',        align: 'right'},
-                        {field: 'UnitPrice_FC2',    title: 'inv_l.unit_price_fc2',  align: 'right'},
-                        {field: 'Tax_FC2',          title: 'inv_l.tax_fc2',         align: 'right'},
-                        {field: 'Brutto_FC2',       title: 'inv_l.gross_fc2',       align: 'right'},
-                        {field: 'Curr_ID',          title: 'inv_l.curr_id'},
-                        {field: 'Period_From_To',   title: 'inv_l.period_from_to'},
-                        {field: 'Period_FROM',      title: 'inv_l.period_from'},
-                        {field: 'Period_TO',        title: 'inv_l.period_to'},
+                        {field: 'TaxRate',          title: '{{ trans('inv_l.tax_rate') }}',        align: 'right', 'formatter': 'percentFormatter'},
+                        {field: 'Tax_DC',           title: '{{ trans('inv_l.tax_dc') }}',          align: 'right', 'formatter': 'decimalFormatter'},
+                        {field: 'Gross_DC',         title: '{{ trans('inv_l.gross_dc') }}',        align: 'right', 'formatter': 'decimalFormatter'},
+                        {field: 'UnitPrice_FC2',    title: '{{ trans('inv_l.unit_price_fc2') }}',  align: 'right', 'formatter': 'decimalFormatter'},
+                        {field: 'Tax_FC2',          title: '{{ trans('inv_l.tax_fc2') }}',         align: 'right', 'formatter': 'decimalFormatter'},
+                        {field: 'Brutto_FC2',       title: '{{ trans('inv_l.gross_fc2') }}',       align: 'right', 'formatter': 'decimalFormatter'},
+                        {field: 'Curr_ID',          title: '{{ trans('inv_l.curr_id') }}'},
+                        {field: 'Period_From_To',   title: '{{ trans('inv_l.period_from_to') }}'},
+                        {field: 'Period_FROM',      title: '{{ trans('inv_l.period_from') }}', 'formatter': 'dateFormatter'},
+                        {field: 'Period_TO',        title: '{{ trans('inv_l.period_to') }}', 'formatter': 'dateFormatter'},
                     ]
                 });
         }

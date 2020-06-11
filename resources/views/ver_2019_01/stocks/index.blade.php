@@ -225,10 +225,10 @@
 @section('css')
 
     {{-- Bootstrap Table --}}
-    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}" rel="stylesheet"/>
 
     <!-- Bootstrap Datetime Picker -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-datetimepicker/dist/css/bootstrap-datetimepicker.css') }}">
 
     <style>
         table.table.table-striped.table-bordered td {
@@ -244,14 +244,14 @@
 @section('js')
 
     {{-- Bootstrap Table --}}
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/tableExport.min.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/tableExport.min.js') }}"
     type="text/javascript"></script>
 
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.min.js') }}"></script>
     <script
-    src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/locale/bootstrap-table-hu-HU.js') }}"></script>
+    src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/locale/bootstrap-table-hu-HU.js') }}"></script>
     <script
-    src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/extensions/export/bootstrap-table-export.js') }}"></script>
+    src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/extensions/export/bootstrap-table-export.js') }}"></script>
     {{--
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.js"></script>
     --}}
@@ -260,16 +260,12 @@
     <script src="{{ asset('assets/bower_components/moment/moment.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/bower_components/moment/locale/hu.js') }}" type="text/javascript"></script>
 
-    <!--
-        Bootstrap Datetime Picker
-        https://www.malot.fr/bootstrap-datetimepicker/index.php
-    -->
-    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/dist/js/bootstrap-datetimepicker.js') }}"></script>
 <!--
-    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.en.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/dist/js/locales/bootstrap-datetimepicker.en.js') }}"
             charset="UTF-8"></script>
     -->
-    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hu.js') }}"
+    <script src="{{ asset('assets/bower_components/bootstrap-datetimepicker/dist/js/locales/bootstrap-datetimepicker.hu.js') }}"
             charset="UTF-8"></script>
 
     <script>

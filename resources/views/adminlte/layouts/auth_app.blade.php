@@ -42,10 +42,10 @@ $bgColor = ColorHelper::getLoginBgColor($company_id);
     <link href="{{ asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/dist/css/font-awesome.min.css') }}">
 
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/dist/css/ionicons.min.css') }}">
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/AdminLTE.min.css') }}">
@@ -65,7 +65,7 @@ $bgColor = ColorHelper::getLoginBgColor($company_id);
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="{{ asset('assets/bower_components/html5shiv/3.7.3/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/html5shiv/3.7.3/dist/html5shiv.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/respond/1.4.2/respond.min.js') }}"></script>
     <![endif]-->
 

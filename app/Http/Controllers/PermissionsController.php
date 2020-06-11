@@ -29,13 +29,12 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        /*
         $permissions = Permission::orderBy('id', 'asc')
             ->paginate(config('appConfig.paginate_number'));
 
         return view('permissions.index', ['permissions' => $permissions]);
-        */
-        return view('permissions.index');
+
+        //return view('permissions.index');
     }
 
     public function getPermissions()

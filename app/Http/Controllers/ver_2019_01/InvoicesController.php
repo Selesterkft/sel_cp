@@ -69,4 +69,27 @@ class InvoicesController extends Controller{
             'company_reports'   => $company_reports,
             ]);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, int $id)
+    {
+        //dd('InvoicesController::show', $request, $id);
+        if( $request->ajax() )
+        {
+            //dd('InvoicesController::show ajax', $request->all(), $id);
+            $model = new InvoiceDetail2Model();
+            $details = $model->getDetails($id);
+
+            return $details;
+        }
+
+        $invoice = InvoiceModel::getInvoice($id);
+
+        return view(session()->get('version').'.invoices.view', compact('invoice'));
+    }
 }

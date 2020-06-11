@@ -9,9 +9,9 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/dist/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/dist/css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -86,9 +86,9 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- SlimScroll -->
-<script src="{{ asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('assets/bower_components/jquery-slimscroll/dist/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->
-<script src="{{ asset('assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('assets/bower_components/fastclick/dist/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->

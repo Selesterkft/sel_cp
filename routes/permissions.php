@@ -20,7 +20,7 @@ Route::group(['domain' => '{company}.' . $domain, 'middleware' => ['auth', 'Html
         return $controller->callAction('store', $parameters = ['request' => request()]);
     })->name('permissions.store');
 
-    Route::get('permissions.edit/{id}', function($id) use($controller)
+    Route::get('permissions.edit/{id}', function($company, $id) use($controller)
     {
         return $controller->callAction('edit', $parameters = ['id' => $id]);
     })->name('permissions.edit');

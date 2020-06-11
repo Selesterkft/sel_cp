@@ -278,7 +278,7 @@ class InvoiceModel extends Model
         //$limit = 0;
         //$offset = 0;
 
-        $where = "WHERE SELEXPED_INV_ID = {$id}";
+        $where = "WHERE ID = {$id}";
         $query = "EXECUTE [dbo].[{$config['read2']}] '{$session_id}',{$client_id},{$cp_users_id},'{$lang}',0,0,'{$where}',''";
         //dd('InvoiceModel::getInvoice', $query);
         $invoice = DB::connection()

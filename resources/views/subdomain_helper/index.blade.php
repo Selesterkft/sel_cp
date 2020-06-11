@@ -96,7 +96,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/bootstrap-table.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.css') }}" rel="stylesheet"/>
 
 @php
 use App\Classes\ColorHelper as ColorHelper;
@@ -115,9 +115,9 @@ echo "<style>.box.box-default {border-top-color: " . ColorHelper::getPanelTabLin
 @section('js')
 
     <script src="{{ asset('assets/bower_components/bootstrap-table/tableExport.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/bootstrap-table.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.4/dist/extensions/export/bootstrap-table-export.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/bootstrap-table.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/locale/bootstrap-table-hu-HU.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/bower_components/bootstrap-table/1.15.5/dist/extensions/export/bootstrap-table-export.js') }}" type="text/javascript"></script>
 
     <script>
 

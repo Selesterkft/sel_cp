@@ -75,6 +75,7 @@ class InvoiceDetail2Model extends Model
 
     public function getDetails(int $id)
     {
+        //dd('InvoiceDetail2Model::getDetails', $id);
         $config = config('appConfig.tables.invoice_details2.' . session()->get('version'));
         $loggedUser = Auth::user();
 
@@ -93,6 +94,7 @@ class InvoiceDetail2Model extends Model
         $total = (int)$res[0]->count;
 
         $query = "[dbo].[{$config['read2']}] '{$session_id}',{$cp_users_id},{$id},'{$lang}',{$offset},{$limit},'{$where}','{$sort}'";
+        //dd('InvoiceDetail2Model::getDetails', $query);
         $res = DB::connection($config['connection'])->select(DB::raw($query));
 
         $details = [

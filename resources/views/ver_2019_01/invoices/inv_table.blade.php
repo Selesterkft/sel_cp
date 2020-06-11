@@ -219,7 +219,7 @@
     function operateFormatter(value, row, index) {
 
         //console.log(row);
-        $url = '{{ url('invoices.show') }}' + '/' + row.SELEXPED_INV_ID;
+        $url = '{{ url('invoices.show') }}' + '/' + row.ID;
 
         return [
             '<a href="' + $url + '" class="btn btn-success btn-sm view"><i class="fa fa-eye"></i></a>',
