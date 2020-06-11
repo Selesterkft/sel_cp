@@ -39,11 +39,11 @@
                     use App\Classes\Helper;
                     if( $login_wallpaper_id != 0 )
                     {
-                        $login_wallpaper_name = Helper::timestampRemover($login_wallpaper_value);
+                        $login_wallpaper_value = Helper::timestampRemover($login_wallpaper_value);
                     }
                     @endphp
                     <input type="text" class="form-control"
-                           value="{{ $login_wallpaper_name }}" disabled>
+                           value="{{ $login_wallpaper_value }}" disabled>
 
                     {{ Form::file('login_image') }}
 

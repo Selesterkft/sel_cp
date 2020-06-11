@@ -35,7 +35,7 @@ class SettingsController extends Controller
         $settings = Helper::getAllSettings();
 
         $designs = DesignModel::all();
-
+//dd('SettingsController::index', $settings, $designs);
         return view('settings.index', [
             'settings' => $settings,
             'designs' => $designs

@@ -47,7 +47,7 @@
                             $general_favicon_name = Helper::timestampRemover($general_favicon_value);
                         }
                     @endphp
-                    <input type="text" class="form-control" value="{{ $general_favicon_name }}" disabled>
+                    <input type="text" class="form-control" value="{{ $general_favicon_value }}" disabled>
                     {{ Form::file('general_favicon_value') }}
 
                 </div>
@@ -69,11 +69,11 @@
                         if( $general_logo_id != 0 )
                         {
                             /** @var string $general_logo_value */
-                            $general_logo_name = Helper::timestampRemover($general_logo_value);
+                            $general_logo_value = Helper::timestampRemover($general_logo_value);
                         }
                     @endphp
                     <input type="text" class="form-control"
-                           value="{{ $general_logo_name }}" disabled>
+                           value="{{ $general_logo_value }}" disabled>
                     {{ Form::file('general_logo_value') }}
 
                 </div>
